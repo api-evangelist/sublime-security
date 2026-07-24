@@ -1,0 +1,102 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@sublime.security
+  title: Multi-Tenancy API (BETA) BinExplode User Reports API
+  version: ''
+servers:
+- url: '{scheme}://{server}'
+  variables:
+    scheme:
+      default: https
+      enum:
+      - http
+      - https
+    server:
+      default: platform.sublime.security
+      description: Base URL of your Sublime deployment
+security:
+- bearerAuth: []
+tags:
+- name: User Reports
+paths:
+  /v0/user-reports:
+    get:
+      description: List user reports
+      operationId: listUserReports
+      parameters:
+      - description: The maximum number of message groups to return. If the value exceeds the maximum, then the maximum value will be used.
+        in: query
+        name: limit
+        schema:
+          description: The maximum number of message groups to return. If the value exceeds the maximum, then the maximum value will be used.
+          format: int32
+          maximum: 500
+          nullable: true
+          type: integer
+      - description: Inclusive start datetime filter for time of report, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only reports at or after this time will be returned.
+        in: query
+        name: reported_at[gte]
+        schema:
+          description: Inclusive start datetime filter for time of report, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only reports at or after this time will be returned.
+          format: date-time
+          nullable: true
+          type: string
+      - description: Exclusive end datetime filter for time of report, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only reports before this time will be returned.
+        in: query
+        name: reported_at[lt]
+        schema:
+          description: Exclusive end datetime filter for time of report, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only reports before this time will be returned.
+          format: date-time
+          nullable: true
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesListUserReportsResponse'
+          description: OK
+      summary: List user reports
+      tags:
+      - User Reports
+components:
+  schemas:
+    Handler_typesListUserReportsResponse:
+      properties:
+        count:
+          description: Count of user reports matching filters (up to limit)
+          format: int32
+          type: integer
+        user_reports:
+          description: User reports matching request filters
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageReportWithCanonicalID'
+          type: array
+      type: object
+    Handler_typesMessageReportWithCanonicalID:
+      properties:
+        channel:
+          description: Channel used to report the group
+          type: string
+        reported_at:
+          description: Time the group was reported
+          format: date-time
+          type: string
+        reported_by_message_id:
+          description: ID of the reporting message (the user forward)
+          nullable: true
+          type: string
+        reported_message_canonical_id:
+          description: Canonical ID of the message that was reported
+          type: string
+        reporter:
+          description: Email address of the user who reported the group
+          type: string
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-readme:
+  explorer-enabled: false

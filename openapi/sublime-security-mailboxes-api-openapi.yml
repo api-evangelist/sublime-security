@@ -1,0 +1,151 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@sublime.security
+  title: Multi-Tenancy API (BETA) BinExplode Mailboxes API
+  version: ''
+servers:
+- url: '{scheme}://{server}'
+  variables:
+    scheme:
+      default: https
+      enum:
+      - http
+      - https
+    server:
+      default: platform.sublime.security
+      description: Base URL of your Sublime deployment
+security:
+- bearerAuth: []
+tags:
+- name: Mailboxes
+paths:
+  /v0/mailboxes:
+    get:
+      description: List all mailboxes
+      operationId: listMailboxes
+      parameters:
+      - description: Filter for effectively active mailboxes (marked active with a live subscription)
+        in: query
+        name: active
+        schema:
+          description: Filter for effectively active mailboxes (marked active with a live subscription)
+          nullable: true
+          type: boolean
+      - description: Email addresses of the mailboxes to return (comma-delimited)
+        in: query
+        name: email_addresses
+        schema:
+          description: Email addresses of the mailboxes to return (comma-delimited)
+          nullable: true
+          type: string
+      - description: The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used
+        in: query
+        name: limit
+        schema:
+          description: The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used
+          format: int32
+          maximum: 500
+          nullable: true
+          type: integer
+      - description: Comma-delimited list of mailbox types to filter by
+        in: query
+        name: mailbox_types
+        schema:
+          description: Comma-delimited list of mailbox types to filter by
+          nullable: true
+          type: string
+      - description: Filter for mailboxes marked active
+        in: query
+        name: marked_active
+        schema:
+          description: Filter for mailboxes marked active
+          nullable: true
+          type: boolean
+      - description: ID of the message source the mailboxes belong to
+        in: query
+        name: message_source_id
+        schema:
+          description: ID of the message source the mailboxes belong to
+          nullable: true
+          type: string
+      - description: The (zero-based) offset of the first mailbox to return
+        in: query
+        name: offset
+        schema:
+          description: The (zero-based) offset of the first mailbox to return
+          format: int32
+          nullable: true
+          type: integer
+      - description: Search across mailbox names and email addresses
+        in: query
+        name: search
+        schema:
+          description: Search across mailbox names and email addresses
+          nullable: true
+          type: string
+      - description: Comma-delimited list of subscription error types to filter by
+        in: query
+        name: sub_error_types
+        schema:
+          description: Comma-delimited list of subscription error types to filter by
+          nullable: true
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandlersV0ListMailboxesResponse'
+          description: OK
+      summary: List mailboxes
+      tags:
+      - Mailboxes
+components:
+  schemas:
+    HandlersV0Mailbox:
+      properties:
+        active:
+          description: Whether the mailbox is active
+          type: boolean
+        email_address:
+          description: Mailbox email address
+          type: string
+        id:
+          description: Mailbox ID
+          format: uuid
+          type: string
+        subscription_error_status:
+          description: Error type encountered when last trying to subscribe to change notifications from the provider (null if most recently successful)
+          nullable: true
+          type: string
+      required:
+      - email_address
+      - id
+      type: object
+    HandlersV0ListMailboxesResponse:
+      properties:
+        active:
+          description: Total number of active matching filters
+          format: int32
+          type: integer
+        count:
+          description: Count of results for this page
+          format: int32
+          type: integer
+        mailboxes:
+          description: List of mailboxes
+          items:
+            $ref: '#/components/schemas/HandlersV0Mailbox'
+          type: array
+        total:
+          description: Total number of results available
+          format: int32
+          type: integer
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-readme:
+  explorer-enabled: false

@@ -1,0 +1,58 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@sublime.security
+  title: Multi-Tenancy API (BETA) BinExplode Roles API
+  version: ''
+servers:
+- url: '{scheme}://{server}'
+  variables:
+    scheme:
+      default: https
+      enum:
+      - http
+      - https
+    server:
+      default: platform.sublime.security
+      description: Base URL of your Sublime deployment
+security:
+- bearerAuth: []
+tags:
+- name: Roles
+paths:
+  /v0/roles/assign:
+    put:
+      description: Assign a role to a user within the organization
+      operationId: assignRoleToUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignRoleToUserInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandlersAssignRoleToUserResponse'
+          description: OK
+      summary: Assign role to user
+      tags:
+      - Roles
+components:
+  schemas:
+    HandlersAssignRoleToUserResponse:
+      type: object
+    AssignRoleToUserInput:
+      properties:
+        email_address:
+          type: string
+        role_title:
+          type: string
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-readme:
+  explorer-enabled: false

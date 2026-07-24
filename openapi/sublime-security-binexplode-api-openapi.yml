@@ -1,0 +1,1468 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@sublime.security
+  title: Multi-Tenancy API (BETA) BinExplode API
+  version: ''
+servers:
+- url: '{scheme}://{server}'
+  variables:
+    scheme:
+      default: https
+      enum:
+      - http
+      - https
+    server:
+      default: platform.sublime.security
+      description: Base URL of your Sublime deployment
+security:
+- bearerAuth: []
+tags:
+- name: BinExplode
+paths:
+  /v0/binexplode/scan:
+    post:
+      description: Starts a task to explode a binary. Returns a task ID to track and ultimately retrieve results. Results expire after 1 hour. Max original file size of 37 mb (base 64 encoded 49 mb)
+      operationId: postScan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostScanInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesTaskAccepted'
+          description: OK
+      summary: Upload a binary to be binexploded
+      tags:
+      - BinExplode
+  /v0/binexplode/scan/{id}:
+    get:
+      description: Retrieve the results of a completed binexplode scan.
+      operationId: getScan
+      parameters:
+      - description: Task ID
+        in: path
+        name: id
+        required: true
+        schema:
+          description: Task ID
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesGetScanResultResponse'
+          description: OK
+      summary: Get results of a binexplode scan
+      tags:
+      - BinExplode
+components:
+  schemas:
+    StrelkaRTF:
+      description: Unpacks RTF files. Reports totals
+      properties:
+        total_extracted:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    StrelkaZip:
+      description: Unpacks ZIP files. Reports total files.
+      properties:
+        all_paths:
+          description: All member paths included in the zip (files and folders)
+          items:
+            type: string
+          type: array
+        attempted_files:
+          description: File names, including path, which the scanner attempted to open (cuts off at a limit)
+          items:
+            type: string
+          type: array
+        encrypted:
+          description: True if known to be encrypted. scan.encrypted_zip can contain details if password is bypassed.
+          type: boolean
+        total_extracted:
+          format: int32
+          nullable: true
+          type: integer
+        total_files:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    Mdm_serviceIP:
+      description: X-Originating-IP header, which identifies the originating IP address of the sender client
+      properties:
+        ip:
+          description: The IP in canonical form
+          type: string
+        translation:
+          $ref: '#/components/schemas/Mdm_serviceIPTranslation'
+        version:
+          description: The version of IP (i.e., 4 or 6), null for backward compatibility.
+          format: int32
+          nullable: true
+          type: integer
+      required:
+      - ip
+      type: object
+    StrelkaHash:
+      description: Multiple hash algorithms
+      properties:
+        md5:
+          type: string
+        sha1:
+          type: string
+        sha256:
+          type: string
+        ssdeep:
+          type: string
+      type: object
+    StrelkaExifTool:
+      description: Responses from the popular ExifTools application
+      properties:
+        command_line_arguments:
+          type: string
+        create_date:
+          format: date-time
+          nullable: true
+          type: string
+        creator:
+          type: string
+        exif_tool_version:
+          format: double
+          type: number
+        fields:
+          items:
+            $ref: '#/components/schemas/StrelkaKeyVal'
+          type: array
+        file_permissions:
+          type: string
+        file_type:
+          type: string
+        file_type_extension:
+          type: string
+        flags:
+          items:
+            type: string
+          type: array
+        hot_key:
+          type: string
+        image_height:
+          description: In pixels
+          format: int32
+          type: integer
+        image_width:
+          description: In pixels
+          format: int32
+          type: integer
+        linearized:
+          type: string
+        local_base_path:
+          type: string
+        modify_date:
+          format: date-time
+          nullable: true
+          type: string
+        page_count:
+          format: int32
+          type: integer
+        pdf_version:
+          type: string
+        producer:
+          type: string
+        relative_path:
+          type: string
+        run_window:
+          type: string
+        source_file:
+          type: string
+        target_file_dos_name:
+          type: string
+        title:
+          type: string
+        zip_bit_flag:
+          format: int32
+          type: integer
+        zip_compressed_size:
+          format: int32
+          type: integer
+        zip_file_name:
+          type: string
+        zip_modify_date:
+          format: date-time
+          nullable: true
+          type: string
+        zip_uncompressed_size:
+          format: int32
+          type: integer
+      type: object
+    StrelkaMachO:
+      description: Unpacks and inspects Mach Objects (executables, libraries, etc)
+      properties:
+        commands:
+          description: All commands within
+          items:
+            type: string
+          type: array
+        has_code_signature:
+          type: boolean
+        header:
+          properties:
+            cpu:
+              description: Details about the CPU/arch the binary is intended for
+              properties:
+                primary:
+                  description: Primary type, e.g. x86_64
+                  type: string
+                sub:
+                  description: Human description (may include ',', 'and', etc)
+                  type: string
+              type: object
+            file:
+              description: Typo of Macho
+              enum:
+              - BUNDLE
+              - CORE
+              - DSYM
+              - DYLIB
+              - DYLIB_STUB
+              - DYLINKER
+              - EXECUTE
+              - FVMLIB
+              - KEXT_BUNDLE
+              - OBJECT
+              - PRELOAD
+              type: string
+            flags:
+              description: Flag List from header
+              items:
+                type: string
+              type: array
+          type: object
+        load_dylinker_name:
+          description: Dylinker command name used
+          type: string
+        nx:
+          description: Binary has NX (non-executable stack) protection
+          type: boolean
+        pie:
+          description: Binary is position independent
+          type: boolean
+        source_version:
+          description: 5 part source version
+          type: string
+        symbols:
+          description: Details about symbols within binary
+          properties:
+            imported:
+              description: Imported symbols
+              items:
+                type: string
+              type: array
+            libraries:
+              description: Imported libraries
+              items:
+                type: string
+              type: array
+          type: object
+        total_binaries:
+          description: Number of binaries registered
+          format: int32
+          type: integer
+        total_commands:
+          description: Number of load commands
+          format: int32
+          type: integer
+        total_libraries:
+          description: Number of libraries/Dylib commands
+          format: int32
+          type: integer
+        total_relocations:
+          description: Number of relocations
+          format: int32
+          type: integer
+        total_sections:
+          description: Number of sections
+          format: int32
+          type: integer
+        total_segments:
+          description: Number of segments
+          format: int32
+          type: integer
+        total_symbols:
+          description: Number of symbols
+          format: int32
+          type: integer
+      type: object
+    StrelkaICSAttendee:
+      properties:
+        mailbox:
+          $ref: '#/components/schemas/Mdm_serviceMailbox'
+        partstat:
+          description: Participation status
+          type: string
+        role:
+          description: Attendee role
+          type: string
+        rsvp:
+          description: RSVP requested
+          type: boolean
+      type: object
+    StrelkaGZip:
+      description: Unpacks gzip. Reports the size
+      properties:
+        size:
+          description: Size of uncompressed file within.
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    Mdm_serviceIPTranslation:
+      properties:
+        original:
+          description: The IP in its original format if it is an IPv4-mapped-IPv6 source address
+          nullable: true
+          type: string
+        v4_to_v6:
+          description: Whether 'Original' is IPv4-mapped-IPv6
+          type: boolean
+      type: object
+    Mdm_serviceEmailAddress:
+      description: Email address object
+      properties:
+        domain:
+          $ref: '#/components/schemas/Mdm_serviceDomain'
+        email:
+          description: Full email address
+          format: email
+          type: string
+        local_part:
+          description: Local-part, i.e. before the @
+          type: string
+      type: object
+    StrelkaOCR:
+      description: Attempts to find text in images and explodes the text for further scanning.
+      properties:
+        raw:
+          description: Full text returned from OCR, including whitespace
+          type: string
+        text:
+          description: Array of words found by OCR
+          items:
+            type: string
+          type: array
+      type: object
+    StrelkaEntropy:
+      description: Shannon entropy of file
+      properties:
+        entropy:
+          description: Shannon entropy (log base 2). A higher number means higher entropy.
+          format: double
+          nullable: true
+          type: number
+      type: object
+    Mdm_serviceMailbox:
+      description: Organizer mailbox with email and display name
+      properties:
+        display_name:
+          description: Display name
+          type: string
+        email:
+          $ref: '#/components/schemas/Mdm_serviceEmailAddress'
+      required:
+      - email
+      type: object
+    StrelkaDocX:
+      description: Extracts details for a document, and explodes the text for further scanning.
+      properties:
+        author:
+          nullable: true
+          type: string
+        category:
+          nullable: true
+          type: string
+        comments:
+          nullable: true
+          type: string
+        created:
+          format: date-time
+          nullable: true
+          type: string
+        font_colors:
+          description: all non black (#000000) detected font colors. represented as web colors (hex) without '#' prefix.
+          items:
+            type: string
+          type: array
+        image_count:
+          format: int32
+          nullable: true
+          type: integer
+        keywords:
+          nullable: true
+          type: string
+        last_printed:
+          format: date-time
+          nullable: true
+          type: string
+        modified:
+          format: date-time
+          nullable: true
+          type: string
+        revision:
+          format: int32
+          nullable: true
+          type: integer
+        subject:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        word_count:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    StrelkaFlavors:
+      description: matched yara and mime for file type identification
+      properties:
+        external:
+          description: Flavors marked by scanners exploding a file
+          items:
+            type: string
+          type: array
+        mime:
+          description: Detected MIME type using the libmagic unix utility.
+          type: string
+        yara:
+          description: Matched YARA rules, for current definitions see [here](https://github.com/sublime-security/strelka/blob/main/build/configs/taste.yara)
+          items:
+            enum:
+            - _7zip_file
+            - arj_file
+            - browser_manifest
+            - cab_file
+            - cpio_file
+            - encrypted_zip
+            - encrypted_word_document
+            - iso_file
+            - mhtml_file
+            - rar_file
+            - tar_file
+            - xar_file
+            - zip_file
+            - mp3_file
+            - pkcs7_file
+            - x509_der_file
+            - x509_pem_file
+            - bzip2_file
+            - gzip_file
+            - lzma_file
+            - xz_file
+            - zlib_file
+            - doc_subheader_file
+            - mso_file
+            - olecf_file
+            - ooxml_file
+            - pdf_file
+            - poi_hpbf_file
+            - rtf_file
+            - vbframe_file
+            - wordml_file
+            - xfdf_file
+            - email_file
+            - tnef_file
+            - base64_pe
+            - pgp_file
+            - elf_file
+            - lnk_file
+            - macho_file
+            - mz_file
+            - bmp_file
+            - cmap_file
+            - gif_file
+            - jpeg_file
+            - postscript_file
+            - png_file
+            - psd_file
+            - psd_image_file
+            - svg_file
+            - xicc_file
+            - xmp_file
+            - jar_manifest_file
+            - bplist_file
+            - fws_file
+            - cws_file
+            - zws_file
+            - debian_package_file
+            - rpm_file
+            - upx_file
+            - batch_file
+            - javascript_file
+            - vb_file
+            - hta_file
+            - html_file
+            - ini_file
+            - json_file
+            - php_file
+            - plist_file
+            - soap_file
+            - xml_file
+            - avi_file
+            - wmv_file
+            type: string
+          type: array
+      type: object
+    StrelkaHTML:
+      description: Scripts and basic details from HTML files. Explodes scripts for further scanning.
+      properties:
+        hyperlinks:
+          items:
+            type: string
+          type: array
+        scripts:
+          description: All unique identifiers present in JS. unescape and write may be considered suspicious; a variable name is also an identifier.
+          items:
+            $ref: '#/components/schemas/StrelkaEmbeddedHTMLScript'
+          type: array
+        spans:
+          description: HTML Span Tags
+          items:
+            $ref: '#/components/schemas/StrelkaHTMLSpan'
+          type: array
+        title:
+          type: string
+        total_extracted:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    StrelkaEncryptedZip:
+      description: Unpacks encrypted ZIP files by trying to break the password. Reports total files even if the zip could not be cracked.
+      properties:
+        cracked_password:
+          description: If the ZIP was successfully opened, this is the password for the zip.
+          nullable: true
+          type: string
+        total_extracted:
+          format: int32
+          nullable: true
+          type: integer
+        total_files:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    StrelkaLibArchive:
+      description: Unpacks archives supported by libarchive (including ISO files). Reports totals
+      properties:
+        total_extracted:
+          format: int32
+          nullable: true
+          type: integer
+        total_files:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    StrelkaScan:
+      description: Contains results of all available bin explode scanners. Some scanners explode embedded binaries more than offer scan/analysis. Some of these have total_extracted & total_unextracted (the count of any files remaining after limits are hit). Some exploding scanners have limited analyses, besides the insight into the count of embedded files (see ZIP). RawOCR is an example which explodes, but does not report totals & explodes content which isn't truly an embedded file.
+      properties:
+        bzip2:
+          $ref: '#/components/schemas/StrelkaBZip2'
+        docx:
+          $ref: '#/components/schemas/StrelkaDocX'
+        encrypted_doc:
+          $ref: '#/components/schemas/StrelkaEncryptedDoc'
+        encrypted_zip:
+          $ref: '#/components/schemas/StrelkaEncryptedZip'
+        entropy:
+          $ref: '#/components/schemas/StrelkaEntropy'
+        exiftool:
+          $ref: '#/components/schemas/StrelkaExifTool'
+        gif:
+          $ref: '#/components/schemas/StrelkaJpegGif'
+        gzip:
+          $ref: '#/components/schemas/StrelkaGZip'
+        hash:
+          $ref: '#/components/schemas/StrelkaHash'
+        html:
+          $ref: '#/components/schemas/StrelkaHTML'
+        ics:
+          $ref: '#/components/schemas/StrelkaICS'
+        javascript:
+          $ref: '#/components/schemas/StrelkaJavascript'
+        jpeg:
+          $ref: '#/components/schemas/StrelkaJpegGif'
+        libarchive:
+          $ref: '#/components/schemas/StrelkaLibArchive'
+        lnk:
+          $ref: '#/components/schemas/StrelkaLNK'
+        macho:
+          $ref: '#/components/schemas/StrelkaMachO'
+        ocr:
+          $ref: '#/components/schemas/StrelkaOCR'
+        ole:
+          $ref: '#/components/schemas/StrelkaOle'
+        pdf:
+          $ref: '#/components/schemas/StrelkaPDF'
+        pdf_obj_hash:
+          $ref: '#/components/schemas/StrelkaPDFObjHash'
+        pptx:
+          $ref: '#/components/schemas/StrelkaPPTX'
+        qr:
+          $ref: '#/components/schemas/StrelkaQR'
+        rar:
+          $ref: '#/components/schemas/StrelkaRar'
+        rtf:
+          $ref: '#/components/schemas/StrelkaRTF'
+        strings:
+          $ref: '#/components/schemas/StrelkaStrings'
+        tar:
+          $ref: '#/components/schemas/StrelkaTar'
+        url:
+          $ref: '#/components/schemas/StrelkaURL'
+        vba:
+          $ref: '#/components/schemas/StrelkaVBA'
+        xml:
+          $ref: '#/components/schemas/StrelkaXML'
+        yara:
+          $ref: '#/components/schemas/StrelkaYARA'
+        zip:
+          $ref: '#/components/schemas/StrelkaZip'
+        zlib:
+          $ref: '#/components/schemas/StrelkaZLib'
+      type: object
+    StrelkaICSCalendar:
+      properties:
+        calscale:
+          description: Calendar scale
+          type: string
+        components:
+          description: Calendar components
+          items:
+            $ref: '#/components/schemas/StrelkaICSComponent'
+          type: array
+        method:
+          description: Calendar method
+          type: string
+        prodid:
+          description: Product identifier
+          type: string
+        version:
+          description: iCalendar version
+          type: string
+      type: object
+    StrelkaTar:
+      description: Unpacks tar files. Reports totals
+      properties:
+        total_extracted:
+          format: int32
+          nullable: true
+          type: integer
+        total_files:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    StrelkaRar:
+      description: Unpacks rar files. Reports totals
+      properties:
+        host_os:
+          nullable: true
+          type: string
+        total_extracted:
+          format: int32
+          nullable: true
+          type: integer
+        total_files:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    StrelkaEmbeddedHTMLScript:
+      properties:
+        language:
+          description: Language of script, e.g. 'javascript'
+          nullable: true
+          type: string
+        scripts:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+      type: object
+    StrelkaICSOrganizer:
+      properties:
+        mailbox:
+          $ref: '#/components/schemas/Mdm_serviceMailbox'
+      type: object
+    StrelkaZLib:
+      description: Unpacks zlib files. Reports size
+      properties:
+        size:
+          description: Size of uncompressed file within.
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    Handler_typesGetTaskResponse:
+      description: Generic information about the scan task execution, such as status or errors.
+      properties:
+        created_at:
+          description: Task creation time
+          format: date-time
+          type: string
+        error:
+          description: Task error
+          type: string
+        id:
+          description: Task ID
+          format: uuid
+          type: string
+        state:
+          description: Task status
+          enum:
+          - pending
+          - started
+          - succeeded
+          - failed
+          - retrying
+          type: string
+      required:
+      - id
+      - state
+      type: object
+    StrelkaXML:
+      description: Finds namespaces and other details from XML
+      properties:
+        doc_type:
+          description: DOCTYPE declaration from file
+          type: string
+        namespaces:
+          items:
+            type: string
+          type: array
+        tags:
+          items:
+            type: string
+          type: array
+        total_extracted:
+          format: int32
+          nullable: true
+          type: integer
+        version:
+          description: XML version as declared by the document
+          nullable: true
+          type: string
+      type: object
+    StrelkaPPTX:
+      description: Extracts details for a powerpoint (pptx) document, and explodes the text for further scanning.
+      properties:
+        author:
+          nullable: true
+          type: string
+        category:
+          nullable: true
+          type: string
+        comments:
+          nullable: true
+          type: string
+        created:
+          format: date-time
+          nullable: true
+          type: string
+        image_count:
+          format: int32
+          nullable: true
+          type: integer
+        invalid_urls:
+          description: URLs which could not be parsed
+          items:
+            type: string
+          type: array
+        keywords:
+          nullable: true
+          type: string
+        last_modified_by:
+          nullable: true
+          type: string
+        last_printed:
+          format: date-time
+          nullable: true
+          type: string
+        modified:
+          format: date-time
+          nullable: true
+          type: string
+        revision:
+          format: int32
+          nullable: true
+          type: integer
+        slide_count:
+          format: int32
+          nullable: true
+          type: integer
+        subject:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        urls:
+          description: Detected URLs
+          items:
+            $ref: '#/components/schemas/Mdm_serviceURL'
+          type: array
+        word_count:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    StrelkaYARA:
+      description: Reports YARA results from custom installed YARA rules.
+      properties:
+        flags:
+          items:
+            type: string
+          type: array
+        matches:
+          items:
+            $ref: '#/components/schemas/StrelkaYARAMatch'
+          type: array
+      type: object
+    StrelkaICSTotal:
+      description: Summary counts for calendar components
+      properties:
+        alarms:
+          description: Total VALARM components
+          format: int32
+          type: integer
+        attachments:
+          description: Total ATTACH properties
+          format: int32
+          type: integer
+        attendees:
+          description: Total attendees across all components
+          format: int32
+          type: integer
+        components:
+          description: Total calendar components
+          format: int32
+          type: integer
+        events:
+          description: Total VEVENT components
+          format: int32
+          type: integer
+        extracted_files:
+          description: Successfully extracted files
+          format: int32
+          type: integer
+        journals:
+          description: Total VJOURNAL components
+          format: int32
+          type: integer
+        organizers:
+          description: Total organizers across all components
+          format: int32
+          type: integer
+        timezones:
+          description: Total VTIMEZONE components
+          format: int32
+          type: integer
+        todos:
+          description: Total VTODO components
+          format: int32
+          type: integer
+        urls:
+          description: Total URL properties
+          format: int32
+          type: integer
+      type: object
+    StrelkaKeyVal:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    Handler_typesGetScanResultResponse:
+      properties:
+        results:
+          description: binexplode list of responses for a single input file, each additional response represents an explosion result
+          items:
+            $ref: '#/components/schemas/StrelkaResponse'
+          type: array
+        task_response:
+          $ref: '#/components/schemas/Handler_typesGetTaskResponse'
+      type: object
+    StrelkaOle:
+      description: Unpacks valid OLE files. Reports total files.
+      properties:
+        total_extracted:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    PostScanInput:
+      properties:
+        file_contents:
+          description: Base64 encoded raw contents of file
+          type: string
+        file_name:
+          description: Name of file, can be anything but must be provided
+          type: string
+      required:
+      - file_contents
+      - file_name
+      type: object
+    StrelkaResponse:
+      properties:
+        depth:
+          description: depth in explosion, starts at 0
+          format: int32
+          type: integer
+        file_extension:
+          description: file extension if known. Using YARA and MIME rules (see .flavors) may provide more accurate detections.
+          type: string
+        file_name:
+          description: name of the file, or a placeholder. For files exploded from an archive this will be the actual name, but for extracted text, octet stream etc, it will be assigned by the parent to something arbitrary.
+          type: string
+        flavors:
+          $ref: '#/components/schemas/StrelkaFlavors'
+        node_id:
+          description: ID representing this file in the tree
+          type: string
+        parent_node_id:
+          description: ID of parent, or not present for the root
+          type: string
+        scan:
+          $ref: '#/components/schemas/StrelkaScan'
+        size:
+          description: file size in bytes
+          format: int32
+          type: integer
+        source:
+          description: Scanner which 'exploded' this file
+          type: string
+      type: object
+    Mdm_serviceURL:
+      description: URL details when QR code type is url
+      properties:
+        domain:
+          $ref: '#/components/schemas/Mdm_serviceDomain'
+        fragment:
+          description: 'Fragment identifier; the text following the # in the URL (also called the anchor tag)'
+          type: string
+        ip:
+          $ref: '#/components/schemas/Mdm_serviceIP'
+        password:
+          description: The password specified before the domain name
+          type: string
+        path:
+          description: Everything after the TLD and before the query parameters
+          type: string
+        port:
+          description: The port used for the URL. If no explicit port is set, the port will be inferred from the protocol
+          format: int32
+          nullable: true
+          type: integer
+        query_params:
+          description: The full query parameters of the URL
+          type: string
+        query_params_decoded:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: The decoded query parameters of the URL
+          type: object
+        rewrite:
+          $ref: '#/components/schemas/Mdm_serviceRewriteDetails'
+        scheme:
+          description: Protocol for the URL request, e.g. http
+          type: string
+        url:
+          description: Full URL
+          type: string
+        username:
+          description: The username specified before the domain name of the URL
+          type: string
+      required:
+      - url
+      type: object
+    StrelkaYARAMatch:
+      properties:
+        meta:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          type: string
+      type: object
+    StrelkaJpegGif:
+      description: Extracts contents past the GIF trailer for further processing. Empty if there's no data based trailer.
+      properties:
+        trailer_index:
+          format: int32
+          type: integer
+      type: object
+    StrelkaJavascript:
+      description: Contains details about the types of elements found in a JS script. Very simple scripts might signal obfuscation.
+      properties:
+        identifiers:
+          description: All unique identifiers present in JS. unescape and write may be considered suspicious; a variable name is also an identifier.
+          items:
+            type: string
+          type: array
+        keywords:
+          description: All unique keywords present in JS, e.g. 'if'.
+          items:
+            type: string
+          type: array
+        regular_expressions:
+          description: All unique regular expressions present JS.
+          items:
+            type: string
+          type: array
+        strings:
+          description: All unique strings present in JS.
+          items:
+            type: string
+          type: array
+        tokens:
+          description: All unique tokens/types present in JS. The other values in this type would be present in this list if they occur at all. E.g. a simple script may contain just Identifier & Punctuator (punctuator is not included any further)
+          items:
+            type: string
+          type: array
+      type: object
+    StrelkaEncryptedDoc:
+      description: Unpacks encrypted doc files by trying to break the password. Does not report totals
+      properties:
+        cracked_password:
+          description: If the doc was successfully opened, this is the password for the doc.
+          nullable: true
+          type: string
+      type: object
+    StrelkaICSAttachment:
+      properties:
+        decode_error:
+          description: Extraction error message
+          type: string
+        extracted:
+          description: Whether file was extracted
+          type: boolean
+        filename:
+          description: Original filename
+          type: string
+        mime_type:
+          description: MIME type
+          type: string
+        size:
+          description: File size in bytes
+          type: string
+        type:
+          description: Attachment type
+          enum:
+          - binary
+          - base64_binary
+          - uri
+          - other
+          type: string
+        uri:
+          description: URI for external references
+          type: string
+      type: object
+    StrelkaICSComponent:
+      properties:
+        attachments:
+          description: File attachments
+          items:
+            $ref: '#/components/schemas/StrelkaICSAttachment'
+          type: array
+        attendees:
+          description: Event attendees
+          items:
+            $ref: '#/components/schemas/StrelkaICSAttendee'
+          type: array
+        class:
+          description: Classification
+          type: string
+        created:
+          description: Creation date/time
+          type: string
+        description:
+          description: Detailed description
+          type: string
+        dtend:
+          description: End date/time
+          type: string
+        dtstamp:
+          description: Creation timestamp
+          type: string
+        dtstart:
+          description: Start date/time
+          type: string
+        duration:
+          description: Duration in human-readable format
+          type: string
+        last_modified:
+          description: Last modification date/time
+          type: string
+        location:
+          description: Event location
+          type: string
+        organizers:
+          description: Event organizers
+          items:
+            $ref: '#/components/schemas/StrelkaICSOrganizer'
+          type: array
+        priority:
+          description: Priority level (0-9)
+          type: string
+        sequence:
+          description: Revision sequence
+          type: string
+        status:
+          description: Event status
+          type: string
+        summary:
+          description: Brief description
+          type: string
+        transp:
+          description: Transparency
+          type: string
+        type:
+          description: Component type
+          enum:
+          - VEVENT
+          - VTODO
+          - VJOURNAL
+          - VTIMEZONE
+          - VALARM
+          type: string
+        uid:
+          description: Unique identifier
+          type: string
+        urls:
+          description: Referenced URLs
+          items:
+            $ref: '#/components/schemas/Mdm_serviceURL'
+          type: array
+      type: object
+    Handler_typesTaskAccepted:
+      properties:
+        task_id:
+          description: Task ID. Use the /v0/tasks/:id endpoint to check the task status.
+          format: uuid
+          type: string
+      required:
+      - task_id
+      type: object
+    StrelkaQR:
+      description: Checks for QR codes and evaluates them
+      properties:
+        data:
+          description: Raw UTF8 Data
+          nullable: true
+          type: string
+        type:
+          description: Type of content, if known
+          enum:
+          - email
+          - mobile
+          - app
+          - geo
+          - wifi
+          - url
+          - undefined
+          type: string
+        url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+      type: object
+    Mdm_serviceDomain:
+      description: Domain parsed from X-Authenticated-Domain or X-Authenticated-Sender headers, which represents the domain used for sender authentication, typically the domain of the sending organization. This field provides additional context for analyzing the legitimacy of the sender
+      properties:
+        domain:
+          description: The fully qualified domain name (FQDN). This may not *always* be routable, e.g. when an email address contains a domain that is just a TLD with no SLD, e.g. foo@WIN-bar
+          format: hostname
+          type: string
+        punycode:
+          description: Interpreted punycode if the domain starts with xn--. For example, if 'domain' is 'xn--ublimesecurity-4xc.com' then 'punycode' is śublimesecurity.com
+          type: string
+        root_domain:
+          description: The root domain, including the TLD
+          format: hostname
+          type: string
+        sld:
+          description: Second-level domain, e.g. 'windows' for the domain 'windows.net'
+          type: string
+        subdomain:
+          description: Subdomain, e.g. 'drive' for the domain 'drive.google.com'
+          type: string
+        tld:
+          description: The domain's top-level domain. E.g. the TLD of google.com is 'com'
+          type: string
+        valid:
+          description: Whether the domain is valid
+          type: boolean
+      required:
+      - domain
+      type: object
+    StrelkaLNK:
+      description: Extracted details from LNK files. See ExifTools too.
+      properties:
+        MAC:
+          type: string
+        command_line_arguments:
+          type: string
+        drive_serial_number:
+          type: string
+        drive_type:
+          type: string
+        local_base_path:
+          type: string
+        machine_id:
+          type: string
+        relative_path:
+          type: string
+        volume_label:
+          type: string
+        working_dir:
+          type: string
+      type: object
+    StrelkaHTMLSpan:
+      properties:
+        style:
+          type: string
+      type: object
+    StrelkaVBA:
+      description: Examines VBA macros in Ole files, and unpacks macro code for further analysis.
+      properties:
+        auto_exec:
+          description: All keywords associated with auto exec macros
+          items:
+            type: string
+          type: array
+        base64:
+          description: Decoded base64 strings
+          items:
+            type: string
+          type: array
+        dridex:
+          description: Decoded dridex strings
+          items:
+            type: string
+          type: array
+        hex:
+          description: Decoded hex strings
+          items:
+            type: string
+          type: array
+        ioc:
+          description: String values of indicators, such as 'cmd.exe'
+          items:
+            type: string
+          type: array
+        suspicious:
+          description: Reported descriptions of suspicious behavior, e.g. 'Run' or 'Hex Strings'
+          items:
+            type: string
+          type: array
+        total_extracted:
+          format: int32
+          nullable: true
+          type: integer
+        total_files:
+          format: int32
+          nullable: true
+          type: integer
+        vba_obfuscated:
+          description: Decoded vba obfuscated strings
+          items:
+            type: string
+          type: array
+      type: object
+    StrelkaURL:
+      description: Detects URLs from text (generally text unpacked by other scanners).
+      properties:
+        invalid_urls:
+          description: URLs which could not be parsed
+          items:
+            type: string
+          type: array
+        urls:
+          description: Detected URLs.
+          items:
+            $ref: '#/components/schemas/Mdm_serviceURL'
+          type: array
+      type: object
+    StrelkaICS:
+      description: Parses iCalendar files and extracts events, attachments, and metadata
+      properties:
+        calendars:
+          description: Parsed calendar objects
+          items:
+            $ref: '#/components/schemas/StrelkaICSCalendar'
+          type: array
+        flags:
+          description: Warning/error flags from parsing
+          items:
+            type: string
+          type: array
+        parse_error:
+          description: Error message if parsing failed
+          nullable: true
+          type: string
+        total:
+          $ref: '#/components/schemas/StrelkaICSTotal'
+        total_extracted:
+          format: int32
+          nullable: true
+          type: integer
+        total_files:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    Mdm_serviceRewriteDetails:
+      description: Information about an original URL that was unfurled from rewrite detection
+      properties:
+        encoders:
+          description: List of detected URL rewrite encoders while unraveling the URL
+          items:
+            enum:
+            - adobe
+            - appspot
+            - aws_ses
+            - azurecomm
+            - azure_safelink
+            - barracuda
+            - bing_open_redirect
+            - branch_io
+            - checkpoint
+            - cisco
+            - cloudflare
+            - convertkit
+            - deref_mail
+            - doubleclick
+            - edgepilot
+            - esvalabs
+            - exactag
+            - exclaimer
+            - facebook
+            - fireeye
+            - fortimail
+            - generic_desturl
+            - generic_logout_redirect
+            - go_acoustic
+            - google_amp
+            - google_amp_project
+            - google_adservices
+            - google_meet_redirect
+            - google_notifications
+            - google_open_redirect
+            - google_tag_manager
+            - google_travel_redirect
+            - google_translate_open_redirect
+            - google_user_content
+            - href_li
+            - indeed_open_redirect
+            - inky
+            - instagram
+            - mailgun
+            - mailjet
+            - mandrill
+            - messagegears
+            - microsoft
+            - microsoft_dynamics
+            - microsoft_oauth_redirect
+            - monday_tracker
+            - postmark
+            - ppcprotect
+            - proofpoint
+            - pylonlinks
+            - securence
+            - sophos
+            - sqclick
+            - squarespace
+            - sublime
+            - titanhq
+            - topsec
+            - trend_micro
+            - vtiger
+            - wix
+            - yahoo
+            - youtube_set_sid
+            type: string
+          type: array
+        original:
+          description: Original URL without any unraveling URL rewrites
+          type: string
+      required:
+      - original
+      type: object
+    StrelkaStrings:
+      description: Simply finds and extracts any strings from.
+      properties:
+        raw:
+          description: If the entire input is a string, mirror the input as a single string.
+          type: string
+        strings:
+          description: All detected strings.
+          items:
+            type: string
+          type: array
+      type: object
+    StrelkaPDFObjHash:
+      description: Generates PDF Object Hash of the given PDF file
+      properties:
+        hash_string:
+          description: Hash string used to generate the object hash for the PDF
+          type: string
+        object_hash:
+          description: Object hash of the PDF. This is the hash of the object types present in the document.
+          type: string
+      type: object
+    StrelkaPDF:
+      description: Unpacks a PDF for further processing. Reports total files.
+      properties:
+        invalid_urls:
+          description: URLs which could not be parsed
+          items:
+            type: string
+          type: array
+        total_extracted:
+          format: int32
+          nullable: true
+          type: integer
+        urls:
+          description: Detected URLs
+          items:
+            $ref: '#/components/schemas/Mdm_serviceURL'
+          type: array
+      type: object
+    StrelkaBZip2:
+      description: Unpacks bzip2 files. Reports size
+      properties:
+        size:
+          description: Size of uncompressed file within.
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-readme:
+  explorer-enabled: false

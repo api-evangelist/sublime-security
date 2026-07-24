@@ -1,0 +1,374 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@sublime.security
+  title: Multi-Tenancy API (BETA) BinExplode Live flow API
+  version: ''
+servers:
+- url: '{scheme}://{server}'
+  variables:
+    scheme:
+      default: https
+      enum:
+      - http
+      - https
+    server:
+      default: platform.sublime.security
+      description: Base URL of your Sublime deployment
+security:
+- bearerAuth: []
+tags:
+- name: Live flow
+paths:
+  /v0/live-flow/raw-messages/analyze:
+    post:
+      description: Process a raw message
+      operationId: analyzeRawMessageLiveFlow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyzeRawMessageLiveFlowInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesAnalyzeRawMessageLiveFlowResponse'
+          description: OK
+      summary: Process raw message
+      tags:
+      - Live flow
+components:
+  schemas:
+    TypesSqarAction:
+      properties:
+        active:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+      type: object
+    AnalyzeRawMessageLiveFlowInput:
+      properties:
+        ? ''
+        : type: boolean
+        analyze_async:
+          description: Run analysis and finish ingestion async. flagged_rules will be empty on response.
+          type: boolean
+        canonical_id:
+          description: Known Canonical (message group) ID
+          maxLength: 64
+          minLength: 64
+          nullable: true
+          type: string
+        create_mailbox:
+          description: Create mailbox if it doesn't exist. If true, message_source_id must also be set
+          type: boolean
+        delivery_status:
+          description: Override delivery status. Use 'undelivered' to simulate inline processing (e.g. for testing interdict actions).
+          nullable: true
+          type: string
+        external_created_at:
+          description: Timestamp the message created at according to the external source
+          format: date-time
+          nullable: true
+          type: string
+        external_message_id:
+          description: ID of the message according to the external source
+          nullable: true
+          type: string
+        external_thread_id:
+          description: ID of the thread the message belongs to according to the external source
+          nullable: true
+          type: string
+        folder:
+          description: The mailbox folder the message is in
+          nullable: true
+          type: string
+        labels:
+          description: Labels applied to the message by the mailbox
+          items:
+            type: string
+          type: array
+        mailbox_email_address:
+          description: The email address of the mailbox containing this message
+          format: email
+          type: string
+        message_source_id:
+          description: API Message source ID associated with the mailbox.
+          format: uuid
+          type: string
+        message_type:
+          $ref: '#/components/schemas/Mdm_serviceMessageType'
+        raw_message:
+          description: The full base64 encoded raw eml message
+          type: string
+        route_type:
+          description: The directional route type of the message
+          nullable: true
+          type: string
+      required:
+      - mailbox_email_address
+      - message_source_id
+      - raw_message
+      type: object
+    Mdm_serviceMessageType:
+      description: Override on message types, defined from the perspective of your organization
+      properties:
+        inbound:
+          description: Message was sent from someone outside your organization, to *at least one* recipient inside your organization
+          type: boolean
+        internal:
+          description: Message was sent from someone inside your organization, to *at least one* recipient inside your organization. Messages *must be authenticated* by either SPF or DKIM to be treated as internal.
+          type: boolean
+        outbound:
+          description: Message was sent from someone inside your organization, to *at least one* recipient outside your organization
+          type: boolean
+      type: object
+    TypesFlatSqar:
+      description: Originating rule for this rule exclusion
+      properties:
+        actions:
+          description: Actions associated with the rule
+          items:
+            $ref: '#/components/schemas/TypesSqarAction'
+          type: array
+        active:
+          description: Whether the rule is active
+          type: boolean
+        active_updated_at:
+          description: When the Rule was last activated/deactivated
+          format: date-time
+          type: string
+        asa_verdict_trigger:
+          description: The ASA verdict that triggered this rule, if applicable
+          nullable: true
+          type: string
+        attack_types:
+          description: Rule attack types
+          items:
+            type: string
+          type: array
+        authors:
+          description: Authors and contributors of a rule
+          items:
+            $ref: '#/components/schemas/TypesRuleAuthor'
+          type: array
+        auto_review_auto_share:
+          description: Whether auto-reviewed messages will be shared
+          type: boolean
+        auto_review_classification:
+          description: The classification auto-reviewed messages will have, when an auto-review action is associated with the rule
+          nullable: true
+          type: string
+        child_ids:
+          description: IDs of any child sqars, if any
+          items:
+            type: string
+          type: array
+        created_at:
+          description: Rule creation time
+          format: date-time
+          nullable: true
+          type: string
+        created_by_api_request_id:
+          description: Created by API Request ID
+          format: uuid
+          nullable: true
+          type: string
+        created_by_org_id:
+          description: Original rule creator org ID
+          format: uuid
+          nullable: true
+          type: string
+        created_by_org_name:
+          description: Original rule creator org name
+          nullable: true
+          type: string
+        created_by_user_id:
+          description: Original rule creator user ID
+          format: uuid
+          nullable: true
+          type: string
+        created_by_user_name:
+          description: Original rule creator user name
+          nullable: true
+          type: string
+        description:
+          description: Description of rule
+          nullable: true
+          type: string
+        detection_methods:
+          description: Rule detection technologies
+          items:
+            type: string
+          type: array
+        false_positives:
+          description: Descriptions of known false positives that could occur
+          items:
+            type: string
+          type: array
+        feed_external_rule_id:
+          description: External rule ID of a rule from a feed
+          nullable: true
+          type: string
+        feed_id:
+          description: Feed ID for a rule from a feed
+          nullable: true
+          type: string
+        full_type:
+          description: Sqar type (rule or query) and subtype
+          enum:
+          - detection_rule
+          - dlp_rule
+          - triage_rule
+          - insight_query
+          - signal_query
+          type: string
+        id:
+          description: Rule ID
+          format: uuid
+          type: string
+        immutable:
+          description: Whether changes to the source or metadata are permitted
+          type: boolean
+        internal_type:
+          description: Unique internal type for rule
+          nullable: true
+          type: string
+        label:
+          description: Rule label
+          nullable: true
+          type: string
+        maturity:
+          description: Rule maturity
+          nullable: true
+          type: string
+        name:
+          description: Rule name
+          type: string
+        org_id:
+          description: Org ID
+          format: uuid
+          type: string
+        parent_id:
+          description: ID of the parent sqar, if there is one
+          nullable: true
+          type: string
+        passive:
+          description: Whether the rule is in passive mode
+          type: boolean
+        references:
+          description: URL references
+          items:
+            type: string
+          type: array
+        run_triage_on_excluded_messages:
+          description: For Triage rules only, whether this rule will run even if the message matched a global exclusion.
+          type: boolean
+        severity:
+          description: Rule severity
+          nullable: true
+          type: string
+        source:
+          description: Source
+          type: string
+        source_md5:
+          description: MD5 hash of source
+          type: string
+        tactics_and_techniques:
+          description: Rule tactics and techniques
+          items:
+            type: string
+          type: array
+        tags:
+          description: Tags
+          items:
+            type: string
+          type: array
+        triage_abuse_reports:
+          description: For Triage rules only, whether this rule will run for reported messages
+          type: boolean
+        triage_ade_complete:
+          description: For Triage rules only, whether this rule will run as triggered by ADE processing completing
+          type: boolean
+        triage_asa_complete:
+          description: For Triage rules only, whether this rule will run as triggered by ASA processing completing
+          type: boolean
+        triage_classification_changes:
+          description: For Triage rules only, whether this rule will run when a reported message has a classification change
+          type: boolean
+        triage_dlp_rule_matched:
+          description: For Triage rules only, whether this rule will run for messages that matched a DLP rule
+          type: boolean
+        triage_email_bomb:
+          description: For Triage rules only, whether this rule will run for messages found in an email bomb
+          type: boolean
+        triage_flagged_messages:
+          description: For Triage rules only, whether this rule will run for messages which flagged
+          type: boolean
+        type:
+          description: Rule type
+          nullable: true
+          type: string
+        updated_at:
+          description: Rule last updated time
+          format: date-time
+          nullable: true
+          type: string
+        user_can_delete:
+          description: Whether the rule can be deleted by a user
+          type: boolean
+        user_provided_tags:
+          description: User-provided tags
+          items:
+            type: string
+          type: array
+      required:
+      - created_at
+      - id
+      - name
+      - source
+      - source_md5
+      - updated_at
+      type: object
+    TypesRuleAuthor:
+      properties:
+        name:
+          description: Name of a rule author
+          type: string
+        twitter:
+          description: Twitter handle for a rule author
+          type: string
+      type: object
+    Handler_typesAnalyzeRawMessageLiveFlowResponse:
+      properties:
+        canonical_id:
+          description: Canonical (message group) ID
+          type: string
+        flagged_rules:
+          description: Flagged rules
+          items:
+            $ref: '#/components/schemas/TypesFlatSqar'
+          type: array
+        message_id:
+          description: Message ID
+          format: uuid
+          nullable: true
+          type: string
+        raw_message_id:
+          description: Raw message ID
+          format: uuid
+          nullable: true
+          type: string
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-readme:
+  explorer-enabled: false

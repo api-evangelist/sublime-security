@@ -1,0 +1,80 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@sublime.security
+  title: Multi-Tenancy API (BETA) BinExplode Tasks API
+  version: ''
+servers:
+- url: '{scheme}://{server}'
+  variables:
+    scheme:
+      default: https
+      enum:
+      - http
+      - https
+    server:
+      default: platform.sublime.security
+      description: Base URL of your Sublime deployment
+security:
+- bearerAuth: []
+tags:
+- name: Tasks
+paths:
+  /v0/tasks/{id}:
+    get:
+      description: Retrieve a task
+      operationId: getTask
+      parameters:
+      - description: Task ID
+        in: path
+        name: id
+        required: true
+        schema:
+          description: Task ID
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesGetTaskResponse'
+          description: OK
+      summary: Retrieve task
+      tags:
+      - Tasks
+components:
+  schemas:
+    Handler_typesGetTaskResponse:
+      description: Generic information about the scan task execution, such as status or errors.
+      properties:
+        created_at:
+          description: Task creation time
+          format: date-time
+          type: string
+        error:
+          description: Task error
+          type: string
+        id:
+          description: Task ID
+          format: uuid
+          type: string
+        state:
+          description: Task status
+          enum:
+          - pending
+          - started
+          - succeeded
+          - failed
+          - retrying
+          type: string
+      required:
+      - id
+      - state
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-readme:
+  explorer-enabled: false

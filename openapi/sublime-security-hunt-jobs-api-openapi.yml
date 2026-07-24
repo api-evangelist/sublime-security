@@ -1,0 +1,411 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@sublime.security
+  title: Multi-Tenancy API (BETA) BinExplode Hunt Jobs API
+  version: ''
+servers:
+- url: '{scheme}://{server}'
+  variables:
+    scheme:
+      default: https
+      enum:
+      - http
+      - https
+    server:
+      default: platform.sublime.security
+      description: Base URL of your Sublime deployment
+security:
+- bearerAuth: []
+tags:
+- name: Hunt Jobs
+paths:
+  /v0/hunt-jobs:
+    post:
+      description: Start a hunt job
+      operationId: startHuntJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartHuntJobInput'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandlersStartHuntJobResponse'
+          description: Created
+      summary: Start hunt job
+      tags:
+      - Hunt Jobs
+  /v0/hunt-jobs/{id}:
+    get:
+      description: Get a hunt job
+      operationId: getHuntJob
+      parameters:
+      - description: ID of the hunt job.
+        in: path
+        name: id
+        required: true
+        schema:
+          description: ID of the hunt job.
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandlersGetV0HuntJobResponse'
+          description: OK
+      summary: Get hunt job
+      tags:
+      - Hunt Jobs
+  /v0/hunt-jobs/{id}/results:
+    get:
+      description: Get hunt job detailed results. Provides message group details and summaries
+      operationId: getHuntJobResults
+      parameters:
+      - description: ID of the hunt job.
+        in: path
+        name: id
+        required: true
+        schema:
+          description: ID of the hunt job.
+          type: string
+      - description: The maximum number of results to return.
+        in: query
+        name: limit
+        schema:
+          description: The maximum number of results to return.
+          format: int32
+          maximum: 500
+          minimum: 1
+          nullable: true
+          type: integer
+      - description: The (zero-based) offset of the first hunt job results to return.
+        in: query
+        name: offset
+        schema:
+          description: The (zero-based) offset of the first hunt job results to return.
+          format: int32
+          nullable: true
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandlersGetV0HuntJobResultsResponse'
+          description: OK
+      summary: Get hunt job results
+      tags:
+      - Hunt Jobs
+components:
+  schemas:
+    Handler_typesMessageReportV0:
+      properties:
+        channel:
+          description: Channel used to report the group
+          type: string
+        reported_at:
+          description: Time the group was reported
+          format: date-time
+          type: string
+        reported_by_message_id:
+          description: ID of the reporting message (the user forward)
+          nullable: true
+          type: string
+        reporter:
+          description: Email address of the user who reported the group
+          type: string
+      type: object
+    HandlersGetV0HuntJobResultsResponse:
+      properties:
+        message_groups:
+          description: Array of messages groups returned by the hunt
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageGroupV0'
+          type: array
+        total_group_count:
+          description: Total count of message groups returned by the hunt
+          format: int32
+          type: integer
+      type: object
+    Handler_typesMessageGroupEventLinkClick:
+      properties:
+        clicked_at:
+          description: The time that the link was clicked
+          format: date-time
+          type: string
+        client_ip:
+          description: The originating client IP for the click
+          type: string
+        mailbox_display_name:
+          description: Display name of mailbox that performed the action
+          nullable: true
+          type: string
+        mailbox_email_address:
+          description: Mailbox email address that performed the action
+          nullable: true
+          type: string
+        mailbox_external_id:
+          description: External ID of the mailbox that performed the action
+          nullable: true
+          type: string
+        message_id:
+          description: ID of the Sublime message for which the action occurred
+          type: string
+        user_agent:
+          description: The originating user-agent for the click
+          type: string
+      type: object
+    StartHuntJobInput:
+      properties:
+        name:
+          description: Name of the hunt job.
+          nullable: true
+          type: string
+        private:
+          description: Restrict hunt job visibility to admins only.
+          type: boolean
+        range_end_time:
+          description: Exclusive end datetime of the hunt job, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z').
+          format: date-time
+          type: string
+        range_start_time:
+          description: Inclusive start datetime of the hunt job, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z').
+          format: date-time
+          type: string
+        source:
+          description: MQL source of the hunt job.
+          type: string
+        triage_email_bomb:
+          description: Pre-filters to only include messages that are contained in an email bomb. Combined with triage_reported, triage_flagged, and triage_dlp_rule_matched with a logical OR.
+          type: boolean
+        triage_flagged:
+          description: Pre-filters to only includes flagged messages. Combined with triage_reported, triage_email_bomb, and triage_dlp_rule_matched with a logical OR.
+          type: boolean
+        triage_reported:
+          description: Pre-filters to only includes user-reported messages. Combined with triage_flagged, triage_email_bomb, and triage_dlp_rule_matched with a logical OR.
+          type: boolean
+      required:
+      - range_end_time
+      - range_start_time
+      - source
+      type: object
+    Handler_typesMessageGroupEventLinksClickedV0:
+      properties:
+        clicks:
+          description: Click events for the URL
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageGroupEventLinkClick'
+          type: array
+        url:
+          description: URL that was clicked
+          type: string
+      type: object
+    Handler_typesMessagePreviewV0:
+      properties:
+        created_at:
+          description: Time this message was added to Sublime
+          format: date-time
+          type: string
+        delivered:
+          description: Whether or not the message has been delivered
+          type: boolean
+        forward_recipients:
+          description: Email addresses this message was forwarded to by the recipient mailbox
+          items:
+            type: string
+          type: array
+        forwarded_at:
+          description: Time this message was forwarded by the recipient mailbox. A null value indicates that it has not yet been forwarded
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          description: Sublime message ID
+          type: string
+        mailbox:
+          $ref: '#/components/schemas/Handler_typesMailbox'
+        read_at:
+          description: Time this message was read in the user's mailbox. A null value indicates that it has not yet been marked read
+          format: date-time
+          nullable: true
+          type: string
+        recipients:
+          description: Details of the message recipients
+          items:
+            $ref: '#/components/schemas/Handler_typesRecipient'
+          type: array
+        replied_at:
+          description: Time that this message was replied to by the recipient mailbox. A null value indicates that it has not yet been replied to by the recipient
+          format: date-time
+          nullable: true
+          type: string
+        sender:
+          $ref: '#/components/schemas/Handler_typesSender'
+        subject:
+          description: Subject of the message
+          type: string
+      required:
+      - id
+      - mailbox
+      - recipients
+      - sender
+      - subject
+      type: object
+    Handler_typesMessageGroupV0:
+      properties:
+        classification:
+          description: Classification of the message group
+          nullable: true
+          type: string
+        flagged_rules:
+          description: Flagged rules from the message
+          items:
+            $ref: '#/components/schemas/Handler_typesFlaggedRuleV0'
+          type: array
+        id:
+          description: Canonical ID of the group
+          type: string
+        message_links_clicked:
+          description: Message link clicked events
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageGroupEventLinksClickedV0'
+          type: array
+        messages:
+          description: Message previews
+          items:
+            $ref: '#/components/schemas/Handler_typesMessagePreviewV0'
+          type: array
+        organization_id:
+          description: ID of the group's organization
+          type: string
+        review_comment:
+          description: Comment describing reason for action
+          nullable: true
+          type: string
+        review_label:
+          description: Message group label
+          nullable: true
+          type: string
+        review_status:
+          description: Message group status
+          nullable: true
+          type: string
+        state:
+          description: Message group state
+          nullable: true
+          type: string
+        user_reports:
+          description: User reports of the message
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageReportV0'
+          type: array
+      required:
+      - id
+      type: object
+    HandlersStartHuntJobResponse:
+      properties:
+        hunt_job_id:
+          description: ID of the started hunt job.
+          type: string
+      type: object
+    Handler_typesRecipient:
+      properties:
+        email:
+          description: Email address
+          type: string
+      required:
+      - email
+      type: object
+    Handler_typesSender:
+      description: Details of the message sender
+      properties:
+        display_name:
+          description: Display name
+          type: string
+        email:
+          description: Email address
+          type: string
+      required:
+      - email
+      type: object
+    Handler_typesFlaggedRuleV0:
+      properties:
+        id:
+          description: ID of the flagged rule
+          type: string
+        name:
+          description: Name of the flagged rule
+          type: string
+        tags:
+          description: List of tags for the flagged rule
+          items:
+            type: string
+          type: array
+      type: object
+    HandlersGetV0HuntJobResponse:
+      properties:
+        error:
+          description: Error message if the hunt job failed.
+          nullable: true
+          type: string
+        id:
+          description: ID of the hunt job.
+          type: string
+        private:
+          description: Restrict hunt job visibility to admins only.
+          type: boolean
+        range_end_time:
+          description: Exclusive end datetime of the hunt job, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z').
+          format: date-time
+          type: string
+        range_start_time:
+          description: Inclusive start datetime of the hunt job, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z').
+          format: date-time
+          type: string
+        results_truncated:
+          description: Whether the hunt job was truncated due to reaching the results limit.
+          type: boolean
+        source:
+          description: MQL source of the hunt job.
+          type: string
+        status:
+          description: Status of the hunt job.
+          enum:
+          - IN_PROGRESS
+          - FAILED
+          - CANCELED
+          - COMPLETED
+          type: string
+      required:
+      - range_end_time
+      - range_start_time
+      type: object
+    Handler_typesMailbox:
+      description: Mailbox that the email bomb was found in
+      properties:
+        email:
+          description: Mailbox email address
+          type: string
+        external_id:
+          description: ID of the mailbox in the source system (e.g., Office 365 or Google Workspace)
+          nullable: true
+          type: string
+        id:
+          description: Mailbox ID
+          format: uuid
+          type: string
+      required:
+      - email
+      - id
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-readme:
+  explorer-enabled: false

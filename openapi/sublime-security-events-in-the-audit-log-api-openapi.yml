@@ -1,0 +1,361 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@sublime.security
+  title: Multi-Tenancy API (BETA) BinExplode Events in the audit log API
+  version: ''
+servers:
+- url: '{scheme}://{server}'
+  variables:
+    scheme:
+      default: https
+      enum:
+      - http
+      - https
+    server:
+      default: platform.sublime.security
+      description: Base URL of your Sublime deployment
+security:
+- bearerAuth: []
+tags:
+- name: Events in the audit log
+paths:
+  /v0/audit-log/events:
+    get:
+      description: List events in audit log
+      operationId: listEventsInAuditLog
+      parameters:
+      - description: Inclusive start datetime filter for time of event creation, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only events at or after this time will be returned.
+        in: query
+        name: created_at[gte]
+        schema:
+          description: Inclusive start datetime filter for time of event creation, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only events at or after this time will be returned.
+          format: date-time
+          nullable: true
+          type: string
+      - description: Exclusive end datetime filter for time of event creation, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only events before this time will be returned.
+        in: query
+        name: created_at[lt]
+        schema:
+          description: Exclusive end datetime filter for time of event creation, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only events before this time will be returned.
+          format: date-time
+          nullable: true
+          type: string
+      - description: The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used
+        in: query
+        name: limit
+        schema:
+          description: The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used
+          format: int32
+          maximum: 500
+          nullable: true
+          type: integer
+      - description: The (zero-based) offset of the first rules to return
+        in: query
+        name: offset
+        schema:
+          description: The (zero-based) offset of the first rules to return
+          format: int32
+          nullable: true
+          type: integer
+      - description: Event type
+        in: query
+        name: type
+        schema:
+          description: Event type
+          nullable: true
+          type: string
+      - description: Filter by user IDs
+        explode: true
+        in: query
+        name: user_ids
+        schema:
+          description: Filter by user IDs
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandlersListEventsInAuditLogResponse'
+          description: OK
+      summary: List events in audit log
+      tags:
+      - Events in the audit log
+  /v0/audit-log/events/types:
+    get:
+      description: List all event types for audit log
+      operationId: listEventTypesForAuditLog
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandlersListEventTypesResponse'
+          description: OK
+      summary: List event types for audit log
+      tags:
+      - Events in the audit log
+  /v0/audit-log/events/{id}:
+    get:
+      operationId: getEventFromAuditLog
+      parameters:
+      - description: Event ID
+        in: path
+        name: id
+        required: true
+        schema:
+          description: Event ID
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandlersGetAuditLogEventResponse'
+          description: OK
+      summary: Retrieve event from audit log
+      tags:
+      - Events in the audit log
+components:
+  schemas:
+    HandlersListEventTypesResponse:
+      properties:
+        event_types:
+          description: Event types
+          items:
+            $ref: '#/components/schemas/TypesEventTypeElement'
+          type: array
+      type: object
+    Handler_typesEventData:
+      description: Event data
+      properties:
+        message:
+          $ref: '#/components/schemas/TypesEventMessage'
+        message_group:
+          $ref: '#/components/schemas/TypesEventMessageGroup'
+        request:
+          $ref: '#/components/schemas/TypesAPIRequest'
+      type: object
+    TypesAPIRequest:
+      description: API request data, if originated from an API request
+      properties:
+        api_key_name:
+          description: Name of API key if an API key was used
+          nullable: true
+          type: string
+        authentication_method:
+          description: Description of how request was authenticated
+          nullable: true
+          type: string
+        body:
+          description: Request body
+          type: string
+        id:
+          description: API request ID
+          format: uuid
+          type: string
+        ip:
+          description: IP address of requester, if available
+          nullable: true
+          type: string
+        method:
+          description: HTTP method
+          type: string
+        path:
+          description: URL path
+          type: string
+        query:
+          additionalProperties:
+            type: string
+          description: Query parameters
+          type: object
+        user_agent:
+          description: User agent of requester, if available
+          type: string
+      required:
+      - id
+      - method
+      - path
+      type: object
+    Handler_typesUser:
+      description: User that created the event. Nil if system originated
+      properties:
+        access_restricted:
+          description: For inactive users only. Indicates the user cannot actually access due to permissions in parent org
+          type: boolean
+        active:
+          description: Whether or not the user is active/enabled (generally managed through SCIM)
+          type: boolean
+        created_at:
+          description: User creation time
+          format: date-time
+          type: string
+        deleted_at:
+          description: User deletion time
+          format: date-time
+          nullable: true
+          type: string
+        email_address:
+          description: Email address
+          format: email
+          type: string
+        first_name:
+          description: First name
+          format: string
+          type: string
+        google_oauth_user_id:
+          description: The user's Google user ID, if it exists'
+          type: string
+        id:
+          description: User ID
+          format: uuid
+          type: string
+        is_enrolled:
+          description: Whether the user has begun using the system (e.g. accepted an invitation or logged in at least once)
+          type: boolean
+        last_name:
+          description: Last name
+          format: string
+          type: string
+        microsoft_oauth_user_id:
+          description: The user's Microsoft user ID, if it exists'
+          type: string
+        phone_number:
+          description: Phone number
+          nullable: true
+          type: string
+        role:
+          description: Role assumed by the user
+          type: string
+        service_account:
+          description: The service account type (e.g., 'ade') if this is a service account
+          nullable: true
+          type: string
+        updated_at:
+          description: User last updated time
+          format: date-time
+          type: string
+      required:
+      - created_at
+      - email_address
+      - first_name
+      - id
+      - last_name
+      - updated_at
+      type: object
+    TypesEventTypeElement:
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+      type: object
+    HandlersGetAuditLogEventResponse:
+      properties:
+        additional_data:
+          description: Additional event data
+          items:
+            format: int32
+            type: integer
+          type: array
+        created_at:
+          description: Event creation time
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/Handler_typesUser'
+        data:
+          $ref: '#/components/schemas/Handler_typesEventData'
+        id:
+          description: Event ID
+          format: uuid
+          type: string
+        type:
+          description: Event type
+          type: string
+      required:
+      - created_at
+      - data
+      - id
+      - type
+      type: object
+    TypesEventMessageGroup:
+      description: Message group data, if originated from an API request taking an action on a message group
+      properties:
+        id:
+          description: Message Group ID
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    TypesEventMessage:
+      description: API request data, if originated from an API request
+      properties:
+        id:
+          description: Message ID
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    HandlersListEventsInAuditLogResponse:
+      properties:
+        count:
+          description: Count of results for this page
+          format: int32
+          type: integer
+        events:
+          description: Events. Platform deployments have 7 day event retention, while Enterprise and Cloud have unlimited retention.
+          items:
+            $ref: '#/components/schemas/Handler_typesEventV0'
+          type: array
+        total:
+          description: Total number of results available
+          format: int32
+          type: integer
+      required:
+      - count
+      - events
+      - total
+      type: object
+    Handler_typesEventV0:
+      properties:
+        additional_data:
+          description: Additional event data
+          items:
+            format: int32
+            type: integer
+          type: array
+        created_at:
+          description: Event creation time
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/Handler_typesUser'
+        data:
+          $ref: '#/components/schemas/Handler_typesEventData'
+        id:
+          description: Event ID
+          format: uuid
+          type: string
+        type:
+          description: Event type
+          type: string
+      required:
+      - created_at
+      - data
+      - id
+      - type
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-readme:
+  explorer-enabled: false

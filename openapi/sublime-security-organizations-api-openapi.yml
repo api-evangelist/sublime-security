@@ -1,0 +1,451 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@sublime.security
+  title: Multi-Tenancy API (BETA) BinExplode Organizations API
+  version: ''
+servers:
+- url: '{scheme}://{server}'
+  variables:
+    scheme:
+      default: https
+      enum:
+      - http
+      - https
+    server:
+      default: platform.sublime.security
+      description: Base URL of your Sublime deployment
+security:
+- bearerAuth: []
+tags:
+- name: Organizations
+paths:
+  /v0/organizations/mine/child-organizations:
+    get:
+      description: List the child organizations under the calling organization, including license and usage data.
+      operationId: listChildOrganizations
+      parameters:
+      - description: Filter by active status. true returns only active organizations; false returns only soft-deleted or scheduled-for-deletion organizations; omit to return all.
+        in: query
+        name: active
+        schema:
+          description: Filter by active status. true returns only active organizations; false returns only soft-deleted or scheduled-for-deletion organizations; omit to return all.
+          example: true
+          nullable: true
+          type: boolean
+      - description: Maximum number of organizations to return. Capped at 500.
+        in: query
+        name: limit
+        schema:
+          description: Maximum number of organizations to return. Capped at 500.
+          example: 50
+          format: int32
+          maximum: 500
+          nullable: true
+          type: integer
+      - description: 'How deep to descend: 1 (the default) returns direct children only, 2 includes grandchildren, and so on. Capped at the maximum hierarchy depth.'
+        in: query
+        name: max_depth
+        schema:
+          description: 'How deep to descend: 1 (the default) returns direct children only, 2 includes grandchildren, and so on. Capped at the maximum hierarchy depth.'
+          example: 2
+          format: int32
+          minimum: 1
+          nullable: true
+          type: integer
+      - description: Zero-based offset into the result set, used for pagination.
+        in: query
+        name: offset
+        schema:
+          description: Zero-based offset into the result set, used for pagination.
+          example: 0
+          format: int32
+          nullable: true
+          type: integer
+      - description: Restrict results to descendants of this organization. Must be the calling organization itself or one of its descendants. Defaults to the calling organization.
+        in: query
+        name: parent_org_id
+        schema:
+          description: Restrict results to descendants of this organization. Must be the calling organization itself or one of its descendants. Defaults to the calling organization.
+          example: 019263d1-7c1a-7c8e-9c66-f1c2a9b1f4e2
+          format: uuid
+          nullable: true
+          type: string
+      - description: Optional case-insensitive substring filter on organization name. Partial matches are returned.
+        in: query
+        name: search
+        schema:
+          description: Optional case-insensitive substring filter on organization name. Partial matches are returned.
+          example: acme
+          nullable: true
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesListChildOrganizationsResponse'
+          description: OK
+      summary: List child organizations
+      tags:
+      - Organizations
+    post:
+      description: Create a child organization under the calling organization, optionally provisioning one or more licenses on it.
+      operationId: createChildOrganization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateChildOrganizationInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesCreateChildOrganizationResponse'
+          description: OK
+      summary: Create child organization
+      tags:
+      - Organizations
+  /v0/organizations/mine/child-organizations/bulk-licensing:
+    post:
+      description: Apply license transitions to up to 200 child organizations in one call. Each organization is evaluated independently; per-organization failures are reported in the results array, not the HTTP status.
+      operationId: bulkPatchChildOrganizationLicensing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkPatchChildOrganizationLicensingInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesBulkPatchChildOrganizationLicensingResponse'
+          description: OK
+      summary: Bulk update child organization licensing
+      tags:
+      - Organizations
+  /v0/organizations/mine/child-organizations/{id}:
+    patch:
+      description: Update a child organization's display name and delegation settings, returning the full child organization.
+      operationId: patchChildOrganization
+      parameters:
+      - description: ID of the child organization to patch.
+        in: path
+        name: id
+        required: true
+        schema:
+          description: ID of the child organization to patch.
+          example: 019263d1-7c1a-7c8e-9c66-f1c2a9b1f4e2
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchChildOrganizationInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypesOrganization'
+          description: OK
+      summary: Update child organization
+      tags:
+      - Organizations
+  /v0/organizations/mine/child-organizations/{id}/licensing:
+    patch:
+      description: Apply a desired license to a child organization. The requested license is evaluated against the organization's current billing state and the appropriate transition is applied.
+      operationId: patchChildOrganizationLicensing
+      parameters:
+      - description: ID of the child organization whose licenses to update.
+        in: path
+        name: id
+        required: true
+        schema:
+          description: ID of the child organization whose licenses to update.
+          example: 019263d1-7c1a-7c8e-9c66-f1c2a9b1f4e2
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchChildOrganizationLicensingInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesPatchChildOrganizationLicensingResponse'
+          description: OK
+      summary: Update child organization licensing
+      tags:
+      - Organizations
+components:
+  schemas:
+    Handler_typesCreateChildOrganizationResponse:
+      properties:
+        id:
+          description: ID of the newly created organization
+          format: uuid
+          type: string
+        licenses:
+          description: Licenses successfully provisioned on the new organization
+          items:
+            $ref: '#/components/schemas/TypesLicense'
+          type: array
+        warnings:
+          description: Non-fatal issues encountered while applying optional settings
+          items:
+            type: string
+          type: array
+      type: object
+    TypesOrganization:
+      description: The root org
+      properties:
+        active_automation_rule_count:
+          description: Number of active automation rules
+          format: int32
+          type: integer
+        active_detection_rule_count:
+          description: Number of active detection rules
+          format: int32
+          type: integer
+        active_mailbox_count:
+          description: Number of currently active mailboxes
+          format: int32
+          type: integer
+        can_add_children:
+          description: Whether this organization can add child organizations
+          nullable: true
+          type: boolean
+        can_manage_child_licenses:
+          description: Whether this organization can manage child organization licenses
+          nullable: true
+          type: boolean
+        created_at:
+          description: Time at which the organization was created
+          format: date-time
+          type: string
+        deleted_at:
+          description: Time at which org was soft deleted (inaccessible, data not deleted)
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          description: Organization unique ID
+          type: string
+        licenses:
+          description: Active licenses for this organization
+          items:
+            $ref: '#/components/schemas/TypesLicense'
+          type: array
+        name:
+          description: Organization chosen name
+          type: string
+        parent_org_id:
+          description: ID of this organization's parent in the hierarchy. The top-level organization has no parent.
+          nullable: true
+          type: string
+        scheduled_for_deletion_at:
+          description: Time at which hard deletion of org data is scheduled to begin
+          format: date-time
+          nullable: true
+          type: string
+        total_mailbox_count:
+          description: Total number of mailboxes
+          format: int32
+          type: integer
+      type: object
+    Handler_typesListChildOrganizationsResponse:
+      properties:
+        children:
+          description: The matching child organizations, ordered by name.
+          items:
+            $ref: '#/components/schemas/TypesOrganization'
+          type: array
+        total:
+          description: Total number of matching child organizations, ignoring offset/limit.
+          example: 3
+          format: int32
+          type: integer
+      type: object
+    PatchChildOrganizationLicensingInput:
+      properties:
+        licenses:
+          description: Desired license to apply. Exactly one license per request is supported today; the array shape is reserved for future multi-SKU support.
+          items:
+            $ref: '#/components/schemas/Handler_typesLicenseInput'
+          maxItems: 1
+          minItems: 1
+          type: array
+      required:
+      - licenses
+      type: object
+    Handler_typesLicenseInput:
+      properties:
+        sku:
+          description: Identifies the product to license. "sublime_email_security" is the only SKU available today.
+          enum:
+          - sublime_email_security
+          type: string
+        status:
+          description: 'Desired billing state for the license. Valid values: "trialing", "active", "canceled". Use "canceled" to downgrade an existing license back to free.'
+          type: string
+        trial_days:
+          description: Length of the trial in days (only used when status is trialing.) If not set, the default trial length will be used.
+          format: int32
+          maximum: 90
+          minimum: 1
+          nullable: true
+          type: integer
+      required:
+      - sku
+      - status
+      type: object
+    CreateChildOrganizationInput:
+      properties:
+        can_add_children:
+          description: Whether the child organization can have its own child organizations
+          nullable: true
+          type: boolean
+        can_manage_child_licenses:
+          description: Whether the child organization can manage its descendants' licenses
+          nullable: true
+          type: boolean
+        licenses:
+          description: Licenses to provision on the new organization. Omit for an unlicensed (free) org.
+          items:
+            $ref: '#/components/schemas/Handler_typesLicenseInput'
+          type: array
+        name:
+          description: Name of the child organization
+          type: string
+      required:
+      - name
+      type: object
+    Handler_typesPatchChildOrganizationLicensingResponse:
+      properties:
+        licenses:
+          description: Licenses present on the organization after the requested transition. A license whose transition failed is omitted; see warnings for details.
+          items:
+            $ref: '#/components/schemas/TypesLicense'
+          type: array
+        warnings:
+          description: Non-fatal issues encountered while applying the transition. A non-empty warnings array alongside a partial licenses array indicates partial success.
+          items:
+            type: string
+          type: array
+      type: object
+    TypesLicense:
+      properties:
+        sku:
+          description: Identifies the licensed product. "sublime_email_security" is the only SKU available today.
+          enum:
+          - sublime_email_security
+          type: string
+        status:
+          description: 'Current billing status of this license. This reflects the underlying billing state and may differ from a requested transition target. Common values: "trialing" (within a time-limited trial — see trial_expires_at for the end date), "active" (a paid, current subscription), and "no_subscription" (free tier — no active subscription). Stripe-derived states such as "past_due", "canceled", "unpaid", "incomplete", and "incomplete_expired" may also appear.'
+          enum:
+          - trialing
+          - active
+          - no_subscription
+          - past_due
+          - canceled
+          - unpaid
+          - incomplete
+          - incomplete_expired
+          type: string
+        trial_expires_at:
+          description: When the trial period ends. Present only while status is "trialing"; omitted otherwise.
+          format: date-time
+          nullable: true
+          type: string
+      type: object
+    Handler_typesBulkPatchChildOrganizationLicensingResponse:
+      properties:
+        results:
+          description: One entry per requested organization, in the same order as the request's items array. Inspect each entry's error field to detect partial failure.
+          items:
+            $ref: '#/components/schemas/Handler_typesBulkLicensingResult'
+          type: array
+      type: object
+    BulkPatchChildOrganizationLicensingInput:
+      properties:
+        items:
+          description: Per-organization transitions to apply. Capped at 200 entries per call. The same org_id may not appear more than once. The caller must be able to manage licenses on every listed organization, or the entire request is rejected before any transition is attempted.
+          items:
+            $ref: '#/components/schemas/Handler_typesBulkLicensingItem'
+          maxItems: 200
+          minItems: 1
+          type: array
+      required:
+      - items
+      type: object
+    PatchChildOrganizationInput:
+      properties:
+        can_add_children:
+          description: Set whether this organization may create its own child organizations. Granting requires the target to be below the maximum hierarchy depth.
+          example: true
+          nullable: true
+          type: boolean
+        can_manage_child_licenses:
+          description: Set whether this organization may manage licenses on its descendants. Granting requires child-organization license management to be enabled for the root organization and the target's immediate parent to already hold this permission; revoking is always allowed.
+          example: false
+          nullable: true
+          type: boolean
+        name:
+          description: New display name for the organization. Must be non-empty after trimming whitespace.
+          example: Acme Corp (renamed)
+          nullable: true
+          type: string
+      type: object
+    Handler_typesBulkLicensingItem:
+      properties:
+        licenses:
+          description: License transition to apply to this organization. Exactly one license per entry is supported today; the array shape is reserved for future multi-SKU support.
+          items:
+            $ref: '#/components/schemas/Handler_typesLicenseInput'
+          maxItems: 1
+          minItems: 1
+          type: array
+        org_id:
+          description: ID of the child organization this entry targets. Must be a descendant of the calling organization.
+          example: 019263d1-7c1a-7c8e-9c66-f1c2a9b1f4e2
+          format: uuid
+          type: string
+      required:
+      - licenses
+      - org_id
+      type: object
+    Handler_typesBulkLicensingResult:
+      properties:
+        error:
+          description: Human-readable failure reason; empty on success, populated when the transition failed for this organization. Safe to surface to end users.
+          example: enterprise subscriptions cannot be transitioned to a trial
+          type: string
+        licenses:
+          description: Licenses present on the organization after the transition. Populated on success.
+          items:
+            $ref: '#/components/schemas/TypesLicense'
+          type: array
+        org_id:
+          description: ID of the organization this result applies to.
+          example: 019263d1-7c1a-7c8e-9c66-f1c2a9b1f4e2
+          format: uuid
+          type: string
+        warnings:
+          description: Non-fatal issues encountered while applying the transition for this organization.
+          items:
+            type: string
+          type: array
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-readme:
+  explorer-enabled: false

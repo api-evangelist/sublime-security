@@ -1,0 +1,821 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@sublime.security
+  title: Multi-Tenancy API (BETA) BinExplode Enrichment API
+  version: ''
+servers:
+- url: '{scheme}://{server}'
+  variables:
+    scheme:
+      default: https
+      enum:
+      - http
+      - https
+    server:
+      default: platform.sublime.security
+      description: Base URL of your Sublime deployment
+security:
+- bearerAuth: []
+tags:
+- name: Enrichment
+paths:
+  /v0/enrichment/link_analysis/evaluate:
+    post:
+      description: Analyze a provided link using ml.link_analysis functionality.
+      operationId: linkAnalysisEvaluate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkAnalysisEvaluateInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesLinkAnalysisResponse'
+          description: OK
+      summary: Analyze a provided link using ml.link_analysis functionality
+      tags:
+      - Enrichment
+components:
+  schemas:
+    Mdm_serviceIP:
+      description: X-Originating-IP header, which identifies the originating IP address of the sender client
+      properties:
+        ip:
+          description: The IP in canonical form
+          type: string
+        translation:
+          $ref: '#/components/schemas/Mdm_serviceIPTranslation'
+        version:
+          description: The version of IP (i.e., 4 or 6), null for backward compatibility.
+          format: int32
+          nullable: true
+          type: integer
+      required:
+      - ip
+      type: object
+    Mdm_serviceRewriteDetails:
+      description: Information about an original URL that was unfurled from rewrite detection
+      properties:
+        encoders:
+          description: List of detected URL rewrite encoders while unraveling the URL
+          items:
+            enum:
+            - adobe
+            - appspot
+            - aws_ses
+            - azurecomm
+            - azure_safelink
+            - barracuda
+            - bing_open_redirect
+            - branch_io
+            - checkpoint
+            - cisco
+            - cloudflare
+            - convertkit
+            - deref_mail
+            - doubleclick
+            - edgepilot
+            - esvalabs
+            - exactag
+            - exclaimer
+            - facebook
+            - fireeye
+            - fortimail
+            - generic_desturl
+            - generic_logout_redirect
+            - go_acoustic
+            - google_amp
+            - google_amp_project
+            - google_adservices
+            - google_meet_redirect
+            - google_notifications
+            - google_open_redirect
+            - google_tag_manager
+            - google_travel_redirect
+            - google_translate_open_redirect
+            - google_user_content
+            - href_li
+            - indeed_open_redirect
+            - inky
+            - instagram
+            - mailgun
+            - mailjet
+            - mandrill
+            - messagegears
+            - microsoft
+            - microsoft_dynamics
+            - microsoft_oauth_redirect
+            - monday_tracker
+            - postmark
+            - ppcprotect
+            - proofpoint
+            - pylonlinks
+            - securence
+            - sophos
+            - sqclick
+            - squarespace
+            - sublime
+            - titanhq
+            - topsec
+            - trend_micro
+            - vtiger
+            - wix
+            - yahoo
+            - youtube_set_sid
+            type: string
+          type: array
+        original:
+          description: Original URL without any unraveling URL rewrites
+          type: string
+      required:
+      - original
+      type: object
+    Handler_typesLinkAnalysisResponse:
+      properties:
+        additional_responses:
+          description: Additional HTTP responses for the page, which could be additional resources, XHR requests, etc.
+          items:
+            $ref: '#/components/schemas/Link_analysis_typesAdditionalResponse'
+          type: array
+        analyzed:
+          description: Whether the target page was successfully analyzed for credential phishing attempts
+          type: boolean
+        content_type:
+          description: Content type of the page
+          type: string
+        credphish:
+          $ref: '#/components/schemas/Enrichment_typesCredPhish'
+        diagnostics:
+          $ref: '#/components/schemas/Enrichment_typesLinkAnalysisRunDiagnostics'
+        effective_url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+        files_downloaded:
+          description: All downloads from the page. These must download without interaction and within a few seconds
+          items:
+            $ref: '#/components/schemas/Link_analysis_typesDownloadedFile'
+          type: array
+        final_dom:
+          $ref: '#/components/schemas/Link_analysis_typesFinalDOM'
+        original_url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+        page_status_code:
+          description: HTTP status code of the page
+          format: int32
+          nullable: true
+          type: integer
+        redirect_history:
+          description: Each URL which the link analysis service was redirected through
+          items:
+            $ref: '#/components/schemas/Mdm_serviceURL'
+          type: array
+        retrieved:
+          description: Whether the page was successfully retrieved
+          type: boolean
+        retrieved_at:
+          description: Time the page was retrieved
+          format: date-time
+          nullable: true
+          type: string
+        screenshot:
+          $ref: '#/components/schemas/Mdm_serviceFile'
+        status_code:
+          description: HTTP status code for the requested page
+          format: int32
+          type: integer
+        submitted:
+          description: Whether the page was submitted to be retrieved for analysis
+          type: boolean
+        unique_urls_accessed:
+          description: All unique URLs accessed during the analysis
+          items:
+            $ref: '#/components/schemas/Mdm_serviceURL'
+          type: array
+        would_analyze:
+          description: Whether the link would have been analyzed if run in a rule
+          type: boolean
+        would_submit:
+          description: Whether the link would have been submitted if run in a rule
+          type: boolean
+      type: object
+    Mdm_serviceURL:
+      description: URL details when QR code type is url
+      properties:
+        domain:
+          $ref: '#/components/schemas/Mdm_serviceDomain'
+        fragment:
+          description: 'Fragment identifier; the text following the # in the URL (also called the anchor tag)'
+          type: string
+        ip:
+          $ref: '#/components/schemas/Mdm_serviceIP'
+        password:
+          description: The password specified before the domain name
+          type: string
+        path:
+          description: Everything after the TLD and before the query parameters
+          type: string
+        port:
+          description: The port used for the URL. If no explicit port is set, the port will be inferred from the protocol
+          format: int32
+          nullable: true
+          type: integer
+        query_params:
+          description: The full query parameters of the URL
+          type: string
+        query_params_decoded:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: The decoded query parameters of the URL
+          type: object
+        rewrite:
+          $ref: '#/components/schemas/Mdm_serviceRewriteDetails'
+        scheme:
+          description: Protocol for the URL request, e.g. http
+          type: string
+        url:
+          description: Full URL
+          type: string
+        username:
+          description: The username specified before the domain name of the URL
+          type: string
+      required:
+      - url
+      type: object
+    Mdm_serviceDomain:
+      description: Domain parsed from X-Authenticated-Domain or X-Authenticated-Sender headers, which represents the domain used for sender authentication, typically the domain of the sending organization. This field provides additional context for analyzing the legitimacy of the sender
+      properties:
+        domain:
+          description: The fully qualified domain name (FQDN). This may not *always* be routable, e.g. when an email address contains a domain that is just a TLD with no SLD, e.g. foo@WIN-bar
+          format: hostname
+          type: string
+        punycode:
+          description: Interpreted punycode if the domain starts with xn--. For example, if 'domain' is 'xn--ublimesecurity-4xc.com' then 'punycode' is śublimesecurity.com
+          type: string
+        root_domain:
+          description: The root domain, including the TLD
+          format: hostname
+          type: string
+        sld:
+          description: Second-level domain, e.g. 'windows' for the domain 'windows.net'
+          type: string
+        subdomain:
+          description: Subdomain, e.g. 'drive' for the domain 'drive.google.com'
+          type: string
+        tld:
+          description: The domain's top-level domain. E.g. the TLD of google.com is 'com'
+          type: string
+        valid:
+          description: Whether the domain is valid
+          type: boolean
+      required:
+      - domain
+      type: object
+    Enrichment_typesCredPhish:
+      description: CredPhish analysis of the screenshot taken for the final URL
+      properties:
+        brand:
+          $ref: '#/components/schemas/Enrichment_typesBrandInfo'
+        confidence:
+          description: Level in a credential phish assessment, only set if .disposition is phishing
+          enum:
+          - low
+          - medium
+          - high
+          type: string
+        contains_captcha:
+          description: Final page contains a captcha test
+          nullable: true
+          type: boolean
+        contains_login:
+          description: Final page resembles a login screen
+          nullable: true
+          type: boolean
+        disposition:
+          description: Verdict of the link, determined by various stages of analysis
+          enum:
+          - benign
+          - phishing
+          - unknown
+          type: string
+      type: object
+    Enrichment_typesLinkAnalysisRunDiagnostics:
+      description: INTERNAL
+      properties:
+        created_at:
+          description: When the diagnostic object was created
+          format: date-time
+          type: string
+        submit_verdict:
+          description: Reason the URL was [not] submitted to Link Analysis
+          type: string
+        submit_verdict_url:
+          description: The URL upon which the submit verdict was based
+          type: string
+      type: object
+    Mdm_serviceIPTranslation:
+      properties:
+        original:
+          description: The IP in its original format if it is an IPv4-mapped-IPv6 source address
+          nullable: true
+          type: string
+        v4_to_v6:
+          description: Whether 'Original' is IPv4-mapped-IPv6
+          type: boolean
+      type: object
+    Link_analysis_typesDownloadedFile:
+      description: Raw HTTP response payload as a file
+      properties:
+        file_extension:
+          description: File extension from context such as headers
+          type: string
+        file_name:
+          description: File name
+          type: string
+        file_type:
+          description: File type determined by looking at the magic bytes in the file
+          enum:
+          - 3gp
+          - 7z
+          - Z
+          - aac
+          - aiff
+          - amr
+          - ar
+          - avi
+          - bmp
+          - bz2
+          - cab
+          - cr2
+          - crx
+          - dcm
+          - deb
+          - dex
+          - dey
+          - doc
+          - docx
+          - dwg
+          - elf
+          - eot
+          - epub
+          - exe
+          - flac
+          - flv
+          - gif
+          - gz
+          - heif
+          - html
+          - ico
+          - ics
+          - iso
+          - jp2
+          - jpg
+          - jxr
+          - lz
+          - m4a
+          - m4v
+          - macho
+          - mid
+          - mkv
+          - mov
+          - mp3
+          - mp4
+          - mpg
+          - nes
+          - ogg
+          - otf
+          - pdf
+          - png
+          - ppt
+          - pptx
+          - ps
+          - psd
+          - rar
+          - rpm
+          - rtf
+          - sqlite
+          - svg
+          - swf
+          - tar
+          - tif
+          - ttf
+          - wasm
+          - wav
+          - webm
+          - webp
+          - wmv
+          - woff
+          - woff2
+          - xls
+          - xlsx
+          - xz
+          - zip
+          - zst
+          - unknown
+          type: string
+        md5:
+          description: MD5 hash of the downloaded file
+          type: string
+        raw:
+          description: Base64 encoded source of the file
+          format: base64
+          nullable: true
+          type: string
+        sha1:
+          description: SHA1 hash of the downloaded file
+          type: string
+        sha256:
+          description: SHA256 hash of the downloaded file
+          type: string
+        size:
+          description: Size of the file in bytes
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    Mdm_serviceFile:
+      description: File containing screenshot of final_url
+      properties:
+        file_extension:
+          description: File extension from context such as headers
+          type: string
+        file_name:
+          description: File name
+          type: string
+        file_type:
+          description: File type determined by looking at the magic bytes in the file
+          enum:
+          - 3gp
+          - 7z
+          - Z
+          - aac
+          - aiff
+          - amr
+          - ar
+          - avi
+          - bmp
+          - bz2
+          - cab
+          - cr2
+          - crx
+          - dcm
+          - deb
+          - dex
+          - dey
+          - doc
+          - docx
+          - dwg
+          - elf
+          - eot
+          - epub
+          - exe
+          - flac
+          - flv
+          - gif
+          - gz
+          - heif
+          - html
+          - ico
+          - ics
+          - iso
+          - jp2
+          - jpg
+          - jxr
+          - lz
+          - m4a
+          - m4v
+          - macho
+          - mid
+          - mkv
+          - mov
+          - mp3
+          - mp4
+          - mpg
+          - nes
+          - ogg
+          - otf
+          - pdf
+          - png
+          - ppt
+          - pptx
+          - ps
+          - psd
+          - rar
+          - rpm
+          - rtf
+          - sqlite
+          - svg
+          - swf
+          - tar
+          - tif
+          - ttf
+          - wasm
+          - wav
+          - webm
+          - webp
+          - wmv
+          - woff
+          - woff2
+          - xls
+          - xlsx
+          - xz
+          - zip
+          - zst
+          - unknown
+          type: string
+        raw:
+          description: Base64 encoded source of the file
+          format: base64
+          nullable: true
+          type: string
+        size:
+          description: Size of the file in bytes
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    Mdm_serviceLink:
+      properties:
+        display_text:
+          description: The text of a hyperlink, if it's not a URL
+          type: string
+        display_url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+        href_url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+        mismatched:
+          description: Whether the display URL and href URL root domains are mismatched (i.e. .href_url.domain.root_domain != .display_url.domain.root_domain, where both are not null and valid domains)
+          nullable: true
+          type: boolean
+        parser:
+          description: The parser that was used to derived the link
+          enum:
+          - plain
+          - hyperlink
+          type: string
+        visible:
+          description: Whether the link is visible to a human when previewing an email or page
+          nullable: true
+          type: boolean
+      type: object
+    Link_analysis_typesFinalDOM:
+      description: Full DOM of the analyzed URL
+      properties:
+        display_text:
+          description: Visible text of the HTML document, with invisible characters removed and non-ASCII characters converted to ASCII spaces.
+          nullable: true
+          type: string
+        inner_text:
+          description: Inner text of the HTML document that doesn't include HTML tags.
+          nullable: true
+          type: string
+        links:
+          description: Links found within the DOM
+          items:
+            $ref: '#/components/schemas/Mdm_serviceLink'
+          type: array
+        raw:
+          description: Decoded raw content of a body text type (text/[subtype] section)
+          nullable: true
+          type: string
+      type: object
+    Enrichment_typesBrandInfo:
+      description: Information about the recognized brand on the target page
+      properties:
+        confidence:
+          description: Level of confidence that the correct brand (or none) was identified
+          enum:
+          - low
+          - medium
+          - high
+          type: string
+        name:
+          description: Name of identified brand in the target page. Null if no brand was identified.
+          enum:
+          - ABN
+          - ADP
+          - AOL
+          - AT&T
+          - Adobe
+          - AliExpress
+          - Amazon
+          - American Express
+          - Apple
+          - Authentisign
+          - Awardco
+          - BB&T Corporation
+          - BBVA
+          - BT
+          - Bass Pro Shop
+          - Bank of America
+          - Barclays
+          - Belastingdienst
+          - Benteler
+          - BeyondTrust
+          - Bol
+          - Box
+          - CFA
+          - CNA
+          - CVS
+          - Caixabank
+          - Capital One Bank
+          - CalPoly
+          - Captcha
+          - Carta
+          - Chase
+          - ChicagoTitle
+          - Citi
+          - Cloudflare
+          - Coinbase
+          - Couer Mining
+          - CyberArk
+          - DHL
+          - DKB
+          - DPD
+          - Dayforce
+          - Digid
+          - Discord
+          - Discover
+          - Disney
+          - DocuSign
+          - Dropbox
+          - EY
+          - Ebay
+          - Europol
+          - Experian
+          - Facebook
+          - FakeAttachment
+          - FanDuel
+          - FedEx
+          - FidelityTitle
+          - FirstAm
+          - FuboTV
+          - GLS
+          - GM
+          - GeekSquad
+          - Gemini Trust
+          - Generic Captcha
+          - Generic Webmail
+          - Github
+          - Gmail
+          - GoDaddy
+          - Google
+          - GoogleDrive
+          - Google Voice
+          - Gusto
+          - HSBC Bank
+          - Heroku
+          - Home Depot
+          - HubSpot
+          - Hulu
+          - Huntress
+          - ING
+          - IRS
+          - Indeed
+          - Instagram
+          - Invite Company
+          - JFrog
+          - KPN
+          - Kehe
+          - Key Bank
+          - LawyersTitle
+          - Ledger
+          - LinkedIn
+          - Lloyds
+          - M & T Bank
+          - MadisonTitle
+          - MailChimp
+          - Mailgun
+          - Mastercard
+          - McAfee
+          - Meta
+          - MetaMask
+          - Microsoft
+          - Microsoft Office365
+          - Microsoft OneDrive
+          - Microsoft Outlook
+          - Microsoft SharePoint
+          - Microsoft Teams
+          - Mimecast
+          - NATO
+          - NHS
+          - NatWest
+          - Navan
+          - Navy Federal Credit Union
+          - Netflix
+          - Norton
+          - OVO
+          - Okta
+          - OldRepublicTitle
+          - OpenAI
+          - PNC
+          - Palo Alto Networks
+          - Pandora
+          - PayPal
+          - PostNL
+          - Postbank
+          - Proton
+          - Pulley
+          - QuicklySign
+          - Quickbooks
+          - RBS
+          - RLI
+          - Rabobank
+          - Rakuten
+          - Robert Half
+          - RoyalMail
+          - SBB
+          - SSA
+          - Santander
+          - Schwab
+          - SendGrid
+          - Shein
+          - Signal
+          - Silicon Valley Bank
+          - Slack
+          - Snowflake
+          - Sparkasse
+          - Spotify
+          - Square
+          - StewartTitle
+          - Stratus
+          - Stripe
+          - SunTrust Bank
+          - Swiss Post
+          - Swisscom
+          - TD Bank
+          - Target
+          - Targobank
+          - Threads
+          - TicorTitle
+          - Tidal
+          - TikTok
+          - Trezor
+          - TrustWallet
+          - Tyrell
+          - U.S. Bank
+          - UCSB
+          - UPS
+          - USPS
+          - Vanguard
+          - Venmo
+          - Visa
+          - Vodafone
+          - Volksbank
+          - WeTransfer
+          - Wells Fargo
+          - Wex
+          - WhatsApp
+          - Wise
+          - Workday
+          - WoS
+          - X
+          - Yahoo
+          - Zebra
+          - Zelle
+          - Zendesk
+          - Ziggo
+          - Zoom
+          - Zscaler
+          type: string
+      type: object
+    Link_analysis_typesAdditionalResponse:
+      properties:
+        content_type:
+          description: Content type of the response
+          type: string
+        file:
+          $ref: '#/components/schemas/Link_analysis_typesDownloadedFile'
+        json:
+          $ref: '#/components/schemas/FfiJSON'
+        status_code:
+          description: HTTP status code for the response
+          format: int32
+          type: integer
+        url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+      type: object
+    LinkAnalysisEvaluateInput:
+      properties:
+        no_logo_detect:
+          description: Whether to skip logo detection
+          type: boolean
+        url:
+          description: URL to analyze
+          type: string
+      required:
+      - url
+      type: object
+    FfiJSON:
+      description: Response from the URL decoded as a JSON object for application/json content types
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-readme:
+  explorer-enabled: false

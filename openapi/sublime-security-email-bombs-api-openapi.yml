@@ -1,0 +1,313 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@sublime.security
+  title: Multi-Tenancy API (BETA) BinExplode Email Bombs API
+  version: ''
+servers:
+- url: '{scheme}://{server}'
+  variables:
+    scheme:
+      default: https
+      enum:
+      - http
+      - https
+    server:
+      default: platform.sublime.security
+      description: Base URL of your Sublime deployment
+security:
+- bearerAuth: []
+tags:
+- name: Email Bombs
+paths:
+  /v0/messages/bombs:
+    get:
+      description: List email bombs
+      operationId: listEmailBombs
+      parameters:
+      - description: Filter by active status. true = only active, false = only inactive, null = all
+        in: query
+        name: active
+        schema:
+          description: Filter by active status. true = only active, false = only inactive, null = all
+          nullable: true
+          type: boolean
+      - description: Filter by dismissed status. true = only dismissed, false = only not dismissed, null = all
+        in: query
+        name: dismissed
+        schema:
+          description: Filter by dismissed status. true = only dismissed, false = only not dismissed, null = all
+          nullable: true
+          type: boolean
+      - description: The maximum number of email bombs to return
+        in: query
+        name: limit
+        schema:
+          description: The maximum number of email bombs to return
+          format: int32
+          maximum: 500
+          nullable: true
+          type: integer
+      - description: The (zero-based) offset of the email bombs to return
+        in: query
+        name: offset
+        schema:
+          description: The (zero-based) offset of the email bombs to return
+          format: int32
+          nullable: true
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandlersV0ListEmailBombsResponse'
+          description: OK
+      summary: List email bombs
+      tags:
+      - Email Bombs
+    post:
+      description: Mark a mailbox time range as an email bomb. A new bomb is created if no existing bomb covers the range; otherwise the existing bomb is extended. Messages within the range are associated asynchronously.
+      operationId: createEmailBomb
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEmailBombInput'
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandlersV0CreateEmailBombResponse'
+          description: Accepted
+      summary: Create email bomb
+      tags:
+      - Email Bombs
+  /v0/messages/bombs/{id}:
+    get:
+      description: Get email bomb
+      operationId: getEmailBomb
+      parameters:
+      - description: ID of the email bomb
+        in: path
+        name: id
+        required: true
+        schema:
+          description: ID of the email bomb
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandlersV0GetEmailBombResponse'
+          description: OK
+      summary: Get email bomb
+      tags:
+      - Email Bombs
+  /v0/messages/bombs/{id}/dismiss:
+    post:
+      description: Dismiss an email bomb, marking it as reviewed by the user
+      operationId: dismissEmailBomb
+      parameters:
+      - description: ID of the email bomb to dismiss
+        in: path
+        name: id
+        required: true
+        schema:
+          description: ID of the email bomb to dismiss
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DismissEmailBombInput'
+      responses:
+        '200':
+          description: OK
+      summary: Dismiss email bomb
+      tags:
+      - Email Bombs
+components:
+  schemas:
+    DismissEmailBombInput:
+      properties:
+        review_comment:
+          description: Comment describing reason for dismissing the email bomb
+          nullable: true
+          type: string
+      type: object
+    HandlersV0GetEmailBombResponse:
+      properties:
+        active:
+          description: Whether the email bomb is currently active (based on last_message_added_at)
+          type: boolean
+        created_at:
+          description: Time when the email bomb was first detected
+          format: date-time
+          type: string
+        end_time:
+          description: End time of the email bomb, when the last message was received
+          format: date-time
+          type: string
+        id:
+          description: ID of the email bomb
+          format: uuid
+          type: string
+        last_message_added_at:
+          description: Time when the last message was added to the email bomb
+          format: date-time
+          type: string
+        mailbox:
+          $ref: '#/components/schemas/Handler_typesMailbox'
+        message_count:
+          description: Total number of messages in the email bomb
+          format: int32
+          type: integer
+        reviewed_at:
+          description: Time when this email bomb was reviewed
+          format: date-time
+          nullable: true
+          type: string
+        reviewed_by_user_id:
+          description: ID of the user who dismissed this email bomb
+          format: uuid
+          nullable: true
+          type: string
+        start_time:
+          description: Start time of the email bomb, when the first message was received
+          format: date-time
+          type: string
+        updated_at:
+          description: Time when the email bomb was last updated
+          format: date-time
+          type: string
+      type: object
+    HandlersV0EmailBombDetail:
+      properties:
+        active:
+          description: Whether the email bomb is currently active (based on last_message_added_at)
+          type: boolean
+        created_at:
+          description: Time when the email bomb was first detected
+          format: date-time
+          type: string
+        end_time:
+          description: End time of the email bomb, when the last message was received
+          format: date-time
+          type: string
+        id:
+          description: ID of the email bomb
+          format: uuid
+          type: string
+        last_message_added_at:
+          description: Time when the last message was added to the email bomb
+          format: date-time
+          type: string
+        mailbox:
+          $ref: '#/components/schemas/Handler_typesMailbox'
+        message_count:
+          description: Total number of messages in the email bomb
+          format: int32
+          type: integer
+        reviewed_at:
+          description: Time when this email bomb was reviewed
+          format: date-time
+          nullable: true
+          type: string
+        reviewed_by_user_id:
+          description: ID of the user who dismissed this email bomb
+          format: uuid
+          nullable: true
+          type: string
+        start_time:
+          description: Start time of the email bomb, when the first message was received
+          format: date-time
+          type: string
+        updated_at:
+          description: Time when the email bomb was last updated
+          format: date-time
+          type: string
+      type: object
+    HandlersV0ListEmailBombsResponse:
+      properties:
+        count:
+          description: Count of email bombs for this page
+          format: int32
+          type: integer
+        email_bombs:
+          description: List of email bombs
+          items:
+            $ref: '#/components/schemas/HandlersV0EmailBombDetail'
+          type: array
+        total:
+          description: Total number of email bombs
+          format: int32
+          type: integer
+      required:
+      - count
+      - total
+      type: object
+    CreateEmailBombInput:
+      properties:
+        end_time:
+          description: End of the email bomb time range (must not be in the future)
+          format: date-time
+          type: string
+        mailbox_id:
+          description: ID of the mailbox to declare the email bomb for
+          type: string
+        start_time:
+          description: Start of the email bomb time range
+          format: date-time
+          type: string
+      required:
+      - end_time
+      - mailbox_id
+      - start_time
+      type: object
+    Handler_typesMailbox:
+      description: Mailbox that the email bomb was found in
+      properties:
+        email:
+          description: Mailbox email address
+          type: string
+        external_id:
+          description: ID of the mailbox in the source system (e.g., Office 365 or Google Workspace)
+          nullable: true
+          type: string
+        id:
+          description: Mailbox ID
+          format: uuid
+          type: string
+      required:
+      - email
+      - id
+      type: object
+    HandlersV0CreateEmailBombResponse:
+      properties:
+        created_bomb_id:
+          description: ID of the newly created bomb. Omitted when the time range merged into existing bombs.
+          format: uuid
+          nullable: true
+          type: string
+        overlapping_bomb_ids:
+          description: IDs of all bombs overlapping the requested time range
+          format: uuid
+          items:
+            type: string
+          type: array
+        updated_bomb_ids:
+          description: IDs of existing bombs expanded to cover the requested time range
+          format: uuid
+          items:
+            type: string
+          type: array
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-readme:
+  explorer-enabled: false

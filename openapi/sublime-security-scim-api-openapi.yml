@@ -1,0 +1,698 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@sublime.security
+  title: Multi-Tenancy API (BETA) BinExplode SCIM API
+  version: ''
+servers:
+- url: '{scheme}://{server}'
+  variables:
+    scheme:
+      default: https
+      enum:
+      - http
+      - https
+    server:
+      default: platform.sublime.security
+      description: Base URL of your Sublime deployment
+security:
+- bearerAuth: []
+tags:
+- name: SCIM
+paths:
+  /v0/scim/ResourceTypes:
+    get:
+      description: List SCIM resource types
+      operationId: listSCIMResourceTypes
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesListSCIMResourceTypesResponse'
+          description: OK
+      summary: List SCIM resource types
+      tags:
+      - SCIM
+  /v0/scim/ResourceTypes/{id}:
+    get:
+      description: Get SCIM resource type
+      operationId: getSCIMResourceType
+      parameters:
+      - description: ID of the resource type
+        in: path
+        name: id
+        required: true
+        schema:
+          description: ID of the resource type
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesSCIMResourceType'
+          description: OK
+      summary: Get SCIM resource type
+      tags:
+      - SCIM
+  /v0/scim/Schemas:
+    get:
+      description: List SCIM schemas
+      operationId: listSCIMSchemas
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesListSCIMSchemasResponse'
+          description: OK
+      summary: List SCIM schemas
+      tags:
+      - SCIM
+  /v0/scim/Schemas/{id}:
+    get:
+      description: Get SCIM schema
+      operationId: getSCIMSchema
+      parameters:
+      - description: Schema ID
+        in: path
+        name: id
+        required: true
+        schema:
+          description: Schema ID
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesSCIMSchema'
+          description: OK
+      summary: Get SCIM schema
+      tags:
+      - SCIM
+  /v0/scim/ServiceProviderConfig:
+    get:
+      description: Get SCIM service provider configuration
+      operationId: getSCIMServiceProviderConfig
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesSCIMServiceProviderConfig'
+          description: OK
+      summary: Get SCIM service provider configuration
+      tags:
+      - SCIM
+  /v0/scim/Users:
+    get:
+      description: List SCIM users
+      operationId: listSCIMUsers
+      parameters:
+      - description: Maximum number of results
+        in: query
+        name: count
+        schema:
+          default: 100
+          description: Maximum number of results
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: Optional filter like 'userName eq "bob@example.com"'
+        in: query
+        name: filter
+        schema:
+          description: Optional filter like 'userName eq "bob@example.com"'
+          type: string
+      - description: 1-indexed starting index
+        in: query
+        name: startIndex
+        schema:
+          default: 1
+          description: 1-indexed starting index
+          format: int32
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesListSCIMUsersResponse'
+          description: OK
+      summary: List SCIM users
+      tags:
+      - SCIM
+    post:
+      description: Create SCIM user
+      operationId: createSCIMUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSCIMUserInput'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesSCIMUser'
+          description: Created
+      summary: Create SCIM user
+      tags:
+      - SCIM
+  /v0/scim/Users/{id}:
+    delete:
+      description: Delete SCIM user
+      operationId: deleteSCIMUser
+      parameters:
+      - description: Sublime ID of the user
+        in: path
+        name: id
+        required: true
+        schema:
+          description: Sublime ID of the user
+          type: string
+      responses:
+        '204':
+          description: No Content
+      summary: Delete SCIM user
+      tags:
+      - SCIM
+    get:
+      description: Get SCIM user
+      operationId: getSCIMUser
+      parameters:
+      - description: Sublime ID of the user
+        in: path
+        name: id
+        required: true
+        schema:
+          description: Sublime ID of the user
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesSCIMUser'
+          description: OK
+      summary: Get SCIM user
+      tags:
+      - SCIM
+    patch:
+      description: Patch SCIM user
+      operationId: patchSCIMUser
+      parameters:
+      - description: Sublime ID of the user
+        in: path
+        name: id
+        required: true
+        schema:
+          description: Sublime ID of the user
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchSCIMUserInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesSCIMUser'
+          description: OK
+      summary: Patch SCIM user
+      tags:
+      - SCIM
+    put:
+      description: Update SCIM user
+      operationId: updateSCIMUser
+      parameters:
+      - description: Sublime ID of the user
+        in: path
+        name: id
+        required: true
+        schema:
+          description: Sublime ID of the user
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSCIMUserInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesSCIMUser'
+          description: OK
+      summary: Update SCIM user
+      tags:
+      - SCIM
+  /v0/scim/validate_auth:
+    get:
+      description: Validate SCIM specific auth
+      operationId: validateSCIMAuth
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandlersScimEchoResp'
+          description: OK
+      summary: Validate SCIM specific auth
+      tags:
+      - SCIM
+components:
+  schemas:
+    Handler_typesSCIMSchemaAttribute:
+      properties:
+        canonicalValues:
+          items:
+            type: string
+          type: array
+        caseExact:
+          type: boolean
+        description:
+          type: string
+        multiValued:
+          type: boolean
+        mutability:
+          type: string
+        name:
+          type: string
+        required:
+          type: boolean
+        returned:
+          type: string
+        subAttributes:
+          items:
+            $ref: '#/components/schemas/Handler_typesSCIMSchemaSubAttribute'
+          type: array
+        type:
+          type: string
+        uniqueness:
+          type: string
+      type: object
+    Handler_typesSCIMServiceProviderConfig:
+      properties:
+        authenticationSchemes:
+          items:
+            $ref: '#/components/schemas/Handler_typesSCIMAuthenticationScheme'
+          type: array
+        bulk:
+          $ref: '#/components/schemas/Handler_typesSCIMServiceProviderConfigBulk'
+        changePassword:
+          $ref: '#/components/schemas/Handler_typesSCIMServiceProviderConfigChange'
+        documentationURI:
+          type: string
+        etag:
+          $ref: '#/components/schemas/Handler_typesSCIMServiceProviderConfigETag'
+        filter:
+          $ref: '#/components/schemas/Handler_typesSCIMServiceProviderConfigFilter'
+        meta:
+          $ref: '#/components/schemas/Handler_typesSCIMMeta'
+        patch:
+          $ref: '#/components/schemas/Handler_typesSCIMServiceProviderConfigPatch'
+        schemas:
+          items:
+            type: string
+          type: array
+        sort:
+          $ref: '#/components/schemas/Handler_typesSCIMServiceProviderConfigSort'
+      type: object
+    Handler_typesSCIMUser:
+      properties:
+        active:
+          type: boolean
+        emails:
+          items:
+            $ref: '#/components/schemas/Handler_typesSCIMEmail'
+          type: array
+        externalId:
+          description: ID of the user in the external identity provider (e.g., Okta)
+          nullable: true
+          type: string
+        id:
+          description: ID of the user in Sublime
+          type: string
+        meta:
+          $ref: '#/components/schemas/Handler_typesSCIMMeta'
+        name:
+          $ref: '#/components/schemas/Handler_typesSCIMUserName'
+        schemas:
+          items:
+            type: string
+          type: array
+        sublimeRole:
+          description: Deprecated. For backwards-compatibility with existing integrations. Prefer the property on "urn:ietf:params:scim:schemas:extension:sublime:2.0:User"
+          type: string
+        urn:ietf:params:scim:schemas:extension:sublime:2.0:User:
+          $ref: '#/components/schemas/Handler_typesSCIMSublimeUserExtension'
+        userName:
+          type: string
+      required:
+      - name
+      - userName
+      type: object
+    Handler_typesSCIMServiceProviderConfigETag:
+      properties:
+        supported:
+          type: boolean
+      type: object
+    Handler_typesSCIMPatchOperation:
+      properties:
+        op:
+          type: string
+        path:
+          nullable: true
+          type: string
+        value:
+          description: Value of any type, including null
+          nullable: true
+      required:
+      - op
+      type: object
+    Handler_typesSCIMAuthenticationScheme:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        primary:
+          type: boolean
+        type:
+          type: string
+      type: object
+    Handler_typesSCIMServiceProviderConfigPatch:
+      properties:
+        supported:
+          type: boolean
+      type: object
+    PatchSCIMUserInput:
+      properties:
+        Operations:
+          items:
+            $ref: '#/components/schemas/Handler_typesSCIMPatchOperation'
+          minItems: 1
+          type: array
+        schemas:
+          items:
+            type: string
+          type: array
+      required:
+      - Operations
+      - schemas
+      type: object
+    HandlersScimEchoResp:
+      properties:
+        user_email:
+          type: string
+      type: object
+    Handler_typesSCIMServiceProviderConfigSort:
+      properties:
+        supported:
+          type: boolean
+      type: object
+    Handler_typesSCIMSchema:
+      properties:
+        attributes:
+          description: Schema attributes
+          items:
+            $ref: '#/components/schemas/Handler_typesSCIMSchemaAttribute'
+          type: array
+        description:
+          description: Schema description
+          type: string
+        id:
+          description: Schema ID
+          type: string
+        meta:
+          $ref: '#/components/schemas/Handler_typesSCIMMeta'
+        name:
+          description: Schema name
+          type: string
+        schemas:
+          items:
+            type: string
+          type: array
+      type: object
+    Handler_typesListSCIMUsersResponse:
+      properties:
+        Resources:
+          items:
+            $ref: '#/components/schemas/Handler_typesSCIMUser'
+          type: array
+        itemsPerPage:
+          format: int32
+          type: integer
+        schemas:
+          items:
+            type: string
+          type: array
+        startIndex:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    Handler_typesSCIMMeta:
+      description: Schema metadata
+      properties:
+        created:
+          description: DateTime when the resource was created
+          type: string
+        lastModified:
+          description: DateTime when the resource was last modified
+          type: string
+        location:
+          description: URL of the resource
+          type: string
+        resourceType:
+          description: Resource type
+          type: string
+      type: object
+    Handler_typesSCIMSchemaExtension:
+      properties:
+        required:
+          description: Whether the extension is required
+          type: boolean
+        schema:
+          description: URI of the schema extension
+          type: string
+      type: object
+    Handler_typesSCIMEmail:
+      properties:
+        primary:
+          type: boolean
+        type:
+          type: string
+        value:
+          type: string
+      type: object
+    Handler_typesSCIMUserName:
+      properties:
+        familyName:
+          type: string
+        givenName:
+          type: string
+      type: object
+    CreateSCIMUserInput:
+      properties:
+        active:
+          type: boolean
+        emails:
+          items:
+            $ref: '#/components/schemas/Handler_typesSCIMEmail'
+          type: array
+        externalId:
+          description: ID of the user in the external identity provider (e.g., Okta)
+          nullable: true
+          type: string
+        id:
+          description: ID of the user in Sublime
+          type: string
+        meta:
+          $ref: '#/components/schemas/Handler_typesSCIMMeta'
+        name:
+          $ref: '#/components/schemas/Handler_typesSCIMUserName'
+        schemas:
+          items:
+            type: string
+          type: array
+        sublimeRole:
+          description: Deprecated. For backwards-compatibility with existing integrations. Prefer the property on "urn:ietf:params:scim:schemas:extension:sublime:2.0:User"
+          type: string
+        urn:ietf:params:scim:schemas:extension:sublime:2.0:User:
+          $ref: '#/components/schemas/Handler_typesSCIMSublimeUserExtension'
+        userName:
+          type: string
+      required:
+      - name
+      - userName
+      type: object
+    Handler_typesSCIMSublimeUserExtension:
+      properties:
+        sublimeRole:
+          description: Sublime role of the user, such as 'admin', 'engineer', 'analyst', or a custom role
+          type: string
+      type: object
+    Handler_typesSCIMServiceProviderConfigBulk:
+      properties:
+        maxOperations:
+          format: int32
+          type: integer
+        maxPayloadSize:
+          format: int32
+          type: integer
+        supported:
+          type: boolean
+      type: object
+    Handler_typesListSCIMSchemasResponse:
+      properties:
+        Resources:
+          items:
+            $ref: '#/components/schemas/Handler_typesSCIMSchema'
+          type: array
+        itemsPerPage:
+          format: int32
+          type: integer
+        schemas:
+          items:
+            type: string
+          type: array
+        startIndex:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    Handler_typesSCIMSchemaSubAttribute:
+      properties:
+        caseExact:
+          type: boolean
+        description:
+          type: string
+        mutability:
+          type: string
+        name:
+          type: string
+        required:
+          type: boolean
+        returned:
+          type: string
+        type:
+          type: string
+        uniqueness:
+          type: string
+      type: object
+    Handler_typesListSCIMResourceTypesResponse:
+      properties:
+        Resources:
+          items:
+            $ref: '#/components/schemas/Handler_typesSCIMResourceType'
+          type: array
+        itemsPerPage:
+          format: int32
+          type: integer
+        schemas:
+          items:
+            type: string
+          type: array
+        startIndex:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    Handler_typesSCIMServiceProviderConfigChange:
+      properties:
+        supported:
+          type: boolean
+      type: object
+    UpdateSCIMUserInput:
+      properties:
+        active:
+          type: boolean
+        emails:
+          items:
+            $ref: '#/components/schemas/Handler_typesSCIMEmail'
+          type: array
+        externalId:
+          description: ID of the user in the external identity provider (e.g., Okta)
+          nullable: true
+          type: string
+        id:
+          description: ID of the user in Sublime
+          type: string
+        meta:
+          $ref: '#/components/schemas/Handler_typesSCIMMeta'
+        name:
+          $ref: '#/components/schemas/Handler_typesSCIMUserName'
+        schemas:
+          items:
+            type: string
+          type: array
+        sublimeRole:
+          description: Deprecated. For backwards-compatibility with existing integrations. Prefer the property on "urn:ietf:params:scim:schemas:extension:sublime:2.0:User"
+          type: string
+        urn:ietf:params:scim:schemas:extension:sublime:2.0:User:
+          $ref: '#/components/schemas/Handler_typesSCIMSublimeUserExtension'
+        userName:
+          type: string
+      required:
+      - name
+      - userName
+      type: object
+    Handler_typesSCIMServiceProviderConfigFilter:
+      properties:
+        maxResults:
+          format: int32
+          type: integer
+        supported:
+          type: boolean
+      type: object
+    Handler_typesSCIMResourceType:
+      properties:
+        description:
+          description: Description of the resource
+          type: string
+        endpoint:
+          description: Endpoint for the resource
+          type: string
+        id:
+          description: ID of the resource in Sublime
+          type: string
+        meta:
+          $ref: '#/components/schemas/Handler_typesSCIMMeta'
+        name:
+          description: Name of the resource
+          type: string
+        schema:
+          description: Schema for the resource
+          type: string
+        schemaExtensions:
+          description: Schema Extensions for the resource
+          items:
+            $ref: '#/components/schemas/Handler_typesSCIMSchemaExtension'
+          type: array
+        schemas:
+          items:
+            type: string
+          type: array
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-readme:
+  explorer-enabled: false

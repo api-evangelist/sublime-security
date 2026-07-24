@@ -1,0 +1,370 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@sublime.security
+  title: Multi-Tenancy API (BETA) BinExplode Lists API
+  version: ''
+servers:
+- url: '{scheme}://{server}'
+  variables:
+    scheme:
+      default: https
+      enum:
+      - http
+      - https
+    server:
+      default: platform.sublime.security
+      description: Base URL of your Sublime deployment
+security:
+- bearerAuth: []
+tags:
+- name: Lists
+paths:
+  /v0/lists:
+    get:
+      description: Retrieve filtered lists
+      operationId: getLists
+      parameters:
+      - description: List type to filter by. One of 'string', 'user_group', 'provider_org_unit'.
+        in: query
+        name: entry_type
+        required: true
+        schema:
+          description: List type to filter by. One of 'string', 'user_group', 'provider_org_unit'.
+          enum:
+          - string
+          - user_group
+          - provider_org_unit
+          type: string
+      - description: Optional ID (exact match) to filter by
+        in: query
+        name: id
+        schema:
+          description: Optional ID (exact match) to filter by
+          format: uuid
+          type: string
+      - description: Optional name (exact match) to filter by
+        in: query
+        name: name
+        schema:
+          description: Optional name (exact match) to filter by
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesGetListResponse'
+          description: OK
+      summary: Retrieve lists
+      tags:
+      - Lists
+    post:
+      description: Create a list
+      operationId: createList
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateListInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesList'
+          description: OK
+      summary: Create list
+      tags:
+      - Lists
+  /v0/lists/{id}:
+    delete:
+      description: Delete a list
+      operationId: deleteList
+      parameters:
+      - description: List ID
+        in: path
+        name: id
+        required: true
+        schema:
+          description: List ID
+          format: uuid
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Delete list
+      tags:
+      - Lists
+    get:
+      description: Get a list
+      operationId: getList
+      parameters:
+      - description: List ID
+        in: path
+        name: id
+        required: true
+        schema:
+          description: List ID
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesList'
+          description: OK
+      summary: Get list
+      tags:
+      - Lists
+    patch:
+      description: Patch a list
+      operationId: patchList
+      parameters:
+      - description: List ID
+        in: path
+        name: id
+        required: true
+        schema:
+          description: List ID
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchListInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesList'
+          description: OK
+      summary: Patch list
+      tags:
+      - Lists
+  /v0/lists/{id}/entries:
+    get:
+      description: Get all list entries
+      operationId: getListEntries
+      parameters:
+      - description: List ID
+        in: path
+        name: id
+        required: true
+        schema:
+          description: List ID
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler_typesListEntries'
+          description: OK
+      summary: Get list entries
+      tags:
+      - Lists
+    put:
+      description: Set (overwrite) all list entries
+      operationId: setListEntries
+      parameters:
+      - description: List ID
+        in: path
+        name: id
+        required: true
+        schema:
+          description: List ID
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetListEntriesInput'
+      responses:
+        '200':
+          description: OK
+      summary: Set list entries
+      tags:
+      - Lists
+  /v0/lists/{id}/entries/entry:
+    delete:
+      description: Delete list entry, if present
+      operationId: deleteListEntry
+      parameters:
+      - description: List ID
+        in: path
+        name: id
+        required: true
+        schema:
+          description: List ID
+          format: uuid
+          type: string
+      - description: String list entry
+        in: query
+        name: string
+        required: true
+        schema:
+          description: String list entry
+          maxLength: 2000
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Delete list entry
+      tags:
+      - Lists
+    get:
+      description: Get list entry, if present
+      operationId: getListEntry
+      parameters:
+      - description: List ID
+        in: path
+        name: id
+        required: true
+        schema:
+          description: List ID
+          format: uuid
+          type: string
+      - description: String list entry
+        in: query
+        name: string
+        required: true
+        schema:
+          description: String list entry
+          maxLength: 2000
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: OK
+      summary: Get list entry
+      tags:
+      - Lists
+    post:
+      description: Add list entry, if not already present
+      operationId: addListEntry
+      parameters:
+      - description: List ID
+        in: path
+        name: id
+        required: true
+        schema:
+          description: List ID
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddListEntryInput'
+      responses:
+        '200':
+          description: OK
+      summary: Add list entry
+      tags:
+      - Lists
+components:
+  schemas:
+    Handler_typesListEntries:
+      properties:
+        entries:
+          description: List of string entries
+          items:
+            type: string
+          type: array
+        overrides:
+          description: List of override string entries
+          items:
+            type: string
+          type: array
+      type: object
+    Handler_typesGetListResponse:
+      properties:
+        lists:
+          description: List of lists
+          items:
+            $ref: '#/components/schemas/Handler_typesList'
+          type: array
+      type: object
+    AddListEntryInput:
+      properties:
+        string:
+          description: String list entry
+          maxLength: 2000
+          type: string
+      type: object
+    SetListEntriesInput:
+      properties:
+        entries:
+          description: List entries
+          items:
+            type: string
+          type: array
+      required:
+      - entries
+      type: object
+    CreateListInput:
+      properties:
+        description:
+          description: Description of list
+          type: string
+        name:
+          description: Unique name used to reference the list in MQL
+          type: string
+      required:
+      - description
+      - name
+      type: object
+    PatchListInput:
+      properties:
+        description:
+          description: Description of list
+          type: string
+      required:
+      - description
+      type: object
+    Handler_typesList:
+      properties:
+        created_at:
+          description: List creation time
+          format: date-time
+          type: string
+        description:
+          description: Description of list
+          type: string
+        editable:
+          description: If the list may be edited. False for system lists.
+          type: boolean
+        entry_type:
+          description: Type of entry. Supported values are 'string', 'user_group', 'provider_org_unit'
+          type: string
+        id:
+          description: List ID
+          format: uuid
+          type: string
+        name:
+          description: Unique name used to reference the list in MQL
+          type: string
+        updated_at:
+          description: List last updated time
+          format: date-time
+          type: string
+      required:
+      - description
+      - id
+      - name
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-readme:
+  explorer-enabled: false
