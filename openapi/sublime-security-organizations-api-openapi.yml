@@ -3,7 +3,7 @@ info:
   contact:
     email: support@sublime.security
   title: Multi-Tenancy API (BETA) BinExplode Organizations API
-  version: ''
+  version: "1.0"
 servers:
 - url: '{scheme}://{server}'
   variables:

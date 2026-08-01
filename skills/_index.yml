@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/sublime-security-platform-openapi.json
+skills:
+  - file: sublime-security-triage-and-trash-message.md
+    name: Triage and trash a malicious message
+    api: openapi/sublime-security-platform-openapi.json
+    operations: [searchMessageGroups, getMessageGroup, getMessage, trashMessageCanonicalGroup, restoreMessageCanonicalGroup, actionMessage]
+  - file: sublime-security-author-detection-rule.md
+    name: Author and activate an MQL detection rule
+    api: openapi/sublime-security-platform-openapi.json
+    operations: [validateRule, createRule, activateRule, listRules, getRule, deactivateRule]
+  - file: sublime-security-analyze-and-hunt.md
+    name: Analyze a raw message and hunt retroactively
+    api: openapi/sublime-security-platform-openapi.json
+    operations: [analyzeRawMessageLiveFlow, attackScoreForRawMessage, huntMessageGroups, getHuntResults, startHuntJob, getHuntJob, getHuntJobResults]

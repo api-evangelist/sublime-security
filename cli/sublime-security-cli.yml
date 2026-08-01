@@ -1,0 +1,31 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/sublime-security/sublime-cli, https://pypi.org/project/sublime-cli/
+name: sublime-cli
+description: >-
+  A command-line tool and Python module for the free Sublime Analysis API — analyze
+  raw email messages (.eml / MDM) against Sublime's Message Query Language (MQL)
+  detection rules, and query message data models locally.
+binary: sublime
+language: python
+official: true
+install:
+  - method: pip
+    command: pip install sublime-cli
+package: packages/sublime-security-packages.yml
+authentication: >-
+  Uses a Sublime API key (free Analysis API key) supplied via `sublime setup` or the
+  SUBLIME_API_KEY environment variable; sends it as an HTTP Bearer token.
+command_groups:
+  - group: setup
+    description: Configure the CLI with an API key and default endpoint.
+  - group: analyze
+    description: Analyze one or more raw email messages (.eml) against MQL detection rules.
+  - group: create
+    description: Author and scaffold new MQL detection rules.
+  - group: enrich
+    description: Enrich a message with the Message Data Model (MDM) for rule authoring.
+note: >-
+  Command surface summarized from the published sublime-cli repository. The CLI targets
+  the free Analysis API; the full Platform API is consumed over REST. Verify exact
+  subcommands with `sublime --help`.

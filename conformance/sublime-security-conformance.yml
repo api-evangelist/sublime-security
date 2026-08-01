@@ -1,0 +1,39 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sublime-security-platform-openapi.json, openapi/sublime-security-multitenancy-openapi.json, https://docs.sublime.security/reference/authentication.md
+note: >-
+  Standards conformance derived from the OpenAPI specs and confirmed docs. Sublime
+  implements SCIM 2.0 for user provisioning (dedicated /v0/scim/* resource surface),
+  HTTP Bearer API-key auth, and OpenAPI 3.0.1 as its contract format.
+standards:
+  - id: openapi-3.0
+    conforms: true
+    evidence: Both specs declare openapi 3.0.1.
+  - id: scim-2.0
+    conforms: true
+    evidence: >-
+      Dedicated /v0/scim/Users, /v0/scim/Schemas, /v0/scim/ResourceTypes and
+      /v0/scim/ServiceProviderConfig endpoints follow RFC 7643/7644 (SCIM 2.0).
+  - id: http-bearer-auth
+    conforms: true
+    evidence: securitySchemes bearerAuth (type http, scheme bearer).
+  - id: rest
+    conforms: true
+    evidence: Resource-oriented URLs, JSON request/response bodies, standard HTTP verbs and status codes (per API introduction).
+  - id: sso-saml-oidc
+    conforms: true
+    evidence: Documented SSO via Okta, Entra ID (Azure), and Google Workspace.
+  - id: oauth2
+    conforms: false
+    evidence: Platform API uses static Bearer API keys, not OAuth2 authorization flows.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Error responses are not documented as application/problem+json in the OpenAPI.
+  - id: fhir-r4
+    conforms: false
+  - id: fapi
+    conforms: false
+  - id: odata
+    conforms: false
+  - id: json-api
+    conforms: false

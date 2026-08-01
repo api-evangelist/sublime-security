@@ -1,0 +1,22 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/sublime-security-multitenancy-openapi.json, openapi/sublime-security-platform-openapi.json
+docs: https://docs.sublime.security/reference/authentication.md
+summary:
+  types:
+  - http
+  scheme: api-key-bearer
+  detail: >-
+    Static API keys generated under Automate > API on the Sublime dashboard and sent as
+    an HTTP Bearer token (`Authorization: Bearer <API key>`). The key is displayed only
+    once at creation. No OAuth2 flows or scopes; RBAC governs what each key can do.
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  in: header
+  header: Authorization
+  format: 'Bearer <API key>'
+  sources:
+  - openapi/sublime-security-multitenancy-openapi.json
+  - openapi/sublime-security-platform-openapi.json

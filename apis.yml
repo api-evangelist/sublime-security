@@ -1,28 +1,268 @@
 aid: sublime-security
 name: Sublime Security
-description: 'Sublime Security is a company surfaced as a portfolio company of index-ventures, ivp and
-  added to the API Evangelist network as a stub for enrichment. Sector: security. This profile is a lead
-  awaiting the enrichment pipeline.'
+description: >-
+  Sublime Security is an adaptive, programmable email security platform that combines
+  best-in-class detection effectiveness with deep visibility and control. Teams write
+  detection-as-code in Sublime's Message Query Language (MQL) to stop business email
+  compromise (BEC), credential phishing, malware, and other email attacks, and can hunt
+  retroactively across historical messages. Sublime runs as a managed multi-region cloud
+  service or self-managed on Docker, AWS, or Azure, integrates with Microsoft 365, Google
+  Workspace, and IMAP, and exposes a REST Platform API (v0), outbound webhooks, SCIM 2.0
+  provisioning, a Multi-Tenancy API for MSPs, and a free Analysis API with an open rules
+  community. Backed by Index Ventures and IVP.
 url: https://raw.githubusercontent.com/api-evangelist/sublime-security/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - index-ventures
 - ivp
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: enrichment-pass
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
+image: https://platform.sublime.security/logo@192.png
 tags:
 - Company
 - Security
-apis: []
+- Email Security
+- Phishing
+- Detection as Code
+- Threat Detection
+- Cloud Email Security
+- SCIM
+apis:
+- aid: sublime-security:sublime-security-binexplode-api
+  name: Sublime Security BinExplode API
+  description: The BinExplode API from Sublime Security — 2 operation(s) for binexplode.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - BinExplode
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-binexplode-api-openapi.yml
+- aid: sublime-security:sublime-security-email-bombs-api
+  name: Sublime Security Email Bombs API
+  description: The Email Bombs API from Sublime Security — 3 operation(s) for email bombs.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - Email Bombs
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-email-bombs-api-openapi.yml
+- aid: sublime-security:sublime-security-enrichment-api
+  name: Sublime Security Enrichment API
+  description: The Enrichment API from Sublime Security — 1 operation(s) for enrichment.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - Enrichment
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-enrichment-api-openapi.yml
+- aid: sublime-security:sublime-security-events-in-the-audit-log-api
+  name: Sublime Security Events in the audit log API
+  description: >-
+    The Events in the audit log API from Sublime Security — 3 operation(s) for events in the audit log.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - Events in the audit log
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-events-in-the-audit-log-api-openapi.yml
+- aid: sublime-security:sublime-security-hunt-jobs-api
+  name: Sublime Security Hunt Jobs API
+  description: The Hunt Jobs API from Sublime Security — 3 operation(s) for hunt jobs.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - Hunt Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-hunt-jobs-api-openapi.yml
+- aid: sublime-security:sublime-security-lists-api
+  name: Sublime Security Lists API
+  description: The Lists API from Sublime Security — 4 operation(s) for lists.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-lists-api-openapi.yml
+- aid: sublime-security:sublime-security-live-flow-api
+  name: Sublime Security Live flow API
+  description: The Live flow API from Sublime Security — 1 operation(s) for live flow.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - Live flow
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-live-flow-api-openapi.yml
+- aid: sublime-security:sublime-security-mailboxes-api
+  name: Sublime Security Mailboxes API
+  description: The Mailboxes API from Sublime Security — 1 operation(s) for mailboxes.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - Mailboxes
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-mailboxes-api-openapi.yml
+- aid: sublime-security:sublime-security-message-groups-api
+  name: Sublime Security Message Groups API
+  description: The Message Groups API from Sublime Security — 17 operation(s) for message groups.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - Message Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-message-groups-api-openapi.yml
+- aid: sublime-security:sublime-security-messages-api
+  name: Sublime Security Messages API
+  description: The Messages API from Sublime Security — 19 operation(s) for messages.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-messages-api-openapi.yml
+- aid: sublime-security:sublime-security-organizations-api
+  name: Sublime Security Organizations API
+  description: The Organizations API from Sublime Security — 4 operation(s) for organizations.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-organizations-api-openapi.yml
+- aid: sublime-security:sublime-security-roles-api
+  name: Sublime Security Roles API
+  description: The Roles API from Sublime Security — 1 operation(s) for roles.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-roles-api-openapi.yml
+- aid: sublime-security:sublime-security-rules-api
+  name: Sublime Security Rules API
+  description: The Rules API from Sublime Security — 7 operation(s) for rules.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-rules-api-openapi.yml
+- aid: sublime-security:sublime-security-scim-api
+  name: Sublime Security SCIM API
+  description: The SCIM API from Sublime Security — 8 operation(s) for scim.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - SCIM
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-scim-api-openapi.yml
+- aid: sublime-security:sublime-security-tasks-api
+  name: Sublime Security Tasks API
+  description: The Tasks API from Sublime Security — 1 operation(s) for tasks.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-tasks-api-openapi.yml
+- aid: sublime-security:sublime-security-user-reports-api
+  name: Sublime Security User Reports API
+  description: The User Reports API from Sublime Security — 1 operation(s) for user reports.
+  humanURL: https://docs.sublime.security/reference/introduction
+  baseURL: https://platform.sublime.security
+  tags:
+  - User Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/sublime-security-user-reports-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 22
+  pass: local-v1
 common:
 - type: Website
   url: https://sublime.security/
+- type: DeveloperPortal
+  url: https://docs.sublime.security/
+- type: Documentation
+  url: https://docs.sublime.security/
+- type: APIReference
+  url: https://docs.sublime.security/reference/introduction
+- type: GettingStarted
+  url: https://docs.sublime.security/docs/sublime-managed
+- type: GitHubOrganization
+  url: https://github.com/sublime-security
+- type: SignUp
+  url: https://platform.sublime.security/signup
+- type: StatusPage
+  url: https://statuspage.incident.io/sublime/customer
+- type: TrustCenter
+  url: https://trust.sublime.security/
+- type: Authentication
+  url: authentication/sublime-security-authentication.yml
+- type: DomainSecurity
+  url: security/sublime-security-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/sublime-security-agentic-access.yml
+- type: Packages
+  url: packages/sublime-security-packages.yml
+- type: SDKs
+  url: packages/sublime-security-packages.yml
+- type: CLI
+  url: cli/sublime-security-cli.yml
+- type: MCPServer
+  url: mcp/sublime-security-mcp.yml
+- type: LLMsTxt
+  url: llms/sublime-security-llms.txt
+- type: Conformance
+  url: conformance/sublime-security-conformance.yml
+- type: ErrorCatalog
+  url: errors/sublime-security-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/sublime-security-lifecycle.yml
+- type: Conventions
+  url: conventions/sublime-security-conventions.yml
+- type: DataModel
+  url: data-model/sublime-security-data-model.yml
+- type: Webhooks
+  url: asyncapi/sublime-security-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Overlay
+  url: overlays/sublime-security-platform-overlay.yaml

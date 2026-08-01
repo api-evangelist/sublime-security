@@ -1,0 +1,12 @@
+generated: '2026-07-21'
+method: searched
+probe: true
+url: https://trust.sublime.security/
+note: >-
+  Sublime Security operates a public trust center at trust.sublime.security (HTTP 200).
+  The page is a client-rendered application, so specific certifications/frameworks are
+  not machine-readable from the raw HTML and are NOT asserted here to avoid fabrication.
+  Request the named certifications (e.g. SOC 2) directly from the trust center portal.
+certifications: []
+evidence:
+  - {source: 'https://trust.sublime.security/', kind: trust-center, status: 200}

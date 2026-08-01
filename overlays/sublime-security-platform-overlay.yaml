@@ -1,0 +1,24 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Sublime Platform API
+  version: 1.0.0
+extends: openapi/sublime-security-platform-openapi.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-21'
+      x-api-style: rest
+      x-authentication: authentication/sublime-security-authentication.yml
+      x-conventions: conventions/sublime-security-conventions.yml
+      x-webhooks: asyncapi/sublime-security-webhooks.yml
+      x-lifecycle: lifecycle/sublime-security-lifecycle.yml
+      x-errors: errors/sublime-security-problem-types.yml
+  - target: $.servers[0].variables.server
+    update:
+      x-known-regions:
+        - platform.sublime.security
+        - na-west.platform.sublime.security
+        - ca.platform.sublime.security
+        - uk.platform.sublime.security
+        - eu.platform.sublime.security
+        - au.platform.sublime.security

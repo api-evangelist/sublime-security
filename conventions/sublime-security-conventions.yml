@@ -1,0 +1,47 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://docs.sublime.security/reference/introduction.md,
+  https://docs.sublime.security/reference/authentication.md,
+  openapi/sublime-security-platform-openapi.json
+authentication:
+  style: http-bearer
+  header: 'Authorization: Bearer <API key>'
+  detail: Static API keys created under Automate > API on the Sublime dashboard; shown only once at creation.
+  artifact: authentication/sublime-security-authentication.yml
+versioning:
+  style: uri-path
+  current: v0
+  artifact: lifecycle/sublime-security-lifecycle.yml
+pagination:
+  style: cursor
+  params: [cursor, limit, offset, count]
+  detail: List endpoints accept a cursor plus limit/offset; opaque cursor tokens page forward.
+request_tracing:
+  header: X-Request-ID
+  direction: response
+  detail: Every API response includes an X-Request-ID header; log it and quote it in support requests.
+filtering:
+  style: field-suffix
+  detail: >-
+    Query filters use suffix operators such as field__is / field__gte / field[gte] / field[lte]
+    (e.g. created_at[gte], attachment_sha256__is, flagged_rule_id__is).
+idempotency:
+  supported: false
+  detail: No Idempotency-Key header/parameter is documented or present in the OpenAPI.
+error_handling:
+  media_type: application/json
+  request_id_header: X-Request-ID
+  detail: Standard HTTP status codes with JSON bodies.
+  artifact: errors/sublime-security-problem-types.yml
+webhooks:
+  supported: true
+  signing: HMAC SHA-256 (scheme v0), replay protection via timestamp
+  artifact: asyncapi/sublime-security-webhooks.yml
+rate_limiting:
+  signaled: 429
+  detail: Deployment-scoped rate limiting returns HTTP 429; specific quota headers are not published.
+note: >-
+  Cross-cutting request/response semantics for the Sublime Platform API (v0), derived
+  from the OpenAPI and confirmed against the docs. Auth is Bearer API key; no OAuth
+  scopes and no idempotency contract.

@@ -1,0 +1,24 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.sublime.security/reference/introduction.md, https://statuspage.incident.io/sublime/customer
+versioning:
+  scheme: uri-path
+  current: v0
+  detail: All Platform API paths are prefixed with /v0/. The Multi-Tenancy API is labelled BETA.
+status_page: https://statuspage.incident.io/sublime/customer
+status_page_provider: incident.io
+regions:
+  - {name: NA-East, base_url: 'https://platform.sublime.security'}
+  - {name: NA-West, base_url: 'https://na-west.platform.sublime.security'}
+  - {name: Canada, base_url: 'https://ca.platform.sublime.security'}
+  - {name: UK (London), base_url: 'https://uk.platform.sublime.security'}
+  - {name: Europe (Dublin), base_url: 'https://eu.platform.sublime.security'}
+  - {name: Australia, base_url: 'https://au.platform.sublime.security'}
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: No formal deprecation/Sunset-header policy was found in the docs as of the generated date.
+deprecated_operations: []
+note: >-
+  Sublime is offered as Sublime Cloud (multi-region managed) plus self-managed Docker/AWS/Azure
+  deployments; base URL and version live behind Automate > API on each deployment's dashboard.

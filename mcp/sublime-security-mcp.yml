@@ -1,0 +1,285 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/sublime-security-platform-openapi.json, openapi/sublime-security-multitenancy-openapi.json
+note: 'No official hosted MCP server was found on Sublime Security''s docs, GitHub org, or MCP registries as of the generated
+  date. This is a DERIVED candidate tool list (one tool per OpenAPI operationId) to seed a future MCP server. Auth: HTTP Bearer
+  API key.'
+server:
+  name: sublime-security
+  transport: http
+  auth: bearer
+tools:
+- name: listEventsInAuditLog
+  description: List events in audit log
+  source_operation: openapi/sublime-security-platform-openapi.json#listEventsInAuditLog
+- name: listEventTypesForAuditLog
+  description: List event types for audit log
+  source_operation: openapi/sublime-security-platform-openapi.json#listEventTypesForAuditLog
+- name: getEventFromAuditLog
+  description: Retrieve event from audit log
+  source_operation: openapi/sublime-security-platform-openapi.json#getEventFromAuditLog
+- name: postScan
+  description: Upload a binary to be binexploded
+  source_operation: openapi/sublime-security-platform-openapi.json#postScan
+- name: getScan
+  description: Get results of a binexplode scan
+  source_operation: openapi/sublime-security-platform-openapi.json#getScan
+- name: linkAnalysisEvaluate
+  description: Analyze a provided link using ml.link_analysis functionality
+  source_operation: openapi/sublime-security-platform-openapi.json#linkAnalysisEvaluate
+- name: startHuntJob
+  description: Start hunt job
+  source_operation: openapi/sublime-security-platform-openapi.json#startHuntJob
+- name: getHuntJob
+  description: Get hunt job
+  source_operation: openapi/sublime-security-platform-openapi.json#getHuntJob
+- name: getHuntJobResults
+  description: Get hunt job results
+  source_operation: openapi/sublime-security-platform-openapi.json#getHuntJobResults
+- name: getLists
+  description: Retrieve lists
+  source_operation: openapi/sublime-security-platform-openapi.json#getLists
+- name: createList
+  description: Create list
+  source_operation: openapi/sublime-security-platform-openapi.json#createList
+- name: deleteList
+  description: Delete list
+  source_operation: openapi/sublime-security-platform-openapi.json#deleteList
+- name: getList
+  description: Get list
+  source_operation: openapi/sublime-security-platform-openapi.json#getList
+- name: patchList
+  description: Patch list
+  source_operation: openapi/sublime-security-platform-openapi.json#patchList
+- name: getListEntries
+  description: Get list entries
+  source_operation: openapi/sublime-security-platform-openapi.json#getListEntries
+- name: setListEntries
+  description: Set list entries
+  source_operation: openapi/sublime-security-platform-openapi.json#setListEntries
+- name: deleteListEntry
+  description: Delete list entry
+  source_operation: openapi/sublime-security-platform-openapi.json#deleteListEntry
+- name: getListEntry
+  description: Get list entry
+  source_operation: openapi/sublime-security-platform-openapi.json#getListEntry
+- name: addListEntry
+  description: Add list entry
+  source_operation: openapi/sublime-security-platform-openapi.json#addListEntry
+- name: analyzeRawMessageLiveFlow
+  description: Process raw message
+  source_operation: openapi/sublime-security-platform-openapi.json#analyzeRawMessageLiveFlow
+- name: listMailboxes
+  description: List mailboxes
+  source_operation: openapi/sublime-security-platform-openapi.json#listMailboxes
+- name: listMessageGroups
+  description: List message groups
+  source_operation: openapi/sublime-security-platform-openapi.json#listMessageGroups
+- name: dismissMultipleMessageGroups
+  description: Dismiss multiple message groups
+  source_operation: openapi/sublime-security-platform-openapi.json#dismissMultipleMessageGroups
+- name: huntMessageGroups
+  description: Hunt message groups
+  source_operation: openapi/sublime-security-platform-openapi.json#huntMessageGroups
+- name: getHuntResults
+  description: Get results of a hunt
+  source_operation: openapi/sublime-security-platform-openapi.json#getHuntResults
+- name: graymailMultipleMessageGroups
+  description: Graymail multiple message groups
+  source_operation: openapi/sublime-security-platform-openapi.json#graymailMultipleMessageGroups
+- name: quarantineMultipleMessageGroups
+  description: Quarantine multiple message groups
+  source_operation: openapi/sublime-security-platform-openapi.json#quarantineMultipleMessageGroups
+- name: restoreMultipleMessageGroups
+  description: Restore multiple message groups
+  source_operation: openapi/sublime-security-platform-openapi.json#restoreMultipleMessageGroups
+- name: reviewMessageGroups
+  description: Review message groups
+  source_operation: openapi/sublime-security-platform-openapi.json#reviewMessageGroups
+- name: searchMessageGroups
+  description: Search message groups
+  source_operation: openapi/sublime-security-platform-openapi.json#searchMessageGroups
+- name: getMessageGroupSIEMSummary
+  description: Get SIEM-oriented summary of flagged message groups
+  source_operation: openapi/sublime-security-platform-openapi.json#getMessageGroupSIEMSummary
+- name: trashMultipleMessageGroups
+  description: Trash multiple message groups
+  source_operation: openapi/sublime-security-platform-openapi.json#trashMultipleMessageGroups
+- name: getMessageGroup
+  description: Get a single message group
+  source_operation: openapi/sublime-security-platform-openapi.json#getMessageGroup
+- name: dismissMessageCanonicalGroup
+  description: Dismiss message group
+  source_operation: openapi/sublime-security-platform-openapi.json#dismissMessageCanonicalGroup
+- name: quarantineMessageCanonicalGroup
+  description: Quarantine message group
+  source_operation: openapi/sublime-security-platform-openapi.json#quarantineMessageCanonicalGroup
+- name: restoreMessageCanonicalGroup
+  description: Restore message group
+  source_operation: openapi/sublime-security-platform-openapi.json#restoreMessageCanonicalGroup
+- name: shareWithSublimePublic
+  description: Share a message with Sublime
+  source_operation: openapi/sublime-security-platform-openapi.json#shareWithSublimePublic
+- name: trashMessageCanonicalGroup
+  description: Trash message group
+  source_operation: openapi/sublime-security-platform-openapi.json#trashMessageCanonicalGroup
+- name: analyzeMessage
+  description: Analyze a raw message
+  source_operation: openapi/sublime-security-platform-openapi.json#analyzeMessage
+- name: getMessageAttachmentImageRaw
+  description: Render image for attachment from the raw base64 encoded bytes
+  source_operation: openapi/sublime-security-platform-openapi.json#getMessageAttachmentImageRaw
+- name: attackScoreForRawMessage
+  description: Evaluate attack score for a raw message
+  source_operation: openapi/sublime-security-platform-openapi.json#attackScoreForRawMessage
+- name: listEmailBombs
+  description: List email bombs
+  source_operation: openapi/sublime-security-platform-openapi.json#listEmailBombs
+- name: createEmailBomb
+  description: Create email bomb
+  source_operation: openapi/sublime-security-platform-openapi.json#createEmailBomb
+- name: getEmailBomb
+  description: Get email bomb
+  source_operation: openapi/sublime-security-platform-openapi.json#getEmailBomb
+- name: dismissEmailBomb
+  description: Dismiss email bomb
+  source_operation: openapi/sublime-security-platform-openapi.json#dismissEmailBomb
+- name: createMessage
+  description: Create message
+  source_operation: openapi/sublime-security-platform-openapi.json#createMessage
+- name: getMessageCanonicalGroupActionState
+  description: Retrieve details about the state of manual actions for a canonical group
+  source_operation: openapi/sublime-security-platform-openapi.json#getMessageCanonicalGroupActionState
+- name: getMessage
+  description: Retrieve message
+  source_operation: openapi/sublime-security-platform-openapi.json#getMessage
+- name: actionMessage
+  description: Perform actions on an individual message
+  source_operation: openapi/sublime-security-platform-openapi.json#actionMessage
+- name: analyzeMessageByID
+  description: Analyze a message by ID
+  source_operation: openapi/sublime-security-platform-openapi.json#analyzeMessageByID
+- name: retrieveASAReport
+  description: Retrieve ASA report for a message
+  source_operation: openapi/sublime-security-platform-openapi.json#retrieveASAReport
+- name: retrieveASAVerdict
+  description: Retrieve ASA verdict for a message
+  source_operation: openapi/sublime-security-platform-openapi.json#retrieveASAVerdict
+- name: getMessageAttachmentImage
+  description: Retrieve image of PDF attachment by md5 hash
+  source_operation: openapi/sublime-security-platform-openapi.json#getMessageAttachmentImage
+- name: attackScoreForMessage
+  description: Evaluate attack score against an existing message
+  source_operation: openapi/sublime-security-platform-openapi.json#attackScoreForMessage
+- name: getMessageEML
+  description: Retrieve raw EML
+  source_operation: openapi/sublime-security-platform-openapi.json#getMessageEML
+- name: getMessageImage
+  description: Retrieve image of message
+  source_operation: openapi/sublime-security-platform-openapi.json#getMessageImage
+- name: getMessageImageLink
+  description: Retrieve a temporary link to the image of message
+  source_operation: openapi/sublime-security-platform-openapi.json#getMessageImageLink
+- name: SetMessageAccessJustification
+  description: Set access justification
+  source_operation: openapi/sublime-security-platform-openapi.json#SetMessageAccessJustification
+- name: getMessageDataModel
+  description: Retrieve the message's Message Data Model
+  source_operation: openapi/sublime-security-platform-openapi.json#getMessageDataModel
+- name: restoreMessage
+  description: Restore a previously-trashed message
+  source_operation: openapi/sublime-security-platform-openapi.json#restoreMessage
+- name: trashMessage
+  description: Trash message
+  source_operation: openapi/sublime-security-platform-openapi.json#trashMessage
+- name: assignRoleToUser
+  description: Assign role to user
+  source_operation: openapi/sublime-security-platform-openapi.json#assignRoleToUser
+- name: listRules
+  description: List rules
+  source_operation: openapi/sublime-security-platform-openapi.json#listRules
+- name: createRule
+  description: Create rule
+  source_operation: openapi/sublime-security-platform-openapi.json#createRule
+- name: listRuleHistory
+  description: List history for rules
+  source_operation: openapi/sublime-security-platform-openapi.json#listRuleHistory
+- name: validateRule
+  description: Validate rule
+  source_operation: openapi/sublime-security-platform-openapi.json#validateRule
+- name: deleteRule
+  description: Delete rule
+  source_operation: openapi/sublime-security-platform-openapi.json#deleteRule
+- name: getRule
+  description: Retrieve rule
+  source_operation: openapi/sublime-security-platform-openapi.json#getRule
+- name: updateRule
+  description: Update rule
+  source_operation: openapi/sublime-security-platform-openapi.json#updateRule
+- name: activateRule
+  description: Activate rule
+  source_operation: openapi/sublime-security-platform-openapi.json#activateRule
+- name: deactivateRule
+  description: Deactivate rule
+  source_operation: openapi/sublime-security-platform-openapi.json#deactivateRule
+- name: getRuleHistory
+  description: Retrieve history of a rule
+  source_operation: openapi/sublime-security-platform-openapi.json#getRuleHistory
+- name: listSCIMResourceTypes
+  description: List SCIM resource types
+  source_operation: openapi/sublime-security-platform-openapi.json#listSCIMResourceTypes
+- name: getSCIMResourceType
+  description: Get SCIM resource type
+  source_operation: openapi/sublime-security-platform-openapi.json#getSCIMResourceType
+- name: listSCIMSchemas
+  description: List SCIM schemas
+  source_operation: openapi/sublime-security-platform-openapi.json#listSCIMSchemas
+- name: getSCIMSchema
+  description: Get SCIM schema
+  source_operation: openapi/sublime-security-platform-openapi.json#getSCIMSchema
+- name: getSCIMServiceProviderConfig
+  description: Get SCIM service provider configuration
+  source_operation: openapi/sublime-security-platform-openapi.json#getSCIMServiceProviderConfig
+- name: listSCIMUsers
+  description: List SCIM users
+  source_operation: openapi/sublime-security-platform-openapi.json#listSCIMUsers
+- name: createSCIMUser
+  description: Create SCIM user
+  source_operation: openapi/sublime-security-platform-openapi.json#createSCIMUser
+- name: deleteSCIMUser
+  description: Delete SCIM user
+  source_operation: openapi/sublime-security-platform-openapi.json#deleteSCIMUser
+- name: getSCIMUser
+  description: Get SCIM user
+  source_operation: openapi/sublime-security-platform-openapi.json#getSCIMUser
+- name: patchSCIMUser
+  description: Patch SCIM user
+  source_operation: openapi/sublime-security-platform-openapi.json#patchSCIMUser
+- name: updateSCIMUser
+  description: Update SCIM user
+  source_operation: openapi/sublime-security-platform-openapi.json#updateSCIMUser
+- name: validateSCIMAuth
+  description: Validate SCIM specific auth
+  source_operation: openapi/sublime-security-platform-openapi.json#validateSCIMAuth
+- name: getTask
+  description: Retrieve task
+  source_operation: openapi/sublime-security-platform-openapi.json#getTask
+- name: listUserReports
+  description: List user reports
+  source_operation: openapi/sublime-security-platform-openapi.json#listUserReports
+- name: listChildOrganizations
+  description: List child organizations
+  source_operation: openapi/sublime-security-multitenancy-openapi.json#listChildOrganizations
+- name: createChildOrganization
+  description: Create child organization
+  source_operation: openapi/sublime-security-multitenancy-openapi.json#createChildOrganization
+- name: bulkPatchChildOrganizationLicensing
+  description: Bulk update child organization licensing
+  source_operation: openapi/sublime-security-multitenancy-openapi.json#bulkPatchChildOrganizationLicensing
+- name: patchChildOrganization
+  description: Update child organization
+  source_operation: openapi/sublime-security-multitenancy-openapi.json#patchChildOrganization
+- name: patchChildOrganizationLicensing
+  description: Update child organization licensing
+  source_operation: openapi/sublime-security-multitenancy-openapi.json#patchChildOrganizationLicensing

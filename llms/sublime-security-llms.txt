@@ -1,0 +1,203 @@
+# Sublime Security Documentation
+
+> Sublime is an adaptive email security platform that combines best-in-class effectiveness with unprecedented visibility and control.
+
+## Guides
+- [Overview](https://docs.sublime.security/docs/overview.md)
+- [Installation Options](https://docs.sublime.security/docs/installation-options.md)
+- [Sublime Cloud](https://docs.sublime.security/docs/sublime-managed.md): Estimated time: < 5 minutes
+- [Docker](https://docs.sublime.security/docs/docker.md)
+- [Docker Install](https://docs.sublime.security/docs/quickstart-docker.md): Estimated time: < 15 minutes
+- [Docker Requirements and Limitations](https://docs.sublime.security/docs/docker-requirements-and-limitations.md)
+- [Docker Troubleshooting](https://docs.sublime.security/docs/docker-troubleshooting.md)
+- [Amazon AWS](https://docs.sublime.security/docs/amazon-aws.md)
+- [AWS CloudFormation Install](https://docs.sublime.security/docs/aws-cloudformation.md): Estimated time: < 60 minutes
+- [AWS GovCloud Install](https://docs.sublime.security/docs/aws-govcloud.md)
+- [Custom Domains](https://docs.sublime.security/docs/custom-domains.md)
+- [Microsoft Azure](https://docs.sublime.security/docs/microsoft-azure.md)
+- [Microsoft Azure ARM Install](https://docs.sublime.security/docs/azure-via-arm.md): Estimated time: < 60 minutes
+- [Add Email/Message Sources](https://docs.sublime.security/docs/add-message-source.md)
+- [Microsoft 365](https://docs.sublime.security/docs/add-an-office-365-message-source.md)
+- [Sublime Cloud - Microsoft 365](https://docs.sublime.security/docs/sublime-cloud-fully-managed-m365.md)
+- [Self Managed - Microsoft 365](https://docs.sublime.security/docs/self-managed-m365.md): Estimated time: <15 minutes
+- [How to update permission settings to enable automatic deletion of calendar events](https://docs.sublime.security/docs/how-to-update-permission-for-cal-access.md)
+- [Google Workspace](https://docs.sublime.security/docs/add-a-google-workspace-message-source.md)
+- [Sublime Cloud - Google Workspace](https://docs.sublime.security/docs/sublime-cloud-fully-managed-gw.md)
+- [Self Managed - Google Workspace](https://docs.sublime.security/docs/self-managed-gw.md)
+- [IMAP](https://docs.sublime.security/docs/add-an-imap-message-source.md)
+- [Configure "Report Phishing"](https://docs.sublime.security/docs/user-reported-phishing.md)
+- [Add your abuse mailbox](https://docs.sublime.security/docs/add-your-abuse-mailbox.md)
+- [Microsoft 365 Configure “Report Phishing”](https://docs.sublime.security/docs/how-to-integrate-microsoft365-report-phishing-with-sublime.md)
+- [Gmail Configure "Report Phishing"](https://docs.sublime.security/docs/gmails-report-phishing-feature.md)
+- [Configure "Quarantine Digests"](https://docs.sublime.security/docs/configure-quarantine-digests.md)
+- [Access & Authentication](https://docs.sublime.security/docs/authenticationauthorization.md)
+- [Single Sign-On (SSO) Configuration](https://docs.sublime.security/docs/single-sign-on-sso-configuration.md)
+- [Okta](https://docs.sublime.security/docs/configure-sso-via-okta.md): Configure Single Sign-On between Sublime and Okta
+- [Entra ID (Azure)](https://docs.sublime.security/docs/configure-sso-via-entra-id-azure.md): Configure Single Sign-On between Sublime and Entra ID
+- [Google](https://docs.sublime.security/docs/configure-sso-via-google-workspace.md): Configure Single Sign-On between Sublime and Google
+- [Role-Based Access Control (RBAC)](https://docs.sublime.security/docs/role-based-access-control-rbac.md)
+- [Export to S3](https://docs.sublime.security/docs/export-to-s3.md)
+- [Export Message MDMs](https://docs.sublime.security/docs/export-message-mdms.md)
+- [Export Audit Logs and Message Events](https://docs.sublime.security/docs/export-audit-logs-and-message-events.md)
+- [Email Data Loss Prevention (DLP) Public Beta](https://docs.sublime.security/docs/email-data-loss-prevention-dlp.md)
+- [Inline Protection for Inbound Messages](https://docs.sublime.security/docs/inline-protection-for-inbound-messages.md)
+- [IP Authentication Override ](https://docs.sublime.security/docs/ip-authentication-override.md)
+- [Message types](https://docs.sublime.security/docs/message-types.md)
+- [Message groups](https://docs.sublime.security/docs/message-groups.md)
+- [MQL Detection Rules](https://docs.sublime.security/docs/detection-rules.md)
+- [Attack Surface Reduction](https://docs.sublime.security/docs/attack-surface-reduction.md): A subset of MQL Detection Rules that aim to locate anomalous behavior
+- [Rule Feeds](https://docs.sublime.security/docs/rule-feeds.md)
+- [Rules file format (YAML)](https://docs.sublime.security/docs/yaml-files.md)
+- [Private rule feed authentication](https://docs.sublime.security/docs/private-feed-authentication.md)
+- [YARA](https://docs.sublime.security/docs/yara.md)
+- [Automations](https://docs.sublime.security/docs/automations.md)
+- [Auto-respond to User Reports](https://docs.sublime.security/docs/auto-respond-to-user-reports.md)
+- [Actions](https://docs.sublime.security/docs/actions.md)
+- [Quarantine](https://docs.sublime.security/docs/quarantine.md)
+- [Trash](https://docs.sublime.security/docs/trash.md)
+- [Warning Banners](https://docs.sublime.security/docs/warning-banners.md)
+- [Move to Spam](https://docs.sublime.security/docs/move-to-spam.md)
+- [Auto-review](https://docs.sublime.security/docs/auto-review.md)
+- [Track Link Clicks](https://docs.sublime.security/docs/track-link-clicks.md)
+- [Webhook](https://docs.sublime.security/docs/webhooks.md)
+- [Tines Webhook](https://docs.sublime.security/docs/tines-webhook.md)
+- [Email Alert](https://docs.sublime.security/docs/email-alerts.md)
+- [Email Alert with EML Attached](https://docs.sublime.security/docs/email-alert-with-eml-attached.md)
+- [Move to Promotions](https://docs.sublime.security/docs/move-to-promotions.md)
+- [Lists](https://docs.sublime.security/docs/lists.md)
+- [Configure the org_vips list](https://docs.sublime.security/docs/configure-org_vips-list.md)
+- [Configure Link Analysis exclusion lists](https://docs.sublime.security/docs/configure-link-analysis-exclusion-lists.md)
+- [Google Workspace - Configure Permissions to Sync Organizational Units (OUs)](https://docs.sublime.security/docs/configure-permissions-to-enable-syncing-ous-to-lists.md)
+- [Exclusions](https://docs.sublime.security/docs/exclusions.md)
+- [Blocklisting](https://docs.sublime.security/docs/blocklisting.md)
+- [Attack Score](https://docs.sublime.security/docs/attack-score.md)
+- [ASA: Autonomous Security Analyst](https://docs.sublime.security/docs/asa-autonomous-security-analyst.md)
+- [ADÉ: Autonomous Detection Engineer](https://docs.sublime.security/docs/ade-autonomous-detection-engineer.md)
+- [Email Bomb Protection](https://docs.sublime.security/docs/email-bomb-protection.md)
+- [Multi-Tenancy Management](https://docs.sublime.security/docs/multi-tenancy-management.md)
+- [[Beta] Advanced Graymail Protection](https://docs.sublime.security/docs/graymail.md)
+- [MQL Guides](https://docs.sublime.security/docs/mql-guides.md)
+- [How to use message header values in a rule](https://docs.sublime.security/docs/how-to-use-message-header-values-in-a-rule.md)
+- [How to detect manual outbound forwards](https://docs.sublime.security/docs/how-to-detect-manual-outbound-forwards.md)
+- [How to detect text in attachments](https://docs.sublime.security/docs/how-to-detect-text-in-attachments.md)
+- [How to detect lookalike domains](https://docs.sublime.security/docs/how-to-detect-lookalike-domains.md): Homoglyphs, homographs, lookalike domains, and typosquats
+- [How to detect keywords or phrases in the body content of messages](https://docs.sublime.security/docs/how-to-detect-keywords-or-phrases-in-the-body.md)
+- [Message Data Model (MDM)](https://docs.sublime.security/docs/mdm.md): A standardized JSON schema for representing an email message.
+- [Message Query Language (MQL)](https://docs.sublime.security/docs/message-query-language.md): Sublime's domain-specific language purpose-built for email.
+- [Syntax](https://docs.sublime.security/docs/syntax.md)
+- [Functions](https://docs.sublime.security/docs/functions.md)
+- [Strings functions](https://docs.sublime.security/docs/strings-module.md): Functions in the `strings` module
+- [RegEx functions](https://docs.sublime.security/docs/regex-module.md): Functions in the `regex` module
+- [Enrichment functions](https://docs.sublime.security/docs/enrichment-functions.md)
+- [Common snippets](https://docs.sublime.security/docs/common-snippets.md): Useful snippets of MQL to make building detection rules easier.
+- [Metrics Collection in Self-Hosted Deployments](https://docs.sublime.security/docs/data-collection-in-self-hosted-deployments.md)
+- [Mimecast Migration Guide](https://docs.sublime.security/docs/mimecast-migration-guide.md)
+- [Proofpoint Migration Guide](https://docs.sublime.security/docs/proofpoint-migration-guide.md)
+- [OpenCTI](https://docs.sublime.security/docs/opencti.md)
+- [CrowdStrike Falcon Sandbox](https://docs.sublime.security/docs/crowdstrike-sandbox-integration.md)
+- [Set up the CrowdStrike Falcon Sandbox integration](https://docs.sublime.security/docs/set-up-the-crowdstrike-falcon-sandbox-integration.md)
+- [Submit EML Files to CrowdStrike Falcon Sandbox](https://docs.sublime.security/docs/submit-eml-files-to-crowdstrike-falcon-sandbox.md)
+- [Understand CrowdStrike Sandbox results in Sublime](https://docs.sublime.security/docs/understand-crowdstrike-sandbox-results-in-sublime.md)
+- [Troubleshoot the CrowdStrike Sandbox integration](https://docs.sublime.security/docs/troubleshoot-the-crowdstrike-sandbox-integration.md)
+
+## API Reference
+- [Introduction](https://docs.sublime.security/reference/introduction.md)
+- [Authentication](https://docs.sublime.security/reference/authentication.md)
+- [Upload a binary to be binexploded](https://docs.sublime.security/reference/postscan-1.md): Starts a task to explode a binary. Returns a task ID to track and ultimately retrieve results. Results expire after 1 hour. Max original file size of 37 mb (base 64 encoded 49 mb)
+- [Get results of a binexplode scan](https://docs.sublime.security/reference/getscan-1.md): Retrieve the results of a completed binexplode scan.
+- [Analyze a provided link using ml.link_analysis functionality](https://docs.sublime.security/reference/linkanalysisevaluate-1.md): Analyze a provided link using ml.link_analysis functionality.
+- [List events in audit log](https://docs.sublime.security/reference/listeventsinauditlog.md): List events in audit log
+- [List event types for audit log](https://docs.sublime.security/reference/listeventtypesforauditlog.md): List all event types for audit log
+- [Retrieve event from audit log](https://docs.sublime.security/reference/geteventfromauditlog.md)
+- [Start hunt job](https://docs.sublime.security/reference/starthuntjob.md): Start a hunt job
+- [Get hunt job](https://docs.sublime.security/reference/gethuntjob.md): Get a hunt job
+- [Get hunt job results](https://docs.sublime.security/reference/gethuntjobresults.md): Get hunt job detailed results. Provides message group details and summaries
+- [Retrieve lists](https://docs.sublime.security/reference/getlists-1.md): Retrieve filtered lists
+- [Create list](https://docs.sublime.security/reference/createlist-1.md): Create a list
+- [Delete list](https://docs.sublime.security/reference/deletelist-1.md): Delete a list
+- [Get list](https://docs.sublime.security/reference/getlist-1.md): Get a list
+- [Patch list](https://docs.sublime.security/reference/patchlist-1.md): Patch a list
+- [Get list entries](https://docs.sublime.security/reference/getlistentries-1.md): Get all list entries
+- [Set list entries](https://docs.sublime.security/reference/setlistentries-1.md): Set (overwrite) all list entries
+- [Delete list entry](https://docs.sublime.security/reference/deletelistentry-1.md): Delete list entry, if present
+- [Get list entry](https://docs.sublime.security/reference/getlistentry-1.md): Get list entry, if present
+- [Add list entry](https://docs.sublime.security/reference/addlistentry-1.md): Add list entry, if not already present
+- [Process raw message](https://docs.sublime.security/reference/analyzerawmessageliveflow-1.md): Process a raw message
+- [List mailboxes](https://docs.sublime.security/reference/listmailboxes.md): List all mailboxes
+- [List message groups](https://docs.sublime.security/reference/listmessagegroups-1.md): List message groups
+- [Dismiss multiple message groups](https://docs.sublime.security/reference/dismissmultiplemessagegroups-1.md): Dismiss all messages in multiple groups, including future messages.
+- [Hunt message groups](https://docs.sublime.security/reference/huntmessagegroups-1.md): DEPRECATED: Hunt using MQL to find message groups. Please use the POST /v0/hunt-jobs endpoint instead.
+- [Get results of a hunt](https://docs.sublime.security/reference/gethuntresults-1.md): DEPRECATED: Retrieve the results of a completed hunt. Please use the GET /v0/hunt-jobs/:id endpoint instead.
+- [Quarantine multiple message groups](https://docs.sublime.security/reference/quarantinemultiplemessagegroups-1.md): Quarantine all messages in multiple groups, including future messages.
+- [Graymail multiple message groups](https://docs.sublime.security/reference/graymailmultiplemessagegroups.md): Move to Graymail all messages in multiple groups, including future messages.
+- [Restore multiple message groups](https://docs.sublime.security/reference/restoremultiplemessagegroups-1.md): Restore all previously-trashed messages in multiple groups and turn off automatic trashing of future messages in the groups. "For an Office 365 message source, each message will be put back in the folder it was in before. For a Google Workspace message source, any applied labels (e.g. "Trash") will be removed from each message."
+- [Review message groups](https://docs.sublime.security/reference/reviewmessagegroups.md): Review, classify and take actions on message groups
+- [Search message groups](https://docs.sublime.security/reference/searchmessagegroups-1.md): Search all message groups
+- [Trash multiple message groups](https://docs.sublime.security/reference/trashmultiplemessagegroups-1.md): Trash all messages in multiple groups, including future messages. For an Office 365 message source, each message will be moved to the "Recoverable Items" folder. For a Google Workspace message source, the "Trash" label will be added to each message.
+- [Get a single message group](https://docs.sublime.security/reference/getmessagegroup.md): Retrieve the details of a single message group.
+- [Dismiss message group](https://docs.sublime.security/reference/dismissmessagecanonicalgroup-1.md): Dismiss all messages in a group, including future messages.
+- [Quarantine message group](https://docs.sublime.security/reference/quarantinemessagecanonicalgroup-1.md): Quarantine all messages in a group, including future messages.
+- [Restore message group](https://docs.sublime.security/reference/restoremessagecanonicalgroup-1.md): Restore all previously-trashed or quarantined messages in a group and turn off automatic trashing/quarantining of future messages in the group. "For an Office 365 message source, each message will be put back in the folder it was in before. For a Google Workspace message source, any applied labels (e.g. "Trash") will be removed from each message."
+- [Share a message with Sublime](https://docs.sublime.security/reference/sharewithsublimepublic-1.md): Share a message with the Sublime team
+- [Trash message group](https://docs.sublime.security/reference/trashmessagecanonicalgroup-1.md): Trash all messages in a group, including future messages. For an Office 365 message source, each message will be moved to the "Recoverable Items" folder. For a Google Workspace message source, the "Trash" label will be added to each message.
+- [Get SIEM-oriented summary of flagged message groups](https://docs.sublime.security/reference/getmessagegroupsiemsummary.md): Returns a paginated, reduced-field summary of flagged message groups intended for SIEM ingestion. Array fields are bounded to keep payloads under typical SIEM batch limits.
+- [Analyze a raw message](https://docs.sublime.security/reference/analyzemessage.md): Analyze a raw message with provided rules and/or active rules in your Sublime organization. Note: All messages will be treated as inbound.
+- [Render image for attachment from the raw base64 encoded bytes](https://docs.sublime.security/reference/getmessageattachmentimageraw-1.md): Render image for attachment from the raw base64 encoded bytes
+- [Evaluate attack score for a raw message](https://docs.sublime.security/reference/attackscoreforrawmessage.md): Evaluate attack score for a raw message
+- [Create message](https://docs.sublime.security/reference/createmessage.md): Create a new message data model from a raw message
+- [Retrieve details about the state of manual actions for a canonical group](https://docs.sublime.security/reference/getmessagecanonicalgroupactionstate.md): Retrieve details about the state of manual actions for a canonical group
+- [Retrieve message](https://docs.sublime.security/reference/getmessage-1.md): Retrieve a message
+- [Perform actions on an individual message](https://docs.sublime.security/reference/actionmessage.md): Perform actions (trash, restore, quarantine, warning banner, move to spam) on an individual message
+- [Analyze a message by ID](https://docs.sublime.security/reference/analyzemessagebyid.md): Analyze a message by ID with provided rules and/or active rules in your Sublime organization
+- [Retrieve ASA report for a message](https://docs.sublime.security/reference/retrieveasareport.md): Retrieve ASA report for a message
+- [Retrieve image of PDF attachment by md5 hash](https://docs.sublime.security/reference/getmessageattachmentimage-1.md): Retrieve image of PDF attachment by md5 hash
+- [Evaluate attack score against an existing message](https://docs.sublime.security/reference/attackscoreformessage.md): Evaluate attack score against an existing message
+- [Retrieve image of message](https://docs.sublime.security/reference/getmessageimage-1.md): Retrieve an image of the message
+- [Retrieve raw EML](https://docs.sublime.security/reference/getmessageeml.md): Retrieve the raw EML for the message
+- [Retrieve a temporary link to the image of message](https://docs.sublime.security/reference/getmessageimagelink-1.md): Retrieve a temporary link to the image of the message
+- [Set access justification](https://docs.sublime.security/reference/setmessageaccessjustification-1.md): Set message contents access justification for a message for the user associated with the API key being used
+- [Retrieve the message's Message Data Model](https://docs.sublime.security/reference/getmessagedatamodel-1.md): Retrieve the message's Message Data Model. If there is no justification, it will be redacted.
+- [Restore a previously-trashed message](https://docs.sublime.security/reference/restoremessage-1.md): Restore a previously-trashed message. "For an Office 365 message source, the message will be put back in the folder it was in before. For a Google Workspace message source, any applied labels (e.g. "Trash") will be removed from the message."
+- [Trash message](https://docs.sublime.security/reference/trashmessage-1.md): Trash a message. For an Office 365 message source, the message will be moved to the "Recoverable Items" folder. For a Google Workspace message source, the "Trash" label will be added to the message.
+- [Retrieve ASA verdict for a message](https://docs.sublime.security/reference/retrieveasaverdict.md): Retrieve ASA verdict for a message
+- [List rules](https://docs.sublime.security/reference/listrules-1.md): List rules
+- [Create rule](https://docs.sublime.security/reference/createrule-1.md): Create a rule
+- [List history for rules](https://docs.sublime.security/reference/listrulehistory.md): List history for rules
+- [Validate rule](https://docs.sublime.security/reference/validaterule.md): Validate a rule (MQL, YAML fields, etc). When run against the sandbox or analyzer, no auth is needed but custom lists etc will not be available.
+- [Delete rule](https://docs.sublime.security/reference/deleterule-1.md): Delete a rule
+- [Retrieve rule](https://docs.sublime.security/reference/getrule-1.md): Retrieve a rule
+- [Update rule](https://docs.sublime.security/reference/updaterule-1.md): Update a rule to a new definition
+- [Activate rule](https://docs.sublime.security/reference/activaterule-1.md): Activate a rule
+- [Deactivate rule](https://docs.sublime.security/reference/deactivaterule-1.md): Deactivate a rule
+- [Retrieve history of a rule](https://docs.sublime.security/reference/getrulehistory.md): Retrieve history of a rule
+- [List SCIM resource types](https://docs.sublime.security/reference/listscimresourcetypes.md): List SCIM resource types
+- [Get SCIM resource type](https://docs.sublime.security/reference/getscimresourcetype.md): Get SCIM resource type
+- [List SCIM schemas](https://docs.sublime.security/reference/listscimschemas.md): List SCIM schemas
+- [Get SCIM schema](https://docs.sublime.security/reference/getscimschema.md): Get SCIM schema
+- [Get SCIM service provider configuration](https://docs.sublime.security/reference/getscimserviceproviderconfig.md): Get SCIM service provider configuration
+- [List SCIM users](https://docs.sublime.security/reference/listscimusers.md): List SCIM users
+- [Create SCIM user](https://docs.sublime.security/reference/createscimuser.md): Create SCIM user
+- [Get SCIM user](https://docs.sublime.security/reference/getscimuser.md): Get SCIM user
+- [Delete SCIM user](https://docs.sublime.security/reference/deletescimuser.md): Delete SCIM user
+- [Update SCIM user](https://docs.sublime.security/reference/updatescimuser.md): Update SCIM user
+- [Patch SCIM user](https://docs.sublime.security/reference/patchscimuser.md): Patch SCIM user
+- [Validate SCIM specific auth](https://docs.sublime.security/reference/validatescimauth.md): Validate SCIM specific auth
+- [Retrieve task](https://docs.sublime.security/reference/gettask-1.md): Retrieve a task
+- [List user reports](https://docs.sublime.security/reference/listuserreports.md): List user reports
+- [Assign role to user](https://docs.sublime.security/reference/assignroletouser.md): Assign a role to a user within the organization
+- [List email bombs](https://docs.sublime.security/reference/listemailbombs.md): List email bombs
+- [Create email bomb](https://docs.sublime.security/reference/createemailbomb.md): Mark a mailbox time range as an email bomb. A new bomb is created if no existing bomb covers the range; otherwise the existing bomb is extended. Messages within the range are associated asynchronously.
+- [Get email bomb](https://docs.sublime.security/reference/getemailbomb.md): Get email bomb
+- [Dismiss email bomb](https://docs.sublime.security/reference/dismissemailbomb.md): Dismiss an email bomb, marking it as reviewed by the user
+- [Introduction](https://docs.sublime.security/reference/analysis-api-introduction.md)
+- [Python module](https://docs.sublime.security/reference/analysis-api-python-module.md)
+- [Introduction](https://docs.sublime.security/reference/emailrep-introduction.md)
+- [List child organizations](https://docs.sublime.security/reference/listchildorganizations.md): List the child organizations under the calling organization, including license and usage data.
+- [Create child organization](https://docs.sublime.security/reference/createchildorganization.md): Create a child organization under the calling organization, optionally provisioning one or more licenses on it.
+- [Bulk update child organization licensing](https://docs.sublime.security/reference/bulkpatchchildorganizationlicensing.md): Apply license transitions to up to 200 child organizations in one call. Each organization is evaluated independently; per-organization failures are reported in the results array, not the HTTP status.
+- [Update child organization licensing](https://docs.sublime.security/reference/patchchildorganizationlicensing.md): Apply a desired license to a child organization. The requested license is evaluated against the organization's current billing state and the appropriate transition is applied.
+- [Update child organization](https://docs.sublime.security/reference/patchchildorganization.md): Update a child organization's display name and delegation settings, returning the full child organization.
+
+## Pages
+- [Customer Onboarding Checklist](https://docs.sublime.security/customer-onboarding-checklist.md)
+- [Partner Document Links](https://docs.sublime.security/partner-document-links.md)

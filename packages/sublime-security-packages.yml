@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: searched
+source: https://pypi.org/project/sublime-cli/, https://pypi.org/project/emailrep/, https://github.com/sublime-security
+note: >-
+  Sublime Security ships first-party Python tooling for its free Analysis API / MQL
+  workflow (sublime-cli) and its EmailRep reputation API (emailrep). No first-party
+  JavaScript/Go/Java/Ruby client SDK for the Platform API was found on npm, Maven
+  Central, NuGet, RubyGems, or pkg.go.dev as of the generated date; the Platform API
+  is consumed directly over REST with a Bearer API key.
+packages:
+  - language: python
+    registry: pypi
+    name: sublime-cli
+    url: https://pypi.org/project/sublime-cli/
+    install: pip install sublime-cli
+    source: https://github.com/sublime-security/sublime-cli
+    description: Command-line tool and Python module for the free Sublime Analysis API and MQL rule workflow.
+    official: true
+  - language: python
+    registry: pypi
+    name: emailrep
+    url: https://pypi.org/project/emailrep/
+    install: pip install emailrep
+    source: https://github.com/sublime-security/emailrep.io-python
+    description: Python interface for the EmailRep email reputation API (maintained by Sublime Security).
+    official: true

@@ -1,0 +1,46 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.sublime.security/docs/webhooks.md
+spec_type: Webhooks
+type: Webhooks
+delivery:
+  transport: http
+  method: POST
+  content_type: application/json
+  direction: outbound
+  configured_via: Webhook Action attached to Detection Rules and Automations (Actions > New Action > Webhook)
+security:
+  signature: HMAC-SHA256
+  scheme: v0
+  detail: >-
+    Sublime signs each webhook with an HMAC-SHA256 over the signed_payload using the
+    webhook's signing secret; ignore any scheme that is not v0 to prevent downgrade
+    attacks. A timestamp is included to mitigate replay attacks.
+  custom_headers: Arbitrary custom headers can be attached per webhook Action.
+scope_options:
+  - On flagged messages received in a message group
+  - On the first message received in a message group
+  - On all messages within a message group
+events:
+  - type: message.flagged
+    description: A message was flagged by a Detection Rule or Automation that triggers a webhook.
+payload:
+  envelope_fields: [id, api_version, created_at, type, data]
+  data_fields: [message, flagged_rules, triggered_actions]
+  trigger_type_values: ['message.flagged', group, manual]
+  trigger_type_extended_values: ['message.flagged', group, manual, group_late_arriving]
+triggered_action_types:
+  - trash_message
+  - auto_review
+  - dismiss_message
+  - quarantine_message
+  - warning_banner
+  - restore_message
+  - track_link_clicks
+  - move_to_spam
+  - report_message
+  - webhook
+note: >-
+  Sublime documents outbound webhooks but does not publish an AsyncAPI document, so this
+  captures the webhook catalog only (type: Webhooks). Payloads mirror a subset of the
+  retrieve-message endpoint (getMessage) and reference message-group operations.

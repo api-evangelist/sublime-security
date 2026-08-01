@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sublime-security-platform-openapi.json, https://docs.sublime.security/reference/introduction.md
+format: http-status
+note: >-
+  The Sublime Platform API "uses standard HTTP response codes" (per the API
+  introduction) and returns JSON-encoded error bodies; it does not declare
+  application/problem+json (RFC 9457) in its OpenAPI, and the specs document only
+  2xx responses (200/201/202/204). Every response carries an X-Request-ID header to
+  quote in support requests. The entries below are the standard HTTP status semantics
+  clients should handle; specific machine-readable error codes are not published in
+  the spec.
+envelope:
+  media_type: application/json
+  request_id_header: X-Request-ID
+problems:
+  - status: 400
+    title: Bad Request
+    meaning: Malformed request body or invalid query parameters.
+  - status: 401
+    title: Unauthorized
+    meaning: Missing or invalid Bearer API key.
+    remediation: 'Supply a valid `Authorization: Bearer <API key>` header.'
+  - status: 403
+    title: Forbidden
+    meaning: API key lacks the role/permission for the resource (RBAC).
+  - status: 404
+    title: Not Found
+    meaning: Referenced message, rule, list, mailbox, or job does not exist.
+  - status: 409
+    title: Conflict
+    meaning: Resource state conflict (e.g. duplicate list entry or rule).
+  - status: 429
+    title: Too Many Requests
+    meaning: Rate limit exceeded for the deployment.
+  - status: 500
+    title: Internal Server Error
+    meaning: Unexpected server error; retry and quote X-Request-ID if persistent.

@@ -1,0 +1,70 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sublime-security-platform-openapi.json, openapi/sublime-security-multitenancy-openapi.json
+note: Entity-relationship graph derived from OpenAPI schemas and id-reference fields. Identifiers are UUIDs; message groups
+  use a content-hash canonical_id.
+entities:
+- name: Message
+- name: MessageGroup
+- name: Rule
+- name: List
+- name: ListEntry
+- name: Mailbox
+- name: MessageSource
+- name: User
+- name: Role
+- name: HuntJob
+- name: EmailBomb
+- name: AuditLogEvent
+- name: Task
+- name: Organization
+- name: ChildOrganization
+relationships:
+- from: Message
+  to: MessageGroup
+  type: belongs_to
+  via: canonical_id
+- from: Message
+  to: Mailbox
+  type: belongs_to
+  via: mailbox.id
+- from: Message
+  to: MessageSource
+  type: belongs_to
+  via: message_source_id
+- from: Message
+  to: Rule
+  type: has_many
+  via: flagged_rules[].id
+- from: MessageGroup
+  to: Message
+  type: has_many
+  via: canonical_id
+- from: HuntJob
+  to: Rule
+  type: references
+  via: rule
+- from: ListEntry
+  to: List
+  type: belongs_to
+  via: list_id
+- from: EmailBomb
+  to: Mailbox
+  type: belongs_to
+  via: mailbox_id
+- from: Rule
+  to: RuleHistory
+  type: has_many
+  via: rule_id
+- from: Role
+  to: User
+  type: has_many
+  via: assignRoleToUser
+- from: AuditLogEvent
+  to: User
+  type: references
+  via: actor
+- from: ChildOrganization
+  to: Organization
+  type: belongs_to
+  via: parent organization
