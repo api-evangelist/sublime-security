@@ -1,0 +1,601 @@
+{
+  "item": [
+    {
+      "id": "18e17ea7-1597-4eda-a0ee-2770df291c3f",
+      "name": "Email Bombs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4a98bbd4-34ab-4942-b8bf-d2842fe25c7b",
+          "name": "List email bombs",
+          "request": {
+            "name": "List email bombs",
+            "description": {
+              "content": "List email bombs",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "messages",
+                "bombs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filter by active status. true = only active, false = only inactive, null = all"
+                },
+                {
+                  "disabled": false,
+                  "key": "dismissed",
+                  "value": "<boolean>",
+                  "description": "Filter by dismissed status. true = only dismissed, false = only not dismissed, null = all"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The maximum number of email bombs to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The (zero-based) offset of the email bombs to return"
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c1383b3-1135-46a0-bfab-3430fa05e3ef",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "messages",
+                    "bombs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "dismissed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 8250,\n  \"total\": 3683,\n  \"email_bombs\": [\n    {\n      \"active\": false,\n      \"created_at\": \"1975-10-25T02:33:38.244Z\",\n      \"end_time\": \"2011-03-28T07:34:25.364Z\",\n      \"id\": \"727f40c3-cd7a-0f8e-07ca-0dbf2978cb59\",\n      \"last_message_added_at\": \"1949-03-23T02:21:29.581Z\",\n      \"mailbox\": {\n        \"email\": \"string\",\n        \"id\": \"4da9d43c-4597-1d78-277c-9b81dfac280c\",\n        \"external_id\": \"string\"\n      },\n      \"message_count\": 5814,\n      \"reviewed_at\": \"2016-10-30T00:07:30.057Z\",\n      \"reviewed_by_user_id\": \"7d5f672b-a815-f998-b51b-7c49efe82f2b\",\n      \"start_time\": \"1999-07-16T19:42:50.582Z\",\n      \"updated_at\": \"1974-06-08T22:12:13.042Z\"\n    },\n    {\n      \"active\": true,\n      \"created_at\": \"2008-07-13T00:19:30.299Z\",\n      \"end_time\": \"1949-06-08T05:49:10.926Z\",\n      \"id\": \"40822d43-5c3a-e653-0ced-494cea5a35d4\",\n      \"last_message_added_at\": \"1983-04-17T06:59:45.633Z\",\n      \"mailbox\": {\n        \"email\": \"string\",\n        \"id\": \"b3a28f13-1685-0cb7-7bf4-b17b8a52adc6\",\n        \"external_id\": \"string\"\n      },\n      \"message_count\": 8058,\n      \"reviewed_at\": \"1954-03-07T21:40:28.711Z\",\n      \"reviewed_by_user_id\": \"2f3ddb57-6083-ce49-19e9-8b76c6524892\",\n      \"start_time\": \"2016-06-07T19:10:40.377Z\",\n      \"updated_at\": \"1962-09-04T14:58:33.127Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a689e9fb-5830-47e0-b09e-39afb8e60245",
+          "name": "Create email bomb",
+          "request": {
+            "name": "Create email bomb",
+            "description": {
+              "content": "Mark a mailbox time range as an email bomb. A new bomb is created if no existing bomb covers the range; otherwise the existing bomb is extended. Messages within the range are associated asynchronously.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "messages",
+                "bombs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"end_time\": \"<dateTime>\",\n  \"mailbox_id\": \"<string>\",\n  \"start_time\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5d016bed-ee50-4a66-813d-6997894ce5ad",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "messages",
+                    "bombs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"end_time\": \"<dateTime>\",\n  \"mailbox_id\": \"<string>\",\n  \"start_time\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_bomb_id\": \"cc62e14d-a7d0-cbbc-bdd0-ab15ed5c425f\",\n  \"overlapping_bomb_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"updated_bomb_ids\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "48877a7d-754b-44d4-b08a-ccaa1336ea06",
+          "name": "Get email bomb",
+          "request": {
+            "name": "Get email bomb",
+            "description": {
+              "content": "Get email bomb",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "messages",
+                "bombs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the email bomb"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69defec9-5f5c-461a-a23a-813ca4d0068b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "messages",
+                    "bombs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the email bomb"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active\": false,\n  \"created_at\": \"1966-12-13T09:25:59.425Z\",\n  \"end_time\": \"2015-05-20T01:49:11.454Z\",\n  \"id\": \"5fdbb965-6f2d-ca9a-6569-c86c7fbac79c\",\n  \"last_message_added_at\": \"2023-04-29T00:40:31.727Z\",\n  \"mailbox\": {\n    \"email\": \"string\",\n    \"id\": \"dcfe8176-7e48-6fe1-7450-c279881b3a45\",\n    \"external_id\": \"string\"\n  },\n  \"message_count\": 7011,\n  \"reviewed_at\": \"2018-02-20T13:16:21.084Z\",\n  \"reviewed_by_user_id\": \"8074d92e-cacf-b5cb-42ac-d53bb8d52f8a\",\n  \"start_time\": \"1968-08-06T18:34:03.289Z\",\n  \"updated_at\": \"2025-03-04T11:28:04.806Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f65ef99-2a4d-4d52-a97e-120f88f0a0a1",
+          "name": "Dismiss email bomb",
+          "request": {
+            "name": "Dismiss email bomb",
+            "description": {
+              "content": "Dismiss an email bomb, marking it as reviewed by the user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "messages",
+                "bombs",
+                ":id",
+                "dismiss"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the email bomb to dismiss"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"review_comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "37b396cc-a80d-4bae-9ebe-564077a7669e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "messages",
+                    "bombs",
+                    ":id",
+                    "dismiss"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the email bomb to dismiss"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"review_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of http,https)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "Base URL of your Sublime deployment",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "platform.sublime.security",
+      "key": "server"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{server}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "862a24b9-e131-4617-ac2c-a4b4bf62fb28",
+    "name": "Multi-Tenancy API (BETA) BinExplode Email Bombs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: support@sublime.security",
+      "type": "text/plain"
+    }
+  }
+}

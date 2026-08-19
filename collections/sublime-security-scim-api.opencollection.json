@@ -1,0 +1,236 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Multi-Tenancy API (BETA) BinExplode SCIM API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SCIM",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List SCIM resource types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/scim/ResourceTypes"
+          },
+          "docs": "List SCIM resource types"
+        },
+        {
+          "info": {
+            "name": "Get SCIM resource type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/scim/ResourceTypes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the resource type"
+              }
+            ]
+          },
+          "docs": "Get SCIM resource type"
+        },
+        {
+          "info": {
+            "name": "List SCIM schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/scim/Schemas"
+          },
+          "docs": "List SCIM schemas"
+        },
+        {
+          "info": {
+            "name": "Get SCIM schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/scim/Schemas/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Schema ID"
+              }
+            ]
+          },
+          "docs": "Get SCIM schema"
+        },
+        {
+          "info": {
+            "name": "Get SCIM service provider configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/scim/ServiceProviderConfig"
+          },
+          "docs": "Get SCIM service provider configuration"
+        },
+        {
+          "info": {
+            "name": "List SCIM users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/scim/Users",
+            "params": [
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter like 'userName eq \"bob@example.com\"'"
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "1-indexed starting index"
+              }
+            ]
+          },
+          "docs": "List SCIM users"
+        },
+        {
+          "info": {
+            "name": "Create SCIM user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/scim/Users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create SCIM user"
+        },
+        {
+          "info": {
+            "name": "Get SCIM user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/scim/Users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sublime ID of the user"
+              }
+            ]
+          },
+          "docs": "Get SCIM user"
+        },
+        {
+          "info": {
+            "name": "Update SCIM user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{scheme}://{server}/v0/scim/Users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sublime ID of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update SCIM user"
+        },
+        {
+          "info": {
+            "name": "Patch SCIM user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{scheme}://{server}/v0/scim/Users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sublime ID of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Patch SCIM user"
+        },
+        {
+          "info": {
+            "name": "Delete SCIM user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{scheme}://{server}/v0/scim/Users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sublime ID of the user"
+              }
+            ]
+          },
+          "docs": "Delete SCIM user"
+        },
+        {
+          "info": {
+            "name": "Validate SCIM specific auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/scim/validate_auth"
+          },
+          "docs": "Validate SCIM specific auth"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

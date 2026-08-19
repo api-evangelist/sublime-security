@@ -1,0 +1,190 @@
+{
+  "item": [
+    {
+      "id": "7a183e17-d41b-49b4-9a0d-2ca4e64c0c70",
+      "name": "Live flow",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1bdd147f-4d26-4ccd-b495-4e4fca3d04b7",
+          "name": "Process raw message",
+          "request": {
+            "name": "Process raw message",
+            "description": {
+              "content": "Process a raw message",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "live-flow",
+                "raw-messages",
+                "analyze"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mailbox_email_address\": \"<email>\",\n  \"message_source_id\": \"<uuid>\",\n  \"raw_message\": \"<string>\",\n  \"\": \"<boolean>\",\n  \"analyze_async\": \"<boolean>\",\n  \"canonical_id\": \"<string>\",\n  \"create_mailbox\": \"<boolean>\",\n  \"delivery_status\": \"<string>\",\n  \"external_created_at\": \"<dateTime>\",\n  \"external_message_id\": \"<string>\",\n  \"external_thread_id\": \"<string>\",\n  \"folder\": \"<string>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"message_type\": {\n    \"inbound\": \"<boolean>\",\n    \"internal\": \"<boolean>\",\n    \"outbound\": \"<boolean>\"\n  },\n  \"route_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "88e7e1be-1d33-4bd2-8998-f4e8bc616918",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "live-flow",
+                    "raw-messages",
+                    "analyze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mailbox_email_address\": \"<email>\",\n  \"message_source_id\": \"<uuid>\",\n  \"raw_message\": \"<string>\",\n  \"\": \"<boolean>\",\n  \"analyze_async\": \"<boolean>\",\n  \"canonical_id\": \"<string>\",\n  \"create_mailbox\": \"<boolean>\",\n  \"delivery_status\": \"<string>\",\n  \"external_created_at\": \"<dateTime>\",\n  \"external_message_id\": \"<string>\",\n  \"external_thread_id\": \"<string>\",\n  \"folder\": \"<string>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"message_type\": {\n    \"inbound\": \"<boolean>\",\n    \"internal\": \"<boolean>\",\n    \"outbound\": \"<boolean>\"\n  },\n  \"route_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"canonical_id\": \"string\",\n  \"flagged_rules\": [\n    {\n      \"created_at\": \"1992-05-09T12:35:14.283Z\",\n      \"id\": \"fdc3f059-1eb8-a049-a631-41ddbf98f8af\",\n      \"name\": \"string\",\n      \"source\": \"string\",\n      \"source_md5\": \"string\",\n      \"updated_at\": \"1964-05-31T04:17:24.513Z\",\n      \"actions\": [\n        {\n          \"active\": true,\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"active\": true,\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"active\": true,\n      \"active_updated_at\": \"1950-03-22T22:02:37.229Z\",\n      \"asa_verdict_trigger\": \"string\",\n      \"attack_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"authors\": [\n        {\n          \"name\": \"string\",\n          \"twitter\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"twitter\": \"string\"\n        }\n      ],\n      \"auto_review_auto_share\": true,\n      \"auto_review_classification\": \"string\",\n      \"child_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_by_api_request_id\": \"0124a64a-6a1c-981c-4301-e19f17a2d9c8\",\n      \"created_by_org_id\": \"7e01c686-0e33-4062-466c-4c1c9ddbcbcf\",\n      \"created_by_org_name\": \"string\",\n      \"created_by_user_id\": \"e9c6945a-38db-4f7b-b8b1-32a2367482a2\",\n      \"created_by_user_name\": \"string\",\n      \"description\": \"string\",\n      \"detection_methods\": [\n        \"string\",\n        \"string\"\n      ],\n      \"false_positives\": [\n        \"string\",\n        \"string\"\n      ],\n      \"feed_external_rule_id\": \"string\",\n      \"feed_id\": \"string\",\n      \"full_type\": \"insight_query\",\n      \"immutable\": false,\n      \"internal_type\": \"string\",\n      \"label\": \"string\",\n      \"maturity\": \"string\",\n      \"org_id\": \"46117a75-d190-b00d-f8e9-0a47aab20f4d\",\n      \"parent_id\": \"string\",\n      \"passive\": true,\n      \"references\": [\n        \"string\",\n        \"string\"\n      ],\n      \"run_triage_on_excluded_messages\": false,\n      \"severity\": \"string\",\n      \"tactics_and_techniques\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"triage_abuse_reports\": true,\n      \"triage_ade_complete\": true,\n      \"triage_asa_complete\": true,\n      \"triage_classification_changes\": false,\n      \"triage_dlp_rule_matched\": false,\n      \"triage_email_bomb\": true,\n      \"triage_flagged_messages\": true,\n      \"type\": \"string\",\n      \"user_can_delete\": true,\n      \"user_provided_tags\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"created_at\": \"2006-04-23T11:15:54.953Z\",\n      \"id\": \"cdf406ca-e5a7-23a3-d4b1-a71606d3bcd5\",\n      \"name\": \"string\",\n      \"source\": \"string\",\n      \"source_md5\": \"string\",\n      \"updated_at\": \"1965-05-25T12:25:33.635Z\",\n      \"actions\": [\n        {\n          \"active\": false,\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"active\": false,\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"active\": false,\n      \"active_updated_at\": \"1994-01-31T12:29:17.894Z\",\n      \"asa_verdict_trigger\": \"string\",\n      \"attack_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"authors\": [\n        {\n          \"name\": \"string\",\n          \"twitter\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"twitter\": \"string\"\n        }\n      ],\n      \"auto_review_auto_share\": true,\n      \"auto_review_classification\": \"string\",\n      \"child_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_by_api_request_id\": \"f2d2fd97-737d-d96b-1a09-aa51dba416cb\",\n      \"created_by_org_id\": \"ef9092e1-6340-948b-55ce-40a7e80465a5\",\n      \"created_by_org_name\": \"string\",\n      \"created_by_user_id\": \"f14f6d27-936e-24d9-2d9b-c3761a4eb998\",\n      \"created_by_user_name\": \"string\",\n      \"description\": \"string\",\n      \"detection_methods\": [\n        \"string\",\n        \"string\"\n      ],\n      \"false_positives\": [\n        \"string\",\n        \"string\"\n      ],\n      \"feed_external_rule_id\": \"string\",\n      \"feed_id\": \"string\",\n      \"full_type\": \"detection_rule\",\n      \"immutable\": false,\n      \"internal_type\": \"string\",\n      \"label\": \"string\",\n      \"maturity\": \"string\",\n      \"org_id\": \"ae345f37-40df-670f-fe15-f9ecd46c37c7\",\n      \"parent_id\": \"string\",\n      \"passive\": false,\n      \"references\": [\n        \"string\",\n        \"string\"\n      ],\n      \"run_triage_on_excluded_messages\": true,\n      \"severity\": \"string\",\n      \"tactics_and_techniques\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"triage_abuse_reports\": false,\n      \"triage_ade_complete\": true,\n      \"triage_asa_complete\": true,\n      \"triage_classification_changes\": false,\n      \"triage_dlp_rule_matched\": true,\n      \"triage_email_bomb\": false,\n      \"triage_flagged_messages\": true,\n      \"type\": \"string\",\n      \"user_can_delete\": true,\n      \"user_provided_tags\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"message_id\": \"87f45b3e-eca1-ef62-951e-10d5b598939a\",\n  \"raw_message_id\": \"b11335da-a34d-ce12-55ac-30f608a924b8\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of http,https)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "Base URL of your Sublime deployment",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "platform.sublime.security",
+      "key": "server"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{server}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5c4333e8-1827-493f-be61-b6938d9f1394",
+    "name": "Multi-Tenancy API (BETA) BinExplode Live flow API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: support@sublime.security",
+      "type": "text/plain"
+    }
+  }
+}

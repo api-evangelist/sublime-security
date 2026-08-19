@@ -1,0 +1,454 @@
+{
+  "item": [
+    {
+      "id": "e8c4a3e3-b5a9-4ae2-8397-8a8a3cfc1b3a",
+      "name": "Hunt Jobs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ad3b113c-0dc1-4b3c-bdfe-377c1b08717a",
+          "name": "Start hunt job",
+          "request": {
+            "name": "Start hunt job",
+            "description": {
+              "content": "Start a hunt job",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "hunt-jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"range_end_time\": \"<dateTime>\",\n  \"range_start_time\": \"<dateTime>\",\n  \"source\": \"<string>\",\n  \"name\": \"<string>\",\n  \"private\": \"<boolean>\",\n  \"triage_email_bomb\": \"<boolean>\",\n  \"triage_flagged\": \"<boolean>\",\n  \"triage_reported\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a6a6da77-a307-43d8-9d45-65d27b48d864",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "hunt-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"range_end_time\": \"<dateTime>\",\n  \"range_start_time\": \"<dateTime>\",\n  \"source\": \"<string>\",\n  \"name\": \"<string>\",\n  \"private\": \"<boolean>\",\n  \"triage_email_bomb\": \"<boolean>\",\n  \"triage_flagged\": \"<boolean>\",\n  \"triage_reported\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hunt_job_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fcd2fe91-5a3e-4eef-b66a-26b526e18bdd",
+          "name": "Get hunt job",
+          "request": {
+            "name": "Get hunt job",
+            "description": {
+              "content": "Get a hunt job",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "hunt-jobs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the hunt job."
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "103eef06-0fb9-4c37-aa2d-3c5ec8fb1084",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "hunt-jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the hunt job."
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"range_end_time\": \"1982-01-24T01:16:25.334Z\",\n  \"range_start_time\": \"1983-05-09T14:46:01.594Z\",\n  \"error\": \"string\",\n  \"id\": \"string\",\n  \"private\": false,\n  \"results_truncated\": true,\n  \"source\": \"string\",\n  \"status\": \"COMPLETED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77999edf-71e2-45f7-8271-34d12f5630d2",
+          "name": "Get hunt job results",
+          "request": {
+            "name": "Get hunt job results",
+            "description": {
+              "content": "Get hunt job detailed results. Provides message group details and summaries",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "hunt-jobs",
+                ":id",
+                "results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The maximum number of results to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The (zero-based) offset of the first hunt job results to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the hunt job."
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac1f96dd-2e26-4940-9a85-e74c21fe878f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "hunt-jobs",
+                    ":id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the hunt job."
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message_groups\": [\n    {\n      \"id\": \"string\",\n      \"classification\": \"string\",\n      \"flagged_rules\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"message_links_clicked\": [\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        },\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        }\n      ],\n      \"messages\": [\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"cd1249b1-f137-b7d4-8642-7ada918cefd6\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"1970-09-09T23:39:31.506Z\",\n          \"delivered\": false,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"1963-04-18T14:32:42.875Z\",\n          \"read_at\": \"1963-06-30T11:14:41.010Z\",\n          \"replied_at\": \"1981-10-04T17:08:10.450Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"ce867b72-b368-bedd-d97e-cb73bdc53f2c\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"2011-07-29T20:54:51.462Z\",\n          \"delivered\": true,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"1950-03-26T01:13:15.813Z\",\n          \"read_at\": \"1968-02-24T06:46:42.956Z\",\n          \"replied_at\": \"1995-09-22T18:53:16.406Z\"\n        }\n      ],\n      \"organization_id\": \"string\",\n      \"review_comment\": \"string\",\n      \"review_label\": \"string\",\n      \"review_status\": \"string\",\n      \"state\": \"string\",\n      \"user_reports\": [\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"2016-05-04T14:54:58.451Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        },\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"1998-05-22T00:44:55.737Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"classification\": \"string\",\n      \"flagged_rules\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"message_links_clicked\": [\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        },\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        }\n      ],\n      \"messages\": [\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"2f0a4169-1ea6-9b9b-0897-bac01d9e8050\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"1949-08-09T06:17:12.992Z\",\n          \"delivered\": true,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"1998-01-23T13:13:26.990Z\",\n          \"read_at\": \"2005-07-12T08:45:50.321Z\",\n          \"replied_at\": \"1975-11-04T09:35:13.630Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"edb75cac-02f8-3ab7-f656-34d1586c8fbc\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"1947-12-01T11:13:16.597Z\",\n          \"delivered\": true,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"2022-01-08T00:26:53.841Z\",\n          \"read_at\": \"1950-03-10T14:11:08.984Z\",\n          \"replied_at\": \"1981-02-20T03:24:04.741Z\"\n        }\n      ],\n      \"organization_id\": \"string\",\n      \"review_comment\": \"string\",\n      \"review_label\": \"string\",\n      \"review_status\": \"string\",\n      \"state\": \"string\",\n      \"user_reports\": [\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"1952-10-30T04:35:50.212Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        },\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"1960-05-19T09:05:04.307Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"total_group_count\": 9849\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of http,https)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "Base URL of your Sublime deployment",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "platform.sublime.security",
+      "key": "server"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{server}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9c75ca8f-b871-4d68-82c2-474fd162d363",
+    "name": "Multi-Tenancy API (BETA) BinExplode Hunt Jobs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: support@sublime.security",
+      "type": "text/plain"
+    }
+  }
+}

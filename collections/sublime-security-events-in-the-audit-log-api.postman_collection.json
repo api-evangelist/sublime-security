@@ -1,0 +1,470 @@
+{
+  "item": [
+    {
+      "id": "71a39bd4-1280-475d-bdaf-8d9fcf194583",
+      "name": "Events in the audit log",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e2473a3e-bae5-45a8-96c5-099b8c4b98cd",
+          "name": "List events in audit log",
+          "request": {
+            "name": "List events in audit log",
+            "description": {
+              "content": "List events in audit log",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "audit-log",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "created_at[gte]",
+                  "value": "<dateTime>",
+                  "description": "Inclusive start datetime filter for time of event creation, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only events at or after this time will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at[lt]",
+                  "value": "<dateTime>",
+                  "description": "Exclusive end datetime filter for time of event creation, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only events before this time will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The (zero-based) offset of the first rules to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Event type"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_ids",
+                  "value": "<string>",
+                  "description": "Filter by user IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_ids",
+                  "value": "<string>",
+                  "description": "Filter by user IDs"
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f6fe77b-51a6-4f99-a841-a7231174a392",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "audit-log",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_at[gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at[lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 6139,\n  \"events\": [\n    {\n      \"created_at\": \"1960-03-01T18:14:24.311Z\",\n      \"data\": {\n        \"message\": {\n          \"id\": \"c305a756-ab76-a187-359b-e1de5889cd51\"\n        },\n        \"message_group\": {\n          \"id\": \"d5099209-d3ac-f935-93ba-a435d66d0ec3\"\n        },\n        \"request\": {\n          \"id\": \"9888ed8c-cdc6-2694-c3de-e9b315881cb3\",\n          \"method\": \"string\",\n          \"path\": \"string\",\n          \"api_key_name\": \"string\",\n          \"authentication_method\": \"string\",\n          \"body\": \"string\",\n          \"ip\": \"string\",\n          \"query\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"user_agent\": \"string\"\n        }\n      },\n      \"id\": \"2b940aa9-3366-fa3f-7e8e-76e82be72359\",\n      \"type\": \"string\",\n      \"additional_data\": [\n        713,\n        4581\n      ],\n      \"created_by\": {\n        \"created_at\": \"1951-05-02T09:48:14.808Z\",\n        \"email_address\": \"Mrd8pbk@QFbhQaBDrXgfYXeULVjxzRx.kqpu\",\n        \"first_name\": \"string\",\n        \"id\": \"a8acc4e5-5c33-6187-8557-80984b364def\",\n        \"last_name\": \"string\",\n        \"updated_at\": \"1999-01-27T04:55:12.444Z\",\n        \"access_restricted\": true,\n        \"active\": true,\n        \"deleted_at\": \"1964-10-02T02:23:56.925Z\",\n        \"google_oauth_user_id\": \"string\",\n        \"is_enrolled\": true,\n        \"microsoft_oauth_user_id\": \"string\",\n        \"phone_number\": \"string\",\n        \"role\": \"string\",\n        \"service_account\": \"string\"\n      }\n    },\n    {\n      \"created_at\": \"1980-09-17T20:07:48.205Z\",\n      \"data\": {\n        \"message\": {\n          \"id\": \"4fbf2269-0b2c-7ce1-59bd-b6e701829ea2\"\n        },\n        \"message_group\": {\n          \"id\": \"640af712-c115-6304-d30b-6435c3d5cb09\"\n        },\n        \"request\": {\n          \"id\": \"f5330304-fd78-cd6f-56d5-f9b735477d41\",\n          \"method\": \"string\",\n          \"path\": \"string\",\n          \"api_key_name\": \"string\",\n          \"authentication_method\": \"string\",\n          \"body\": \"string\",\n          \"ip\": \"string\",\n          \"query\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"user_agent\": \"string\"\n        }\n      },\n      \"id\": \"debd63b6-a10b-25ab-f577-436bbe872cd7\",\n      \"type\": \"string\",\n      \"additional_data\": [\n        5543,\n        2027\n      ],\n      \"created_by\": {\n        \"created_at\": \"2016-11-27T03:13:42.720Z\",\n        \"email_address\": \"2WwLHqdMkyCo@efbeBvsMJCSwpafrvfSpNz.ipwl\",\n        \"first_name\": \"string\",\n        \"id\": \"668d45b2-2315-55d1-a504-08da0ce4db33\",\n        \"last_name\": \"string\",\n        \"updated_at\": \"1972-06-26T16:43:23.378Z\",\n        \"access_restricted\": false,\n        \"active\": false,\n        \"deleted_at\": \"2001-11-05T03:05:00.585Z\",\n        \"google_oauth_user_id\": \"string\",\n        \"is_enrolled\": true,\n        \"microsoft_oauth_user_id\": \"string\",\n        \"phone_number\": \"string\",\n        \"role\": \"string\",\n        \"service_account\": \"string\"\n      }\n    }\n  ],\n  \"total\": 6608\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7fb19c48-c930-40eb-b937-19d16edd04b5",
+          "name": "List event types for audit log",
+          "request": {
+            "name": "List event types for audit log",
+            "description": {
+              "content": "List all event types for audit log",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "audit-log",
+                "events",
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ef4726d-656c-4b4b-a49d-10d382be690e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "audit-log",
+                    "events",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"event_types\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af350d0e-5e6f-471a-ada0-5f2af8559fb5",
+          "name": "Retrieve event from audit log",
+          "request": {
+            "name": "Retrieve event from audit log",
+            "description": {},
+            "url": {
+              "path": [
+                "v0",
+                "audit-log",
+                "events",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Event ID"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1001738a-b249-4ca4-b298-036d4bcc9e8d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "audit-log",
+                    "events",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Event ID"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_at\": \"1953-01-02T07:58:28.577Z\",\n  \"data\": {\n    \"message\": {\n      \"id\": \"d17f165e-179c-ea90-f4f5-6d6b15995a32\"\n    },\n    \"message_group\": {\n      \"id\": \"4e339950-aa31-e32b-12b1-73b75fb94608\"\n    },\n    \"request\": {\n      \"id\": \"04246eab-257d-8867-3617-bf53c4d80c32\",\n      \"method\": \"string\",\n      \"path\": \"string\",\n      \"api_key_name\": \"string\",\n      \"authentication_method\": \"string\",\n      \"body\": \"string\",\n      \"ip\": \"string\",\n      \"query\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"user_agent\": \"string\"\n    }\n  },\n  \"id\": \"fe4ae785-10a8-2f86-d857-2fb79bac2135\",\n  \"type\": \"string\",\n  \"additional_data\": [\n    7062,\n    45\n  ],\n  \"created_by\": {\n    \"created_at\": \"1961-02-05T06:53:57.873Z\",\n    \"email_address\": \"emyQYRcM8@TCwyOwMLLoEyfF.dtqc\",\n    \"first_name\": \"string\",\n    \"id\": \"d329f550-e1cf-a9ca-85e6-905ec5171795\",\n    \"last_name\": \"string\",\n    \"updated_at\": \"1965-06-28T11:07:40.150Z\",\n    \"access_restricted\": true,\n    \"active\": false,\n    \"deleted_at\": \"2015-05-08T22:49:14.555Z\",\n    \"google_oauth_user_id\": \"string\",\n    \"is_enrolled\": true,\n    \"microsoft_oauth_user_id\": \"string\",\n    \"phone_number\": \"string\",\n    \"role\": \"string\",\n    \"service_account\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of http,https)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "Base URL of your Sublime deployment",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "platform.sublime.security",
+      "key": "server"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{server}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "457358e3-4db1-40bf-b9cd-abe585145269",
+    "name": "Multi-Tenancy API (BETA) BinExplode Events in the audit log API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: support@sublime.security",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,791 @@
+{
+  "item": [
+    {
+      "id": "90aaee0b-054a-49e0-bce9-850793835be7",
+      "name": "Organizations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "00af68e6-4a26-4e74-b14b-a0215ed5a938",
+          "name": "List child organizations",
+          "request": {
+            "name": "List child organizations",
+            "description": {
+              "content": "List the child organizations under the calling organization, including license and usage data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "organizations",
+                "mine",
+                "child-organizations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filter by active status. true returns only active organizations; false returns only soft-deleted or scheduled-for-deletion organizations; omit to return all."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of organizations to return. Capped at 500."
+                },
+                {
+                  "disabled": false,
+                  "key": "max_depth",
+                  "value": "<integer>",
+                  "description": "How deep to descend: 1 (the default) returns direct children only, 2 includes grandchildren, and so on. Capped at the maximum hierarchy depth."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Zero-based offset into the result set, used for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "parent_org_id",
+                  "value": "<uuid>",
+                  "description": "Restrict results to descendants of this organization. Must be the calling organization itself or one of its descendants. Defaults to the calling organization."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Optional case-insensitive substring filter on organization name. Partial matches are returned."
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ae5fff8-f3d8-4ff8-a678-1618483ec734",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "organizations",
+                    "mine",
+                    "child-organizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "true"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "max_depth",
+                      "value": "2"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "parent_org_id",
+                      "value": "019263d1-7c1a-7c8e-9c66-f1c2a9b1f4e2"
+                    },
+                    {
+                      "key": "search",
+                      "value": "acme"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"children\": [\n    {\n      \"active_automation_rule_count\": 8786,\n      \"active_detection_rule_count\": 7264,\n      \"active_mailbox_count\": 6904,\n      \"can_add_children\": true,\n      \"can_manage_child_licenses\": false,\n      \"created_at\": \"1976-09-30T18:42:32.430Z\",\n      \"deleted_at\": \"1953-07-18T09:19:03.292Z\",\n      \"id\": \"string\",\n      \"licenses\": [\n        {\n          \"sku\": \"sublime_email_security\",\n          \"status\": \"incomplete\",\n          \"trial_expires_at\": \"1976-05-16T16:02:07.924Z\"\n        },\n        {\n          \"sku\": \"sublime_email_security\",\n          \"status\": \"no_subscription\",\n          \"trial_expires_at\": \"1962-01-29T05:30:47.022Z\"\n        }\n      ],\n      \"name\": \"string\",\n      \"parent_org_id\": \"string\",\n      \"scheduled_for_deletion_at\": \"2005-04-23T09:30:19.721Z\",\n      \"total_mailbox_count\": 6787\n    },\n    {\n      \"active_automation_rule_count\": 4735,\n      \"active_detection_rule_count\": 6552,\n      \"active_mailbox_count\": 8580,\n      \"can_add_children\": false,\n      \"can_manage_child_licenses\": false,\n      \"created_at\": \"1995-08-20T06:29:26.760Z\",\n      \"deleted_at\": \"2014-06-12T09:40:47.881Z\",\n      \"id\": \"string\",\n      \"licenses\": [\n        {\n          \"sku\": \"sublime_email_security\",\n          \"status\": \"trialing\",\n          \"trial_expires_at\": \"1969-12-11T19:37:50.878Z\"\n        },\n        {\n          \"sku\": \"sublime_email_security\",\n          \"status\": \"trialing\",\n          \"trial_expires_at\": \"2003-05-06T00:14:49.211Z\"\n        }\n      ],\n      \"name\": \"string\",\n      \"parent_org_id\": \"string\",\n      \"scheduled_for_deletion_at\": \"2014-11-26T10:21:47.190Z\",\n      \"total_mailbox_count\": 8320\n    }\n  ],\n  \"total\": 3\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c13a04e4-f9e2-4dca-8641-bdc2a5239e29",
+          "name": "Create child organization",
+          "request": {
+            "name": "Create child organization",
+            "description": {
+              "content": "Create a child organization under the calling organization, optionally provisioning one or more licenses on it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "organizations",
+                "mine",
+                "child-organizations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"can_add_children\": \"<boolean>\",\n  \"can_manage_child_licenses\": \"<boolean>\",\n  \"licenses\": [\n    {\n      \"sku\": \"<string>\",\n      \"status\": \"<string>\",\n      \"trial_days\": \"<integer>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"status\": \"<string>\",\n      \"trial_days\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dde321db-6658-412b-a3f7-99d64b3b7f5e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "organizations",
+                    "mine",
+                    "child-organizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"can_add_children\": \"<boolean>\",\n  \"can_manage_child_licenses\": \"<boolean>\",\n  \"licenses\": [\n    {\n      \"sku\": \"<string>\",\n      \"status\": \"<string>\",\n      \"trial_days\": \"<integer>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"status\": \"<string>\",\n      \"trial_days\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"a9f6f891-3fde-450e-0306-c445a6ecf313\",\n  \"licenses\": [\n    {\n      \"sku\": \"sublime_email_security\",\n      \"status\": \"incomplete_expired\",\n      \"trial_expires_at\": \"1981-05-23T20:58:04.882Z\"\n    },\n    {\n      \"sku\": \"sublime_email_security\",\n      \"status\": \"incomplete\",\n      \"trial_expires_at\": \"1950-01-05T20:51:49.054Z\"\n    }\n  ],\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8d339cf-af9e-4a7f-8a84-1ffd52532930",
+          "name": "Bulk update child organization licensing",
+          "request": {
+            "name": "Bulk update child organization licensing",
+            "description": {
+              "content": "Apply license transitions to up to 200 child organizations in one call. Each organization is evaluated independently; per-organization failures are reported in the results array, not the HTTP status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "organizations",
+                "mine",
+                "child-organizations",
+                "bulk-licensing"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"licenses\": [\n        {\n          \"sku\": \"<string>\",\n          \"status\": \"<string>\",\n          \"trial_days\": \"<integer>\"\n        }\n      ],\n      \"org_id\": \"<uuid>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "49c8d492-b645-4150-a1e5-894e5ba26f55",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "organizations",
+                    "mine",
+                    "child-organizations",
+                    "bulk-licensing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"licenses\": [\n        {\n          \"sku\": \"<string>\",\n          \"status\": \"<string>\",\n          \"trial_days\": \"<integer>\"\n        }\n      ],\n      \"org_id\": \"019263d1-7c1a-7c8e-9c66-f1c2a9b1f4e2\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"error\": \"enterprise subscriptions cannot be transitioned to a trial\",\n      \"licenses\": [\n        {\n          \"sku\": \"sublime_email_security\",\n          \"status\": \"past_due\",\n          \"trial_expires_at\": \"1959-05-08T06:56:59.826Z\"\n        },\n        {\n          \"sku\": \"sublime_email_security\",\n          \"status\": \"unpaid\",\n          \"trial_expires_at\": \"1997-05-20T11:41:11.768Z\"\n        }\n      ],\n      \"org_id\": \"019263d1-7c1a-7c8e-9c66-f1c2a9b1f4e2\",\n      \"warnings\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"error\": \"enterprise subscriptions cannot be transitioned to a trial\",\n      \"licenses\": [\n        {\n          \"sku\": \"sublime_email_security\",\n          \"status\": \"past_due\",\n          \"trial_expires_at\": \"2003-02-16T09:46:56.482Z\"\n        },\n        {\n          \"sku\": \"sublime_email_security\",\n          \"status\": \"canceled\",\n          \"trial_expires_at\": \"2019-12-14T22:16:49.510Z\"\n        }\n      ],\n      \"org_id\": \"019263d1-7c1a-7c8e-9c66-f1c2a9b1f4e2\",\n      \"warnings\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c63ec16-f035-4b08-abe4-83277da863bb",
+          "name": "Update child organization",
+          "request": {
+            "name": "Update child organization",
+            "description": {
+              "content": "Update a child organization's display name and delegation settings, returning the full child organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "organizations",
+                "mine",
+                "child-organizations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) ID of the child organization to patch."
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"can_add_children\": \"<boolean>\",\n  \"can_manage_child_licenses\": \"<boolean>\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "590c5f93-9ede-43c2-ba3a-011196c43ac1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "organizations",
+                    "mine",
+                    "child-organizations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) ID of the child organization to patch."
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"can_add_children\": true,\n  \"can_manage_child_licenses\": false,\n  \"name\": \"Acme Corp (renamed)\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active_automation_rule_count\": 9585,\n  \"active_detection_rule_count\": 555,\n  \"active_mailbox_count\": 2485,\n  \"can_add_children\": false,\n  \"can_manage_child_licenses\": false,\n  \"created_at\": \"2025-12-20T06:46:37.409Z\",\n  \"deleted_at\": \"1998-08-01T09:31:22.628Z\",\n  \"id\": \"string\",\n  \"licenses\": [\n    {\n      \"sku\": \"sublime_email_security\",\n      \"status\": \"active\",\n      \"trial_expires_at\": \"1964-07-11T22:37:01.717Z\"\n    },\n    {\n      \"sku\": \"sublime_email_security\",\n      \"status\": \"active\",\n      \"trial_expires_at\": \"1967-07-14T12:03:40.461Z\"\n    }\n  ],\n  \"name\": \"string\",\n  \"parent_org_id\": \"string\",\n  \"scheduled_for_deletion_at\": \"2023-04-30T18:39:07.110Z\",\n  \"total_mailbox_count\": 8192\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e51ac588-6f7b-4641-bca1-f2b5c3da600c",
+          "name": "Update child organization licensing",
+          "request": {
+            "name": "Update child organization licensing",
+            "description": {
+              "content": "Apply a desired license to a child organization. The requested license is evaluated against the organization's current billing state and the appropriate transition is applied.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "organizations",
+                "mine",
+                "child-organizations",
+                ":id",
+                "licensing"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) ID of the child organization whose licenses to update."
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"licenses\": [\n    {\n      \"sku\": \"<string>\",\n      \"status\": \"<string>\",\n      \"trial_days\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e788c619-b02c-4001-a5c3-766c023a141b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "organizations",
+                    "mine",
+                    "child-organizations",
+                    ":id",
+                    "licensing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) ID of the child organization whose licenses to update."
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"licenses\": [\n    {\n      \"sku\": \"<string>\",\n      \"status\": \"<string>\",\n      \"trial_days\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"licenses\": [\n    {\n      \"sku\": \"sublime_email_security\",\n      \"status\": \"no_subscription\",\n      \"trial_expires_at\": \"1950-05-13T19:02:53.162Z\"\n    },\n    {\n      \"sku\": \"sublime_email_security\",\n      \"status\": \"active\",\n      \"trial_expires_at\": \"2002-12-06T01:04:38.174Z\"\n    }\n  ],\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of http,https)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "Base URL of your Sublime deployment",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "platform.sublime.security",
+      "key": "server"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{server}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6c3681ff-9908-4b15-8155-9c0d1da65679",
+    "name": "Multi-Tenancy API (BETA) BinExplode Organizations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: support@sublime.security",
+      "type": "text/plain"
+    }
+  }
+}

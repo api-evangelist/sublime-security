@@ -1,0 +1,257 @@
+{
+  "item": [
+    {
+      "id": "39e3f545-bd83-4787-b1c8-a7dc32771902",
+      "name": "Mailboxes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c7551467-8325-477a-a89c-b3dec7ebfff6",
+          "name": "List mailboxes",
+          "request": {
+            "name": "List mailboxes",
+            "description": {
+              "content": "List all mailboxes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "mailboxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filter for effectively active mailboxes (marked active with a live subscription)"
+                },
+                {
+                  "disabled": false,
+                  "key": "email_addresses",
+                  "value": "<string>",
+                  "description": "Email addresses of the mailboxes to return (comma-delimited)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used"
+                },
+                {
+                  "disabled": false,
+                  "key": "mailbox_types",
+                  "value": "<string>",
+                  "description": "Comma-delimited list of mailbox types to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "marked_active",
+                  "value": "<boolean>",
+                  "description": "Filter for mailboxes marked active"
+                },
+                {
+                  "disabled": false,
+                  "key": "message_source_id",
+                  "value": "<string>",
+                  "description": "ID of the message source the mailboxes belong to"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The (zero-based) offset of the first mailbox to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search across mailbox names and email addresses"
+                },
+                {
+                  "disabled": false,
+                  "key": "sub_error_types",
+                  "value": "<string>",
+                  "description": "Comma-delimited list of subscription error types to filter by"
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "431081d1-abb7-4f1b-b181-c4e14c7b733a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "mailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "email_addresses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "mailbox_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "marked_active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "message_source_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sub_error_types",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active\": 5521,\n  \"count\": 4833,\n  \"mailboxes\": [\n    {\n      \"email_address\": \"string\",\n      \"id\": \"fcfb60f5-84c5-e86b-f318-55e86093e812\",\n      \"active\": false,\n      \"subscription_error_status\": \"string\"\n    },\n    {\n      \"email_address\": \"string\",\n      \"id\": \"e271c5e1-774f-1274-db69-ac55315c9e65\",\n      \"active\": true,\n      \"subscription_error_status\": \"string\"\n    }\n  ],\n  \"total\": 6344\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of http,https)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "Base URL of your Sublime deployment",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "platform.sublime.security",
+      "key": "server"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{server}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "13c4076e-d7f5-4b80-ab05-04daf69866a6",
+    "name": "Multi-Tenancy API (BETA) BinExplode Mailboxes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: support@sublime.security",
+      "type": "text/plain"
+    }
+  }
+}

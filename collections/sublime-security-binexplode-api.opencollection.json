@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Multi-Tenancy API (BETA) BinExplode API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BinExplode",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload a binary to be binexploded",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/binexplode/scan",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts a task to explode a binary. Returns a task ID to track and ultimately retrieve results. Results expire after 1 hour. Max original file size of 37 mb (base 64 encoded 49 mb)"
+        },
+        {
+          "info": {
+            "name": "Get results of a binexplode scan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/binexplode/scan/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Task ID"
+              }
+            ]
+          },
+          "docs": "Retrieve the results of a completed binexplode scan."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

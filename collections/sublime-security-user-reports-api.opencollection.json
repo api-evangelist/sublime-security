@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Multi-Tenancy API (BETA) BinExplode User Reports API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List user reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/user-reports",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of message groups to return. If the value exceeds the maximum, then the maximum value will be used."
+              },
+              {
+                "name": "reported_at[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start datetime filter for time of report, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only reports at or after this time will be returned."
+              },
+              {
+                "name": "reported_at[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Exclusive end datetime filter for time of report, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only reports before this time will be returned."
+              }
+            ]
+          },
+          "docs": "List user reports"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

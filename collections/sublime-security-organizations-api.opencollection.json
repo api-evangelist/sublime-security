@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Multi-Tenancy API (BETA) BinExplode Organizations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List child organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/organizations/mine/child-organizations",
+            "params": [
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filter by active status. true returns only active organizations; false returns only soft-deleted or scheduled-for-deletion organizations; omit to return all."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of organizations to return. Capped at 500."
+              },
+              {
+                "name": "max_depth",
+                "value": "",
+                "type": "query",
+                "description": "How deep to descend: 1 (the default) returns direct children only, 2 includes grandchildren, and so on. Capped at the maximum hierarchy depth."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set, used for pagination."
+              },
+              {
+                "name": "parent_org_id",
+                "value": "",
+                "type": "query",
+                "description": "Restrict results to descendants of this organization. Must be the calling organization itself or one of its descendants. Defaults to the calling organization."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Optional case-insensitive substring filter on organization name. Partial matches are returned."
+              }
+            ]
+          },
+          "docs": "List the child organizations under the calling organization, including license and usage data."
+        },
+        {
+          "info": {
+            "name": "Create child organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/organizations/mine/child-organizations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a child organization under the calling organization, optionally provisioning one or more licenses on it."
+        },
+        {
+          "info": {
+            "name": "Bulk update child organization licensing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/organizations/mine/child-organizations/bulk-licensing",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apply license transitions to up to 200 child organizations in one call. Each organization is evaluated independently; per-organization failures are reported in the results array, not the HTTP status."
+        },
+        {
+          "info": {
+            "name": "Update child organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{scheme}://{server}/v0/organizations/mine/child-organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the child organization to patch."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a child organization's display name and delegation settings, returning the full child organization."
+        },
+        {
+          "info": {
+            "name": "Update child organization licensing",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{scheme}://{server}/v0/organizations/mine/child-organizations/:id/licensing",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the child organization whose licenses to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apply a desired license to a child organization. The requested license is evaluated against the organization's current billing state and the appropriate transition is applied."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

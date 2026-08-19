@@ -1,0 +1,246 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Multi-Tenancy API (BETA) BinExplode Lists API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/lists",
+            "params": [
+              {
+                "name": "entry_type",
+                "value": "",
+                "type": "query",
+                "description": "List type to filter by. One of 'string', 'user_group', 'provider_org_unit'."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Optional ID (exact match) to filter by"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Optional name (exact match) to filter by"
+              }
+            ]
+          },
+          "docs": "Retrieve filtered lists"
+        },
+        {
+          "info": {
+            "name": "Create list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a list"
+        },
+        {
+          "info": {
+            "name": "Get list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "List ID"
+              }
+            ]
+          },
+          "docs": "Get a list"
+        },
+        {
+          "info": {
+            "name": "Patch list",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{scheme}://{server}/v0/lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "List ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Patch a list"
+        },
+        {
+          "info": {
+            "name": "Delete list",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{scheme}://{server}/v0/lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "List ID"
+              }
+            ]
+          },
+          "docs": "Delete a list"
+        },
+        {
+          "info": {
+            "name": "Get list entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/lists/:id/entries",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "List ID"
+              }
+            ]
+          },
+          "docs": "Get all list entries"
+        },
+        {
+          "info": {
+            "name": "Set list entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{scheme}://{server}/v0/lists/:id/entries",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "List ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set (overwrite) all list entries"
+        },
+        {
+          "info": {
+            "name": "Get list entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/lists/:id/entries/entry",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "List ID"
+              },
+              {
+                "name": "string",
+                "value": "",
+                "type": "query",
+                "description": "String list entry"
+              }
+            ]
+          },
+          "docs": "Get list entry, if present"
+        },
+        {
+          "info": {
+            "name": "Add list entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/lists/:id/entries/entry",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "List ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add list entry, if not already present"
+        },
+        {
+          "info": {
+            "name": "Delete list entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{scheme}://{server}/v0/lists/:id/entries/entry",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "List ID"
+              },
+              {
+                "name": "string",
+                "value": "",
+                "type": "query",
+                "description": "String list entry"
+              }
+            ]
+          },
+          "docs": "Delete list entry, if present"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2977 @@
+{
+  "item": [
+    {
+      "id": "84e2c7b8-80a6-4366-9af6-5375f25acd20",
+      "name": "Message Groups",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eca00556-f1df-4827-8849-d7ee69336155",
+          "name": "List message groups",
+          "request": {
+            "name": "List message groups",
+            "description": {
+              "content": "List message groups",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attachment_name__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided attachment name"
+                },
+                {
+                  "disabled": false,
+                  "key": "attachment_name__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided attachment name"
+                },
+                {
+                  "disabled": false,
+                  "key": "attachment_sha256__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided attachment SHA256"
+                },
+                {
+                  "disabled": false,
+                  "key": "attachment_sha256__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided attachment SHA256"
+                },
+                {
+                  "disabled": false,
+                  "key": "attack_score_verdict__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided attack score verdict"
+                },
+                {
+                  "disabled": false,
+                  "key": "attack_score_verdict__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided attack score verdict"
+                },
+                {
+                  "disabled": false,
+                  "key": "attack_surface_reduction__filter",
+                  "value": "<bool>",
+                  "description": "Filters result to only message groups that have flagged (ONLY) rules with the 'Attack surface reduction' tag"
+                },
+                {
+                  "disabled": false,
+                  "key": "canonical_id__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided canonical ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "canonical_id__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided canonical ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at__gte",
+                  "value": "<dateTime>",
+                  "description": "Inclusive start datetime filter, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only message groups that contain a message processed at or after this time will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at__lt",
+                  "value": "<dateTime>",
+                  "description": "Exclusive end datetime filter, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups that contain a message processed before this time will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "first_message_reported_at[gte]",
+                  "value": "<dateTime>",
+                  "description": "DEPRECATED: Use first_message_reported_at__gte"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_message_reported_at__gte",
+                  "value": "<dateTime>",
+                  "description": "Filters result to only message groups with a message first reported at or after the provided time. Datetime must be in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z')."
+                },
+                {
+                  "disabled": false,
+                  "key": "flagged",
+                  "value": "<bool>",
+                  "description": "Filters result to only message groups with at least one flagged message"
+                },
+                {
+                  "disabled": false,
+                  "key": "flagged_rule_id__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided flagged rule ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "flagged_rule_id__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided flagged rule ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "flagged_rule_severity__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided flagged rule severity"
+                },
+                {
+                  "disabled": false,
+                  "key": "flagged_rule_severity__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided flagged rule severity"
+                },
+                {
+                  "disabled": false,
+                  "key": "historically_flagged_rule_id__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided historically flagged rule ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "historically_flagged_rule_id__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided historically flagged rule ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "historically_flagged_rule_severity__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided historically flagged rule severity"
+                },
+                {
+                  "disabled": false,
+                  "key": "historically_flagged_rule_severity__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided historically flagged rule severity"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_message_created_at[gte]",
+                  "value": "<dateTime>",
+                  "description": "DEPRECATED: Use created_at__gte instead"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The maximum number of message groups to return. If the value exceeds the maximum, then the maximum value will be used."
+                },
+                {
+                  "disabled": false,
+                  "key": "mailbox_email__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided mailbox email"
+                },
+                {
+                  "disabled": false,
+                  "key": "mailbox_email__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided mailbox email"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The (zero-based) offset of the message groups to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "recipient_email__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided recipient email"
+                },
+                {
+                  "disabled": false,
+                  "key": "recipient_email__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided recipient email"
+                },
+                {
+                  "disabled": false,
+                  "key": "reported_as_phish_by__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided reporter"
+                },
+                {
+                  "disabled": false,
+                  "key": "reported_as_phish_by__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided reporter"
+                },
+                {
+                  "disabled": false,
+                  "key": "reviewed",
+                  "value": "<bool>",
+                  "description": "Filters result to only message groups which have or have not been reviewed"
+                },
+                {
+                  "disabled": false,
+                  "key": "sender_display_name__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided sender display name"
+                },
+                {
+                  "disabled": false,
+                  "key": "sender_display_name__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided sender display name"
+                },
+                {
+                  "disabled": false,
+                  "key": "sender_domain__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided sender domain"
+                },
+                {
+                  "disabled": false,
+                  "key": "sender_domain__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided sender domain"
+                },
+                {
+                  "disabled": false,
+                  "key": "sender_email__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided sender email"
+                },
+                {
+                  "disabled": false,
+                  "key": "sender_email__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided sender email"
+                },
+                {
+                  "disabled": false,
+                  "key": "spam__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided spam status"
+                },
+                {
+                  "disabled": false,
+                  "key": "spam__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided spam status"
+                },
+                {
+                  "disabled": false,
+                  "key": "subject__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided subject"
+                },
+                {
+                  "disabled": false,
+                  "key": "subject__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided subject"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_reported",
+                  "value": "<bool>",
+                  "description": "Filters result to only message groups with at least one reported message"
+                },
+                {
+                  "disabled": false,
+                  "key": "vendor_id__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "vendor_id__is",
+                  "value": "<string>",
+                  "description": "Filters result to only message groups with the provided vendor"
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "57ad3bc4-e4ae-41e7-8b4c-ab40ea9f3afd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attachment_name__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attachment_name__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attachment_sha256__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attachment_sha256__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attack_score_verdict__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attack_score_verdict__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attack_surface_reduction__filter",
+                      "value": "<bool>"
+                    },
+                    {
+                      "key": "canonical_id__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "canonical_id__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at__gte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at__lt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "first_message_reported_at[gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "first_message_reported_at__gte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "flagged",
+                      "value": "<bool>"
+                    },
+                    {
+                      "key": "flagged_rule_id__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flagged_rule_id__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flagged_rule_severity__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flagged_rule_severity__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "historically_flagged_rule_id__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "historically_flagged_rule_id__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "historically_flagged_rule_severity__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "historically_flagged_rule_severity__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_message_created_at[gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "mailbox_email__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mailbox_email__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "recipient_email__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "recipient_email__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reported_as_phish_by__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reported_as_phish_by__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reviewed",
+                      "value": "<bool>"
+                    },
+                    {
+                      "key": "sender_display_name__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sender_display_name__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sender_domain__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sender_domain__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sender_email__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sender_email__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spam__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spam__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subject__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subject__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_reported",
+                      "value": "<bool>"
+                    },
+                    {
+                      "key": "vendor_id__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vendor_id__is",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 819,\n  \"total\": 479,\n  \"message_groups\": [\n    {\n      \"id\": \"string\",\n      \"classification\": \"string\",\n      \"flagged_rules\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"message_links_clicked\": [\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        },\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        }\n      ],\n      \"messages\": [\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"9864c66a-e749-643c-6e08-cc9d6ef43f28\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"1967-02-17T20:25:31.897Z\",\n          \"delivered\": false,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"1982-07-09T02:12:23.247Z\",\n          \"read_at\": \"2011-01-19T09:34:25.369Z\",\n          \"replied_at\": \"2010-09-01T14:23:21.257Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"73df79b8-f12d-2489-a833-d6b266590a65\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"2026-05-17T03:49:42.019Z\",\n          \"delivered\": true,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"1974-08-21T01:31:13.749Z\",\n          \"read_at\": \"2005-05-06T18:03:22.583Z\",\n          \"replied_at\": \"1979-01-13T01:07:22.545Z\"\n        }\n      ],\n      \"organization_id\": \"string\",\n      \"review_comment\": \"string\",\n      \"review_label\": \"string\",\n      \"review_status\": \"string\",\n      \"state\": \"string\",\n      \"user_reports\": [\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"2018-07-10T10:32:01.250Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        },\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"1990-06-24T22:22:18.600Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"classification\": \"string\",\n      \"flagged_rules\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"message_links_clicked\": [\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        },\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        }\n      ],\n      \"messages\": [\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"a7a90953-7a55-7dee-3861-38856cba6c09\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"1971-12-03T03:17:50.205Z\",\n          \"delivered\": true,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"2018-07-11T21:10:00.525Z\",\n          \"read_at\": \"1971-05-17T13:45:59.384Z\",\n          \"replied_at\": \"1969-10-24T05:46:51.544Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"ac0410b1-127d-ac97-3b92-67ed1413a55e\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"1987-05-31T10:19:53.621Z\",\n          \"delivered\": false,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"1979-10-10T13:24:40.820Z\",\n          \"read_at\": \"1947-09-07T05:39:25.041Z\",\n          \"replied_at\": \"1966-11-17T15:44:50.695Z\"\n        }\n      ],\n      \"organization_id\": \"string\",\n      \"review_comment\": \"string\",\n      \"review_label\": \"string\",\n      \"review_status\": \"string\",\n      \"state\": \"string\",\n      \"user_reports\": [\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"1955-09-01T13:15:41.270Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        },\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"2006-04-17T18:46:19.085Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"stats_limit_exceeded\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ddb369ba-a161-4368-993d-0da74f1e1fec",
+          "name": "Dismiss multiple message groups",
+          "request": {
+            "name": "Dismiss multiple message groups",
+            "description": {
+              "content": "Dismiss all messages in multiple groups, including future messages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                "dismiss"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message_group_ids\": [\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "17ad9892-b47a-4428-84eb-7c0bf598177a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    "dismiss"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message_group_ids\": [\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "647d05e4-6c57-41a1-a9b5-94a3e9cb4e5f",
+          "name": "Hunt message groups",
+          "request": {
+            "name": "Hunt message groups",
+            "description": {
+              "content": "DEPRECATED: Hunt using MQL to find message groups. Please use the POST /v0/hunt-jobs endpoint instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                "hunt"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": \"<string>\",\n  \"created_at[gte]\": \"<dateTime>\",\n  \"created_at[lt]\": \"<dateTime>\",\n  \"private\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bb73b2b7-0008-4f13-8339-215ee574565b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    "hunt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": \"<string>\",\n  \"created_at[gte]\": \"<dateTime>\",\n  \"created_at[lt]\": \"<dateTime>\",\n  \"private\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task_id\": \"37adacda-f6de-b31b-2ba9-c4db9112328c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c542cf2-9d5f-499e-84ae-d6b5c9e76b3a",
+          "name": "Get results of a hunt",
+          "request": {
+            "name": "Get results of a hunt",
+            "description": {
+              "content": "DEPRECATED: Retrieve the results of a completed hunt. Please use the GET /v0/hunt-jobs/:id endpoint instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                "hunt",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Task ID"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c05faf10-5158-4a13-bba7-1d09bfe17d72",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    "hunt",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Task ID"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message_groups\": [\n    {\n      \"id\": \"string\",\n      \"classification\": \"string\",\n      \"flagged_rules\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"message_links_clicked\": [\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        },\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        }\n      ],\n      \"messages\": [\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"4ae95ea6-d167-803c-26ba-4242487d6f1f\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"1962-07-09T12:55:47.016Z\",\n          \"delivered\": false,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"2014-01-20T05:36:19.243Z\",\n          \"read_at\": \"1959-11-02T15:53:20.052Z\",\n          \"replied_at\": \"1951-01-28T05:57:06.075Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"8c79eb04-040e-14d5-1934-bde7cdb7445d\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"1995-09-25T00:04:57.500Z\",\n          \"delivered\": false,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"1989-07-16T13:59:09.456Z\",\n          \"read_at\": \"1991-06-24T09:15:19.935Z\",\n          \"replied_at\": \"1955-07-13T15:08:22.290Z\"\n        }\n      ],\n      \"organization_id\": \"string\",\n      \"review_comment\": \"string\",\n      \"review_label\": \"string\",\n      \"review_status\": \"string\",\n      \"state\": \"string\",\n      \"user_reports\": [\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"2010-10-08T16:37:35.744Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        },\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"1965-05-29T04:10:35.959Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"classification\": \"string\",\n      \"flagged_rules\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"message_links_clicked\": [\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        },\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        }\n      ],\n      \"messages\": [\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"9299025b-78b3-9240-b756-e56925f8993b\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"2006-11-15T20:04:50.839Z\",\n          \"delivered\": true,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"2025-04-15T20:37:19.710Z\",\n          \"read_at\": \"1987-02-11T00:01:13.405Z\",\n          \"replied_at\": \"1952-02-10T14:51:52.732Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"e5b4244e-6cef-d8d0-0fec-44a58d910e7a\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"2015-09-07T18:32:58.549Z\",\n          \"delivered\": false,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"2000-10-22T10:54:37.539Z\",\n          \"read_at\": \"1951-07-03T10:30:44.343Z\",\n          \"replied_at\": \"1957-12-06T00:43:04.241Z\"\n        }\n      ],\n      \"organization_id\": \"string\",\n      \"review_comment\": \"string\",\n      \"review_label\": \"string\",\n      \"review_status\": \"string\",\n      \"state\": \"string\",\n      \"user_reports\": [\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"2013-04-22T09:31:35.854Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        },\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"1957-12-12T02:21:23.991Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"task_response\": {\n    \"id\": \"2e18e766-7cc1-6b5b-872d-c5ec329088df\",\n    \"state\": \"pending\",\n    \"created_at\": \"1947-05-21T11:50:26.284Z\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47cc63ee-04f8-4fae-90d8-b50e0dba1d87",
+          "name": "Graymail multiple message groups",
+          "request": {
+            "name": "Graymail multiple message groups",
+            "description": {
+              "content": "Move to Graymail all messages in multiple groups, including future messages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                "move-to-graymail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message_group_ids\": [\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ad9e2cbb-fd7e-4c8b-aa84-181fd4970584",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    "move-to-graymail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message_group_ids\": [\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task_id\": \"37adacda-f6de-b31b-2ba9-c4db9112328c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "758940b3-273b-4332-a425-ecc159b7e4e6",
+          "name": "Quarantine multiple message groups",
+          "request": {
+            "name": "Quarantine multiple message groups",
+            "description": {
+              "content": "Quarantine all messages in multiple groups, including future messages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                "quarantine"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message_group_ids\": [\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2d92503e-a63e-44f0-adbf-5f02320b5bbe",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    "quarantine"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message_group_ids\": [\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task_id\": \"37adacda-f6de-b31b-2ba9-c4db9112328c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c7182f0-c783-4ef4-85be-af63f9a6de83",
+          "name": "Restore multiple message groups",
+          "request": {
+            "name": "Restore multiple message groups",
+            "description": {
+              "content": "Restore all previously-trashed messages in multiple groups and turn off automatic trashing of future messages in the groups. \"For an Office 365 message source, each message will be put back in the folder it was in before. For a Google Workspace message source, any applied labels (e.g. \"Trash\") will be removed from each message.\"",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                "restore"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message_group_ids\": [\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "57264c9e-e303-45c3-8294-5295a616920b",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message_group_ids\": [\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task_id\": \"37adacda-f6de-b31b-2ba9-c4db9112328c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e11e000-6b1c-4e4e-98af-50477032bae4",
+          "name": "Review message groups",
+          "request": {
+            "name": "Review message groups",
+            "description": {
+              "content": "Review, classify and take actions on message groups",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                "review"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"classification\": \"<string>\",\n  \"message_group_ids\": [\n    \"<string>\"\n  ],\n  \"action\": \"<string>\",\n  \"custom_action_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"review_comment\": \"<string>\",\n  \"share_with_sublime\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "36c1da26-b9e1-4263-bf7d-a0c068264ed7",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    "review"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"classification\": \"<string>\",\n  \"message_group_ids\": [\n    \"<string>\"\n  ],\n  \"action\": \"<string>\",\n  \"custom_action_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"review_comment\": \"<string>\",\n  \"share_with_sublime\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"actions\": [\n    \"string\",\n    \"string\"\n  ],\n  \"task_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff943bae-dc82-404e-a32b-38daf635e3a9",
+          "name": "Search message groups",
+          "request": {
+            "name": "Search message groups",
+            "description": {
+              "content": "Search all message groups",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "any",
+                  "value": "<string>",
+                  "description": "Searches every field (performs a case insensitive, OR search in all fields). Not compatible with other search fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "attachment_md5",
+                  "value": "<string>",
+                  "description": "Search for messages containing an attachment MD5 match"
+                },
+                {
+                  "disabled": false,
+                  "key": "attachment_sha1",
+                  "value": "<string>",
+                  "description": "Search for messages containing an attachment SHA1 match"
+                },
+                {
+                  "disabled": false,
+                  "key": "attachment_sha256",
+                  "value": "<string>",
+                  "description": "Search for messages containing an attachment SHA256 match"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at[gte]",
+                  "value": "<dateTime>",
+                  "description": "Inclusive start datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only message groups with a message processed at or after this time will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at[lt]",
+                  "value": "<dateTime>",
+                  "description": "Exclusive end datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups with a message processed before this time will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at[lte]",
+                  "value": "<dateTime>",
+                  "description": "Deprecated, use created_at[lt]. Exclusive end datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups with a message processed before this time will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_name",
+                  "value": "<string>",
+                  "description": "Search in attachment filenames (case insensitive wildcard match)"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_reported_as_phish_at[gte]",
+                  "value": "<dateTime>",
+                  "description": "Inclusive start datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only message groups reported at or after this time will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "first_reported_as_phish_at[lt]",
+                  "value": "<dateTime>",
+                  "description": "Exclusive end datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups reported before this time will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<string>",
+                  "description": "DEPRECATED: Use 'sender' instead. Search in the From field. (case insensitive wildcard match)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The maximum number of message groups to return. If the value exceeds the maximum, then the maximum value will be used."
+                },
+                {
+                  "disabled": false,
+                  "key": "mailbox",
+                  "value": "<string>",
+                  "description": "Search for a mailbox by email address (case insensitive, wildcard match)"
+                },
+                {
+                  "disabled": false,
+                  "key": "message_id",
+                  "value": "<string>",
+                  "description": "Search in the Message-ID header (case insensitive wildcard match)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The (zero-based) offset of the message groups to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "sender",
+                  "value": "<string>",
+                  "description": "Search in the From field (case insensitive wildcard match)"
+                },
+                {
+                  "disabled": false,
+                  "key": "states",
+                  "value": "<string>",
+                  "description": "Search for messages in any of the given states"
+                },
+                {
+                  "disabled": false,
+                  "key": "states",
+                  "value": "<string>",
+                  "description": "Search for messages in any of the given states"
+                },
+                {
+                  "disabled": false,
+                  "key": "subject",
+                  "value": "<string>",
+                  "description": "Search in the message subject (case insensitive wildcard match)"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>",
+                  "description": "Search in the To, CC, and Bcc fields (case insensitive wildcard match). If possible, use 'mailbox' and 'type' instead for better performance"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Search for messages by type"
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "abefc48a-596a-40e6-94f5-6da9c9ed5c62",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "any",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attachment_md5",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attachment_sha1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attachment_sha256",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at[gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at[lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at[lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "file_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first_reported_as_phish_at[gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "first_reported_as_phish_at[lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "mailbox",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "message_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sender",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "states",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "states",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 4568,\n  \"total\": 875,\n  \"message_groups\": [\n    {\n      \"id\": \"string\",\n      \"classification\": \"string\",\n      \"flagged_rules\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"message_links_clicked\": [\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        },\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        }\n      ],\n      \"messages\": [\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"7444f020-24c1-f50f-9761-7d6cd3a43f57\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"1953-03-01T03:11:02.761Z\",\n          \"delivered\": false,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"2014-05-30T18:23:04.562Z\",\n          \"read_at\": \"2008-09-26T01:16:55.882Z\",\n          \"replied_at\": \"1973-09-17T10:53:06.502Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"dad1f1b3-cd89-ef48-7348-ca5881ac2dec\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"1953-11-22T12:33:16.397Z\",\n          \"delivered\": true,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"1972-01-07T08:36:00.068Z\",\n          \"read_at\": \"1962-08-27T00:58:02.338Z\",\n          \"replied_at\": \"1972-09-30T14:03:25.840Z\"\n        }\n      ],\n      \"organization_id\": \"string\",\n      \"review_comment\": \"string\",\n      \"review_label\": \"string\",\n      \"review_status\": \"string\",\n      \"state\": \"string\",\n      \"user_reports\": [\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"1980-12-20T17:49:21.685Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        },\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"1975-10-13T05:49:46.621Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"classification\": \"string\",\n      \"flagged_rules\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"message_links_clicked\": [\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        },\n        {\n          \"clicks\": [\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"clicked_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_email_address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mailbox_external_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"message_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_agent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"url\": \"string\"\n        }\n      ],\n      \"messages\": [\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"1e81e75a-2b01-f359-b949-74fc5fe21b16\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"2006-10-21T00:21:27.293Z\",\n          \"delivered\": true,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"1965-08-31T06:46:52.571Z\",\n          \"read_at\": \"1984-05-16T02:32:20.737Z\",\n          \"replied_at\": \"1956-06-06T20:46:28.498Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"mailbox\": {\n            \"email\": \"string\",\n            \"id\": \"d38267b9-3d5d-c2f7-d207-9e238c21b173\",\n            \"external_id\": \"string\"\n          },\n          \"recipients\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sender\": {\n            \"email\": \"string\",\n            \"display_name\": \"string\"\n          },\n          \"subject\": \"string\",\n          \"created_at\": \"1963-12-31T11:44:51.708Z\",\n          \"delivered\": false,\n          \"forward_recipients\": [\n            \"string\",\n            \"string\"\n          ],\n          \"forwarded_at\": \"2012-02-19T09:01:09.433Z\",\n          \"read_at\": \"2011-02-19T14:46:06.031Z\",\n          \"replied_at\": \"1991-11-28T23:54:51.220Z\"\n        }\n      ],\n      \"organization_id\": \"string\",\n      \"review_comment\": \"string\",\n      \"review_label\": \"string\",\n      \"review_status\": \"string\",\n      \"state\": \"string\",\n      \"user_reports\": [\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"1957-11-22T02:14:52.390Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        },\n        {\n          \"channel\": \"string\",\n          \"reported_at\": \"2016-09-02T09:23:09.417Z\",\n          \"reported_by_message_id\": \"string\",\n          \"reporter\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"stats_limit_exceeded\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "984c3694-d521-4bd3-a880-84756191e920",
+          "name": "Get SIEM-oriented summary of flagged message groups",
+          "request": {
+            "name": "Get SIEM-oriented summary of flagged message groups",
+            "description": {
+              "content": "Returns a paginated, reduced-field summary of flagged message groups intended for SIEM ingestion. Array fields are bounded to keep payloads under typical SIEM batch limits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                "siem-summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque pagination cursor returned in the previous response's cursor field."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "The maximum number of message groups to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp__gte",
+                  "value": "<dateTime>",
+                  "description": "Inclusive lower bound on the sort timestamp (newest_created_at for type=flagged, first_reported_as_phish_at for type=reported)."
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp__lt",
+                  "value": "<dateTime>",
+                  "description": "Exclusive upper bound on the sort timestamp (newest_created_at for type=flagged, first_reported_as_phish_at for type=reported)."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "flagged",
+                  "description": "Which timestamp the endpoint sorts/filters on: 'flagged' uses newest_created_at, 'reported' uses first_reported_as_phish_at."
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2034af0a-1373-4331-88d2-ef445abc7e64",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    "siem-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "timestamp__gte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "timestamp__lt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "flagged"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cursor\": \"string\",\n  \"message_groups\": [\n    {\n      \"attachment_hashes\": {\n        \"total\": 5440,\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"attachment_names\": {\n        \"total\": 987,\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"detection_rule_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"first_seen\": \"1952-10-13T19:02:37.646Z\",\n      \"id\": \"string\",\n      \"last_seen\": \"1961-03-04T13:43:23.802Z\",\n      \"link_clicks\": {\n        \"total\": 6856,\n        \"truncated\": true,\n        \"values\": [\n          {\n            \"client_ip\": \"string\",\n            \"forward_recipients\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mailbox\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message_id\": \"string\",\n            \"recipients\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timestamp\": \"1976-06-23T14:17:54.452Z\",\n            \"type\": \"string\",\n            \"url\": \"string\",\n            \"user_agent\": \"string\"\n          },\n          {\n            \"client_ip\": \"string\",\n            \"forward_recipients\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mailbox\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message_id\": \"string\",\n            \"recipients\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timestamp\": \"1983-06-04T12:30:27.664Z\",\n            \"type\": \"string\",\n            \"url\": \"string\",\n            \"user_agent\": \"string\"\n          }\n        ]\n      },\n      \"message_count\": 509,\n      \"recipient_count\": 9560,\n      \"sender_domains\": {\n        \"total\": 6000,\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"senders\": {\n        \"total\": 2736,\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"source_ips\": {\n        \"total\": 4277,\n        \"truncated\": false,\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"subjects\": {\n        \"total\": 4964,\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    {\n      \"attachment_hashes\": {\n        \"total\": 9952,\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"attachment_names\": {\n        \"total\": 2319,\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"detection_rule_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"first_seen\": \"1950-11-10T14:07:00.995Z\",\n      \"id\": \"string\",\n      \"last_seen\": \"1995-06-10T22:03:38.618Z\",\n      \"link_clicks\": {\n        \"total\": 9262,\n        \"truncated\": true,\n        \"values\": [\n          {\n            \"client_ip\": \"string\",\n            \"forward_recipients\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mailbox\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message_id\": \"string\",\n            \"recipients\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timestamp\": \"2019-04-25T15:36:56.048Z\",\n            \"type\": \"string\",\n            \"url\": \"string\",\n            \"user_agent\": \"string\"\n          },\n          {\n            \"client_ip\": \"string\",\n            \"forward_recipients\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mailbox\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message_id\": \"string\",\n            \"recipients\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timestamp\": \"1978-08-20T23:06:38.556Z\",\n            \"type\": \"string\",\n            \"url\": \"string\",\n            \"user_agent\": \"string\"\n          }\n        ]\n      },\n      \"message_count\": 5523,\n      \"recipient_count\": 6934,\n      \"sender_domains\": {\n        \"total\": 2934,\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"senders\": {\n        \"total\": 83,\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"source_ips\": {\n        \"total\": 7818,\n        \"truncated\": true,\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"subjects\": {\n        \"total\": 3088,\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f15f949-be22-4638-843f-babcf9c61777",
+          "name": "Trash multiple message groups",
+          "request": {
+            "name": "Trash multiple message groups",
+            "description": {
+              "content": "Trash all messages in multiple groups, including future messages. For an Office 365 message source, each message will be moved to the \"Recoverable Items\" folder. For a Google Workspace message source, the \"Trash\" label will be added to each message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                "trash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message_group_ids\": [\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9ab4851d-ea8f-4ba1-83e0-be42b17aed83",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    "trash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message_group_ids\": [\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task_id\": \"37adacda-f6de-b31b-2ba9-c4db9112328c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7258aef5-d026-4686-8101-899d9a724cc9",
+          "name": "Get a single message group",
+          "request": {
+            "name": "Get a single message group",
+            "description": {
+              "content": "Retrieve the details of a single message group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sort_previews_message_id__is",
+                  "value": "<string>",
+                  "description": "Sort previews with these message IDs at the top"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_previews_message_id__is",
+                  "value": "<string>",
+                  "description": "Sort previews with these message IDs at the top"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Canonical ID of the message group to retrieve"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9b8635c-0e9c-4a64-a83b-123cc098add7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort_previews_message_id__is",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_previews_message_id__is",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Canonical ID of the message group to retrieve"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"classification\": \"string\",\n  \"flagged_rules\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"message_links_clicked\": [\n    {\n      \"clicks\": [\n        {\n          \"clicked_at\": \"1970-01-01T16:20:14.779Z\",\n          \"client_ip\": \"string\",\n          \"mailbox_display_name\": \"string\",\n          \"mailbox_email_address\": \"string\",\n          \"mailbox_external_id\": \"string\",\n          \"message_id\": \"string\",\n          \"user_agent\": \"string\"\n        },\n        {\n          \"clicked_at\": \"1984-11-13T08:10:43.896Z\",\n          \"client_ip\": \"string\",\n          \"mailbox_display_name\": \"string\",\n          \"mailbox_email_address\": \"string\",\n          \"mailbox_external_id\": \"string\",\n          \"message_id\": \"string\",\n          \"user_agent\": \"string\"\n        }\n      ],\n      \"url\": \"string\"\n    },\n    {\n      \"clicks\": [\n        {\n          \"clicked_at\": \"2000-01-16T06:15:16.623Z\",\n          \"client_ip\": \"string\",\n          \"mailbox_display_name\": \"string\",\n          \"mailbox_email_address\": \"string\",\n          \"mailbox_external_id\": \"string\",\n          \"message_id\": \"string\",\n          \"user_agent\": \"string\"\n        },\n        {\n          \"clicked_at\": \"1956-03-06T22:51:30.908Z\",\n          \"client_ip\": \"string\",\n          \"mailbox_display_name\": \"string\",\n          \"mailbox_email_address\": \"string\",\n          \"mailbox_external_id\": \"string\",\n          \"message_id\": \"string\",\n          \"user_agent\": \"string\"\n        }\n      ],\n      \"url\": \"string\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"id\": \"string\",\n      \"mailbox\": {\n        \"email\": \"string\",\n        \"id\": \"a2aea3b6-7fc3-fe0b-36e3-e64f67ebf0bb\",\n        \"external_id\": \"string\"\n      },\n      \"recipients\": [\n        {\n          \"email\": \"string\"\n        },\n        {\n          \"email\": \"string\"\n        }\n      ],\n      \"sender\": {\n        \"email\": \"string\",\n        \"display_name\": \"string\"\n      },\n      \"subject\": \"string\",\n      \"created_at\": \"1985-02-07T17:01:49.100Z\",\n      \"delivered\": false,\n      \"forward_recipients\": [\n        \"string\",\n        \"string\"\n      ],\n      \"forwarded_at\": \"1964-05-31T21:36:29.707Z\",\n      \"read_at\": \"1968-05-15T02:26:07.809Z\",\n      \"replied_at\": \"2010-07-07T02:53:56.539Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"mailbox\": {\n        \"email\": \"string\",\n        \"id\": \"ddd185dc-950b-772a-bc51-4641ca32e079\",\n        \"external_id\": \"string\"\n      },\n      \"recipients\": [\n        {\n          \"email\": \"string\"\n        },\n        {\n          \"email\": \"string\"\n        }\n      ],\n      \"sender\": {\n        \"email\": \"string\",\n        \"display_name\": \"string\"\n      },\n      \"subject\": \"string\",\n      \"created_at\": \"2005-03-22T08:01:19.907Z\",\n      \"delivered\": true,\n      \"forward_recipients\": [\n        \"string\",\n        \"string\"\n      ],\n      \"forwarded_at\": \"2005-07-15T17:13:45.217Z\",\n      \"read_at\": \"1973-03-05T14:14:38.025Z\",\n      \"replied_at\": \"1953-02-03T22:20:45.889Z\"\n    }\n  ],\n  \"organization_id\": \"string\",\n  \"review_comment\": \"string\",\n  \"review_label\": \"string\",\n  \"review_status\": \"string\",\n  \"state\": \"string\",\n  \"user_reports\": [\n    {\n      \"channel\": \"string\",\n      \"reported_at\": \"1968-10-05T00:57:14.295Z\",\n      \"reported_by_message_id\": \"string\",\n      \"reporter\": \"string\"\n    },\n    {\n      \"channel\": \"string\",\n      \"reported_at\": \"1959-08-14T19:26:50.343Z\",\n      \"reported_by_message_id\": \"string\",\n      \"reporter\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b802f11-fb93-4416-a65b-a45002cec2be",
+          "name": "Dismiss message group",
+          "request": {
+            "name": "Dismiss message group",
+            "description": {
+              "content": "Dismiss all messages in a group, including future messages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                ":id",
+                "dismiss"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Canonical ID of the message group to dismiss"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7869bb7c-c770-4010-9f07-0632110bba0a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    ":id",
+                    "dismiss"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Canonical ID of the message group to dismiss"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97006adc-fb30-4dc2-9ed3-9409db00fdb0",
+          "name": "Quarantine message group",
+          "request": {
+            "name": "Quarantine message group",
+            "description": {
+              "content": "Quarantine all messages in a group, including future messages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                ":id",
+                "quarantine"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Canonical ID of the message group to quarantine"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "db569eae-0d11-47be-92ac-43e733ac1a35",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    ":id",
+                    "quarantine"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Canonical ID of the message group to quarantine"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task_id\": \"37adacda-f6de-b31b-2ba9-c4db9112328c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f6228e6-ea5f-499b-b5fc-6dd9110a8b0d",
+          "name": "Restore message group",
+          "request": {
+            "name": "Restore message group",
+            "description": {
+              "content": "Restore all previously-trashed or quarantined messages in a group and turn off automatic trashing/quarantining of future messages in the group. \"For an Office 365 message source, each message will be put back in the folder it was in before. For a Google Workspace message source, any applied labels (e.g. \"Trash\") will be removed from each message.\"",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                ":id",
+                "restore"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Canonical ID of the message group to restore"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "499a8da7-77fd-4172-90de-8254a6cca24d",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    ":id",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Canonical ID of the message group to restore"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task_id\": \"37adacda-f6de-b31b-2ba9-c4db9112328c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf101d3c-a922-4a82-acac-81c92e189cc5",
+          "name": "Share a message with Sublime",
+          "request": {
+            "name": "Share a message with Sublime",
+            "description": {
+              "content": "Share a message with the Sublime team",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                ":id",
+                "share-with-sublime"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Canonical ID of the message group to share"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"destination\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f81f08c6-e613-4537-9152-8cf782d4a185",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    ":id",
+                    "share-with-sublime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Canonical ID of the message group to share"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"destination\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task_id\": \"37adacda-f6de-b31b-2ba9-c4db9112328c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1f5e2da-6fa1-43e5-8ecc-071c37def4eb",
+          "name": "Trash message group",
+          "request": {
+            "name": "Trash message group",
+            "description": {
+              "content": "Trash all messages in a group, including future messages. For an Office 365 message source, each message will be moved to the \"Recoverable Items\" folder. For a Google Workspace message source, the \"Trash\" label will be added to each message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "message-groups",
+                ":id",
+                "trash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Canonical ID of the message group to trash"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fb6988d0-ad1f-4a98-b70a-d6fbd816fbda",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "message-groups",
+                    ":id",
+                    "trash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Canonical ID of the message group to trash"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"classification\": \"<string>\",\n  \"report_label\": \"<string>\",\n  \"review_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task_id\": \"37adacda-f6de-b31b-2ba9-c4db9112328c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of http,https)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "Base URL of your Sublime deployment",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "platform.sublime.security",
+      "key": "server"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{server}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "17c31d0e-0c73-4114-8178-86ad83beb4d5",
+    "name": "Multi-Tenancy API (BETA) BinExplode Message Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: support@sublime.security",
+      "type": "text/plain"
+    }
+  }
+}

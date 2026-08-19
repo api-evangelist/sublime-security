@@ -1,0 +1,312 @@
+{
+  "item": [
+    {
+      "id": "f2f85ef7-da1a-4e36-b6c7-c3795535f4fb",
+      "name": "BinExplode",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "197d1785-864b-4c05-8380-29c6e751f535",
+          "name": "Upload a binary to be binexploded",
+          "request": {
+            "name": "Upload a binary to be binexploded",
+            "description": {
+              "content": "Starts a task to explode a binary. Returns a task ID to track and ultimately retrieve results. Results expire after 1 hour. Max original file size of 37 mb (base 64 encoded 49 mb)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "binexplode",
+                "scan"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"file_contents\": \"<string>\",\n  \"file_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "59eb6883-eb8c-4822-82d7-ad2b8bb29b19",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "binexplode",
+                    "scan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"file_contents\": \"<string>\",\n  \"file_name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task_id\": \"5b56e70a-7474-2fa1-daae-1db59199c21a\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82ab8f90-31ee-4a57-a92b-4d37d06336d1",
+          "name": "Get results of a binexplode scan",
+          "request": {
+            "name": "Get results of a binexplode scan",
+            "description": {
+              "content": "Retrieve the results of a completed binexplode scan.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "binexplode",
+                "scan",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Task ID"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80242651-986d-4323-ba94-af096ab58494",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "binexplode",
+                    "scan",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Task ID"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"depth\": 9706,\n      \"file_extension\": \"string\",\n      \"file_name\": \"string\",\n      \"flavors\": {\n        \"external\": [\n          \"string\",\n          \"string\"\n        ],\n        \"mime\": \"string\",\n        \"yara\": [\n          \"rar_file\",\n          \"mhtml_file\"\n        ]\n      },\n      \"node_id\": \"string\",\n      \"parent_node_id\": \"string\",\n      \"scan\": {\n        \"bzip2\": {\n          \"size\": 8280\n        },\n        \"docx\": {\n          \"author\": \"string\",\n          \"category\": \"string\",\n          \"comments\": \"string\",\n          \"created\": \"1999-06-22T16:26:28.228Z\",\n          \"font_colors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"image_count\": 4104,\n          \"keywords\": \"string\",\n          \"last_printed\": \"1997-11-02T12:25:22.909Z\",\n          \"modified\": \"1961-07-09T03:06:37.274Z\",\n          \"revision\": 3574,\n          \"subject\": \"string\",\n          \"title\": \"string\",\n          \"word_count\": 363\n        },\n        \"encrypted_doc\": {\n          \"cracked_password\": \"string\"\n        },\n        \"encrypted_zip\": {\n          \"cracked_password\": \"string\",\n          \"total_extracted\": 5703,\n          \"total_files\": 1028\n        },\n        \"entropy\": {\n          \"entropy\": 911.6618068876014\n        },\n        \"exiftool\": {\n          \"command_line_arguments\": \"string\",\n          \"create_date\": \"1957-07-16T10:42:26.792Z\",\n          \"creator\": \"string\",\n          \"exif_tool_version\": 3717.9827024811675,\n          \"fields\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"file_permissions\": \"string\",\n          \"file_type\": \"string\",\n          \"file_type_extension\": \"string\",\n          \"flags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"hot_key\": \"string\",\n          \"image_height\": 4548,\n          \"image_width\": 3308,\n          \"linearized\": \"string\",\n          \"local_base_path\": \"string\",\n          \"modify_date\": \"1983-12-13T19:45:45.447Z\",\n          \"page_count\": 4278,\n          \"pdf_version\": \"string\",\n          \"producer\": \"string\",\n          \"relative_path\": \"string\",\n          \"run_window\": \"string\",\n          \"source_file\": \"string\",\n          \"target_file_dos_name\": \"string\",\n          \"title\": \"string\",\n          \"zip_bit_flag\": 8958,\n          \"zip_compressed_size\": 9427,\n          \"zip_file_name\": \"string\",\n          \"zip_modify_date\": \"1958-05-01T22:03:15.732Z\",\n          \"zip_uncompressed_size\": 8688\n        },\n        \"gif\": {\n          \"trailer_index\": 7529\n        },\n        \"gzip\": {\n          \"size\": 3810\n        },\n        \"hash\": {\n          \"md5\": \"string\",\n          \"sha1\": \"string\",\n          \"sha256\": \"string\",\n          \"ssdeep\": \"string\"\n        },\n        \"html\": {\n          \"hyperlinks\": [\n            \"string\",\n            \"string\"\n          ],\n          \"scripts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"spans\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"title\": \"string\",\n          \"total_extracted\": 4282\n        },\n        \"ics\": {\n          \"calendars\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"flags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"parse_error\": \"string\",\n          \"total\": {\n            \"alarms\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attachments\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attendees\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"components\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"events\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"extracted_files\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"journals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"organizers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timezones\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"todos\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"urls\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"total_extracted\": 4534,\n          \"total_files\": 6502\n        },\n        \"javascript\": {\n          \"identifiers\": [\n            \"string\",\n            \"string\"\n          ],\n          \"keywords\": [\n            \"string\",\n            \"string\"\n          ],\n          \"regular_expressions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"strings\": [\n            \"string\",\n            \"string\"\n          ],\n          \"tokens\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"jpeg\": {\n          \"trailer_index\": 8848\n        },\n        \"libarchive\": {\n          \"total_extracted\": 7067,\n          \"total_files\": 7955\n        },\n        \"lnk\": {\n          \"MAC\": \"string\",\n          \"command_line_arguments\": \"string\",\n          \"drive_serial_number\": \"string\",\n          \"drive_type\": \"string\",\n          \"local_base_path\": \"string\",\n          \"machine_id\": \"string\",\n          \"relative_path\": \"string\",\n          \"volume_label\": \"string\",\n          \"working_dir\": \"string\"\n        },\n        \"macho\": {\n          \"commands\": [\n            \"string\",\n            \"string\"\n          ],\n          \"has_code_signature\": false,\n          \"header\": {\n            \"cpu\": {\n              \"primary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sub\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"file\": \"EXECUTE\",\n            \"flags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"load_dylinker_name\": \"string\",\n          \"nx\": false,\n          \"pie\": false,\n          \"source_version\": \"string\",\n          \"symbols\": {\n            \"imported\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"libraries\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"total_binaries\": 7913,\n          \"total_commands\": 689,\n          \"total_libraries\": 2305,\n          \"total_relocations\": 5056,\n          \"total_sections\": 4571,\n          \"total_segments\": 7207,\n          \"total_symbols\": 1346\n        },\n        \"ocr\": {\n          \"raw\": \"string\",\n          \"text\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"ole\": {\n          \"total_extracted\": 4174\n        },\n        \"pdf\": {\n          \"invalid_urls\": [\n            \"string\",\n            \"string\"\n          ],\n          \"total_extracted\": 3460,\n          \"urls\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"pdf_obj_hash\": {\n          \"hash_string\": \"string\",\n          \"object_hash\": \"string\"\n        },\n        \"pptx\": {\n          \"author\": \"string\",\n          \"category\": \"string\",\n          \"comments\": \"string\",\n          \"created\": \"1975-03-16T08:11:09.208Z\",\n          \"image_count\": 3607,\n          \"invalid_urls\": [\n            \"string\",\n            \"string\"\n          ],\n          \"keywords\": \"string\",\n          \"last_modified_by\": \"string\",\n          \"last_printed\": \"1996-01-25T14:35:38.149Z\",\n          \"modified\": \"1965-08-12T17:06:02.366Z\",\n          \"revision\": 3568,\n          \"slide_count\": 4907,\n          \"subject\": \"string\",\n          \"title\": \"string\",\n          \"urls\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"word_count\": 1446\n        },\n        \"qr\": {\n          \"data\": \"string\",\n          \"type\": \"mobile\",\n          \"url\": {\n            \"url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"domain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fragment\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"password\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"port\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"query_params\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"query_params_decoded\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rewrite\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scheme\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"username\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"rar\": {\n          \"host_os\": \"string\",\n          \"total_extracted\": 4954,\n          \"total_files\": 1409\n        },\n        \"rtf\": {\n          \"total_extracted\": 7239\n        },\n        \"strings\": {\n          \"raw\": \"string\",\n          \"strings\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"tar\": {\n          \"total_extracted\": 3692,\n          \"total_files\": 369\n        },\n        \"url\": {\n          \"invalid_urls\": [\n            \"string\",\n            \"string\"\n          ],\n          \"urls\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"vba\": {\n          \"auto_exec\": [\n            \"string\",\n            \"string\"\n          ],\n          \"base64\": [\n            \"string\",\n            \"string\"\n          ],\n          \"dridex\": [\n            \"string\",\n            \"string\"\n          ],\n          \"hex\": [\n            \"string\",\n            \"string\"\n          ],\n          \"ioc\": [\n            \"string\",\n            \"string\"\n          ],\n          \"suspicious\": [\n            \"string\",\n            \"string\"\n          ],\n          \"total_extracted\": 1222,\n          \"total_files\": 9105,\n          \"vba_obfuscated\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"xml\": {\n          \"doc_type\": \"string\",\n          \"namespaces\": [\n            \"string\",\n            \"string\"\n          ],\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"total_extracted\": 1491,\n          \"version\": \"string\"\n        },\n        \"yara\": {\n          \"flags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"matches\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"zip\": {\n          \"all_paths\": [\n            \"string\",\n            \"string\"\n          ],\n          \"attempted_files\": [\n            \"string\",\n            \"string\"\n          ],\n          \"encrypted\": false,\n          \"total_extracted\": 6753,\n          \"total_files\": 6803\n        },\n        \"zlib\": {\n          \"size\": 8242\n        }\n      },\n      \"size\": 9026,\n      \"source\": \"string\"\n    },\n    {\n      \"depth\": 8980,\n      \"file_extension\": \"string\",\n      \"file_name\": \"string\",\n      \"flavors\": {\n        \"external\": [\n          \"string\",\n          \"string\"\n        ],\n        \"mime\": \"string\",\n        \"yara\": [\n          \"mhtml_file\",\n          \"poi_hpbf_file\"\n        ]\n      },\n      \"node_id\": \"string\",\n      \"parent_node_id\": \"string\",\n      \"scan\": {\n        \"bzip2\": {\n          \"size\": 8965\n        },\n        \"docx\": {\n          \"author\": \"string\",\n          \"category\": \"string\",\n          \"comments\": \"string\",\n          \"created\": \"1984-06-30T06:44:18.134Z\",\n          \"font_colors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"image_count\": 5915,\n          \"keywords\": \"string\",\n          \"last_printed\": \"2008-06-14T04:47:22.538Z\",\n          \"modified\": \"1984-01-06T02:56:39.306Z\",\n          \"revision\": 9043,\n          \"subject\": \"string\",\n          \"title\": \"string\",\n          \"word_count\": 6400\n        },\n        \"encrypted_doc\": {\n          \"cracked_password\": \"string\"\n        },\n        \"encrypted_zip\": {\n          \"cracked_password\": \"string\",\n          \"total_extracted\": 7628,\n          \"total_files\": 2712\n        },\n        \"entropy\": {\n          \"entropy\": 1616.835599389025\n        },\n        \"exiftool\": {\n          \"command_line_arguments\": \"string\",\n          \"create_date\": \"1999-10-16T19:21:02.926Z\",\n          \"creator\": \"string\",\n          \"exif_tool_version\": 4762.38433108121,\n          \"fields\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"file_permissions\": \"string\",\n          \"file_type\": \"string\",\n          \"file_type_extension\": \"string\",\n          \"flags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"hot_key\": \"string\",\n          \"image_height\": 922,\n          \"image_width\": 6447,\n          \"linearized\": \"string\",\n          \"local_base_path\": \"string\",\n          \"modify_date\": \"1997-10-19T04:07:06.994Z\",\n          \"page_count\": 1235,\n          \"pdf_version\": \"string\",\n          \"producer\": \"string\",\n          \"relative_path\": \"string\",\n          \"run_window\": \"string\",\n          \"source_file\": \"string\",\n          \"target_file_dos_name\": \"string\",\n          \"title\": \"string\",\n          \"zip_bit_flag\": 2894,\n          \"zip_compressed_size\": 3464,\n          \"zip_file_name\": \"string\",\n          \"zip_modify_date\": \"1956-10-12T17:56:44.420Z\",\n          \"zip_uncompressed_size\": 5458\n        },\n        \"gif\": {\n          \"trailer_index\": 8059\n        },\n        \"gzip\": {\n          \"size\": 6928\n        },\n        \"hash\": {\n          \"md5\": \"string\",\n          \"sha1\": \"string\",\n          \"sha256\": \"string\",\n          \"ssdeep\": \"string\"\n        },\n        \"html\": {\n          \"hyperlinks\": [\n            \"string\",\n            \"string\"\n          ],\n          \"scripts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"spans\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"title\": \"string\",\n          \"total_extracted\": 3378\n        },\n        \"ics\": {\n          \"calendars\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"flags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"parse_error\": \"string\",\n          \"total\": {\n            \"alarms\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attachments\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attendees\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"components\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"events\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"extracted_files\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"journals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"organizers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timezones\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"todos\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"urls\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"total_extracted\": 2075,\n          \"total_files\": 4526\n        },\n        \"javascript\": {\n          \"identifiers\": [\n            \"string\",\n            \"string\"\n          ],\n          \"keywords\": [\n            \"string\",\n            \"string\"\n          ],\n          \"regular_expressions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"strings\": [\n            \"string\",\n            \"string\"\n          ],\n          \"tokens\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"jpeg\": {\n          \"trailer_index\": 8804\n        },\n        \"libarchive\": {\n          \"total_extracted\": 9629,\n          \"total_files\": 9649\n        },\n        \"lnk\": {\n          \"MAC\": \"string\",\n          \"command_line_arguments\": \"string\",\n          \"drive_serial_number\": \"string\",\n          \"drive_type\": \"string\",\n          \"local_base_path\": \"string\",\n          \"machine_id\": \"string\",\n          \"relative_path\": \"string\",\n          \"volume_label\": \"string\",\n          \"working_dir\": \"string\"\n        },\n        \"macho\": {\n          \"commands\": [\n            \"string\",\n            \"string\"\n          ],\n          \"has_code_signature\": false,\n          \"header\": {\n            \"cpu\": {\n              \"primary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sub\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"file\": \"FVMLIB\",\n            \"flags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"load_dylinker_name\": \"string\",\n          \"nx\": true,\n          \"pie\": false,\n          \"source_version\": \"string\",\n          \"symbols\": {\n            \"imported\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"libraries\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"total_binaries\": 7285,\n          \"total_commands\": 9286,\n          \"total_libraries\": 2973,\n          \"total_relocations\": 696,\n          \"total_sections\": 9231,\n          \"total_segments\": 7896,\n          \"total_symbols\": 1349\n        },\n        \"ocr\": {\n          \"raw\": \"string\",\n          \"text\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"ole\": {\n          \"total_extracted\": 7712\n        },\n        \"pdf\": {\n          \"invalid_urls\": [\n            \"string\",\n            \"string\"\n          ],\n          \"total_extracted\": 2557,\n          \"urls\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"pdf_obj_hash\": {\n          \"hash_string\": \"string\",\n          \"object_hash\": \"string\"\n        },\n        \"pptx\": {\n          \"author\": \"string\",\n          \"category\": \"string\",\n          \"comments\": \"string\",\n          \"created\": \"1986-01-09T17:45:12.920Z\",\n          \"image_count\": 1804,\n          \"invalid_urls\": [\n            \"string\",\n            \"string\"\n          ],\n          \"keywords\": \"string\",\n          \"last_modified_by\": \"string\",\n          \"last_printed\": \"1965-08-27T10:32:06.788Z\",\n          \"modified\": \"1986-09-01T14:53:22.095Z\",\n          \"revision\": 8942,\n          \"slide_count\": 2471,\n          \"subject\": \"string\",\n          \"title\": \"string\",\n          \"urls\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"word_count\": 9367\n        },\n        \"qr\": {\n          \"data\": \"string\",\n          \"type\": \"undefined\",\n          \"url\": {\n            \"url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"domain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fragment\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"password\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"port\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"query_params\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"query_params_decoded\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rewrite\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scheme\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"username\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"rar\": {\n          \"host_os\": \"string\",\n          \"total_extracted\": 3261,\n          \"total_files\": 1957\n        },\n        \"rtf\": {\n          \"total_extracted\": 2223\n        },\n        \"strings\": {\n          \"raw\": \"string\",\n          \"strings\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"tar\": {\n          \"total_extracted\": 812,\n          \"total_files\": 9264\n        },\n        \"url\": {\n          \"invalid_urls\": [\n            \"string\",\n            \"string\"\n          ],\n          \"urls\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"vba\": {\n          \"auto_exec\": [\n            \"string\",\n            \"string\"\n          ],\n          \"base64\": [\n            \"string\",\n            \"string\"\n          ],\n          \"dridex\": [\n            \"string\",\n            \"string\"\n          ],\n          \"hex\": [\n            \"string\",\n            \"string\"\n          ],\n          \"ioc\": [\n            \"string\",\n            \"string\"\n          ],\n          \"suspicious\": [\n            \"string\",\n            \"string\"\n          ],\n          \"total_extracted\": 5153,\n          \"total_files\": 9714,\n          \"vba_obfuscated\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"xml\": {\n          \"doc_type\": \"string\",\n          \"namespaces\": [\n            \"string\",\n            \"string\"\n          ],\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"total_extracted\": 3635,\n          \"version\": \"string\"\n        },\n        \"yara\": {\n          \"flags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"matches\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"zip\": {\n          \"all_paths\": [\n            \"string\",\n            \"string\"\n          ],\n          \"attempted_files\": [\n            \"string\",\n            \"string\"\n          ],\n          \"encrypted\": false,\n          \"total_extracted\": 3677,\n          \"total_files\": 1766\n        },\n        \"zlib\": {\n          \"size\": 3272\n        }\n      },\n      \"size\": 4376,\n      \"source\": \"string\"\n    }\n  ],\n  \"task_response\": {\n    \"id\": \"63d88cb0-0940-2031-ad28-603f69ca8aef\",\n    \"state\": \"pending\",\n    \"created_at\": \"1965-07-16T00:58:01.634Z\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of http,https)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "Base URL of your Sublime deployment",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "platform.sublime.security",
+      "key": "server"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{server}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "84e8f243-8b88-44c9-82f2-8afa2acab843",
+    "name": "Multi-Tenancy API (BETA) BinExplode API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: support@sublime.security",
+      "type": "text/plain"
+    }
+  }
+}

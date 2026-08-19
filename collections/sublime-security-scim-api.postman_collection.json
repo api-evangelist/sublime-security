@@ -1,0 +1,1536 @@
+{
+  "item": [
+    {
+      "id": "365b4259-4e11-4ee2-94da-297ba4235a92",
+      "name": "SCIM",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "48d262d8-788b-4d54-8dfc-e4bdc352a5ae",
+          "name": "List SCIM resource types",
+          "request": {
+            "name": "List SCIM resource types",
+            "description": {
+              "content": "List SCIM resource types",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "scim",
+                "ResourceTypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b6a710c-c706-42dc-bb62-b16ded6b1929",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "scim",
+                    "ResourceTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Resources\": [\n    {\n      \"description\": \"string\",\n      \"endpoint\": \"string\",\n      \"id\": \"string\",\n      \"meta\": {\n        \"created\": \"string\",\n        \"lastModified\": \"string\",\n        \"location\": \"string\",\n        \"resourceType\": \"string\"\n      },\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"schemaExtensions\": [\n        {\n          \"required\": true,\n          \"schema\": \"string\"\n        },\n        {\n          \"required\": true,\n          \"schema\": \"string\"\n        }\n      ],\n      \"schemas\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"description\": \"string\",\n      \"endpoint\": \"string\",\n      \"id\": \"string\",\n      \"meta\": {\n        \"created\": \"string\",\n        \"lastModified\": \"string\",\n        \"location\": \"string\",\n        \"resourceType\": \"string\"\n      },\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"schemaExtensions\": [\n        {\n          \"required\": false,\n          \"schema\": \"string\"\n        },\n        {\n          \"required\": true,\n          \"schema\": \"string\"\n        }\n      ],\n      \"schemas\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"itemsPerPage\": 2923,\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"startIndex\": 5699,\n  \"totalResults\": 3066\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59fe6235-5ce3-48a9-ad9c-4429bf38f29c",
+          "name": "Get SCIM resource type",
+          "request": {
+            "name": "Get SCIM resource type",
+            "description": {
+              "content": "Get SCIM resource type",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "scim",
+                "ResourceTypes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the resource type"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a499627f-57ad-4ef6-b984-782fd6ab9bef",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "scim",
+                    "ResourceTypes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the resource type"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"endpoint\": \"string\",\n  \"id\": \"string\",\n  \"meta\": {\n    \"created\": \"string\",\n    \"lastModified\": \"string\",\n    \"location\": \"string\",\n    \"resourceType\": \"string\"\n  },\n  \"name\": \"string\",\n  \"schema\": \"string\",\n  \"schemaExtensions\": [\n    {\n      \"required\": true,\n      \"schema\": \"string\"\n    },\n    {\n      \"required\": true,\n      \"schema\": \"string\"\n    }\n  ],\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2af10e2d-6510-4588-92ce-b2f82d95f457",
+          "name": "List SCIM schemas",
+          "request": {
+            "name": "List SCIM schemas",
+            "description": {
+              "content": "List SCIM schemas",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "scim",
+                "Schemas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76997c2c-805e-4c19-8142-c4bda84ecbf5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "scim",
+                    "Schemas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Resources\": [\n    {\n      \"attributes\": [\n        {\n          \"canonicalValues\": [\n            \"string\",\n            \"string\"\n          ],\n          \"caseExact\": false,\n          \"description\": \"string\",\n          \"multiValued\": true,\n          \"mutability\": \"string\",\n          \"name\": \"string\",\n          \"required\": false,\n          \"returned\": \"string\",\n          \"subAttributes\": [\n            {\n              \"caseExact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mutability\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"required\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"returned\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uniqueness\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"caseExact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mutability\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"required\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"returned\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uniqueness\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"type\": \"string\",\n          \"uniqueness\": \"string\"\n        },\n        {\n          \"canonicalValues\": [\n            \"string\",\n            \"string\"\n          ],\n          \"caseExact\": false,\n          \"description\": \"string\",\n          \"multiValued\": false,\n          \"mutability\": \"string\",\n          \"name\": \"string\",\n          \"required\": false,\n          \"returned\": \"string\",\n          \"subAttributes\": [\n            {\n              \"caseExact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mutability\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"required\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"returned\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uniqueness\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"caseExact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mutability\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"required\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"returned\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uniqueness\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"type\": \"string\",\n          \"uniqueness\": \"string\"\n        }\n      ],\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"meta\": {\n        \"created\": \"string\",\n        \"lastModified\": \"string\",\n        \"location\": \"string\",\n        \"resourceType\": \"string\"\n      },\n      \"name\": \"string\",\n      \"schemas\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"attributes\": [\n        {\n          \"canonicalValues\": [\n            \"string\",\n            \"string\"\n          ],\n          \"caseExact\": false,\n          \"description\": \"string\",\n          \"multiValued\": false,\n          \"mutability\": \"string\",\n          \"name\": \"string\",\n          \"required\": false,\n          \"returned\": \"string\",\n          \"subAttributes\": [\n            {\n              \"caseExact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mutability\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"required\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"returned\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uniqueness\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"caseExact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mutability\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"required\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"returned\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uniqueness\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"type\": \"string\",\n          \"uniqueness\": \"string\"\n        },\n        {\n          \"canonicalValues\": [\n            \"string\",\n            \"string\"\n          ],\n          \"caseExact\": true,\n          \"description\": \"string\",\n          \"multiValued\": false,\n          \"mutability\": \"string\",\n          \"name\": \"string\",\n          \"required\": true,\n          \"returned\": \"string\",\n          \"subAttributes\": [\n            {\n              \"caseExact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mutability\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"required\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"returned\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uniqueness\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"caseExact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"mutability\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"required\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"returned\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uniqueness\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"type\": \"string\",\n          \"uniqueness\": \"string\"\n        }\n      ],\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"meta\": {\n        \"created\": \"string\",\n        \"lastModified\": \"string\",\n        \"location\": \"string\",\n        \"resourceType\": \"string\"\n      },\n      \"name\": \"string\",\n      \"schemas\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"itemsPerPage\": 1112,\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"startIndex\": 6639,\n  \"totalResults\": 6282\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f65a2e78-1895-4943-880e-36c7af56f598",
+          "name": "Get SCIM schema",
+          "request": {
+            "name": "Get SCIM schema",
+            "description": {
+              "content": "Get SCIM schema",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "scim",
+                "Schemas",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Schema ID"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "11672799-8011-488c-9c45-8eb8181af386",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "scim",
+                    "Schemas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Schema ID"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"attributes\": [\n    {\n      \"canonicalValues\": [\n        \"string\",\n        \"string\"\n      ],\n      \"caseExact\": true,\n      \"description\": \"string\",\n      \"multiValued\": false,\n      \"mutability\": \"string\",\n      \"name\": \"string\",\n      \"required\": true,\n      \"returned\": \"string\",\n      \"subAttributes\": [\n        {\n          \"caseExact\": true,\n          \"description\": \"string\",\n          \"mutability\": \"string\",\n          \"name\": \"string\",\n          \"required\": true,\n          \"returned\": \"string\",\n          \"type\": \"string\",\n          \"uniqueness\": \"string\"\n        },\n        {\n          \"caseExact\": false,\n          \"description\": \"string\",\n          \"mutability\": \"string\",\n          \"name\": \"string\",\n          \"required\": true,\n          \"returned\": \"string\",\n          \"type\": \"string\",\n          \"uniqueness\": \"string\"\n        }\n      ],\n      \"type\": \"string\",\n      \"uniqueness\": \"string\"\n    },\n    {\n      \"canonicalValues\": [\n        \"string\",\n        \"string\"\n      ],\n      \"caseExact\": false,\n      \"description\": \"string\",\n      \"multiValued\": true,\n      \"mutability\": \"string\",\n      \"name\": \"string\",\n      \"required\": true,\n      \"returned\": \"string\",\n      \"subAttributes\": [\n        {\n          \"caseExact\": false,\n          \"description\": \"string\",\n          \"mutability\": \"string\",\n          \"name\": \"string\",\n          \"required\": true,\n          \"returned\": \"string\",\n          \"type\": \"string\",\n          \"uniqueness\": \"string\"\n        },\n        {\n          \"caseExact\": false,\n          \"description\": \"string\",\n          \"mutability\": \"string\",\n          \"name\": \"string\",\n          \"required\": true,\n          \"returned\": \"string\",\n          \"type\": \"string\",\n          \"uniqueness\": \"string\"\n        }\n      ],\n      \"type\": \"string\",\n      \"uniqueness\": \"string\"\n    }\n  ],\n  \"description\": \"string\",\n  \"id\": \"string\",\n  \"meta\": {\n    \"created\": \"string\",\n    \"lastModified\": \"string\",\n    \"location\": \"string\",\n    \"resourceType\": \"string\"\n  },\n  \"name\": \"string\",\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21b481db-4883-4e0b-aedb-afb48e2ab9c6",
+          "name": "Get SCIM service provider configuration",
+          "request": {
+            "name": "Get SCIM service provider configuration",
+            "description": {
+              "content": "Get SCIM service provider configuration",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "scim",
+                "ServiceProviderConfig"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9513ee92-030a-46d6-997f-e60a79b019ba",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "scim",
+                    "ServiceProviderConfig"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authenticationSchemes\": [\n    {\n      \"description\": \"string\",\n      \"name\": \"string\",\n      \"primary\": false,\n      \"type\": \"string\"\n    },\n    {\n      \"description\": \"string\",\n      \"name\": \"string\",\n      \"primary\": true,\n      \"type\": \"string\"\n    }\n  ],\n  \"bulk\": {\n    \"maxOperations\": 24,\n    \"maxPayloadSize\": 6098,\n    \"supported\": false\n  },\n  \"changePassword\": {\n    \"supported\": false\n  },\n  \"documentationURI\": \"string\",\n  \"etag\": {\n    \"supported\": true\n  },\n  \"filter\": {\n    \"maxResults\": 8161,\n    \"supported\": true\n  },\n  \"meta\": {\n    \"created\": \"string\",\n    \"lastModified\": \"string\",\n    \"location\": \"string\",\n    \"resourceType\": \"string\"\n  },\n  \"patch\": {\n    \"supported\": true\n  },\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"sort\": {\n    \"supported\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92325f2a-f309-4db6-92e0-f9cffd347a2b",
+          "name": "List SCIM users",
+          "request": {
+            "name": "List SCIM users",
+            "description": {
+              "content": "List SCIM users",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "scim",
+                "Users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "100",
+                  "description": "Maximum number of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Optional filter like 'userName eq \"bob@example.com\"'"
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "1",
+                  "description": "1-indexed starting index"
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26a17baf-8e93-4b8c-b80f-c5427585a0a5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "count",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Resources\": [\n    {\n      \"name\": {\n        \"familyName\": \"string\",\n        \"givenName\": \"string\"\n      },\n      \"userName\": \"string\",\n      \"active\": true,\n      \"emails\": [\n        {\n          \"primary\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"primary\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"externalId\": \"string\",\n      \"id\": \"string\",\n      \"meta\": {\n        \"created\": \"string\",\n        \"lastModified\": \"string\",\n        \"location\": \"string\",\n        \"resourceType\": \"string\"\n      },\n      \"schemas\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sublimeRole\": \"string\",\n      \"urn:ietf:params:scim:schemas:extension:sublime:2.0:User\": {\n        \"sublimeRole\": \"string\"\n      }\n    },\n    {\n      \"name\": {\n        \"familyName\": \"string\",\n        \"givenName\": \"string\"\n      },\n      \"userName\": \"string\",\n      \"active\": true,\n      \"emails\": [\n        {\n          \"primary\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"primary\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"externalId\": \"string\",\n      \"id\": \"string\",\n      \"meta\": {\n        \"created\": \"string\",\n        \"lastModified\": \"string\",\n        \"location\": \"string\",\n        \"resourceType\": \"string\"\n      },\n      \"schemas\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sublimeRole\": \"string\",\n      \"urn:ietf:params:scim:schemas:extension:sublime:2.0:User\": {\n        \"sublimeRole\": \"string\"\n      }\n    }\n  ],\n  \"itemsPerPage\": 7047,\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"startIndex\": 3471,\n  \"totalResults\": 1671\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9fc724d9-6220-4ec5-9fc3-ce9018d10540",
+          "name": "Create SCIM user",
+          "request": {
+            "name": "Create SCIM user",
+            "description": {
+              "content": "Create SCIM user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "scim",
+                "Users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\"\n  },\n  \"userName\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"emails\": [\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalId\": \"<string>\",\n  \"id\": \"<string>\",\n  \"meta\": {\n    \"created\": \"<string>\",\n    \"lastModified\": \"<string>\",\n    \"location\": \"<string>\",\n    \"resourceType\": \"<string>\"\n  },\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sublimeRole\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:sublime:2.0:User\": {\n    \"sublimeRole\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ec13a4c-043e-430c-9ddc-19f10cd4df1b",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\"\n  },\n  \"userName\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"emails\": [\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalId\": \"<string>\",\n  \"id\": \"<string>\",\n  \"meta\": {\n    \"created\": \"<string>\",\n    \"lastModified\": \"<string>\",\n    \"location\": \"<string>\",\n    \"resourceType\": \"<string>\"\n  },\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sublimeRole\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:sublime:2.0:User\": {\n    \"sublimeRole\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\"\n  },\n  \"userName\": \"string\",\n  \"active\": false,\n  \"emails\": [\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalId\": \"string\",\n  \"id\": \"string\",\n  \"meta\": {\n    \"created\": \"<string>\",\n    \"lastModified\": \"<string>\",\n    \"location\": \"<string>\",\n    \"resourceType\": \"<string>\"\n  },\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"sublimeRole\": \"string\",\n  \"urn:ietf:params:scim:schemas:extension:sublime:2.0:User\": {\n    \"sublimeRole\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa6900cb-b3d2-4532-bf16-2adb176f87c2",
+          "name": "Delete SCIM user",
+          "request": {
+            "name": "Delete SCIM user",
+            "description": {
+              "content": "Delete SCIM user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "scim",
+                "Users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sublime ID of the user"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92c6db21-a954-4d3d-8198-0f1e2ac0bea4",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sublime ID of the user"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b511b6a7-2cbb-47d6-a606-cc838700cd0c",
+          "name": "Get SCIM user",
+          "request": {
+            "name": "Get SCIM user",
+            "description": {
+              "content": "Get SCIM user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "scim",
+                "Users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sublime ID of the user"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "deeef7be-a556-41a1-ab85-0d65d94d7a78",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sublime ID of the user"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\"\n  },\n  \"userName\": \"string\",\n  \"active\": false,\n  \"emails\": [\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalId\": \"string\",\n  \"id\": \"string\",\n  \"meta\": {\n    \"created\": \"<string>\",\n    \"lastModified\": \"<string>\",\n    \"location\": \"<string>\",\n    \"resourceType\": \"<string>\"\n  },\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"sublimeRole\": \"string\",\n  \"urn:ietf:params:scim:schemas:extension:sublime:2.0:User\": {\n    \"sublimeRole\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ca28886-4fa5-4641-af3e-224ac5f1cbb5",
+          "name": "Patch SCIM user",
+          "request": {
+            "name": "Patch SCIM user",
+            "description": {
+              "content": "Patch SCIM user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "scim",
+                "Users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sublime ID of the user"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eafda82f-fd27-488a-9dc0-039405b2ebb7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sublime ID of the user"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\"\n  },\n  \"userName\": \"string\",\n  \"active\": false,\n  \"emails\": [\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalId\": \"string\",\n  \"id\": \"string\",\n  \"meta\": {\n    \"created\": \"<string>\",\n    \"lastModified\": \"<string>\",\n    \"location\": \"<string>\",\n    \"resourceType\": \"<string>\"\n  },\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"sublimeRole\": \"string\",\n  \"urn:ietf:params:scim:schemas:extension:sublime:2.0:User\": {\n    \"sublimeRole\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c6ccfa8-99f4-417a-aa06-aa0d672b1c89",
+          "name": "Update SCIM user",
+          "request": {
+            "name": "Update SCIM user",
+            "description": {
+              "content": "Update SCIM user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "scim",
+                "Users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sublime ID of the user"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\"\n  },\n  \"userName\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"emails\": [\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalId\": \"<string>\",\n  \"id\": \"<string>\",\n  \"meta\": {\n    \"created\": \"<string>\",\n    \"lastModified\": \"<string>\",\n    \"location\": \"<string>\",\n    \"resourceType\": \"<string>\"\n  },\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sublimeRole\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:sublime:2.0:User\": {\n    \"sublimeRole\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "22497a2f-6f0e-4b56-a7d7-d8b2ca9afa64",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sublime ID of the user"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\"\n  },\n  \"userName\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"emails\": [\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalId\": \"<string>\",\n  \"id\": \"<string>\",\n  \"meta\": {\n    \"created\": \"<string>\",\n    \"lastModified\": \"<string>\",\n    \"location\": \"<string>\",\n    \"resourceType\": \"<string>\"\n  },\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sublimeRole\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:sublime:2.0:User\": {\n    \"sublimeRole\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\"\n  },\n  \"userName\": \"string\",\n  \"active\": false,\n  \"emails\": [\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalId\": \"string\",\n  \"id\": \"string\",\n  \"meta\": {\n    \"created\": \"<string>\",\n    \"lastModified\": \"<string>\",\n    \"location\": \"<string>\",\n    \"resourceType\": \"<string>\"\n  },\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"sublimeRole\": \"string\",\n  \"urn:ietf:params:scim:schemas:extension:sublime:2.0:User\": {\n    \"sublimeRole\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed45c12c-ec87-40c1-b562-bdbe3de2e2fd",
+          "name": "Validate SCIM specific auth",
+          "request": {
+            "name": "Validate SCIM specific auth",
+            "description": {
+              "content": "Validate SCIM specific auth",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "scim",
+                "validate_auth"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "794c54da-9cef-4312-8af5-cadcf0e4f0e1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "scim",
+                    "validate_auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user_email\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of http,https)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "Base URL of your Sublime deployment",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "platform.sublime.security",
+      "key": "server"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{server}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a326dbf9-4f5b-4688-a03b-7dc90849af4e",
+    "name": "Multi-Tenancy API (BETA) BinExplode SCIM API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: support@sublime.security",
+      "type": "text/plain"
+    }
+  }
+}

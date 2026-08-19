@@ -1,0 +1,458 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Multi-Tenancy API (BETA) BinExplode Messages API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Analyze a raw message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/messages/analyze",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Analyze a raw message with provided rules and/or active rules in your Sublime organization. Note: All messages will be treated as inbound."
+        },
+        {
+          "info": {
+            "name": "Render image for attachment from the raw base64 encoded bytes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/messages/attachment/image",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Render image for attachment from the raw base64 encoded bytes"
+        },
+        {
+          "info": {
+            "name": "Evaluate attack score for a raw message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/messages/attack_score",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Evaluate attack score for a raw message"
+        },
+        {
+          "info": {
+            "name": "Create message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/messages/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new message data model from a raw message"
+        },
+        {
+          "info": {
+            "name": "Retrieve details about the state of manual actions for a canonical group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/messages/groups/:id/action-state",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "created_at__gte",
+                "value": "",
+                "type": "query",
+                "description": "Only return action states created after this time"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of action states to return. If the value exceeds the maximum, then the maximum value will be used."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The (zero-based) offset of the action states to return"
+              }
+            ]
+          },
+          "docs": "Retrieve details about the state of manual actions for a canonical group"
+        },
+        {
+          "info": {
+            "name": "Retrieve message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/messages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "recompute_mdm_from_raw",
+                "value": "",
+                "type": "query",
+                "description": "When true, recompute the MDM from the raw EML. For internal use only!"
+              },
+              {
+                "name": "remove_large_text_fields",
+                "value": "",
+                "type": "query",
+                "description": "When true, any text field over 1MB will be cleared before returning"
+              }
+            ]
+          },
+          "docs": "Retrieve a message"
+        },
+        {
+          "info": {
+            "name": "Perform actions on an individual message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/messages/:id/actions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the message to act on"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform actions (trash, restore, quarantine, warning banner, move to spam) on an individual message"
+        },
+        {
+          "info": {
+            "name": "Analyze a message by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/messages/:id/analyze",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the message"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Analyze a message by ID with provided rules and/or active rules in your Sublime organization"
+        },
+        {
+          "info": {
+            "name": "Retrieve ASA report for a message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/messages/:id/asa_report",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message ID"
+              }
+            ]
+          },
+          "docs": "Retrieve ASA report for a message"
+        },
+        {
+          "info": {
+            "name": "Retrieve ASA verdict for a message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/messages/:id/asa_verdict",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message ID"
+              }
+            ]
+          },
+          "docs": "Retrieve ASA verdict for a message"
+        },
+        {
+          "info": {
+            "name": "Retrieve image of PDF attachment by md5 hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/messages/:id/attachment/:hash/image",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path",
+                "description": "MD5 hash of the attachment to retrieve"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sublime Message ID"
+              }
+            ]
+          },
+          "docs": "Retrieve image of PDF attachment by md5 hash"
+        },
+        {
+          "info": {
+            "name": "Evaluate attack score against an existing message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/messages/:id/attack_score",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message ID"
+              }
+            ]
+          },
+          "docs": "Evaluate attack score against an existing message"
+        },
+        {
+          "info": {
+            "name": "Retrieve raw EML",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/messages/:id/eml",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the raw EML for the message"
+        },
+        {
+          "info": {
+            "name": "Retrieve image of message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/messages/:id/image",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "recompute_mdm_from_raw",
+                "value": "",
+                "type": "query",
+                "description": "When true, recompute the MDM from the raw EML. For internal use only!"
+              },
+              {
+                "name": "remove_large_text_fields",
+                "value": "",
+                "type": "query",
+                "description": "When true, any text field over 1MB will be cleared before returning"
+              }
+            ]
+          },
+          "docs": "Retrieve an image of the message"
+        },
+        {
+          "info": {
+            "name": "Retrieve a temporary link to the image of message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/messages/:id/image_link",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "link_duration_seconds",
+                "value": "",
+                "type": "query",
+                "description": "Period link should be valid for. Default is 15 minutes, max 7 days."
+              },
+              {
+                "name": "platform_link",
+                "value": "",
+                "type": "query",
+                "description": "When true, link will always be presigned against Sublime. When false, the link may be to S3 directly."
+              },
+              {
+                "name": "recompute_mdm_from_raw",
+                "value": "",
+                "type": "query",
+                "description": "When true, recompute the MDM from the raw EML. For internal use only!"
+              },
+              {
+                "name": "remove_large_text_fields",
+                "value": "",
+                "type": "query",
+                "description": "When true, any text field over 1MB will be cleared before returning"
+              }
+            ]
+          },
+          "docs": "Retrieve a temporary link to the image of the message"
+        },
+        {
+          "info": {
+            "name": "Set access justification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/messages/:id/justification",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set message contents access justification for a message for the user associated with the API key being used"
+        },
+        {
+          "info": {
+            "name": "Retrieve the message's Message Data Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/messages/:id/message_data_model",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "recompute_mdm_from_raw",
+                "value": "",
+                "type": "query",
+                "description": "When true, recompute the MDM from the raw EML. For internal use only!"
+              },
+              {
+                "name": "remove_large_text_fields",
+                "value": "",
+                "type": "query",
+                "description": "When true, any text field over 1MB will be cleared before returning"
+              }
+            ]
+          },
+          "docs": "Retrieve the message's Message Data Model. If there is no justification, it will be redacted."
+        },
+        {
+          "info": {
+            "name": "Restore a previously-trashed message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/messages/:id/restore",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the message to restore"
+              }
+            ]
+          },
+          "docs": "Restore a previously-trashed message. \"For an Office 365 message source, the message will be put back in the folder it was in before. For a Google Workspace message source, any applied labels (e.g. \"Trash\") will be removed from the message.\""
+        },
+        {
+          "info": {
+            "name": "Trash message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/messages/:id/trash",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the message to trash"
+              }
+            ]
+          },
+          "docs": "Trash a message. For an Office 365 message source, the message will be moved to the \"Recoverable Items\" folder. For a Google Workspace message source, the \"Trash\" label will be added to the message."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

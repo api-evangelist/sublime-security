@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Multi-Tenancy API (BETA) BinExplode Events in the audit log API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events in the audit log",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List events in audit log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/audit-log/events",
+            "params": [
+              {
+                "name": "created_at[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start datetime filter for time of event creation, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only events at or after this time will be returned."
+              },
+              {
+                "name": "created_at[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Exclusive end datetime filter for time of event creation, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only events before this time will be returned."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The (zero-based) offset of the first rules to return"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Event type"
+              },
+              {
+                "name": "user_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user IDs"
+              }
+            ]
+          },
+          "docs": "List events in audit log"
+        },
+        {
+          "info": {
+            "name": "List event types for audit log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/audit-log/events/types"
+          },
+          "docs": "List all event types for audit log"
+        },
+        {
+          "info": {
+            "name": "Retrieve event from audit log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/audit-log/events/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Event ID"
+              }
+            ]
+          },
+          "docs": "Retrieve event from audit log"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

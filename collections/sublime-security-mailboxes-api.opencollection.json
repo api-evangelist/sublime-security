@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Multi-Tenancy API (BETA) BinExplode Mailboxes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mailboxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List mailboxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/mailboxes",
+            "params": [
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filter for effectively active mailboxes (marked active with a live subscription)"
+              },
+              {
+                "name": "email_addresses",
+                "value": "",
+                "type": "query",
+                "description": "Email addresses of the mailboxes to return (comma-delimited)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used"
+              },
+              {
+                "name": "mailbox_types",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of mailbox types to filter by"
+              },
+              {
+                "name": "marked_active",
+                "value": "",
+                "type": "query",
+                "description": "Filter for mailboxes marked active"
+              },
+              {
+                "name": "message_source_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the message source the mailboxes belong to"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The (zero-based) offset of the first mailbox to return"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search across mailbox names and email addresses"
+              },
+              {
+                "name": "sub_error_types",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of subscription error types to filter by"
+              }
+            ]
+          },
+          "docs": "List all mailboxes"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

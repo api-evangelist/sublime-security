@@ -1,0 +1,1434 @@
+{
+  "item": [
+    {
+      "id": "55d1d804-ab58-4fdd-aa86-ec65538ce1fb",
+      "name": "Rules",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d42d873d-f777-4579-968a-1d7cc6944eb4",
+          "name": "List rules",
+          "request": {
+            "name": "List rules",
+            "description": {
+              "content": "List rules",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "in_feed",
+                  "value": "<boolean>",
+                  "description": "Restrict to rules that are explicitly in or not in a feed"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "The maximum number of entries to return. Maximum value is 500."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The (zero-based) offset of the first rule to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search for matching case-insensitive substring across rule name, description, and MQL source"
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12a4e124-9875-4843-a47f-d6aff4a95022",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "in_feed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 9461,\n  \"rules\": [\n    {\n      \"description\": \"string\",\n      \"name\": \"string\",\n      \"source\": \"string\",\n      \"active\": false,\n      \"created_at\": \"1951-06-22T22:35:52.782Z\",\n      \"id\": \"6df8d067-6d1c-d69b-7a2a-4bc0ed2c0cd3\",\n      \"references\": [\n        \"string\",\n        \"string\"\n      ],\n      \"severity\": \"high\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"updated_at\": \"2015-03-17T21:26:02.011Z\"\n    },\n    {\n      \"description\": \"string\",\n      \"name\": \"string\",\n      \"source\": \"string\",\n      \"active\": true,\n      \"created_at\": \"1970-05-31T15:02:50.217Z\",\n      \"id\": \"4e06039e-5b7c-2d38-0704-a9fb2393796a\",\n      \"references\": [\n        \"string\",\n        \"string\"\n      ],\n      \"severity\": \"low\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"updated_at\": \"1990-12-16T17:49:58.556Z\"\n    }\n  ],\n  \"total\": 5712\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4f3c8a6-8487-4494-a129-4fda2712dea1",
+          "name": "Create rule",
+          "request": {
+            "name": "Create rule",
+            "description": {
+              "content": "Create a rule",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"source\": \"<string>\",\n  \"action_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"active\": \"<boolean>\",\n  \"attack_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"authors\": [\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    }\n  ],\n  \"auto_review_auto_share\": \"<boolean>\",\n  \"auto_review_classification\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detection_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"false_positives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"internal_type\": \"<string>\",\n  \"label\": \"<string>\",\n  \"maturity\": \"<string>\",\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"run_triage_on_excluded_messages\": \"<boolean>\",\n  \"severity\": \"<string>\",\n  \"tactics_and_techniques\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"triage_abuse_reports\": \"<boolean>\",\n  \"triage_classification_changes\": \"<boolean>\",\n  \"triage_dlp_rule_matched\": \"<boolean>\",\n  \"triage_flagged_messages\": \"<boolean>\",\n  \"type\": \"<string>\",\n  \"user_provided_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cdee1dba-cb7a-42a3-8a54-0655c91d6a8a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"source\": \"<string>\",\n  \"action_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"active\": \"<boolean>\",\n  \"attack_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"authors\": [\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    }\n  ],\n  \"auto_review_auto_share\": \"<boolean>\",\n  \"auto_review_classification\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detection_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"false_positives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"internal_type\": \"<string>\",\n  \"label\": \"<string>\",\n  \"maturity\": \"<string>\",\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"run_triage_on_excluded_messages\": \"<boolean>\",\n  \"severity\": \"<string>\",\n  \"tactics_and_techniques\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"triage_abuse_reports\": \"<boolean>\",\n  \"triage_classification_changes\": \"<boolean>\",\n  \"triage_dlp_rule_matched\": \"<boolean>\",\n  \"triage_flagged_messages\": \"<boolean>\",\n  \"type\": \"<string>\",\n  \"user_provided_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"name\": \"string\",\n  \"source\": \"string\",\n  \"action_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"active\": false,\n  \"attack_types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"authors\": [\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    }\n  ],\n  \"auto_review_auto_share\": true,\n  \"auto_review_classification\": \"malicious\",\n  \"created_at\": \"1950-02-23T10:23:19.743Z\",\n  \"detection_methods\": [\n    \"string\",\n    \"string\"\n  ],\n  \"false_positives\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"78fcb376-9f32-57d6-7f84-d6c65906e054\",\n  \"label\": \"string\",\n  \"last_activated_at\": \"1982-04-22T04:27:21.180Z\",\n  \"maturity\": \"string\",\n  \"passive\": false,\n  \"references\": [\n    \"string\",\n    \"string\"\n  ],\n  \"run_triage_on_excluded_messages\": false,\n  \"severity\": \"low\",\n  \"tactics_and_techniques\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"triage_abuse_reports\": true,\n  \"triage_classification_changes\": false,\n  \"triage_dlp_rule_matched\": false,\n  \"triage_flagged_messages\": false,\n  \"type\": \"string\",\n  \"updated_at\": \"2011-08-24T00:12:33.222Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46035431-890b-43c5-bec9-f6cbb67d8e72",
+          "name": "List history for rules",
+          "request": {
+            "name": "List history for rules",
+            "description": {
+              "content": "List history for rules",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "rules",
+                "rule-history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Restrict to rules that are active"
+                },
+                {
+                  "disabled": false,
+                  "key": "classification_created_at[gte]",
+                  "value": "<dateTime>",
+                  "description": "(Required) Filter by classifications made after this datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "classification_created_at[lte]",
+                  "value": "<dateTime>",
+                  "description": "(Required) Filter by classifications made before this datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "in_feed",
+                  "value": "<boolean>",
+                  "description": "Restrict to rules that are in a feed"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset from the first result"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Restrict to rules that have one of the given types"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Restrict to rules that have one of the given types"
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5d2fed4-59eb-4152-a5b2-63540287648c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "rules",
+                    "rule-history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "classification_created_at[gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "classification_created_at[lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in_feed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"history\": {\n    \"key_0\": {\n      \"actions\": [\n        {\n          \"active\": false,\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"active\": false,\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"flagged_message_groups_report\": {\n        \"classified_detection_rate\": 9608.116751859117,\n        \"count_classified_benign\": 4390,\n        \"count_classified_graymail\": 7462,\n        \"count_classified_malicious\": 9618,\n        \"count_classified_no_reason\": 6195,\n        \"count_classified_simulation\": 2590,\n        \"count_classified_unwanted\": 6558,\n        \"count_unreviewed\": 8683,\n        \"total\": 251\n      },\n      \"rule\": {\n        \"description\": \"string\",\n        \"name\": \"string\",\n        \"source\": \"string\",\n        \"action_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"active\": false,\n        \"attack_types\": [\n          \"string\",\n          \"string\"\n        ],\n        \"authors\": [\n          {\n            \"name\": \"<string>\",\n            \"twitter\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"twitter\": \"<string>\"\n          }\n        ],\n        \"auto_review_auto_share\": false,\n        \"auto_review_classification\": \"non-violation\",\n        \"created_at\": \"1961-12-12T17:35:49.489Z\",\n        \"detection_methods\": [\n          \"string\",\n          \"string\"\n        ],\n        \"false_positives\": [\n          \"string\",\n          \"string\"\n        ],\n        \"id\": \"14b9a8fe-a930-0968-ddc3-a328fd692d8d\",\n        \"label\": \"string\",\n        \"last_activated_at\": \"2001-02-25T07:00:31.999Z\",\n        \"maturity\": \"string\",\n        \"passive\": false,\n        \"references\": [\n          \"string\",\n          \"string\"\n        ],\n        \"run_triage_on_excluded_messages\": true,\n        \"severity\": \"medium\",\n        \"tactics_and_techniques\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"triage_abuse_reports\": false,\n        \"triage_classification_changes\": true,\n        \"triage_dlp_rule_matched\": true,\n        \"triage_flagged_messages\": true,\n        \"type\": \"string\",\n        \"updated_at\": \"1994-05-16T02:45:58.546Z\"\n      }\n    },\n    \"key_1\": {\n      \"actions\": [\n        {\n          \"active\": true,\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"active\": false,\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"flagged_message_groups_report\": {\n        \"classified_detection_rate\": 4371.8191969126265,\n        \"count_classified_benign\": 7665,\n        \"count_classified_graymail\": 8744,\n        \"count_classified_malicious\": 8868,\n        \"count_classified_no_reason\": 8670,\n        \"count_classified_simulation\": 2254,\n        \"count_classified_unwanted\": 8561,\n        \"count_unreviewed\": 3489,\n        \"total\": 6637\n      },\n      \"rule\": {\n        \"description\": \"string\",\n        \"name\": \"string\",\n        \"source\": \"string\",\n        \"action_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"active\": false,\n        \"attack_types\": [\n          \"string\",\n          \"string\"\n        ],\n        \"authors\": [\n          {\n            \"name\": \"<string>\",\n            \"twitter\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"twitter\": \"<string>\"\n          }\n        ],\n        \"auto_review_auto_share\": false,\n        \"auto_review_classification\": \"simulation\",\n        \"created_at\": \"2021-09-09T23:23:56.762Z\",\n        \"detection_methods\": [\n          \"string\",\n          \"string\"\n        ],\n        \"false_positives\": [\n          \"string\",\n          \"string\"\n        ],\n        \"id\": \"037a1dc7-2c13-279e-4e6a-147b03df30f0\",\n        \"label\": \"string\",\n        \"last_activated_at\": \"1950-05-30T14:20:23.580Z\",\n        \"maturity\": \"string\",\n        \"passive\": false,\n        \"references\": [\n          \"string\",\n          \"string\"\n        ],\n        \"run_triage_on_excluded_messages\": false,\n        \"severity\": \"medium\",\n        \"tactics_and_techniques\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"triage_abuse_reports\": true,\n        \"triage_classification_changes\": false,\n        \"triage_dlp_rule_matched\": true,\n        \"triage_flagged_messages\": true,\n        \"type\": \"string\",\n        \"updated_at\": \"1951-11-10T22:47:32.016Z\"\n      }\n    },\n    \"key_2\": {\n      \"actions\": [\n        {\n          \"active\": true,\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"active\": true,\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"flagged_message_groups_report\": {\n        \"classified_detection_rate\": 6648.195876840384,\n        \"count_classified_benign\": 5583,\n        \"count_classified_graymail\": 5163,\n        \"count_classified_malicious\": 6411,\n        \"count_classified_no_reason\": 1161,\n        \"count_classified_simulation\": 8407,\n        \"count_classified_unwanted\": 2178,\n        \"count_unreviewed\": 6888,\n        \"total\": 142\n      },\n      \"rule\": {\n        \"description\": \"string\",\n        \"name\": \"string\",\n        \"source\": \"string\",\n        \"action_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"active\": false,\n        \"attack_types\": [\n          \"string\",\n          \"string\"\n        ],\n        \"authors\": [\n          {\n            \"name\": \"<string>\",\n            \"twitter\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"twitter\": \"<string>\"\n          }\n        ],\n        \"auto_review_auto_share\": true,\n        \"auto_review_classification\": \"simulation\",\n        \"created_at\": \"1966-11-30T15:59:23.988Z\",\n        \"detection_methods\": [\n          \"string\",\n          \"string\"\n        ],\n        \"false_positives\": [\n          \"string\",\n          \"string\"\n        ],\n        \"id\": \"7828f783-5a9b-a19e-0971-66c6ef2567eb\",\n        \"label\": \"string\",\n        \"last_activated_at\": \"1976-05-02T22:29:04.374Z\",\n        \"maturity\": \"string\",\n        \"passive\": true,\n        \"references\": [\n          \"string\",\n          \"string\"\n        ],\n        \"run_triage_on_excluded_messages\": false,\n        \"severity\": \"informational\",\n        \"tactics_and_techniques\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"triage_abuse_reports\": false,\n        \"triage_classification_changes\": true,\n        \"triage_dlp_rule_matched\": true,\n        \"triage_flagged_messages\": false,\n        \"type\": \"string\",\n        \"updated_at\": \"1958-03-09T02:17:46.988Z\"\n      }\n    },\n    \"key_3\": {\n      \"actions\": [\n        {\n          \"active\": false,\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"active\": true,\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"flagged_message_groups_report\": {\n        \"classified_detection_rate\": 2238.897510798469,\n        \"count_classified_benign\": 3703,\n        \"count_classified_graymail\": 2892,\n        \"count_classified_malicious\": 2422,\n        \"count_classified_no_reason\": 309,\n        \"count_classified_simulation\": 5450,\n        \"count_classified_unwanted\": 9390,\n        \"count_unreviewed\": 7082,\n        \"total\": 9537\n      },\n      \"rule\": {\n        \"description\": \"string\",\n        \"name\": \"string\",\n        \"source\": \"string\",\n        \"action_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"active\": true,\n        \"attack_types\": [\n          \"string\",\n          \"string\"\n        ],\n        \"authors\": [\n          {\n            \"name\": \"<string>\",\n            \"twitter\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"twitter\": \"<string>\"\n          }\n        ],\n        \"auto_review_auto_share\": true,\n        \"auto_review_classification\": \"graymail\",\n        \"created_at\": \"1972-04-08T07:01:37.603Z\",\n        \"detection_methods\": [\n          \"string\",\n          \"string\"\n        ],\n        \"false_positives\": [\n          \"string\",\n          \"string\"\n        ],\n        \"id\": \"87da69d9-fc40-996d-c8c4-6436100e9dfe\",\n        \"label\": \"string\",\n        \"last_activated_at\": \"1979-12-09T03:03:54.609Z\",\n        \"maturity\": \"string\",\n        \"passive\": true,\n        \"references\": [\n          \"string\",\n          \"string\"\n        ],\n        \"run_triage_on_excluded_messages\": false,\n        \"severity\": \"critical\",\n        \"tactics_and_techniques\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"triage_abuse_reports\": false,\n        \"triage_classification_changes\": true,\n        \"triage_dlp_rule_matched\": true,\n        \"triage_flagged_messages\": false,\n        \"type\": \"string\",\n        \"updated_at\": \"2007-03-07T03:12:12.282Z\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "217efe86-99a9-449c-9b51-3e8338cecd96",
+          "name": "Validate rule",
+          "request": {
+            "name": "Validate rule",
+            "description": {
+              "content": "Validate a rule (MQL, YAML fields, etc). When run against the sandbox or analyzer, no auth is needed but custom lists etc will not be available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "rules",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"source\": \"<string>\",\n  \"action_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"active\": \"<boolean>\",\n  \"attack_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"authors\": [\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    }\n  ],\n  \"auto_review_auto_share\": \"<boolean>\",\n  \"auto_review_classification\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detection_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"false_positives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"internal_type\": \"<string>\",\n  \"label\": \"<string>\",\n  \"maturity\": \"<string>\",\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"run_triage_on_excluded_messages\": \"<boolean>\",\n  \"severity\": \"<string>\",\n  \"tactics_and_techniques\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"triage_abuse_reports\": \"<boolean>\",\n  \"triage_classification_changes\": \"<boolean>\",\n  \"triage_dlp_rule_matched\": \"<boolean>\",\n  \"triage_flagged_messages\": \"<boolean>\",\n  \"type\": \"<string>\",\n  \"user_provided_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "86d7f1fe-a2c1-4f49-b434-0508f45db3a1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "rules",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"source\": \"<string>\",\n  \"action_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"active\": \"<boolean>\",\n  \"attack_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"authors\": [\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    }\n  ],\n  \"auto_review_auto_share\": \"<boolean>\",\n  \"auto_review_classification\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detection_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"false_positives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"internal_type\": \"<string>\",\n  \"label\": \"<string>\",\n  \"maturity\": \"<string>\",\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"run_triage_on_excluded_messages\": \"<boolean>\",\n  \"severity\": \"<string>\",\n  \"tactics_and_techniques\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"triage_abuse_reports\": \"<boolean>\",\n  \"triage_classification_changes\": \"<boolean>\",\n  \"triage_dlp_rule_matched\": \"<boolean>\",\n  \"triage_flagged_messages\": \"<boolean>\",\n  \"type\": \"<string>\",\n  \"user_provided_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"functions\": [\n    \"string\",\n    \"string\"\n  ],\n  \"is_org_dependent\": true,\n  \"list\": [\n    \"string\",\n    \"string\"\n  ],\n  \"validation_error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e2c27e9-9723-4951-aa6e-025cdee140f0",
+          "name": "Delete rule",
+          "request": {
+            "name": "Delete rule",
+            "description": {
+              "content": "Delete a rule",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "rules",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Rule ID"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c0d9cbe-45ba-4f2b-b1c4-591d0fefde21",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Rule ID"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0d6123f-a4e3-4fe8-b1e0-1912835c15b0",
+          "name": "Retrieve rule",
+          "request": {
+            "name": "Retrieve rule",
+            "description": {
+              "content": "Retrieve a rule",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "rules",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Rule ID"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0027027-0cf2-4fd2-b2eb-1da870d85891",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Rule ID"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"name\": \"string\",\n  \"source\": \"string\",\n  \"action_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"active\": false,\n  \"attack_types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"authors\": [\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    }\n  ],\n  \"auto_review_auto_share\": true,\n  \"auto_review_classification\": \"spam\",\n  \"created_at\": \"2014-01-07T18:15:48.211Z\",\n  \"detection_methods\": [\n    \"string\",\n    \"string\"\n  ],\n  \"false_positives\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"44f9857d-c6eb-1987-6757-142f30297ff5\",\n  \"label\": \"string\",\n  \"last_activated_at\": \"2001-04-25T11:27:05.050Z\",\n  \"maturity\": \"string\",\n  \"passive\": true,\n  \"references\": [\n    \"string\",\n    \"string\"\n  ],\n  \"run_triage_on_excluded_messages\": true,\n  \"severity\": \"low\",\n  \"tactics_and_techniques\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"triage_abuse_reports\": false,\n  \"triage_classification_changes\": true,\n  \"triage_dlp_rule_matched\": true,\n  \"triage_flagged_messages\": true,\n  \"type\": \"string\",\n  \"updated_at\": \"2007-03-11T10:00:17.267Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "382d6e94-41be-4d7c-9824-cb900c1501fd",
+          "name": "Update rule",
+          "request": {
+            "name": "Update rule",
+            "description": {
+              "content": "Update a rule to a new definition",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "rules",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Rule ID"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"source\": \"<string>\",\n  \"action_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"attack_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"authors\": [\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    }\n  ],\n  \"auto_review_auto_share\": \"<boolean>\",\n  \"auto_review_classification\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detection_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"false_positives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"internal_type\": \"<string>\",\n  \"label\": \"<string>\",\n  \"maturity\": \"<string>\",\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"run_triage_on_excluded_messages\": \"<boolean>\",\n  \"severity\": \"<string>\",\n  \"tactics_and_techniques\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"triage_abuse_reports\": \"<boolean>\",\n  \"triage_classification_changes\": \"<boolean>\",\n  \"triage_dlp_rule_matched\": \"<boolean>\",\n  \"triage_flagged_messages\": \"<boolean>\",\n  \"user_provided_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "19ddb384-8295-49c8-ba9d-d5934b3c3142",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Rule ID"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"source\": \"<string>\",\n  \"action_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"attack_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"authors\": [\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    }\n  ],\n  \"auto_review_auto_share\": \"<boolean>\",\n  \"auto_review_classification\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detection_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"false_positives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"internal_type\": \"<string>\",\n  \"label\": \"<string>\",\n  \"maturity\": \"<string>\",\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"run_triage_on_excluded_messages\": \"<boolean>\",\n  \"severity\": \"<string>\",\n  \"tactics_and_techniques\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"triage_abuse_reports\": \"<boolean>\",\n  \"triage_classification_changes\": \"<boolean>\",\n  \"triage_dlp_rule_matched\": \"<boolean>\",\n  \"triage_flagged_messages\": \"<boolean>\",\n  \"user_provided_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"name\": \"string\",\n  \"source\": \"string\",\n  \"action_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"active\": false,\n  \"attack_types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"authors\": [\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    }\n  ],\n  \"auto_review_auto_share\": true,\n  \"auto_review_classification\": \"spam\",\n  \"created_at\": \"2014-01-07T18:15:48.211Z\",\n  \"detection_methods\": [\n    \"string\",\n    \"string\"\n  ],\n  \"false_positives\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"44f9857d-c6eb-1987-6757-142f30297ff5\",\n  \"label\": \"string\",\n  \"last_activated_at\": \"2001-04-25T11:27:05.050Z\",\n  \"maturity\": \"string\",\n  \"passive\": true,\n  \"references\": [\n    \"string\",\n    \"string\"\n  ],\n  \"run_triage_on_excluded_messages\": true,\n  \"severity\": \"low\",\n  \"tactics_and_techniques\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"triage_abuse_reports\": false,\n  \"triage_classification_changes\": true,\n  \"triage_dlp_rule_matched\": true,\n  \"triage_flagged_messages\": true,\n  \"type\": \"string\",\n  \"updated_at\": \"2007-03-11T10:00:17.267Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a25946b0-a00d-4afb-ae97-9172785b25ea",
+          "name": "Activate rule",
+          "request": {
+            "name": "Activate rule",
+            "description": {
+              "content": "Activate a rule",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "rules",
+                ":id",
+                "activate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Rule ID"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5421f999-771f-4afa-b468-24ab3e977d6b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "rules",
+                    ":id",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Rule ID"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"name\": \"string\",\n  \"source\": \"string\",\n  \"action_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"active\": false,\n  \"attack_types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"authors\": [\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    }\n  ],\n  \"auto_review_auto_share\": true,\n  \"auto_review_classification\": \"spam\",\n  \"created_at\": \"2014-01-07T18:15:48.211Z\",\n  \"detection_methods\": [\n    \"string\",\n    \"string\"\n  ],\n  \"false_positives\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"44f9857d-c6eb-1987-6757-142f30297ff5\",\n  \"label\": \"string\",\n  \"last_activated_at\": \"2001-04-25T11:27:05.050Z\",\n  \"maturity\": \"string\",\n  \"passive\": true,\n  \"references\": [\n    \"string\",\n    \"string\"\n  ],\n  \"run_triage_on_excluded_messages\": true,\n  \"severity\": \"low\",\n  \"tactics_and_techniques\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"triage_abuse_reports\": false,\n  \"triage_classification_changes\": true,\n  \"triage_dlp_rule_matched\": true,\n  \"triage_flagged_messages\": true,\n  \"type\": \"string\",\n  \"updated_at\": \"2007-03-11T10:00:17.267Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3f8a023-6e16-4f01-9b60-53e5ceadff26",
+          "name": "Deactivate rule",
+          "request": {
+            "name": "Deactivate rule",
+            "description": {
+              "content": "Deactivate a rule",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "rules",
+                ":id",
+                "deactivate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Rule ID"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de8905ea-45ef-4da3-b25e-ba3be7608d59",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "rules",
+                    ":id",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Rule ID"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"name\": \"string\",\n  \"source\": \"string\",\n  \"action_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"active\": false,\n  \"attack_types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"authors\": [\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"twitter\": \"<string>\"\n    }\n  ],\n  \"auto_review_auto_share\": true,\n  \"auto_review_classification\": \"spam\",\n  \"created_at\": \"2014-01-07T18:15:48.211Z\",\n  \"detection_methods\": [\n    \"string\",\n    \"string\"\n  ],\n  \"false_positives\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"44f9857d-c6eb-1987-6757-142f30297ff5\",\n  \"label\": \"string\",\n  \"last_activated_at\": \"2001-04-25T11:27:05.050Z\",\n  \"maturity\": \"string\",\n  \"passive\": true,\n  \"references\": [\n    \"string\",\n    \"string\"\n  ],\n  \"run_triage_on_excluded_messages\": true,\n  \"severity\": \"low\",\n  \"tactics_and_techniques\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"triage_abuse_reports\": false,\n  \"triage_classification_changes\": true,\n  \"triage_dlp_rule_matched\": true,\n  \"triage_flagged_messages\": true,\n  \"type\": \"string\",\n  \"updated_at\": \"2007-03-11T10:00:17.267Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ee824ce-073f-4324-8ce7-0fcb43a6453b",
+          "name": "Retrieve history of a rule",
+          "request": {
+            "name": "Retrieve history of a rule",
+            "description": {
+              "content": "Retrieve history of a rule",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "rules",
+                ":id",
+                "rule-history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "classification_created_at[gte]",
+                  "value": "<dateTime>",
+                  "description": "Filter by classifications made after this datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "classification_created_at[lte]",
+                  "value": "<dateTime>",
+                  "description": "Filter by classifications made before this datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "use_rule_last_updated_as_created_at",
+                  "value": "<boolean>",
+                  "description": "Filter by classifications made since the rule has been updated"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Rule ID"
+                },
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fab8956f-1ff5-4af4-b68e-4aab7c0f5832",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "rules",
+                    ":id",
+                    "rule-history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "classification_created_at[gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "classification_created_at[lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "use_rule_last_updated_as_created_at",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Rule ID"
+                    },
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"actions\": [\n    {\n      \"active\": true,\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"active\": false,\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"flagged_message_groups_report\": {\n    \"classified_detection_rate\": 7937.626052434347,\n    \"count_classified_benign\": 8277,\n    \"count_classified_graymail\": 1679,\n    \"count_classified_malicious\": 2308,\n    \"count_classified_no_reason\": 5392,\n    \"count_classified_simulation\": 6476,\n    \"count_classified_unwanted\": 1626,\n    \"count_unreviewed\": 8245,\n    \"total\": 4062\n  },\n  \"rule\": {\n    \"description\": \"string\",\n    \"name\": \"string\",\n    \"source\": \"string\",\n    \"action_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"active\": true,\n    \"attack_types\": [\n      \"string\",\n      \"string\"\n    ],\n    \"authors\": [\n      {\n        \"name\": \"<string>\",\n        \"twitter\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"twitter\": \"<string>\"\n      }\n    ],\n    \"auto_review_auto_share\": true,\n    \"auto_review_classification\": \"spam\",\n    \"created_at\": \"1952-03-11T12:10:19.964Z\",\n    \"detection_methods\": [\n      \"string\",\n      \"string\"\n    ],\n    \"false_positives\": [\n      \"string\",\n      \"string\"\n    ],\n    \"id\": \"7a88f580-a58b-9a68-5cae-03c364a2161e\",\n    \"label\": \"string\",\n    \"last_activated_at\": \"2013-07-07T07:59:40.476Z\",\n    \"maturity\": \"string\",\n    \"passive\": true,\n    \"references\": [\n      \"string\",\n      \"string\"\n    ],\n    \"run_triage_on_excluded_messages\": true,\n    \"severity\": \"low\",\n    \"tactics_and_techniques\": [\n      \"string\",\n      \"string\"\n    ],\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"triage_abuse_reports\": true,\n    \"triage_classification_changes\": true,\n    \"triage_dlp_rule_matched\": true,\n    \"triage_flagged_messages\": false,\n    \"type\": \"string\",\n    \"updated_at\": \"1972-07-23T20:47:00.737Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of http,https)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "Base URL of your Sublime deployment",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "platform.sublime.security",
+      "key": "server"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{server}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bbc70ceb-627e-4b08-a11c-3a1428f436c7",
+    "name": "Multi-Tenancy API (BETA) BinExplode Rules API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: support@sublime.security",
+      "type": "text/plain"
+    }
+  }
+}

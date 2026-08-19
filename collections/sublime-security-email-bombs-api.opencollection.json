@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Multi-Tenancy API (BETA) BinExplode Email Bombs API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Email Bombs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List email bombs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/messages/bombs",
+            "params": [
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filter by active status. true = only active, false = only inactive, null = all"
+              },
+              {
+                "name": "dismissed",
+                "value": "",
+                "type": "query",
+                "description": "Filter by dismissed status. true = only dismissed, false = only not dismissed, null = all"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of email bombs to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The (zero-based) offset of the email bombs to return"
+              }
+            ]
+          },
+          "docs": "List email bombs"
+        },
+        {
+          "info": {
+            "name": "Create email bomb",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/messages/bombs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mark a mailbox time range as an email bomb. A new bomb is created if no existing bomb covers the range; otherwise the existing bomb is extended. Messages within the range are associated asynchronously."
+        },
+        {
+          "info": {
+            "name": "Get email bomb",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/messages/bombs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the email bomb"
+              }
+            ]
+          },
+          "docs": "Get email bomb"
+        },
+        {
+          "info": {
+            "name": "Dismiss email bomb",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/messages/bombs/:id/dismiss",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the email bomb to dismiss"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Dismiss an email bomb, marking it as reviewed by the user"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

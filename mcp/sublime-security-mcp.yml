@@ -2,9 +2,9 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/sublime-security-platform-openapi.json, openapi/sublime-security-multitenancy-openapi.json
-note: 'No official hosted MCP server was found on Sublime Security''s docs, GitHub org, or MCP registries as of the generated
-  date. This is a DERIVED candidate tool list (one tool per OpenAPI operationId) to seed a future MCP server. Auth: HTTP Bearer
-  API key.'
+note: 'No official hosted MCP server was found on Sublime Security''s docs, GitHub org, or MCP registries
+  as of the generated date. This is a DERIVED candidate tool list (one tool per OpenAPI operationId) to
+  seed a future MCP server. Auth: HTTP Bearer API key.'
 server:
   name: sublime-security
   transport: http
@@ -283,3 +283,9 @@ tools:
 - name: patchChildOrganizationLicensing
   description: Update child organization licensing
   source_operation: openapi/sublime-security-multitenancy-openapi.json#patchChildOrganizationLicensing
+deployment:
+  mode: none
+  verified: derived
+  tools: 91
+  checked: '2026-08-12'
+  source: catalog MCP census

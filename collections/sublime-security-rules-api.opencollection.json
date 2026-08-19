@@ -1,0 +1,282 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Multi-Tenancy API (BETA) BinExplode Rules API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/rules",
+            "params": [
+              {
+                "name": "in_feed",
+                "value": "",
+                "type": "query",
+                "description": "Restrict to rules that are explicitly in or not in a feed"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of entries to return. Maximum value is 500."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The (zero-based) offset of the first rule to return"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search for matching case-insensitive substring across rule name, description, and MQL source"
+              }
+            ]
+          },
+          "docs": "List rules"
+        },
+        {
+          "info": {
+            "name": "Create rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/rules",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a rule"
+        },
+        {
+          "info": {
+            "name": "List history for rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/rules/rule-history",
+            "params": [
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Restrict to rules that are active"
+              },
+              {
+                "name": "classification_created_at[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by classifications made after this datetime"
+              },
+              {
+                "name": "classification_created_at[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by classifications made before this datetime"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "in_feed",
+                "value": "",
+                "type": "query",
+                "description": "Restrict to rules that are in a feed"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset from the first result"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Restrict to rules that have one of the given types"
+              }
+            ]
+          },
+          "docs": "List history for rules"
+        },
+        {
+          "info": {
+            "name": "Validate rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/rules/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate a rule (MQL, YAML fields, etc). When run against the sandbox or analyzer, no auth is needed but custom lists etc will not be available."
+        },
+        {
+          "info": {
+            "name": "Retrieve rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Rule ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a rule"
+        },
+        {
+          "info": {
+            "name": "Update rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{scheme}://{server}/v0/rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Rule ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a rule to a new definition"
+        },
+        {
+          "info": {
+            "name": "Delete rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{scheme}://{server}/v0/rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Rule ID"
+              }
+            ]
+          },
+          "docs": "Delete a rule"
+        },
+        {
+          "info": {
+            "name": "Activate rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/rules/:id/activate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Rule ID"
+              }
+            ]
+          },
+          "docs": "Activate a rule"
+        },
+        {
+          "info": {
+            "name": "Deactivate rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/rules/:id/deactivate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Rule ID"
+              }
+            ]
+          },
+          "docs": "Deactivate a rule"
+        },
+        {
+          "info": {
+            "name": "Retrieve history of a rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/rules/:id/rule-history",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Rule ID"
+              },
+              {
+                "name": "classification_created_at[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by classifications made after this datetime"
+              },
+              {
+                "name": "classification_created_at[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by classifications made before this datetime"
+              },
+              {
+                "name": "use_rule_last_updated_as_created_at",
+                "value": "",
+                "type": "query",
+                "description": "Filter by classifications made since the rule has been updated"
+              }
+            ]
+          },
+          "docs": "Retrieve history of a rule"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

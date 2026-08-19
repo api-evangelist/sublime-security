@@ -1,0 +1,645 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Multi-Tenancy API (BETA) BinExplode Message Groups API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Message Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List message groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/message-groups",
+            "params": [
+              {
+                "name": "attachment_name__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided attachment name"
+              },
+              {
+                "name": "attachment_sha256__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided attachment SHA256"
+              },
+              {
+                "name": "attack_score_verdict__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided attack score verdict"
+              },
+              {
+                "name": "attack_surface_reduction__filter",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups that have flagged (ONLY) rules with the 'Attack surface reduction' tag"
+              },
+              {
+                "name": "canonical_id__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided canonical ID"
+              },
+              {
+                "name": "created_at__gte",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start datetime filter, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only message groups that contain a message processed at or after this time will be returned."
+              },
+              {
+                "name": "created_at__lt",
+                "value": "",
+                "type": "query",
+                "description": "Exclusive end datetime filter, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups that contain a message processed before this time will be returned."
+              },
+              {
+                "name": "first_message_reported_at[gte]",
+                "value": "",
+                "type": "query",
+                "description": "DEPRECATED: Use first_message_reported_at__gte"
+              },
+              {
+                "name": "first_message_reported_at__gte",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with a message first reported at or after the provided time. Datetime must be in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z')."
+              },
+              {
+                "name": "flagged",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with at least one flagged message"
+              },
+              {
+                "name": "flagged_rule_id__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided flagged rule ID"
+              },
+              {
+                "name": "flagged_rule_severity__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided flagged rule severity"
+              },
+              {
+                "name": "historically_flagged_rule_id__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided historically flagged rule ID"
+              },
+              {
+                "name": "historically_flagged_rule_severity__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided historically flagged rule severity"
+              },
+              {
+                "name": "last_message_created_at[gte]",
+                "value": "",
+                "type": "query",
+                "description": "DEPRECATED: Use created_at__gte instead"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of message groups to return. If the value exceeds the maximum, then the maximum value will be used."
+              },
+              {
+                "name": "mailbox_email__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided mailbox email"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The (zero-based) offset of the message groups to return"
+              },
+              {
+                "name": "recipient_email__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided recipient email"
+              },
+              {
+                "name": "reported_as_phish_by__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided reporter"
+              },
+              {
+                "name": "reviewed",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups which have or have not been reviewed"
+              },
+              {
+                "name": "sender_display_name__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided sender display name"
+              },
+              {
+                "name": "sender_domain__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided sender domain"
+              },
+              {
+                "name": "sender_email__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided sender email"
+              },
+              {
+                "name": "spam__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided spam status"
+              },
+              {
+                "name": "subject__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided subject"
+              },
+              {
+                "name": "user_reported",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with at least one reported message"
+              },
+              {
+                "name": "vendor_id__is",
+                "value": "",
+                "type": "query",
+                "description": "Filters result to only message groups with the provided vendor"
+              }
+            ]
+          },
+          "docs": "List message groups"
+        },
+        {
+          "info": {
+            "name": "Dismiss multiple message groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/message-groups/dismiss",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Dismiss all messages in multiple groups, including future messages."
+        },
+        {
+          "info": {
+            "name": "Hunt message groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/message-groups/hunt",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "DEPRECATED: Hunt using MQL to find message groups. Please use the POST /v0/hunt-jobs endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Get results of a hunt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/message-groups/hunt/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Task ID"
+              }
+            ]
+          },
+          "docs": "DEPRECATED: Retrieve the results of a completed hunt. Please use the GET /v0/hunt-jobs/:id endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Graymail multiple message groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/message-groups/move-to-graymail",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Move to Graymail all messages in multiple groups, including future messages."
+        },
+        {
+          "info": {
+            "name": "Quarantine multiple message groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/message-groups/quarantine",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Quarantine all messages in multiple groups, including future messages."
+        },
+        {
+          "info": {
+            "name": "Restore multiple message groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/message-groups/restore",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restore all previously-trashed messages in multiple groups and turn off automatic trashing of future messages in the groups. \"For an Office 365 message source, each message will be put back in the folder it was in before. For a Google Workspace message source, any applied labels (e.g. \"Trash\") will be removed from each message.\""
+        },
+        {
+          "info": {
+            "name": "Review message groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/message-groups/review",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Review, classify and take actions on message groups"
+        },
+        {
+          "info": {
+            "name": "Search message groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/message-groups/search",
+            "params": [
+              {
+                "name": "any",
+                "value": "",
+                "type": "query",
+                "description": "Searches every field (performs a case insensitive, OR search in all fields). Not compatible with other search fields."
+              },
+              {
+                "name": "attachment_md5",
+                "value": "",
+                "type": "query",
+                "description": "Search for messages containing an attachment MD5 match"
+              },
+              {
+                "name": "attachment_sha1",
+                "value": "",
+                "type": "query",
+                "description": "Search for messages containing an attachment SHA1 match"
+              },
+              {
+                "name": "attachment_sha256",
+                "value": "",
+                "type": "query",
+                "description": "Search for messages containing an attachment SHA256 match"
+              },
+              {
+                "name": "created_at[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only message groups with a message processed at or after this time will be returned."
+              },
+              {
+                "name": "created_at[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Exclusive end datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups with a message processed before this time will be returned."
+              },
+              {
+                "name": "created_at[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated, use created_at[lt]. Exclusive end datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups with a message processed before this time will be returned."
+              },
+              {
+                "name": "file_name",
+                "value": "",
+                "type": "query",
+                "description": "Search in attachment filenames (case insensitive wildcard match)"
+              },
+              {
+                "name": "first_reported_as_phish_at[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only message groups reported at or after this time will be returned."
+              },
+              {
+                "name": "first_reported_as_phish_at[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Exclusive end datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups reported before this time will be returned."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "DEPRECATED: Use 'sender' instead. Search in the From field. (case insensitive wildcard match)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of message groups to return. If the value exceeds the maximum, then the maximum value will be used."
+              },
+              {
+                "name": "mailbox",
+                "value": "",
+                "type": "query",
+                "description": "Search for a mailbox by email address (case insensitive, wildcard match)"
+              },
+              {
+                "name": "message_id",
+                "value": "",
+                "type": "query",
+                "description": "Search in the Message-ID header (case insensitive wildcard match)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The (zero-based) offset of the message groups to return"
+              },
+              {
+                "name": "sender",
+                "value": "",
+                "type": "query",
+                "description": "Search in the From field (case insensitive wildcard match)"
+              },
+              {
+                "name": "states",
+                "value": "",
+                "type": "query",
+                "description": "Search for messages in any of the given states"
+              },
+              {
+                "name": "subject",
+                "value": "",
+                "type": "query",
+                "description": "Search in the message subject (case insensitive wildcard match)"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Search in the To, CC, and Bcc fields (case insensitive wildcard match). If possible, use 'mailbox' and 'type' instead for better performance"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Search for messages by type"
+              }
+            ]
+          },
+          "docs": "Search all message groups"
+        },
+        {
+          "info": {
+            "name": "Get SIEM-oriented summary of flagged message groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/message-groups/siem-summary",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque pagination cursor returned in the previous response's cursor field."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of message groups to return."
+              },
+              {
+                "name": "timestamp__gte",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive lower bound on the sort timestamp (newest_created_at for type=flagged, first_reported_as_phish_at for type=reported)."
+              },
+              {
+                "name": "timestamp__lt",
+                "value": "",
+                "type": "query",
+                "description": "Exclusive upper bound on the sort timestamp (newest_created_at for type=flagged, first_reported_as_phish_at for type=reported)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Which timestamp the endpoint sorts/filters on: 'flagged' uses newest_created_at, 'reported' uses first_reported_as_phish_at."
+              }
+            ]
+          },
+          "docs": "Returns a paginated, reduced-field summary of flagged message groups intended for SIEM ingestion. Array fields are bounded to keep payloads under typical SIEM batch limits."
+        },
+        {
+          "info": {
+            "name": "Trash multiple message groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/message-groups/trash",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Trash all messages in multiple groups, including future messages. For an Office 365 message source, each message will be moved to the \"Recoverable Items\" folder. For a Google Workspace message source, the \"Trash\" label will be added to each message."
+        },
+        {
+          "info": {
+            "name": "Get a single message group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{server}/v0/message-groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Canonical ID of the message group to retrieve"
+              },
+              {
+                "name": "sort_previews_message_id__is",
+                "value": "",
+                "type": "query",
+                "description": "Sort previews with these message IDs at the top"
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a single message group."
+        },
+        {
+          "info": {
+            "name": "Dismiss message group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/message-groups/:id/dismiss",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Canonical ID of the message group to dismiss"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Dismiss all messages in a group, including future messages."
+        },
+        {
+          "info": {
+            "name": "Quarantine message group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/message-groups/:id/quarantine",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Canonical ID of the message group to quarantine"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Quarantine all messages in a group, including future messages."
+        },
+        {
+          "info": {
+            "name": "Restore message group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/message-groups/:id/restore",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Canonical ID of the message group to restore"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restore all previously-trashed or quarantined messages in a group and turn off automatic trashing/quarantining of future messages in the group. \"For an Office 365 message source, each message will be put back in the folder it was in before. For a Google Workspace message source, any applied labels (e.g. \"Trash\") will be removed from each message.\""
+        },
+        {
+          "info": {
+            "name": "Share a message with Sublime",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/message-groups/:id/share-with-sublime",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Canonical ID of the message group to share"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Share a message with the Sublime team"
+        },
+        {
+          "info": {
+            "name": "Trash message group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{server}/v0/message-groups/:id/trash",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Canonical ID of the message group to trash"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Trash all messages in a group, including future messages. For an Office 365 message source, each message will be moved to the \"Recoverable Items\" folder. For a Google Workspace message source, the \"Trash\" label will be added to each message."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

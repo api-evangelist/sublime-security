@@ -1,0 +1,190 @@
+{
+  "item": [
+    {
+      "id": "35076137-2179-4913-bd12-3804efd53531",
+      "name": "Enrichment",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0ef22c84-9cec-4cab-abfe-73994475bf5c",
+          "name": "Analyze a provided link using ml.link_analysis functionality",
+          "request": {
+            "name": "Analyze a provided link using ml.link_analysis functionality",
+            "description": {
+              "content": "Analyze a provided link using ml.link_analysis functionality.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "enrichment",
+                "link_analysis",
+                "evaluate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of http,https)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "Base URL of your Sublime deployment",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<string>\",\n  \"no_logo_detect\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "454b5caf-266a-48a2-a2e1-ee5cac86e80e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "enrichment",
+                    "link_analysis",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of http,https)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "Base URL of your Sublime deployment",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"no_logo_detect\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additional_responses\": [\n    {\n      \"content_type\": \"string\",\n      \"file\": {\n        \"file_extension\": \"string\",\n        \"file_name\": \"string\",\n        \"file_type\": \"wav\",\n        \"md5\": \"string\",\n        \"raw\": \"string\",\n        \"sha1\": \"string\",\n        \"sha256\": \"string\",\n        \"size\": 7298\n      },\n      \"json\": {},\n      \"status_code\": 4357,\n      \"url\": {\n        \"url\": \"string\",\n        \"domain\": {\n          \"domain\": \"ygZqlYZTwrcjkBcd.igx\",\n          \"punycode\": \"string\",\n          \"root_domain\": \"GIeZxhDpsXAUExbInCgTcvM.cy\",\n          \"sld\": \"string\",\n          \"subdomain\": \"string\",\n          \"tld\": \"string\",\n          \"valid\": true\n        },\n        \"fragment\": \"string\",\n        \"ip\": {\n          \"ip\": \"string\",\n          \"translation\": {\n            \"original\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"v4_to_v6\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"version\": 2857\n        },\n        \"password\": \"string\",\n        \"path\": \"string\",\n        \"port\": 7701,\n        \"query_params\": \"string\",\n        \"query_params_decoded\": {\n          \"key_0\": [\n            \"string\",\n            \"string\"\n          ],\n          \"key_1\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"rewrite\": {\n          \"original\": \"string\",\n          \"encoders\": [\n            \"squarespace\",\n            \"azure_safelink\"\n          ]\n        },\n        \"scheme\": \"string\",\n        \"username\": \"string\"\n      }\n    },\n    {\n      \"content_type\": \"string\",\n      \"file\": {\n        \"file_extension\": \"string\",\n        \"file_name\": \"string\",\n        \"file_type\": \"webp\",\n        \"md5\": \"string\",\n        \"raw\": \"string\",\n        \"sha1\": \"string\",\n        \"sha256\": \"string\",\n        \"size\": 5877\n      },\n      \"json\": {},\n      \"status_code\": 3675,\n      \"url\": {\n        \"url\": \"string\",\n        \"domain\": {\n          \"domain\": \"DWcrot.fy\",\n          \"punycode\": \"string\",\n          \"root_domain\": \"BdcjyvuGHGzOkDMUXLV.qlz\",\n          \"sld\": \"string\",\n          \"subdomain\": \"string\",\n          \"tld\": \"string\",\n          \"valid\": false\n        },\n        \"fragment\": \"string\",\n        \"ip\": {\n          \"ip\": \"string\",\n          \"translation\": {\n            \"original\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"v4_to_v6\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"version\": 2822\n        },\n        \"password\": \"string\",\n        \"path\": \"string\",\n        \"port\": 6158,\n        \"query_params\": \"string\",\n        \"query_params_decoded\": {\n          \"key_0\": [\n            \"string\",\n            \"string\"\n          ],\n          \"key_1\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"rewrite\": {\n          \"original\": \"string\",\n          \"encoders\": [\n            \"azure_safelink\",\n            \"inky\"\n          ]\n        },\n        \"scheme\": \"string\",\n        \"username\": \"string\"\n      }\n    }\n  ],\n  \"analyzed\": false,\n  \"content_type\": \"string\",\n  \"credphish\": {\n    \"brand\": {\n      \"confidence\": \"low\",\n      \"name\": \"Bass Pro Shop\"\n    },\n    \"confidence\": \"low\",\n    \"contains_captcha\": true,\n    \"contains_login\": true,\n    \"disposition\": \"unknown\"\n  },\n  \"diagnostics\": {\n    \"created_at\": \"1968-09-02T16:23:54.960Z\",\n    \"submit_verdict\": \"string\",\n    \"submit_verdict_url\": \"string\"\n  },\n  \"effective_url\": {\n    \"url\": \"string\",\n    \"domain\": {\n      \"domain\": \"UXAwNLzhkrfCcUqHSsL.jg\",\n      \"punycode\": \"string\",\n      \"root_domain\": \"dzVxcumrtEGIe.ykp\",\n      \"sld\": \"string\",\n      \"subdomain\": \"string\",\n      \"tld\": \"string\",\n      \"valid\": true\n    },\n    \"fragment\": \"string\",\n    \"ip\": {\n      \"ip\": \"string\",\n      \"translation\": {\n        \"original\": \"string\",\n        \"v4_to_v6\": true\n      },\n      \"version\": 1978\n    },\n    \"password\": \"string\",\n    \"path\": \"string\",\n    \"port\": 4534,\n    \"query_params\": \"string\",\n    \"query_params_decoded\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"rewrite\": {\n      \"original\": \"string\",\n      \"encoders\": [\n        \"google_translate_open_redirect\",\n        \"sqclick\"\n      ]\n    },\n    \"scheme\": \"string\",\n    \"username\": \"string\"\n  },\n  \"files_downloaded\": [\n    {\n      \"file_extension\": \"string\",\n      \"file_name\": \"string\",\n      \"file_type\": \"macho\",\n      \"md5\": \"string\",\n      \"raw\": \"string\",\n      \"sha1\": \"string\",\n      \"sha256\": \"string\",\n      \"size\": 6963\n    },\n    {\n      \"file_extension\": \"string\",\n      \"file_name\": \"string\",\n      \"file_type\": \"mov\",\n      \"md5\": \"string\",\n      \"raw\": \"string\",\n      \"sha1\": \"string\",\n      \"sha256\": \"string\",\n      \"size\": 2334\n    }\n  ],\n  \"final_dom\": {\n    \"display_text\": \"string\",\n    \"inner_text\": \"string\",\n    \"links\": [\n      {\n        \"display_text\": \"string\",\n        \"display_url\": {\n          \"url\": \"string\",\n          \"domain\": {\n            \"domain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"punycode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"root_domain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sld\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"subdomain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tld\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"valid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"fragment\": \"string\",\n          \"ip\": {\n            \"ip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"translation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"password\": \"string\",\n          \"path\": \"string\",\n          \"port\": 7979,\n          \"query_params\": \"string\",\n          \"query_params_decoded\": {\n            \"key_0\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"key_1\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"key_2\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"key_3\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"rewrite\": {\n            \"original\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"encoders\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"scheme\": \"string\",\n          \"username\": \"string\"\n        },\n        \"href_url\": {\n          \"url\": \"string\",\n          \"domain\": {\n            \"domain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"punycode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"root_domain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sld\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"subdomain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tld\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"valid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"fragment\": \"string\",\n          \"ip\": {\n            \"ip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"translation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"password\": \"string\",\n          \"path\": \"string\",\n          \"port\": 9888,\n          \"query_params\": \"string\",\n          \"query_params_decoded\": {\n            \"key_0\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"key_1\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"rewrite\": {\n            \"original\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"encoders\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"scheme\": \"string\",\n          \"username\": \"string\"\n        },\n        \"mismatched\": true,\n        \"parser\": \"hyperlink\",\n        \"visible\": true\n      },\n      {\n        \"display_text\": \"string\",\n        \"display_url\": {\n          \"url\": \"string\",\n          \"domain\": {\n            \"domain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"punycode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"root_domain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sld\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"subdomain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tld\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"valid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"fragment\": \"string\",\n          \"ip\": {\n            \"ip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"translation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"password\": \"string\",\n          \"path\": \"string\",\n          \"port\": 2362,\n          \"query_params\": \"string\",\n          \"query_params_decoded\": {\n            \"key_0\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"rewrite\": {\n            \"original\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"encoders\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"scheme\": \"string\",\n          \"username\": \"string\"\n        },\n        \"href_url\": {\n          \"url\": \"string\",\n          \"domain\": {\n            \"domain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"punycode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"root_domain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sld\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"subdomain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tld\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"valid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"fragment\": \"string\",\n          \"ip\": {\n            \"ip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"translation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"password\": \"string\",\n          \"path\": \"string\",\n          \"port\": 1728,\n          \"query_params\": \"string\",\n          \"query_params_decoded\": {\n            \"key_0\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"key_1\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"rewrite\": {\n            \"original\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"encoders\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"scheme\": \"string\",\n          \"username\": \"string\"\n        },\n        \"mismatched\": true,\n        \"parser\": \"plain\",\n        \"visible\": false\n      }\n    ],\n    \"raw\": \"string\"\n  },\n  \"original_url\": {\n    \"url\": \"string\",\n    \"domain\": {\n      \"domain\": \"uMNvMaijhrc.ram\",\n      \"punycode\": \"string\",\n      \"root_domain\": \"bGmiHNjJSpH.zn\",\n      \"sld\": \"string\",\n      \"subdomain\": \"string\",\n      \"tld\": \"string\",\n      \"valid\": false\n    },\n    \"fragment\": \"string\",\n    \"ip\": {\n      \"ip\": \"string\",\n      \"translation\": {\n        \"original\": \"string\",\n        \"v4_to_v6\": true\n      },\n      \"version\": 7900\n    },\n    \"password\": \"string\",\n    \"path\": \"string\",\n    \"port\": 1881,\n    \"query_params\": \"string\",\n    \"query_params_decoded\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"rewrite\": {\n      \"original\": \"string\",\n      \"encoders\": [\n        \"google_adservices\",\n        \"google_open_redirect\"\n      ]\n    },\n    \"scheme\": \"string\",\n    \"username\": \"string\"\n  },\n  \"page_status_code\": 7397,\n  \"redirect_history\": [\n    {\n      \"url\": \"string\",\n      \"domain\": {\n        \"domain\": \"OJKOfaJMv.rc\",\n        \"punycode\": \"string\",\n        \"root_domain\": \"SvBecSgSn.rehw\",\n        \"sld\": \"string\",\n        \"subdomain\": \"string\",\n        \"tld\": \"string\",\n        \"valid\": false\n      },\n      \"fragment\": \"string\",\n      \"ip\": {\n        \"ip\": \"string\",\n        \"translation\": {\n          \"original\": \"string\",\n          \"v4_to_v6\": true\n        },\n        \"version\": 8918\n      },\n      \"password\": \"string\",\n      \"path\": \"string\",\n      \"port\": 9125,\n      \"query_params\": \"string\",\n      \"query_params_decoded\": {\n        \"key_0\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_1\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_2\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_3\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"rewrite\": {\n        \"original\": \"string\",\n        \"encoders\": [\n          \"doubleclick\",\n          \"pylonlinks\"\n        ]\n      },\n      \"scheme\": \"string\",\n      \"username\": \"string\"\n    },\n    {\n      \"url\": \"string\",\n      \"domain\": {\n        \"domain\": \"htaSVO.hx\",\n        \"punycode\": \"string\",\n        \"root_domain\": \"nqGPlVNaipUcpyDooNDyLG.fd\",\n        \"sld\": \"string\",\n        \"subdomain\": \"string\",\n        \"tld\": \"string\",\n        \"valid\": false\n      },\n      \"fragment\": \"string\",\n      \"ip\": {\n        \"ip\": \"string\",\n        \"translation\": {\n          \"original\": \"string\",\n          \"v4_to_v6\": true\n        },\n        \"version\": 8089\n      },\n      \"password\": \"string\",\n      \"path\": \"string\",\n      \"port\": 3075,\n      \"query_params\": \"string\",\n      \"query_params_decoded\": {\n        \"key_0\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"rewrite\": {\n        \"original\": \"string\",\n        \"encoders\": [\n          \"youtube_set_sid\",\n          \"doubleclick\"\n        ]\n      },\n      \"scheme\": \"string\",\n      \"username\": \"string\"\n    }\n  ],\n  \"retrieved\": true,\n  \"retrieved_at\": \"2014-10-04T01:18:04.028Z\",\n  \"screenshot\": {\n    \"file_extension\": \"string\",\n    \"file_name\": \"string\",\n    \"file_type\": \"woff\",\n    \"raw\": \"string\",\n    \"size\": 1959\n  },\n  \"status_code\": 980,\n  \"submitted\": true,\n  \"unique_urls_accessed\": [\n    {\n      \"url\": \"string\",\n      \"domain\": {\n        \"domain\": \"jchUreZhYwAeWTjIYALOPrZmQJ.nog\",\n        \"punycode\": \"string\",\n        \"root_domain\": \"uiyLddGeKhiRBfEobRSzRCtaxOVtVEle.wh\",\n        \"sld\": \"string\",\n        \"subdomain\": \"string\",\n        \"tld\": \"string\",\n        \"valid\": true\n      },\n      \"fragment\": \"string\",\n      \"ip\": {\n        \"ip\": \"string\",\n        \"translation\": {\n          \"original\": \"string\",\n          \"v4_to_v6\": true\n        },\n        \"version\": 2371\n      },\n      \"password\": \"string\",\n      \"path\": \"string\",\n      \"port\": 4815,\n      \"query_params\": \"string\",\n      \"query_params_decoded\": {\n        \"key_0\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"rewrite\": {\n        \"original\": \"string\",\n        \"encoders\": [\n          \"microsoft_oauth_redirect\",\n          \"postmark\"\n        ]\n      },\n      \"scheme\": \"string\",\n      \"username\": \"string\"\n    },\n    {\n      \"url\": \"string\",\n      \"domain\": {\n        \"domain\": \"lYDwKiVcftWH.dtb\",\n        \"punycode\": \"string\",\n        \"root_domain\": \"DKtlGIMONiywajFIpTzcPljcPjmO.tn\",\n        \"sld\": \"string\",\n        \"subdomain\": \"string\",\n        \"tld\": \"string\",\n        \"valid\": false\n      },\n      \"fragment\": \"string\",\n      \"ip\": {\n        \"ip\": \"string\",\n        \"translation\": {\n          \"original\": \"string\",\n          \"v4_to_v6\": true\n        },\n        \"version\": 1533\n      },\n      \"password\": \"string\",\n      \"path\": \"string\",\n      \"port\": 5290,\n      \"query_params\": \"string\",\n      \"query_params_decoded\": {\n        \"key_0\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_1\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"rewrite\": {\n        \"original\": \"string\",\n        \"encoders\": [\n          \"microsoft_oauth_redirect\",\n          \"esvalabs\"\n        ]\n      },\n      \"scheme\": \"string\",\n      \"username\": \"string\"\n    }\n  ],\n  \"would_analyze\": true,\n  \"would_submit\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of http,https)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "Base URL of your Sublime deployment",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "platform.sublime.security",
+      "key": "server"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{server}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5e2e543d-fc5a-4a5e-b7f8-82d7a2e8c338",
+    "name": "Multi-Tenancy API (BETA) BinExplode Enrichment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: support@sublime.security",
+      "type": "text/plain"
+    }
+  }
+}
