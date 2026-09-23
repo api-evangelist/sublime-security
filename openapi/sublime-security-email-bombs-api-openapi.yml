@@ -1,9 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: support@sublime.security
-  title: Multi-Tenancy API (BETA) BinExplode Email Bombs API
-  version: "1.0"
+  title: Sublime Platform Email Bombs API
+  version: ''
 servers:
 - url: '{scheme}://{server}'
   variables:
@@ -22,7 +22,6 @@ tags:
 paths:
   /v0/messages/bombs:
     get:
-      description: List email bombs
       operationId: listEmailBombs
       parameters:
       - description: Filter by active status. true = only active, false = only inactive, null = all
@@ -30,15 +29,17 @@ paths:
         name: active
         schema:
           description: Filter by active status. true = only active, false = only inactive, null = all
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
       - description: Filter by dismissed status. true = only dismissed, false = only not dismissed, null = all
         in: query
         name: dismissed
         schema:
           description: Filter by dismissed status. true = only dismissed, false = only not dismissed, null = all
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
       - description: The maximum number of email bombs to return
         in: query
         name: limit
@@ -46,16 +47,18 @@ paths:
           description: The maximum number of email bombs to return
           format: int32
           maximum: 500
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       - description: The (zero-based) offset of the email bombs to return
         in: query
         name: offset
         schema:
           description: The (zero-based) offset of the email bombs to return
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       responses:
         '200':
           content:
@@ -86,7 +89,6 @@ paths:
       - Email Bombs
   /v0/messages/bombs/{id}:
     get:
-      description: Get email bomb
       operationId: getEmailBomb
       parameters:
       - description: ID of the email bomb
@@ -131,11 +133,71 @@ paths:
       - Email Bombs
 components:
   schemas:
-    DismissEmailBombInput:
+    HandlersV0ListEmailBombsResponse:
       properties:
-        review_comment:
-          description: Comment describing reason for dismissing the email bomb
-          nullable: true
+        count:
+          description: Count of email bombs for this page
+          format: int32
+          type: integer
+        email_bombs:
+          description: List of email bombs
+          items:
+            $ref: '#/components/schemas/HandlersV0EmailBombDetail'
+          type: array
+        total:
+          description: Total number of email bombs
+          format: int32
+          type: integer
+      required:
+      - count
+      - total
+      type: object
+    HandlersV0EmailBombDetail:
+      properties:
+        active:
+          description: Whether the email bomb is currently active (based on last_message_added_at)
+          type: boolean
+        created_at:
+          description: Time when the email bomb was first detected
+          format: date-time
+          type: string
+        end_time:
+          description: End time of the email bomb, when the last message was received
+          format: date-time
+          type: string
+        id:
+          description: ID of the email bomb
+          format: uuid
+          type: string
+        last_message_added_at:
+          description: Time when the last message was added to the email bomb
+          format: date-time
+          type: string
+        mailbox:
+          $ref: '#/components/schemas/Handler_typesMailbox'
+        message_count:
+          description: Total number of messages in the email bomb
+          format: int32
+          type: integer
+        reviewed_at:
+          description: Time when this email bomb was reviewed
+          format: date-time
+          type:
+          - string
+          - 'null'
+        reviewed_by_user_id:
+          description: ID of the user who dismissed this email bomb
+          format: uuid
+          type:
+          - string
+          - 'null'
+        start_time:
+          description: Start time of the email bomb, when the first message was received
+          format: date-time
+          type: string
+        updated_at:
+          description: Time when the email bomb was last updated
+          format: date-time
           type: string
       type: object
     HandlersV0GetEmailBombResponse:
@@ -168,13 +230,15 @@ components:
         reviewed_at:
           description: Time when this email bomb was reviewed
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         reviewed_by_user_id:
           description: ID of the user who dismissed this email bomb
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         start_time:
           description: Start time of the email bomb, when the first message was received
           format: date-time
@@ -183,71 +247,6 @@ components:
           description: Time when the email bomb was last updated
           format: date-time
           type: string
-      type: object
-    HandlersV0EmailBombDetail:
-      properties:
-        active:
-          description: Whether the email bomb is currently active (based on last_message_added_at)
-          type: boolean
-        created_at:
-          description: Time when the email bomb was first detected
-          format: date-time
-          type: string
-        end_time:
-          description: End time of the email bomb, when the last message was received
-          format: date-time
-          type: string
-        id:
-          description: ID of the email bomb
-          format: uuid
-          type: string
-        last_message_added_at:
-          description: Time when the last message was added to the email bomb
-          format: date-time
-          type: string
-        mailbox:
-          $ref: '#/components/schemas/Handler_typesMailbox'
-        message_count:
-          description: Total number of messages in the email bomb
-          format: int32
-          type: integer
-        reviewed_at:
-          description: Time when this email bomb was reviewed
-          format: date-time
-          nullable: true
-          type: string
-        reviewed_by_user_id:
-          description: ID of the user who dismissed this email bomb
-          format: uuid
-          nullable: true
-          type: string
-        start_time:
-          description: Start time of the email bomb, when the first message was received
-          format: date-time
-          type: string
-        updated_at:
-          description: Time when the email bomb was last updated
-          format: date-time
-          type: string
-      type: object
-    HandlersV0ListEmailBombsResponse:
-      properties:
-        count:
-          description: Count of email bombs for this page
-          format: int32
-          type: integer
-        email_bombs:
-          description: List of email bombs
-          items:
-            $ref: '#/components/schemas/HandlersV0EmailBombDetail'
-          type: array
-        total:
-          description: Total number of email bombs
-          format: int32
-          type: integer
-      required:
-      - count
-      - total
       type: object
     CreateEmailBombInput:
       properties:
@@ -275,8 +274,9 @@ components:
           type: string
         external_id:
           description: ID of the mailbox in the source system (e.g., Office 365 or Google Workspace)
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         id:
           description: Mailbox ID
           format: uuid
@@ -290,8 +290,9 @@ components:
         created_bomb_id:
           description: ID of the newly created bomb. Omitted when the time range merged into existing bombs.
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         overlapping_bomb_ids:
           description: IDs of all bombs overlapping the requested time range
           format: uuid
@@ -304,6 +305,14 @@ components:
           items:
             type: string
           type: array
+      type: object
+    DismissEmailBombInput:
+      properties:
+        review_comment:
+          description: Comment describing reason for dismissing the email bomb
+          type:
+          - string
+          - 'null'
       type: object
   securitySchemes:
     bearerAuth:

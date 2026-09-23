@@ -1,9 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: support@sublime.security
-  title: Multi-Tenancy API (BETA) BinExplode User Reports API
-  version: "1.0"
+  title: Sublime Platform User Reports API
+  version: ''
 servers:
 - url: '{scheme}://{server}'
   variables:
@@ -22,7 +22,6 @@ tags:
 paths:
   /v0/user-reports:
     get:
-      description: List user reports
       operationId: listUserReports
       parameters:
       - description: The maximum number of message groups to return. If the value exceeds the maximum, then the maximum value will be used.
@@ -32,24 +31,27 @@ paths:
           description: The maximum number of message groups to return. If the value exceeds the maximum, then the maximum value will be used.
           format: int32
           maximum: 500
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       - description: Inclusive start datetime filter for time of report, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only reports at or after this time will be returned.
         in: query
         name: reported_at[gte]
         schema:
           description: Inclusive start datetime filter for time of report, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only reports at or after this time will be returned.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Exclusive end datetime filter for time of report, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only reports before this time will be returned.
         in: query
         name: reported_at[lt]
         schema:
           description: Exclusive end datetime filter for time of report, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only reports before this time will be returned.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       responses:
         '200':
           content:
@@ -85,8 +87,9 @@ components:
           type: string
         reported_by_message_id:
           description: ID of the reporting message (the user forward)
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         reported_message_canonical_id:
           description: Canonical ID of the message that was reported
           type: string

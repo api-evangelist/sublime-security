@@ -1,9 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: support@sublime.security
-  title: Multi-Tenancy API (BETA) BinExplode Message Groups API
-  version: "1.0"
+  title: Sublime Platform Message Groups API
+  version: ''
 servers:
 - url: '{scheme}://{server}'
   variables:
@@ -22,7 +22,6 @@ tags:
 paths:
   /v0/message-groups:
     get:
-      description: List message groups
       operationId: listMessageGroups
       parameters:
       - description: Filters result to only message groups with the provided attachment name
@@ -68,8 +67,9 @@ paths:
         schema:
           description: Filters result to only message groups that have flagged (ONLY) rules with the 'Attack surface reduction' tag
           format: bool
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Filters result to only message groups with the provided canonical ID
         explode: true
         in: query
@@ -86,40 +86,45 @@ paths:
         schema:
           description: Inclusive start datetime filter, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only message groups that contain a message processed at or after this time will be returned.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Exclusive end datetime filter, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups that contain a message processed before this time will be returned.
         in: query
         name: created_at__lt
         schema:
           description: Exclusive end datetime filter, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups that contain a message processed before this time will be returned.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: 'DEPRECATED: Use first_message_reported_at__gte'
         in: query
         name: first_message_reported_at[gte]
         schema:
           description: 'DEPRECATED: Use first_message_reported_at__gte'
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Filters result to only message groups with a message first reported at or after the provided time. Datetime must be in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z').
         in: query
         name: first_message_reported_at__gte
         schema:
           description: Filters result to only message groups with a message first reported at or after the provided time. Datetime must be in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z').
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Filters result to only message groups with at least one flagged message
         in: query
         name: flagged
         schema:
           description: Filters result to only message groups with at least one flagged message
           format: bool
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
       - description: Filters result to only message groups with the provided flagged rule ID
         explode: true
         in: query
@@ -178,8 +183,9 @@ paths:
         schema:
           description: 'DEPRECATED: Use created_at__gte instead'
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: The maximum number of message groups to return. If the value exceeds the maximum, then the maximum value will be used.
         in: query
         name: limit
@@ -187,8 +193,9 @@ paths:
           description: The maximum number of message groups to return. If the value exceeds the maximum, then the maximum value will be used.
           format: int32
           maximum: 500
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       - description: Filters result to only message groups with the provided mailbox email
         explode: true
         in: query
@@ -205,8 +212,9 @@ paths:
         schema:
           description: The (zero-based) offset of the message groups to return
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       - description: Filters result to only message groups with the provided recipient email
         explode: true
         in: query
@@ -233,8 +241,9 @@ paths:
         schema:
           description: Filters result to only message groups which have or have not been reviewed
           format: bool
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
       - description: Filters result to only message groups with the provided sender display name
         explode: true
         in: query
@@ -295,8 +304,9 @@ paths:
         schema:
           description: Filters result to only message groups with at least one reported message
           format: bool
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
       - description: Filters result to only message groups with the provided vendor
         explode: true
         in: query
@@ -462,8 +472,9 @@ paths:
         name: any
         schema:
           description: Searches every field (performs a case insensitive, OR search in all fields). Not compatible with other search fields.
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Search for messages containing an attachment MD5 match
         in: query
         name: attachment_md5
@@ -471,8 +482,9 @@ paths:
           description: Search for messages containing an attachment MD5 match
           maxLength: 32
           minLength: 32
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Search for messages containing an attachment SHA1 match
         in: query
         name: attachment_sha1
@@ -480,8 +492,9 @@ paths:
           description: Search for messages containing an attachment SHA1 match
           maxLength: 40
           minLength: 40
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Search for messages containing an attachment SHA256 match
         in: query
         name: attachment_sha256
@@ -489,62 +502,70 @@ paths:
           description: Search for messages containing an attachment SHA256 match
           maxLength: 64
           minLength: 64
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Inclusive start datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only message groups with a message processed at or after this time will be returned.
         in: query
         name: created_at[gte]
         schema:
           description: Inclusive start datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only message groups with a message processed at or after this time will be returned.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Exclusive end datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups with a message processed before this time will be returned.
         in: query
         name: created_at[lt]
         schema:
           description: Exclusive end datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups with a message processed before this time will be returned.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Deprecated, use created_at[lt]. Exclusive end datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups with a message processed before this time will be returned.
         in: query
         name: created_at[lte]
         schema:
           description: Deprecated, use created_at[lt]. Exclusive end datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups with a message processed before this time will be returned.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Search in attachment filenames (case insensitive wildcard match)
         in: query
         name: file_name
         schema:
           description: Search in attachment filenames (case insensitive wildcard match)
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Inclusive start datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only message groups reported at or after this time will be returned.
         in: query
         name: first_reported_as_phish_at[gte]
         schema:
           description: Inclusive start datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only message groups reported at or after this time will be returned.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Exclusive end datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups reported before this time will be returned.
         in: query
         name: first_reported_as_phish_at[lt]
         schema:
           description: Exclusive end datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups reported before this time will be returned.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: 'DEPRECATED: Use ''sender'' instead. Search in the From field. (case insensitive wildcard match)'
         in: query
         name: from
         schema:
           description: 'DEPRECATED: Use ''sender'' instead. Search in the From field. (case insensitive wildcard match)'
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: The maximum number of message groups to return. If the value exceeds the maximum, then the maximum value will be used.
         in: query
         name: limit
@@ -552,37 +573,42 @@ paths:
           description: The maximum number of message groups to return. If the value exceeds the maximum, then the maximum value will be used.
           format: int32
           maximum: 500
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       - description: Search for a mailbox by email address (case insensitive, wildcard match)
         in: query
         name: mailbox
         schema:
           description: Search for a mailbox by email address (case insensitive, wildcard match)
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Search in the Message-ID header (case insensitive wildcard match)
         in: query
         name: message_id
         schema:
           description: Search in the Message-ID header (case insensitive wildcard match)
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: The (zero-based) offset of the message groups to return
         in: query
         name: offset
         schema:
           description: The (zero-based) offset of the message groups to return
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       - description: Search in the From field (case insensitive wildcard match)
         in: query
         name: sender
         schema:
           description: Search in the From field (case insensitive wildcard match)
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Search for messages in any of the given states
         explode: true
         in: query
@@ -598,22 +624,25 @@ paths:
         name: subject
         schema:
           description: Search in the message subject (case insensitive wildcard match)
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Search in the To, CC, and Bcc fields (case insensitive wildcard match). If possible, use 'mailbox' and 'type' instead for better performance
         in: query
         name: to
         schema:
           description: Search in the To, CC, and Bcc fields (case insensitive wildcard match). If possible, use 'mailbox' and 'type' instead for better performance
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Search for messages by type
         in: query
         name: type
         schema:
           description: Search for messages by type
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       responses:
         '200':
           content:
@@ -634,8 +663,9 @@ paths:
         name: cursor
         schema:
           description: Opaque pagination cursor returned in the previous response's cursor field.
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: The maximum number of message groups to return.
         in: query
         name: limit
@@ -652,16 +682,18 @@ paths:
         schema:
           description: Inclusive lower bound on the sort timestamp (newest_created_at for type=flagged, first_reported_as_phish_at for type=reported).
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Exclusive upper bound on the sort timestamp (newest_created_at for type=flagged, first_reported_as_phish_at for type=reported).
         in: query
         name: timestamp__lt
         schema:
           description: Exclusive upper bound on the sort timestamp (newest_created_at for type=flagged, first_reported_as_phish_at for type=reported).
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: 'Which timestamp the endpoint sorts/filters on: ''flagged'' uses newest_created_at, ''reported'' uses first_reported_as_phish_at.'
         in: query
         name: type
@@ -866,54 +898,125 @@ paths:
       - Message Groups
 components:
   schemas:
-    Handler_typesMessageGroupActivityEvent:
+    TruncatedBoundedValues_handler_types.MessageGroupActivityEvent:
+      description: Link clicks observed on messages in the group, newest first; for full history use GET /v1/messages/groups/{id}/activity?type=click
       properties:
-        client_ip:
-          description: Client IP of the click (click events only)
-          nullable: true
-          type: string
-        forward_recipients:
-          $ref: '#/components/schemas/BoundedValues_string'
-        mailbox:
-          $ref: '#/components/schemas/Handler_typesMessageGroupActivityEventMailbox'
-        message_id:
-          description: ID of the message, except for 'received' events
-          nullable: true
-          type: string
-        recipients:
-          $ref: '#/components/schemas/TruncatedBoundedValues_string'
-        timestamp:
-          description: Time of the event
-          format: date-time
-          type: string
-        type:
-          description: Type of activity event
-          type: string
-        url:
-          description: URL that was clicked (click events only)
-          nullable: true
-          type: string
-        user_agent:
-          description: User agent of the click (click events only)
-          nullable: true
-          type: string
+        total:
+          format: int32
+          type: integer
+        truncated:
+          type: boolean
+        values:
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageGroupActivityEvent'
+          type: array
       type: object
-    Handler_typesMessageReportV0:
+    Handler_typesV0ListMessageGroupsResponse:
       properties:
-        channel:
-          description: Channel used to report the group
+        count:
+          description: Count of messages groups for this page
+          format: int32
+          type: integer
+        message_groups:
+          description: Array of messages groups matching the search
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageGroupV0'
+          type: array
+        stats_limit_exceeded:
+          description: Indicates if 'total' is a lower bound
+          type: boolean
+        total:
+          description: Total number of messages groups matching the search
+          format: int32
+          type: integer
+      required:
+      - count
+      - total
+      type: object
+    RestoreMultipleMessageGroupsInput:
+      properties:
+        classification:
+          description: Classification to apply to the messages being reviewed. Optional.
+          enum:
+          - malicious
+          - benign
+          - spam
+          - graymail
+          - simulation
+          - unwanted
+          - violation
+          - non-violation
           type: string
-        reported_at:
-          description: Time the group was reported
-          format: date-time
+        message_group_ids:
+          description: Canonical IDs of the message groups to restore
+          items:
+            type: string
+          minItems: 1
+          type: array
+        report_label:
+          description: Label to apply to messages being reviewed. Optional.
+          enum:
+          - spam
+          - phishing
+          - false_positive
+          - false_negative
+          - phishing_simulation
+          - graymail
+          - violation
+          - non-violation
           type: string
-        reported_by_message_id:
-          description: ID of the reporting message (the user forward)
-          nullable: true
+        review_comment:
+          description: Comment describing reason for action
+          type:
+          - string
+          - 'null'
+      required:
+      - message_group_ids
+      type: object
+    HandlersReviewMessagesResponse:
+      properties:
+        actions:
+          description: List of actions that were applied
+          items:
+            type: string
+          type: array
+        task_id:
+          description: Tracking ID of the parent task
+          type:
+          - string
+          - 'null'
+      type: object
+    DismissMessageCanonicalGroupInput:
+      properties:
+        classification:
+          description: Classification to apply to the messages being reviewed. Optional.
+          enum:
+          - malicious
+          - benign
+          - spam
+          - graymail
+          - simulation
+          - unwanted
+          - violation
+          - non-violation
           type: string
-        reporter:
-          description: Email address of the user who reported the group
+        report_label:
+          description: Label to apply to messages being reviewed. Optional.
+          enum:
+          - spam
+          - phishing
+          - false_positive
+          - false_negative
+          - phishing_simulation
+          - graymail
+          - violation
+          - non-violation
           type: string
+        review_comment:
+          description: Comment describing reason for action
+          type:
+          - string
+          - 'null'
       type: object
     Handler_typesMessageGroupSIEMSummaryItem:
       properties:
@@ -956,158 +1059,20 @@ components:
         subjects:
           $ref: '#/components/schemas/BoundedValues_string'
       type: object
-    Handler_typesMessageGroupActivityEventMailbox:
-      description: Details about the mailbox associated with the message, except for 'received' events
-      properties:
-        display_name:
-          description: Display name of the mailbox
-          nullable: true
-          type: string
-        email_address:
-          description: Email address of the mailbox
-          type: string
-        external_id:
-          description: External ID of the mailbox
-          nullable: true
-          type: string
-      type: object
-    Handler_typesV0ListMessageGroupsResponse:
-      properties:
-        count:
-          description: Count of messages groups for this page
-          format: int32
-          type: integer
-        message_groups:
-          description: Array of messages groups matching the search
-          items:
-            $ref: '#/components/schemas/Handler_typesMessageGroupV0'
-          type: array
-        stats_limit_exceeded:
-          description: Indicates if 'total' is a lower bound
-          type: boolean
-        total:
-          description: Total number of messages groups matching the search
-          format: int32
-          type: integer
-      required:
-      - count
-      - total
-      type: object
-    Handler_typesMessageGroupEventLinksClickedV0:
-      properties:
-        clicks:
-          description: Click events for the URL
-          items:
-            $ref: '#/components/schemas/Handler_typesMessageGroupEventLinkClick'
-          type: array
-        url:
-          description: URL that was clicked
-          type: string
-      type: object
-    RestoreMultipleMessageGroupsInput:
-      properties:
-        classification:
-          description: Classification to apply to the messages being reviewed. Optional.
-          enum:
-          - malicious
-          - benign
-          - spam
-          - graymail
-          - simulation
-          - unwanted
-          - violation
-          - non-violation
-          type: string
-        message_group_ids:
-          description: Canonical IDs of the message groups to restore
-          items:
-            type: string
-          minItems: 1
-          type: array
-        report_label:
-          description: Label to apply to messages being reviewed. Optional.
-          enum:
-          - spam
-          - phishing
-          - false_positive
-          - false_negative
-          - phishing_simulation
-          - graymail
-          - violation
-          - non-violation
-          type: string
-        review_comment:
-          description: Comment describing reason for action
-          nullable: true
-          type: string
-      required:
-      - message_group_ids
-      type: object
-    Handler_typesMessageGroupV0:
-      properties:
-        classification:
-          description: Classification of the message group
-          nullable: true
-          type: string
-        flagged_rules:
-          description: Flagged rules from the message
-          items:
-            $ref: '#/components/schemas/Handler_typesFlaggedRuleV0'
-          type: array
-        id:
-          description: Canonical ID of the group
-          type: string
-        message_links_clicked:
-          description: Message link clicked events
-          items:
-            $ref: '#/components/schemas/Handler_typesMessageGroupEventLinksClickedV0'
-          type: array
-        messages:
-          description: Message previews
-          items:
-            $ref: '#/components/schemas/Handler_typesMessagePreviewV0'
-          type: array
-        organization_id:
-          description: ID of the group's organization
-          type: string
-        review_comment:
-          description: Comment describing reason for action
-          nullable: true
-          type: string
-        review_label:
-          description: Message group label
-          nullable: true
-          type: string
-        review_status:
-          description: Message group status
-          nullable: true
-          type: string
-        state:
-          description: Message group state
-          nullable: true
-          type: string
-        user_reports:
-          description: User reports of the message
-          items:
-            $ref: '#/components/schemas/Handler_typesMessageReportV0'
-          type: array
-      required:
-      - id
-      type: object
-    Handler_typesRecipient:
-      properties:
-        email:
-          description: Email address
-          type: string
-      required:
-      - email
-      type: object
     Handler_typesSender:
       description: Details of the message sender
       properties:
         display_name:
           description: Display name
           type: string
+        email:
+          description: Email address
+          type: string
+      required:
+      - email
+      type: object
+    Handler_typesRecipient:
+      properties:
         email:
           description: Email address
           type: string
@@ -1148,10 +1113,188 @@ components:
           type: string
         review_comment:
           description: Comment describing reason for action
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       required:
       - message_group_ids
+      type: object
+    Handler_typesMailbox:
+      description: Mailbox that the email bomb was found in
+      properties:
+        email:
+          description: Mailbox email address
+          type: string
+        external_id:
+          description: ID of the mailbox in the source system (e.g., Office 365 or Google Workspace)
+          type:
+          - string
+          - 'null'
+        id:
+          description: Mailbox ID
+          format: uuid
+          type: string
+      required:
+      - email
+      - id
+      type: object
+    Handler_typesMessageGroupEventLinkClick:
+      properties:
+        clicked_at:
+          description: The time that the link was clicked
+          format: date-time
+          type: string
+        client_ip:
+          description: The originating client IP for the click
+          type: string
+        mailbox_display_name:
+          description: Display name of mailbox that performed the action
+          type:
+          - string
+          - 'null'
+        mailbox_email_address:
+          description: Mailbox email address that performed the action
+          type:
+          - string
+          - 'null'
+        mailbox_external_id:
+          description: External ID of the mailbox that performed the action
+          type:
+          - string
+          - 'null'
+        message_id:
+          description: ID of the Sublime message for which the action occurred
+          type: string
+        user_agent:
+          description: The originating user-agent for the click
+          type: string
+      type: object
+    TrashMessageCanonicalGroupInput:
+      properties:
+        classification:
+          description: Classification to apply to the messages being reviewed. Optional.
+          enum:
+          - malicious
+          - benign
+          - spam
+          - graymail
+          - simulation
+          - unwanted
+          - violation
+          - non-violation
+          type: string
+        report_label:
+          description: Label to apply to messages being reviewed. Optional.
+          enum:
+          - spam
+          - phishing
+          - false_positive
+          - false_negative
+          - phishing_simulation
+          - graymail
+          - violation
+          - non-violation
+          type: string
+        review_comment:
+          description: Comment describing reason for action
+          type:
+          - string
+          - 'null'
+      type: object
+    Handler_typesTaskAccepted:
+      properties:
+        task_id:
+          description: Task ID. Use the /v0/tasks/:id endpoint to check the task status.
+          format: uuid
+          type: string
+      required:
+      - task_id
+      type: object
+    Handler_typesMessagePreviewV0:
+      properties:
+        created_at:
+          description: Time this message was added to Sublime
+          format: date-time
+          type: string
+        delivered:
+          description: Whether or not the message has been delivered
+          type: boolean
+        forward_recipients:
+          description: Email addresses this message was forwarded to by the recipient mailbox
+          items:
+            type: string
+          type: array
+        forwarded_at:
+          description: Time this message was forwarded by the recipient mailbox. A null value indicates that it has not yet been forwarded
+          format: date-time
+          type:
+          - string
+          - 'null'
+        id:
+          description: Sublime message ID
+          type: string
+        mailbox:
+          $ref: '#/components/schemas/Handler_typesMailbox'
+        read_at:
+          description: Time this message was read in the user's mailbox. A null value indicates that it has not yet been marked read
+          format: date-time
+          type:
+          - string
+          - 'null'
+        recipients:
+          description: Details of the message recipients
+          items:
+            $ref: '#/components/schemas/Handler_typesRecipient'
+          type: array
+        replied_at:
+          description: Time that this message was replied to by the recipient mailbox. A null value indicates that it has not yet been replied to by the recipient
+          format: date-time
+          type:
+          - string
+          - 'null'
+        sender:
+          $ref: '#/components/schemas/Handler_typesSender'
+        subject:
+          description: Subject of the message
+          type: string
+      required:
+      - id
+      - mailbox
+      - recipients
+      - sender
+      - subject
+      type: object
+    QuarantineMessageCanonicalGroupInput:
+      properties:
+        classification:
+          description: Classification to apply to the messages being reviewed. Optional.
+          enum:
+          - malicious
+          - benign
+          - spam
+          - graymail
+          - simulation
+          - unwanted
+          - violation
+          - non-violation
+          type: string
+        report_label:
+          description: Label to apply to messages being reviewed. Optional.
+          enum:
+          - spam
+          - phishing
+          - false_positive
+          - false_negative
+          - phishing_simulation
+          - graymail
+          - violation
+          - non-violation
+          type: string
+        review_comment:
+          description: Comment describing reason for action
+          type:
+          - string
+          - 'null'
       type: object
     BoundedValues_string:
       description: Bounded first attachment names on messages in the group
@@ -1192,62 +1335,54 @@ components:
           type: string
         review_comment:
           description: Comment describing reason for action
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       type: object
-    Handler_typesMessageGroupEventLinkClick:
+    Handler_typesMessageGroupSIEMSummaryResponse:
       properties:
-        clicked_at:
-          description: The time that the link was clicked
-          format: date-time
-          type: string
-        client_ip:
-          description: The originating client IP for the click
-          type: string
-        mailbox_display_name:
-          description: Display name of mailbox that performed the action
-          nullable: true
-          type: string
-        mailbox_email_address:
-          description: Mailbox email address that performed the action
-          nullable: true
-          type: string
-        mailbox_external_id:
-          description: External ID of the mailbox that performed the action
-          nullable: true
-          type: string
-        message_id:
-          description: ID of the Sublime message for which the action occurred
-          type: string
-        user_agent:
-          description: The originating user-agent for the click
-          type: string
-      type: object
-    TruncatedBoundedValues_handler_types.MessageGroupActivityEvent:
-      description: Link clicks observed on messages in the group, newest first; for full history use GET /v1/messages/groups/{id}/activity?type=click
-      properties:
-        total:
-          format: int32
-          type: integer
-        truncated:
-          type: boolean
-        values:
+        cursor:
+          description: Opaque cursor for the next page; pass it back as the cursor query param. Null when no more pages are available.
+          type:
+          - string
+          - 'null'
+        message_groups:
+          description: List of flagged message groups for SIEM ingestion
           items:
-            $ref: '#/components/schemas/Handler_typesMessageGroupActivityEvent'
+            $ref: '#/components/schemas/Handler_typesMessageGroupSIEMSummaryItem'
           type: array
+      type: object
+    Handler_typesMessageGroupActivityEventMailbox:
+      description: Details about the mailbox associated with the message, except for 'received' events
+      properties:
+        display_name:
+          description: Display name of the mailbox
+          type:
+          - string
+          - 'null'
+        email_address:
+          description: Email address of the mailbox
+          type: string
+        external_id:
+          description: External ID of the mailbox
+          type:
+          - string
+          - 'null'
       type: object
     HuntMessageGroupsInput:
       properties:
         created_at[gte]:
           description: Inclusive start datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only message groups with a message processed at or after this time will be returned.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         created_at[lt]:
           description: Exclusive end datetime filter for search, in UTC using the ISO 8601 format (e.g., '2021-05-04T15:09:26Z'). Only message groups with a message processed before this time will be returned.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         private:
           description: Restrict hunt visibility to admin-only
           type: boolean
@@ -1256,270 +1391,6 @@ components:
           type: string
       required:
       - source
-      type: object
-    DismissMessageCanonicalGroupInput:
-      properties:
-        classification:
-          description: Classification to apply to the messages being reviewed. Optional.
-          enum:
-          - malicious
-          - benign
-          - spam
-          - graymail
-          - simulation
-          - unwanted
-          - violation
-          - non-violation
-          type: string
-        report_label:
-          description: Label to apply to messages being reviewed. Optional.
-          enum:
-          - spam
-          - phishing
-          - false_positive
-          - false_negative
-          - phishing_simulation
-          - graymail
-          - violation
-          - non-violation
-          type: string
-        review_comment:
-          description: Comment describing reason for action
-          nullable: true
-          type: string
-      type: object
-    TrashMessageCanonicalGroupInput:
-      properties:
-        classification:
-          description: Classification to apply to the messages being reviewed. Optional.
-          enum:
-          - malicious
-          - benign
-          - spam
-          - graymail
-          - simulation
-          - unwanted
-          - violation
-          - non-violation
-          type: string
-        report_label:
-          description: Label to apply to messages being reviewed. Optional.
-          enum:
-          - spam
-          - phishing
-          - false_positive
-          - false_negative
-          - phishing_simulation
-          - graymail
-          - violation
-          - non-violation
-          type: string
-        review_comment:
-          description: Comment describing reason for action
-          nullable: true
-          type: string
-      type: object
-    TruncatedBoundedValues_string:
-      description: The first recipient email addresses of the message involved in the event (received events only), may truncate with as few as 1 recipient
-      properties:
-        total:
-          format: int32
-          type: integer
-        truncated:
-          type: boolean
-        values:
-          items:
-            type: string
-          type: array
-      type: object
-    Handler_typesGetHuntResponse:
-      properties:
-        message_groups:
-          description: Array of messages groups returned by the hunt
-          items:
-            $ref: '#/components/schemas/Handler_typesMessageGroupV0'
-          type: array
-        task_response:
-          $ref: '#/components/schemas/Handler_typesGetTaskResponse'
-      type: object
-    Handler_typesGetTaskResponse:
-      description: Generic information about the scan task execution, such as status or errors.
-      properties:
-        created_at:
-          description: Task creation time
-          format: date-time
-          type: string
-        error:
-          description: Task error
-          type: string
-        id:
-          description: Task ID
-          format: uuid
-          type: string
-        state:
-          description: Task status
-          enum:
-          - pending
-          - started
-          - succeeded
-          - failed
-          - retrying
-          type: string
-      required:
-      - id
-      - state
-      type: object
-    Handler_typesMessagePreviewV0:
-      properties:
-        created_at:
-          description: Time this message was added to Sublime
-          format: date-time
-          type: string
-        delivered:
-          description: Whether or not the message has been delivered
-          type: boolean
-        forward_recipients:
-          description: Email addresses this message was forwarded to by the recipient mailbox
-          items:
-            type: string
-          type: array
-        forwarded_at:
-          description: Time this message was forwarded by the recipient mailbox. A null value indicates that it has not yet been forwarded
-          format: date-time
-          nullable: true
-          type: string
-        id:
-          description: Sublime message ID
-          type: string
-        mailbox:
-          $ref: '#/components/schemas/Handler_typesMailbox'
-        read_at:
-          description: Time this message was read in the user's mailbox. A null value indicates that it has not yet been marked read
-          format: date-time
-          nullable: true
-          type: string
-        recipients:
-          description: Details of the message recipients
-          items:
-            $ref: '#/components/schemas/Handler_typesRecipient'
-          type: array
-        replied_at:
-          description: Time that this message was replied to by the recipient mailbox. A null value indicates that it has not yet been replied to by the recipient
-          format: date-time
-          nullable: true
-          type: string
-        sender:
-          $ref: '#/components/schemas/Handler_typesSender'
-        subject:
-          description: Subject of the message
-          type: string
-      required:
-      - id
-      - mailbox
-      - recipients
-      - sender
-      - subject
-      type: object
-    Handler_typesMessageGroupSIEMSummaryResponse:
-      properties:
-        cursor:
-          description: Opaque cursor for the next page; pass it back as the cursor query param. Null when no more pages are available.
-          nullable: true
-          type: string
-        message_groups:
-          description: List of flagged message groups for SIEM ingestion
-          items:
-            $ref: '#/components/schemas/Handler_typesMessageGroupSIEMSummaryItem'
-          type: array
-      type: object
-    ShareWithSublimePublicInput:
-      properties:
-        destination:
-          description: Consent-scoped destination on Themis. Empty for the default shared-samples flow.
-          type: string
-        report_label:
-          description: User reported label that categorizes the report
-          enum:
-          - spam
-          - phishing
-          - false_positive
-          - violation
-          - non-violation
-          type: string
-        review_comment:
-          description: Comment describing reason for the report
-          type: string
-      type: object
-    Handler_typesFlaggedRuleV0:
-      properties:
-        id:
-          description: ID of the flagged rule
-          type: string
-        name:
-          description: Name of the flagged rule
-          type: string
-        tags:
-          description: List of tags for the flagged rule
-          items:
-            type: string
-          type: array
-      type: object
-    DismissMultipleMessageGroupsInput:
-      properties:
-        classification:
-          description: Classification to apply to the messages being reviewed. Optional.
-          enum:
-          - malicious
-          - benign
-          - spam
-          - graymail
-          - simulation
-          - unwanted
-          - violation
-          - non-violation
-          type: string
-        message_group_ids:
-          description: Canonical IDs of the message groups to dismiss
-          items:
-            type: string
-          minItems: 1
-          type: array
-        report_label:
-          description: Label to apply to messages being reviewed. Optional.
-          enum:
-          - spam
-          - phishing
-          - false_positive
-          - false_negative
-          - phishing_simulation
-          - graymail
-          - violation
-          - non-violation
-          type: string
-        review_comment:
-          description: Comment describing reason for action
-          nullable: true
-          type: string
-      required:
-      - message_group_ids
-      type: object
-    Handler_typesMailbox:
-      description: Mailbox that the email bomb was found in
-      properties:
-        email:
-          description: Mailbox email address
-          type: string
-        external_id:
-          description: ID of the mailbox in the source system (e.g., Office 365 or Google Workspace)
-          nullable: true
-          type: string
-        id:
-          description: Mailbox ID
-          format: uuid
-          type: string
-      required:
-      - email
-      - id
       type: object
     TrashMultipleMessageGroupsInput:
       properties:
@@ -1555,62 +1426,139 @@ components:
           type: string
         review_comment:
           description: Comment describing reason for action
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       required:
       - message_group_ids
       type: object
-    HandlersReviewMessagesResponse:
+    Handler_typesMessageGroupActivityEvent:
       properties:
-        actions:
-          description: List of actions that were applied
-          items:
-            type: string
-          type: array
-        task_id:
-          description: Tracking ID of the parent task
-          nullable: true
+        client_ip:
+          description: Client IP of the click (click events only)
+          type:
+          - string
+          - 'null'
+        forward_recipients:
+          $ref: '#/components/schemas/BoundedValues_string'
+        mailbox:
+          $ref: '#/components/schemas/Handler_typesMessageGroupActivityEventMailbox'
+        message_id:
+          description: ID of the message, except for 'received' events
+          type:
+          - string
+          - 'null'
+        recipients:
+          $ref: '#/components/schemas/TruncatedBoundedValues_string'
+        timestamp:
+          description: Time of the event
+          format: date-time
+          type: string
+        type:
+          description: Type of activity event
+          type: string
+        url:
+          description: URL that was clicked (click events only)
+          type:
+          - string
+          - 'null'
+        user_agent:
+          description: User agent of the click (click events only)
+          type:
+          - string
+          - 'null'
+      type: object
+    Handler_typesMessageReportV0:
+      properties:
+        channel:
+          description: Channel used to report the group
+          type: string
+        reported_at:
+          description: Time the group was reported
+          format: date-time
+          type: string
+        reported_by_message_id:
+          description: ID of the reporting message (the user forward)
+          type:
+          - string
+          - 'null'
+        reporter:
+          description: Email address of the user who reported the group
           type: string
       type: object
-    QuarantineMessageCanonicalGroupInput:
+    ShareWithSublimePublicInput:
       properties:
-        classification:
-          description: Classification to apply to the messages being reviewed. Optional.
-          enum:
-          - malicious
-          - benign
-          - spam
-          - graymail
-          - simulation
-          - unwanted
-          - violation
-          - non-violation
+        destination:
+          description: Consent-scoped destination on Themis. Empty for the default shared-samples flow.
           type: string
         report_label:
-          description: Label to apply to messages being reviewed. Optional.
+          description: User reported label that categorizes the report
           enum:
           - spam
           - phishing
           - false_positive
-          - false_negative
-          - phishing_simulation
-          - graymail
           - violation
           - non-violation
           type: string
         review_comment:
-          description: Comment describing reason for action
-          nullable: true
+          description: Comment describing reason for the report
           type: string
       type: object
-    Handler_typesTaskAccepted:
+    Handler_typesMessageGroupV0:
       properties:
-        task_id:
-          description: Task ID. Use the /v0/tasks/:id endpoint to check the task status.
-          format: uuid
+        classification:
+          description: Classification of the message group
+          type:
+          - string
+          - 'null'
+        flagged_rules:
+          description: Flagged rules from the message
+          items:
+            $ref: '#/components/schemas/Handler_typesFlaggedRuleV0'
+          type: array
+        id:
+          description: Canonical ID of the group
           type: string
+        message_links_clicked:
+          description: Message link clicked events
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageGroupEventLinksClickedV0'
+          type: array
+        messages:
+          description: Message previews
+          items:
+            $ref: '#/components/schemas/Handler_typesMessagePreviewV0'
+          type: array
+        organization_id:
+          description: ID of the group's organization
+          type: string
+        review_comment:
+          description: Comment describing reason for action
+          type:
+          - string
+          - 'null'
+        review_label:
+          description: Message group label
+          type:
+          - string
+          - 'null'
+        review_status:
+          description: Message group status
+          type:
+          - string
+          - 'null'
+        state:
+          description: Message group state
+          type:
+          - string
+          - 'null'
+        user_reports:
+          description: User reports of the message
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageReportV0'
+          type: array
       required:
-      - task_id
+      - id
       type: object
     ReviewMessageGroupsInput:
       properties:
@@ -1651,8 +1599,9 @@ components:
           type: array
         review_comment:
           description: Comment describing reason for action
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         share_with_sublime:
           description: Whether to share the message group & review with Sublime
           type: boolean
@@ -1694,8 +1643,124 @@ components:
           type: string
         review_comment:
           description: Comment describing reason for action
-          nullable: true
+          type:
+          - string
+          - 'null'
+      required:
+      - message_group_ids
+      type: object
+    Handler_typesMessageGroupEventLinksClickedV0:
+      properties:
+        clicks:
+          description: Click events for the URL
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageGroupEventLinkClick'
+          type: array
+        url:
+          description: URL that was clicked
           type: string
+      type: object
+    Handler_typesGetHuntResponse:
+      properties:
+        message_groups:
+          description: Array of messages groups returned by the hunt
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageGroupV0'
+          type: array
+        task_response:
+          $ref: '#/components/schemas/Handler_typesGetTaskResponse'
+      type: object
+    Handler_typesFlaggedRuleV0:
+      properties:
+        id:
+          description: ID of the flagged rule
+          type: string
+        name:
+          description: Name of the flagged rule
+          type: string
+        tags:
+          description: List of tags for the flagged rule
+          items:
+            type: string
+          type: array
+      type: object
+    TruncatedBoundedValues_string:
+      description: The first recipient email addresses of the message involved in the event (received events only), may truncate with as few as 1 recipient
+      properties:
+        total:
+          format: int32
+          type: integer
+        truncated:
+          type: boolean
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    Handler_typesGetTaskResponse:
+      description: Generic information about the scan task execution, such as status or errors.
+      properties:
+        created_at:
+          description: Task creation time
+          format: date-time
+          type: string
+        error:
+          description: Task error
+          type: string
+        id:
+          description: Task ID
+          format: uuid
+          type: string
+        state:
+          description: Task status
+          enum:
+          - pending
+          - started
+          - succeeded
+          - failed
+          - retrying
+          type: string
+      required:
+      - id
+      - state
+      type: object
+    DismissMultipleMessageGroupsInput:
+      properties:
+        classification:
+          description: Classification to apply to the messages being reviewed. Optional.
+          enum:
+          - malicious
+          - benign
+          - spam
+          - graymail
+          - simulation
+          - unwanted
+          - violation
+          - non-violation
+          type: string
+        message_group_ids:
+          description: Canonical IDs of the message groups to dismiss
+          items:
+            type: string
+          minItems: 1
+          type: array
+        report_label:
+          description: Label to apply to messages being reviewed. Optional.
+          enum:
+          - spam
+          - phishing
+          - false_positive
+          - false_negative
+          - phishing_simulation
+          - graymail
+          - violation
+          - non-violation
+          type: string
+        review_comment:
+          description: Comment describing reason for action
+          type:
+          - string
+          - 'null'
       required:
       - message_group_ids
       type: object

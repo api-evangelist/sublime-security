@@ -1,9 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: support@sublime.security
-  title: Multi-Tenancy API (BETA) BinExplode Hunt Jobs API
-  version: "1.0"
+  title: Sublime Platform Hunt Jobs API
+  version: ''
 servers:
 - url: '{scheme}://{server}'
   variables:
@@ -81,16 +81,18 @@ paths:
           format: int32
           maximum: 500
           minimum: 1
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       - description: The (zero-based) offset of the first hunt job results to return.
         in: query
         name: offset
         schema:
           description: The (zero-based) offset of the first hunt job results to return.
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       responses:
         '200':
           content:
@@ -103,23 +105,6 @@ paths:
       - Hunt Jobs
 components:
   schemas:
-    Handler_typesMessageReportV0:
-      properties:
-        channel:
-          description: Channel used to report the group
-          type: string
-        reported_at:
-          description: Time the group was reported
-          format: date-time
-          type: string
-        reported_by_message_id:
-          description: ID of the reporting message (the user forward)
-          nullable: true
-          type: string
-        reporter:
-          description: Email address of the user who reported the group
-          type: string
-      type: object
     HandlersGetV0HuntJobResultsResponse:
       properties:
         message_groups:
@@ -132,40 +117,123 @@ components:
           format: int32
           type: integer
       type: object
-    Handler_typesMessageGroupEventLinkClick:
+    Handler_typesMessagePreviewV0:
       properties:
-        clicked_at:
-          description: The time that the link was clicked
+        created_at:
+          description: Time this message was added to Sublime
           format: date-time
           type: string
-        client_ip:
-          description: The originating client IP for the click
+        delivered:
+          description: Whether or not the message has been delivered
+          type: boolean
+        forward_recipients:
+          description: Email addresses this message was forwarded to by the recipient mailbox
+          items:
+            type: string
+          type: array
+        forwarded_at:
+          description: Time this message was forwarded by the recipient mailbox. A null value indicates that it has not yet been forwarded
+          format: date-time
+          type:
+          - string
+          - 'null'
+        id:
+          description: Sublime message ID
           type: string
-        mailbox_display_name:
-          description: Display name of mailbox that performed the action
-          nullable: true
+        mailbox:
+          $ref: '#/components/schemas/Handler_typesMailbox'
+        read_at:
+          description: Time this message was read in the user's mailbox. A null value indicates that it has not yet been marked read
+          format: date-time
+          type:
+          - string
+          - 'null'
+        recipients:
+          description: Details of the message recipients
+          items:
+            $ref: '#/components/schemas/Handler_typesRecipient'
+          type: array
+        replied_at:
+          description: Time that this message was replied to by the recipient mailbox. A null value indicates that it has not yet been replied to by the recipient
+          format: date-time
+          type:
+          - string
+          - 'null'
+        sender:
+          $ref: '#/components/schemas/Handler_typesSender'
+        subject:
+          description: Subject of the message
           type: string
-        mailbox_email_address:
-          description: Mailbox email address that performed the action
-          nullable: true
+      required:
+      - id
+      - mailbox
+      - recipients
+      - sender
+      - subject
+      type: object
+    Handler_typesMessageGroupV0:
+      properties:
+        classification:
+          description: Classification of the message group
+          type:
+          - string
+          - 'null'
+        flagged_rules:
+          description: Flagged rules from the message
+          items:
+            $ref: '#/components/schemas/Handler_typesFlaggedRuleV0'
+          type: array
+        id:
+          description: Canonical ID of the group
           type: string
-        mailbox_external_id:
-          description: External ID of the mailbox that performed the action
-          nullable: true
+        message_links_clicked:
+          description: Message link clicked events
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageGroupEventLinksClickedV0'
+          type: array
+        messages:
+          description: Message previews
+          items:
+            $ref: '#/components/schemas/Handler_typesMessagePreviewV0'
+          type: array
+        organization_id:
+          description: ID of the group's organization
           type: string
-        message_id:
-          description: ID of the Sublime message for which the action occurred
-          type: string
-        user_agent:
-          description: The originating user-agent for the click
-          type: string
+        review_comment:
+          description: Comment describing reason for action
+          type:
+          - string
+          - 'null'
+        review_label:
+          description: Message group label
+          type:
+          - string
+          - 'null'
+        review_status:
+          description: Message group status
+          type:
+          - string
+          - 'null'
+        state:
+          description: Message group state
+          type:
+          - string
+          - 'null'
+        user_reports:
+          description: User reports of the message
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageReportV0'
+          type: array
+      required:
+      - id
       type: object
     StartHuntJobInput:
       properties:
         name:
           description: Name of the hunt job.
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         private:
           description: Restrict hunt job visibility to admins only.
           type: boolean
@@ -205,122 +273,6 @@ components:
           description: URL that was clicked
           type: string
       type: object
-    Handler_typesMessagePreviewV0:
-      properties:
-        created_at:
-          description: Time this message was added to Sublime
-          format: date-time
-          type: string
-        delivered:
-          description: Whether or not the message has been delivered
-          type: boolean
-        forward_recipients:
-          description: Email addresses this message was forwarded to by the recipient mailbox
-          items:
-            type: string
-          type: array
-        forwarded_at:
-          description: Time this message was forwarded by the recipient mailbox. A null value indicates that it has not yet been forwarded
-          format: date-time
-          nullable: true
-          type: string
-        id:
-          description: Sublime message ID
-          type: string
-        mailbox:
-          $ref: '#/components/schemas/Handler_typesMailbox'
-        read_at:
-          description: Time this message was read in the user's mailbox. A null value indicates that it has not yet been marked read
-          format: date-time
-          nullable: true
-          type: string
-        recipients:
-          description: Details of the message recipients
-          items:
-            $ref: '#/components/schemas/Handler_typesRecipient'
-          type: array
-        replied_at:
-          description: Time that this message was replied to by the recipient mailbox. A null value indicates that it has not yet been replied to by the recipient
-          format: date-time
-          nullable: true
-          type: string
-        sender:
-          $ref: '#/components/schemas/Handler_typesSender'
-        subject:
-          description: Subject of the message
-          type: string
-      required:
-      - id
-      - mailbox
-      - recipients
-      - sender
-      - subject
-      type: object
-    Handler_typesMessageGroupV0:
-      properties:
-        classification:
-          description: Classification of the message group
-          nullable: true
-          type: string
-        flagged_rules:
-          description: Flagged rules from the message
-          items:
-            $ref: '#/components/schemas/Handler_typesFlaggedRuleV0'
-          type: array
-        id:
-          description: Canonical ID of the group
-          type: string
-        message_links_clicked:
-          description: Message link clicked events
-          items:
-            $ref: '#/components/schemas/Handler_typesMessageGroupEventLinksClickedV0'
-          type: array
-        messages:
-          description: Message previews
-          items:
-            $ref: '#/components/schemas/Handler_typesMessagePreviewV0'
-          type: array
-        organization_id:
-          description: ID of the group's organization
-          type: string
-        review_comment:
-          description: Comment describing reason for action
-          nullable: true
-          type: string
-        review_label:
-          description: Message group label
-          nullable: true
-          type: string
-        review_status:
-          description: Message group status
-          nullable: true
-          type: string
-        state:
-          description: Message group state
-          nullable: true
-          type: string
-        user_reports:
-          description: User reports of the message
-          items:
-            $ref: '#/components/schemas/Handler_typesMessageReportV0'
-          type: array
-      required:
-      - id
-      type: object
-    HandlersStartHuntJobResponse:
-      properties:
-        hunt_job_id:
-          description: ID of the started hunt job.
-          type: string
-      type: object
-    Handler_typesRecipient:
-      properties:
-        email:
-          description: Email address
-          type: string
-      required:
-      - email
-      type: object
     Handler_typesSender:
       description: Details of the message sender
       properties:
@@ -347,12 +299,77 @@ components:
             type: string
           type: array
       type: object
+    Handler_typesRecipient:
+      properties:
+        email:
+          description: Email address
+          type: string
+      required:
+      - email
+      type: object
+    HandlersStartHuntJobResponse:
+      properties:
+        hunt_job_id:
+          description: ID of the started hunt job.
+          type: string
+      type: object
+    Handler_typesMailbox:
+      description: Mailbox that the email bomb was found in
+      properties:
+        email:
+          description: Mailbox email address
+          type: string
+        external_id:
+          description: ID of the mailbox in the source system (e.g., Office 365 or Google Workspace)
+          type:
+          - string
+          - 'null'
+        id:
+          description: Mailbox ID
+          format: uuid
+          type: string
+      required:
+      - email
+      - id
+      type: object
+    Handler_typesMessageGroupEventLinkClick:
+      properties:
+        clicked_at:
+          description: The time that the link was clicked
+          format: date-time
+          type: string
+        client_ip:
+          description: The originating client IP for the click
+          type: string
+        mailbox_display_name:
+          description: Display name of mailbox that performed the action
+          type:
+          - string
+          - 'null'
+        mailbox_email_address:
+          description: Mailbox email address that performed the action
+          type:
+          - string
+          - 'null'
+        mailbox_external_id:
+          description: External ID of the mailbox that performed the action
+          type:
+          - string
+          - 'null'
+        message_id:
+          description: ID of the Sublime message for which the action occurred
+          type: string
+        user_agent:
+          description: The originating user-agent for the click
+          type: string
+      type: object
     HandlersGetV0HuntJobResponse:
       properties:
         error:
           description: Error message if the hunt job failed.
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         id:
           description: ID of the hunt job.
           type: string
@@ -385,23 +402,23 @@ components:
       - range_end_time
       - range_start_time
       type: object
-    Handler_typesMailbox:
-      description: Mailbox that the email bomb was found in
+    Handler_typesMessageReportV0:
       properties:
-        email:
-          description: Mailbox email address
+        channel:
+          description: Channel used to report the group
           type: string
-        external_id:
-          description: ID of the mailbox in the source system (e.g., Office 365 or Google Workspace)
-          nullable: true
+        reported_at:
+          description: Time the group was reported
+          format: date-time
           type: string
-        id:
-          description: Mailbox ID
-          format: uuid
+        reported_by_message_id:
+          description: ID of the reporting message (the user forward)
+          type:
+          - string
+          - 'null'
+        reporter:
+          description: Email address of the user who reported the group
           type: string
-      required:
-      - email
-      - id
       type: object
   securitySchemes:
     bearerAuth:

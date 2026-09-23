@@ -1,9 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: support@sublime.security
-  title: Multi-Tenancy API (BETA) BinExplode Tasks API
-  version: "1.0"
+  title: Sublime Platform Tasks API
+  version: ''
 servers:
 - url: '{scheme}://{server}'
   variables:

@@ -1,9 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: support@sublime.security
-  title: Multi-Tenancy API (BETA) BinExplode Events in the audit log API
-  version: "1.0"
+  title: Sublime Platform Events in the audit log API
+  version: ''
 servers:
 - url: '{scheme}://{server}'
   variables:
@@ -22,7 +22,6 @@ tags:
 paths:
   /v0/audit-log/events:
     get:
-      description: List events in audit log
       operationId: listEventsInAuditLog
       parameters:
       - description: Inclusive start datetime filter for time of event creation, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only events at or after this time will be returned.
@@ -31,16 +30,18 @@ paths:
         schema:
           description: Inclusive start datetime filter for time of event creation, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only events at or after this time will be returned.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Exclusive end datetime filter for time of event creation, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only events before this time will be returned.
         in: query
         name: created_at[lt]
         schema:
           description: Exclusive end datetime filter for time of event creation, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z'). Only events before this time will be returned.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used
         in: query
         name: limit
@@ -48,23 +49,26 @@ paths:
           description: The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used
           format: int32
           maximum: 500
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       - description: The (zero-based) offset of the first rules to return
         in: query
         name: offset
         schema:
           description: The (zero-based) offset of the first rules to return
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       - description: Event type
         in: query
         name: type
         schema:
           description: Event type
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - description: Filter by user IDs
         explode: true
         in: query
@@ -123,6 +127,16 @@ paths:
       - Events in the audit log
 components:
   schemas:
+    TypesEventMessage:
+      description: API request data, if originated from an API request
+      properties:
+        id:
+          description: Message ID
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
     HandlersListEventTypesResponse:
       properties:
         event_types:
@@ -141,17 +155,65 @@ components:
         request:
           $ref: '#/components/schemas/TypesAPIRequest'
       type: object
+    TypesEventMessageGroup:
+      description: Message group data, if originated from an API request taking an action on a message group
+      properties:
+        id:
+          description: Message Group ID
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    Handler_typesEventV0:
+      properties:
+        additional_data:
+          description: Additional event data
+          items:
+            format: int32
+            type: integer
+          type: array
+        created_at:
+          description: Event creation time
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/Handler_typesUser'
+        data:
+          $ref: '#/components/schemas/Handler_typesEventData'
+        id:
+          description: Event ID
+          format: uuid
+          type: string
+        type:
+          description: Event type
+          type: string
+      required:
+      - created_at
+      - data
+      - id
+      - type
+      type: object
+    TypesEventTypeElement:
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+      type: object
     TypesAPIRequest:
       description: API request data, if originated from an API request
       properties:
         api_key_name:
           description: Name of API key if an API key was used
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         authentication_method:
           description: Description of how request was authenticated
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         body:
           description: Request body
           type: string
@@ -161,8 +223,9 @@ components:
           type: string
         ip:
           description: IP address of requester, if available
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         method:
           description: HTTP method
           type: string
@@ -198,8 +261,9 @@ components:
         deleted_at:
           description: User deletion time
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         email_address:
           description: Email address
           format: email
@@ -227,15 +291,17 @@ components:
           type: string
         phone_number:
           description: Phone number
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         role:
           description: Role assumed by the user
           type: string
         service_account:
           description: The service account type (e.g., 'ade') if this is a service account
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         updated_at:
           description: User last updated time
           format: date-time
@@ -247,62 +313,6 @@ components:
       - id
       - last_name
       - updated_at
-      type: object
-    TypesEventTypeElement:
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-      type: object
-    HandlersGetAuditLogEventResponse:
-      properties:
-        additional_data:
-          description: Additional event data
-          items:
-            format: int32
-            type: integer
-          type: array
-        created_at:
-          description: Event creation time
-          format: date-time
-          type: string
-        created_by:
-          $ref: '#/components/schemas/Handler_typesUser'
-        data:
-          $ref: '#/components/schemas/Handler_typesEventData'
-        id:
-          description: Event ID
-          format: uuid
-          type: string
-        type:
-          description: Event type
-          type: string
-      required:
-      - created_at
-      - data
-      - id
-      - type
-      type: object
-    TypesEventMessageGroup:
-      description: Message group data, if originated from an API request taking an action on a message group
-      properties:
-        id:
-          description: Message Group ID
-          format: uuid
-          type: string
-      required:
-      - id
-      type: object
-    TypesEventMessage:
-      description: API request data, if originated from an API request
-      properties:
-        id:
-          description: Message ID
-          format: uuid
-          type: string
-      required:
-      - id
       type: object
     HandlersListEventsInAuditLogResponse:
       properties:
@@ -324,7 +334,7 @@ components:
       - events
       - total
       type: object
-    Handler_typesEventV0:
+    HandlersGetAuditLogEventResponse:
       properties:
         additional_data:
           description: Additional event data

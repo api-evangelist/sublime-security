@@ -1,24 +1,11 @@
 {
   "provider": "sublime-security",
   "sources": [
-    "sublime-security-binexplode-api-openapi.yml",
-    "sublime-security-email-bombs-api-openapi.yml",
-    "sublime-security-enrichment-api-openapi.yml",
-    "sublime-security-events-in-the-audit-log-api-openapi.yml",
-    "sublime-security-hunt-jobs-api-openapi.yml",
-    "sublime-security-lists-api-openapi.yml",
-    "sublime-security-live-flow-api-openapi.yml",
-    "sublime-security-mailboxes-api-openapi.yml",
-    "sublime-security-message-groups-api-openapi.yml",
-    "sublime-security-messages-api-openapi.yml",
-    "sublime-security-organizations-api-openapi.yml",
-    "sublime-security-roles-api-openapi.yml",
-    "sublime-security-rules-api-openapi.yml",
-    "sublime-security-scim-api-openapi.yml",
-    "sublime-security-tasks-api-openapi.yml",
-    "sublime-security-user-reports-api-openapi.yml"
+    "_original/sublime-security-multitenancy-openapi.json",
+    "_original/sublime-security-platform-openapi.json"
   ],
   "outputs": [
+    "sublime-security-organizations-api-openapi.yml",
     "sublime-security-binexplode-api-openapi.yml",
     "sublime-security-email-bombs-api-openapi.yml",
     "sublime-security-enrichment-api-openapi.yml",
@@ -29,7 +16,6 @@
     "sublime-security-mailboxes-api-openapi.yml",
     "sublime-security-message-groups-api-openapi.yml",
     "sublime-security-messages-api-openapi.yml",
-    "sublime-security-organizations-api-openapi.yml",
     "sublime-security-roles-api-openapi.yml",
     "sublime-security-rules-api-openapi.yml",
     "sublime-security-scim-api-openapi.yml",
@@ -39,23 +25,31 @@
   "archived": [],
   "errors": [],
   "warnings": [
-    "sublime-security-binexplode-api-openapi.yml: info.version missing",
-    "sublime-security-email-bombs-api-openapi.yml: info.version missing",
-    "sublime-security-enrichment-api-openapi.yml: info.version missing",
-    "sublime-security-events-in-the-audit-log-api-openapi.yml: info.version missing",
-    "sublime-security-hunt-jobs-api-openapi.yml: info.version missing",
-    "sublime-security-lists-api-openapi.yml: info.version missing",
-    "sublime-security-live-flow-api-openapi.yml: info.version missing",
-    "sublime-security-mailboxes-api-openapi.yml: info.version missing",
-    "sublime-security-message-groups-api-openapi.yml: info.version missing",
-    "sublime-security-messages-api-openapi.yml: info.version missing",
-    "sublime-security-organizations-api-openapi.yml: info.version missing",
-    "sublime-security-roles-api-openapi.yml: info.version missing",
-    "sublime-security-rules-api-openapi.yml: info.version missing",
-    "sublime-security-scim-api-openapi.yml: info.version missing",
-    "sublime-security-tasks-api-openapi.yml: info.version missing",
-    "sublime-security-user-reports-api-openapi.yml: info.version missing"
+    "sublime-security-multitenancy-openapi.json: info.version missing",
+    "sublime-security-platform-openapi.json: info.version missing"
   ],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sublime-security-multitenancy-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "sublime-security-platform-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "sublime-security-binexplode-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-email-bombs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-enrichment-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-events-in-the-audit-log-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-hunt-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-lists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-live-flow-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-mailboxes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-message-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-messages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-organizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-roles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-rules-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-scim-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sublime-security-user-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

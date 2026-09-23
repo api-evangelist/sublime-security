@@ -1,9 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: support@sublime.security
-  title: Multi-Tenancy API (BETA) BinExplode Lists API
-  version: "1.0"
+  title: Sublime Platform Lists API
+  version: ''
 servers:
 - url: '{scheme}://{server}'
   variables:
@@ -273,6 +273,57 @@ paths:
       - Lists
 components:
   schemas:
+    Handler_typesList:
+      properties:
+        created_at:
+          description: List creation time
+          format: date-time
+          type: string
+        description:
+          description: Description of list
+          type: string
+        editable:
+          description: If the list may be edited. False for system lists.
+          type: boolean
+        entry_type:
+          description: Type of entry. Supported values are 'string', 'user_group', 'provider_org_unit'
+          type: string
+        id:
+          description: List ID
+          format: uuid
+          type: string
+        name:
+          description: Unique name used to reference the list in MQL
+          type: string
+        updated_at:
+          description: List last updated time
+          format: date-time
+          type: string
+      required:
+      - description
+      - id
+      - name
+      type: object
+    CreateListInput:
+      properties:
+        description:
+          description: Description of list
+          type: string
+        name:
+          description: Unique name used to reference the list in MQL
+          type: string
+      required:
+      - description
+      - name
+      type: object
+    PatchListInput:
+      properties:
+        description:
+          description: Description of list
+          type: string
+      required:
+      - description
+      type: object
     Handler_typesListEntries:
       properties:
         entries:
@@ -310,57 +361,6 @@ components:
           type: array
       required:
       - entries
-      type: object
-    CreateListInput:
-      properties:
-        description:
-          description: Description of list
-          type: string
-        name:
-          description: Unique name used to reference the list in MQL
-          type: string
-      required:
-      - description
-      - name
-      type: object
-    PatchListInput:
-      properties:
-        description:
-          description: Description of list
-          type: string
-      required:
-      - description
-      type: object
-    Handler_typesList:
-      properties:
-        created_at:
-          description: List creation time
-          format: date-time
-          type: string
-        description:
-          description: Description of list
-          type: string
-        editable:
-          description: If the list may be edited. False for system lists.
-          type: boolean
-        entry_type:
-          description: Type of entry. Supported values are 'string', 'user_group', 'provider_org_unit'
-          type: string
-        id:
-          description: List ID
-          format: uuid
-          type: string
-        name:
-          description: Unique name used to reference the list in MQL
-          type: string
-        updated_at:
-          description: List last updated time
-          format: date-time
-          type: string
-      required:
-      - description
-      - id
-      - name
       type: object
   securitySchemes:
     bearerAuth:

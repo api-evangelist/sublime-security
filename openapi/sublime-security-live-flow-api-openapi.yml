@@ -1,9 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: support@sublime.security
-  title: Multi-Tenancy API (BETA) BinExplode Live flow API
-  version: "1.0"
+  title: Sublime Platform Live flow API
+  version: ''
 servers:
 - url: '{scheme}://{server}'
   variables:
@@ -41,93 +41,14 @@ paths:
       - Live flow
 components:
   schemas:
-    TypesSqarAction:
+    TypesRuleAuthor:
       properties:
-        active:
-          type: boolean
-        id:
-          type: string
         name:
+          description: Name of a rule author
           type: string
-        type:
+        twitter:
+          description: Twitter handle for a rule author
           type: string
-      type: object
-    AnalyzeRawMessageLiveFlowInput:
-      properties:
-        ? ''
-        : type: boolean
-        analyze_async:
-          description: Run analysis and finish ingestion async. flagged_rules will be empty on response.
-          type: boolean
-        canonical_id:
-          description: Known Canonical (message group) ID
-          maxLength: 64
-          minLength: 64
-          nullable: true
-          type: string
-        create_mailbox:
-          description: Create mailbox if it doesn't exist. If true, message_source_id must also be set
-          type: boolean
-        delivery_status:
-          description: Override delivery status. Use 'undelivered' to simulate inline processing (e.g. for testing interdict actions).
-          nullable: true
-          type: string
-        external_created_at:
-          description: Timestamp the message created at according to the external source
-          format: date-time
-          nullable: true
-          type: string
-        external_message_id:
-          description: ID of the message according to the external source
-          nullable: true
-          type: string
-        external_thread_id:
-          description: ID of the thread the message belongs to according to the external source
-          nullable: true
-          type: string
-        folder:
-          description: The mailbox folder the message is in
-          nullable: true
-          type: string
-        labels:
-          description: Labels applied to the message by the mailbox
-          items:
-            type: string
-          type: array
-        mailbox_email_address:
-          description: The email address of the mailbox containing this message
-          format: email
-          type: string
-        message_source_id:
-          description: API Message source ID associated with the mailbox.
-          format: uuid
-          type: string
-        message_type:
-          $ref: '#/components/schemas/Mdm_serviceMessageType'
-        raw_message:
-          description: The full base64 encoded raw eml message
-          type: string
-        route_type:
-          description: The directional route type of the message
-          nullable: true
-          type: string
-      required:
-      - mailbox_email_address
-      - message_source_id
-      - raw_message
-      type: object
-    Mdm_serviceMessageType:
-      description: Override on message types, defined from the perspective of your organization
-      properties:
-        inbound:
-          description: Message was sent from someone outside your organization, to *at least one* recipient inside your organization
-          type: boolean
-        internal:
-          description: Message was sent from someone inside your organization, to *at least one* recipient inside your organization. Messages *must be authenticated* by either SPF or DKIM to be treated as internal.
-          type: boolean
-        outbound:
-          description: Message was sent from someone inside your organization, to *at least one* recipient outside your organization
-          type: boolean
       type: object
     TypesFlatSqar:
       description: Originating rule for this rule exclusion
@@ -146,8 +67,9 @@ components:
           type: string
         asa_verdict_trigger:
           description: The ASA verdict that triggered this rule, if applicable
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         attack_types:
           description: Rule attack types
           items:
@@ -163,8 +85,9 @@ components:
           type: boolean
         auto_review_classification:
           description: The classification auto-reviewed messages will have, when an auto-review action is associated with the rule
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         child_ids:
           description: IDs of any child sqars, if any
           items:
@@ -173,35 +96,42 @@ components:
         created_at:
           description: Rule creation time
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         created_by_api_request_id:
           description: Created by API Request ID
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         created_by_org_id:
           description: Original rule creator org ID
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         created_by_org_name:
           description: Original rule creator org name
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         created_by_user_id:
           description: Original rule creator user ID
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         created_by_user_name:
           description: Original rule creator user name
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         description:
           description: Description of rule
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         detection_methods:
           description: Rule detection technologies
           items:
@@ -214,12 +144,14 @@ components:
           type: array
         feed_external_rule_id:
           description: External rule ID of a rule from a feed
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         feed_id:
           description: Feed ID for a rule from a feed
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         full_type:
           description: Sqar type (rule or query) and subtype
           enum:
@@ -238,16 +170,19 @@ components:
           type: boolean
         internal_type:
           description: Unique internal type for rule
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         label:
           description: Rule label
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         maturity:
           description: Rule maturity
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         name:
           description: Rule name
           type: string
@@ -257,8 +192,9 @@ components:
           type: string
         parent_id:
           description: ID of the parent sqar, if there is one
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         passive:
           description: Whether the rule is in passive mode
           type: boolean
@@ -272,8 +208,9 @@ components:
           type: boolean
         severity:
           description: Rule severity
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         source:
           description: Source
           type: string
@@ -313,13 +250,15 @@ components:
           type: boolean
         type:
           description: Rule type
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         updated_at:
           description: Rule last updated time
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         user_can_delete:
           description: Whether the rule can be deleted by a user
           type: boolean
@@ -336,15 +275,6 @@ components:
       - source_md5
       - updated_at
       type: object
-    TypesRuleAuthor:
-      properties:
-        name:
-          description: Name of a rule author
-          type: string
-        twitter:
-          description: Twitter handle for a rule author
-          type: string
-      type: object
     Handler_typesAnalyzeRawMessageLiveFlowResponse:
       properties:
         canonical_id:
@@ -358,12 +288,109 @@ components:
         message_id:
           description: Message ID
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         raw_message_id:
           description: Raw message ID
           format: uuid
-          nullable: true
+          type:
+          - string
+          - 'null'
+      type: object
+    Mdm_serviceMessageType:
+      description: Override on message types, defined from the perspective of your organization
+      properties:
+        inbound:
+          description: Message was sent from someone outside your organization, to *at least one* recipient inside your organization
+          type: boolean
+        internal:
+          description: Message was sent from someone inside your organization, to *at least one* recipient inside your organization. Messages *must be authenticated* by either SPF or DKIM to be treated as internal.
+          type: boolean
+        outbound:
+          description: Message was sent from someone inside your organization, to *at least one* recipient outside your organization
+          type: boolean
+      type: object
+    AnalyzeRawMessageLiveFlowInput:
+      properties:
+        ? ''
+        : type: boolean
+        analyze_async:
+          description: Run analysis and finish ingestion async. flagged_rules will be empty on response.
+          type: boolean
+        canonical_id:
+          description: Known Canonical (message group) ID
+          maxLength: 64
+          minLength: 64
+          type:
+          - string
+          - 'null'
+        create_mailbox:
+          description: Create mailbox if it doesn't exist. If true, message_source_id must also be set
+          type: boolean
+        delivery_status:
+          description: Override delivery status. Use 'undelivered' to simulate inline processing (e.g. for testing interdict actions).
+          type:
+          - string
+          - 'null'
+        external_created_at:
+          description: Timestamp the message created at according to the external source
+          format: date-time
+          type:
+          - string
+          - 'null'
+        external_message_id:
+          description: ID of the message according to the external source
+          type:
+          - string
+          - 'null'
+        external_thread_id:
+          description: ID of the thread the message belongs to according to the external source
+          type:
+          - string
+          - 'null'
+        folder:
+          description: The mailbox folder the message is in
+          type:
+          - string
+          - 'null'
+        labels:
+          description: Labels applied to the message by the mailbox
+          items:
+            type: string
+          type: array
+        mailbox_email_address:
+          description: The email address of the mailbox containing this message
+          format: email
+          type: string
+        message_source_id:
+          description: API Message source ID associated with the mailbox.
+          format: uuid
+          type: string
+        message_type:
+          $ref: '#/components/schemas/Mdm_serviceMessageType'
+        raw_message:
+          description: The full base64 encoded raw eml message
+          type: string
+        route_type:
+          description: The directional route type of the message
+          type:
+          - string
+          - 'null'
+      required:
+      - mailbox_email_address
+      - message_source_id
+      - raw_message
+      type: object
+    TypesSqarAction:
+      properties:
+        active:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        type:
           type: string
       type: object
   securitySchemes:

@@ -1,9 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: support@sublime.security
-  title: Multi-Tenancy API (BETA) BinExplode Roles API
-  version: "1.0"
+  title: Sublime Platform Roles API
+  version: ''
 servers:
 - url: '{scheme}://{server}'
   variables:
@@ -41,14 +41,14 @@ paths:
       - Roles
 components:
   schemas:
-    HandlersAssignRoleToUserResponse:
-      type: object
     AssignRoleToUserInput:
       properties:
         email_address:
           type: string
         role_title:
           type: string
+      type: object
+    HandlersAssignRoleToUserResponse:
       type: object
   securitySchemes:
     bearerAuth:
