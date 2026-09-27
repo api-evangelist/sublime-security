@@ -349,26 +349,170 @@ paths:
       - Rules
 components:
   schemas:
-    TypesRuleAuthor:
+    Handler_typesRuleHistoryStats:
+      description: Rule history stats for message groups
       properties:
-        name:
-          description: Name of a rule author
-          type: string
-        twitter:
-          description: Twitter handle for a rule author
-          type: string
+        classified_detection_rate:
+          description: The percentage of classified detections
+          format: double
+          type:
+          - number
+          - 'null'
+        count_classified_benign:
+          description: Total number of classified benign rule history entries
+          format: int32
+          type: integer
+        count_classified_graymail:
+          description: Total number of classified graymail rule history entries
+          format: int32
+          type: integer
+        count_classified_malicious:
+          description: Total number of classified malicious rule history entries
+          format: int32
+          type: integer
+        count_classified_no_reason:
+          description: Total number of classified no reason rule history entries
+          format: int32
+          type: integer
+        count_classified_simulation:
+          description: Total number of classified simulation rule history entries
+          format: int32
+          type: integer
+        count_classified_unwanted:
+          description: Total number of classified unwanted rule history entries
+          format: int32
+          type: integer
+        count_unreviewed:
+          description: Total number of unreviewed rule history entries
+          format: int32
+          type: integer
+        total:
+          description: Total number of rule history entries
+          format: int32
+          type: integer
       type: object
-    Handler_typesRuleHistoryResponse:
+    ValidateRuleInput:
       properties:
-        actions:
-          description: Actions associated with the rule
+        action_ids:
+          description: IDs of actions to run when the rule is triggered
           items:
-            $ref: '#/components/schemas/TypesSqarAction'
+            type: string
           type: array
-        flagged_message_groups_report:
-          $ref: '#/components/schemas/Handler_typesRuleHistoryStats'
-        rule:
-          $ref: '#/components/schemas/TypesAPIRule'
+        active:
+          description: Activate the rule immediately
+          type: boolean
+        attack_types:
+          description: Rule attack types
+          items:
+            type: string
+          type: array
+        authors:
+          description: Rule authors. Defaults to the user that made the request
+          items:
+            $ref: '#/components/schemas/TypesRuleAuthor'
+          type: array
+        auto_review_auto_share:
+          description: Whether auto-reviewed messages will be shared
+          type: boolean
+        auto_review_classification:
+          description: The classification auto-reviewed messages will have, when an auto-review action is associated with the rule
+          type:
+          - string
+          - 'null'
+        description:
+          description: Description of rule
+          type: string
+        detection_methods:
+          description: Rule detection technologies
+          items:
+            type: string
+          type: array
+        false_positives:
+          description: Descriptions of known false positives that could occur
+          items:
+            type: string
+          type: array
+        internal_type:
+          description: For core feed only
+          type:
+          - string
+          - 'null'
+        label:
+          description: Rule label
+          type:
+          - string
+          - 'null'
+        maturity:
+          description: Rule maturity
+          type:
+          - string
+          - 'null'
+        name:
+          description: Rule name
+          type: string
+        references:
+          description: URL references
+          items:
+            type: string
+          type: array
+        run_triage_on_excluded_messages:
+          description: For Triage rules only, whether this rule will run even if the message matched a global exclusion.
+          type:
+          - boolean
+          - 'null'
+        severity:
+          description: Rule severity
+          type:
+          - string
+          - 'null'
+        source:
+          description: Source
+          type: string
+        tactics_and_techniques:
+          description: Rule tactics and techniques
+          items:
+            type: string
+          type: array
+        tags:
+          description: Tags
+          items:
+            type: string
+          type: array
+        triage_abuse_reports:
+          description: For Triage rules only, whether this rule will run for reported messages. For triage rules, one triage_ field must be true.
+          type:
+          - boolean
+          - 'null'
+        triage_classification_changes:
+          description: For Triage rules only, whether this rule will run for messages whose classification has just changed. For triage rules, one triage_ field must be true.
+          type:
+          - boolean
+          - 'null'
+        triage_dlp_rule_matched:
+          description: For Triage rules only, whether this rule will run for messages that matched a DLP rule. For triage rules, one triage_ field must be true.
+          type:
+          - boolean
+          - 'null'
+        triage_flagged_messages:
+          description: For Triage rules only, whether this rule will run for messages which flagged. For triage rules, one triage_ field must be true.
+          type:
+          - boolean
+          - 'null'
+        type:
+          description: Type of the rule
+          enum:
+          - detection
+          - dlp
+          - triage
+          type: string
+        user_provided_tags:
+          description: User-provided tags
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - source
       type: object
     TypesAPIRule:
       description: Rule base
@@ -497,24 +641,13 @@ components:
       - name
       - source
       type: object
-    Handler_typesListRuleHistoryResponse:
-      properties:
-        history:
-          additionalProperties:
-            $ref: '#/components/schemas/Handler_typesRuleHistoryResponse'
-          description: List of rule history entries
-          type: object
-      type: object
-    ValidateRuleInput:
+    UpdateRuleInput:
       properties:
         action_ids:
           description: IDs of actions to run when the rule is triggered
           items:
             type: string
           type: array
-        active:
-          description: Activate the rule immediately
-          type: boolean
         attack_types:
           description: Rule attack types
           items:
@@ -612,13 +745,6 @@ components:
           type:
           - boolean
           - 'null'
-        type:
-          description: Type of the rule
-          enum:
-          - detection
-          - dlp
-          - triage
-          type: string
         user_provided_tags:
           description: User-provided tags
           items:
@@ -627,6 +753,25 @@ components:
       required:
       - name
       - source
+      type: object
+    Handler_typesValidateRuleResponse:
+      properties:
+        functions:
+          description: Function names found in the rule
+          items:
+            type: string
+          type: array
+        is_org_dependent:
+          description: Whether the rule uses org-specific fields, lists, or functions
+          type: boolean
+        list:
+          description: List names found in the rule
+          items:
+            type: string
+          type: array
+        validation_error:
+          description: Validation error message if the rule is invalid
+          type: string
       type: object
     Handler_typesRule:
       properties:
@@ -677,6 +822,15 @@ components:
       - description
       - name
       - source
+      type: object
+    TypesRuleAuthor:
+      properties:
+        name:
+          description: Name of a rule author
+          type: string
+        twitter:
+          description: Twitter handle for a rule author
+          type: string
       type: object
     CreateRuleInput:
       properties:
@@ -801,160 +955,16 @@ components:
       - name
       - source
       type: object
-    Handler_typesRuleHistoryStats:
-      description: Rule history stats for message groups
+    TypesSqarAction:
       properties:
-        classified_detection_rate:
-          description: The percentage of classified detections
-          format: double
-          type:
-          - number
-          - 'null'
-        count_classified_benign:
-          description: Total number of classified benign rule history entries
-          format: int32
-          type: integer
-        count_classified_graymail:
-          description: Total number of classified graymail rule history entries
-          format: int32
-          type: integer
-        count_classified_malicious:
-          description: Total number of classified malicious rule history entries
-          format: int32
-          type: integer
-        count_classified_no_reason:
-          description: Total number of classified no reason rule history entries
-          format: int32
-          type: integer
-        count_classified_simulation:
-          description: Total number of classified simulation rule history entries
-          format: int32
-          type: integer
-        count_classified_unwanted:
-          description: Total number of classified unwanted rule history entries
-          format: int32
-          type: integer
-        count_unreviewed:
-          description: Total number of unreviewed rule history entries
-          format: int32
-          type: integer
-        total:
-          description: Total number of rule history entries
-          format: int32
-          type: integer
-      type: object
-    UpdateRuleInput:
-      properties:
-        action_ids:
-          description: IDs of actions to run when the rule is triggered
-          items:
-            type: string
-          type: array
-        attack_types:
-          description: Rule attack types
-          items:
-            type: string
-          type: array
-        authors:
-          description: Rule authors. Defaults to the user that made the request
-          items:
-            $ref: '#/components/schemas/TypesRuleAuthor'
-          type: array
-        auto_review_auto_share:
-          description: Whether auto-reviewed messages will be shared
+        active:
           type: boolean
-        auto_review_classification:
-          description: The classification auto-reviewed messages will have, when an auto-review action is associated with the rule
-          type:
-          - string
-          - 'null'
-        description:
-          description: Description of rule
+        id:
           type: string
-        detection_methods:
-          description: Rule detection technologies
-          items:
-            type: string
-          type: array
-        false_positives:
-          description: Descriptions of known false positives that could occur
-          items:
-            type: string
-          type: array
-        internal_type:
-          description: For core feed only
-          type:
-          - string
-          - 'null'
-        label:
-          description: Rule label
-          type:
-          - string
-          - 'null'
-        maturity:
-          description: Rule maturity
-          type:
-          - string
-          - 'null'
         name:
-          description: Rule name
           type: string
-        references:
-          description: URL references
-          items:
-            type: string
-          type: array
-        run_triage_on_excluded_messages:
-          description: For Triage rules only, whether this rule will run even if the message matched a global exclusion.
-          type:
-          - boolean
-          - 'null'
-        severity:
-          description: Rule severity
-          type:
-          - string
-          - 'null'
-        source:
-          description: Source
+        type:
           type: string
-        tactics_and_techniques:
-          description: Rule tactics and techniques
-          items:
-            type: string
-          type: array
-        tags:
-          description: Tags
-          items:
-            type: string
-          type: array
-        triage_abuse_reports:
-          description: For Triage rules only, whether this rule will run for reported messages. For triage rules, one triage_ field must be true.
-          type:
-          - boolean
-          - 'null'
-        triage_classification_changes:
-          description: For Triage rules only, whether this rule will run for messages whose classification has just changed. For triage rules, one triage_ field must be true.
-          type:
-          - boolean
-          - 'null'
-        triage_dlp_rule_matched:
-          description: For Triage rules only, whether this rule will run for messages that matched a DLP rule. For triage rules, one triage_ field must be true.
-          type:
-          - boolean
-          - 'null'
-        triage_flagged_messages:
-          description: For Triage rules only, whether this rule will run for messages which flagged. For triage rules, one triage_ field must be true.
-          type:
-          - boolean
-          - 'null'
-        user_provided_tags:
-          description: User-provided tags
-          items:
-            type: string
-          type: array
-      required:
-      - name
-      - source
       type: object
     Handler_typesListRulesResponse:
       properties:
@@ -972,35 +982,25 @@ components:
           format: int32
           type: integer
       type: object
-    Handler_typesValidateRuleResponse:
+    Handler_typesListRuleHistoryResponse:
       properties:
-        functions:
-          description: Function names found in the rule
-          items:
-            type: string
-          type: array
-        is_org_dependent:
-          description: Whether the rule uses org-specific fields, lists, or functions
-          type: boolean
-        list:
-          description: List names found in the rule
-          items:
-            type: string
-          type: array
-        validation_error:
-          description: Validation error message if the rule is invalid
-          type: string
+        history:
+          additionalProperties:
+            $ref: '#/components/schemas/Handler_typesRuleHistoryResponse'
+          description: List of rule history entries
+          type: object
       type: object
-    TypesSqarAction:
+    Handler_typesRuleHistoryResponse:
       properties:
-        active:
-          type: boolean
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
+        actions:
+          description: Actions associated with the rule
+          items:
+            $ref: '#/components/schemas/TypesSqarAction'
+          type: array
+        flagged_message_groups_report:
+          $ref: '#/components/schemas/Handler_typesRuleHistoryStats'
+        rule:
+          $ref: '#/components/schemas/TypesAPIRule'
       type: object
   securitySchemes:
     bearerAuth:

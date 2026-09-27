@@ -41,14 +41,14 @@ paths:
       - Roles
 components:
   schemas:
+    HandlersAssignRoleToUserResponse:
+      type: object
     AssignRoleToUserInput:
       properties:
         email_address:
           type: string
         role_title:
           type: string
-      type: object
-    HandlersAssignRoleToUserResponse:
       type: object
   securitySchemes:
     bearerAuth:

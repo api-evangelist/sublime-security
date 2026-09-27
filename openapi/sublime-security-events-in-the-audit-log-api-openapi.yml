@@ -127,23 +127,32 @@ paths:
       - Events in the audit log
 components:
   schemas:
-    TypesEventMessage:
-      description: API request data, if originated from an API request
+    HandlersListEventsInAuditLogResponse:
       properties:
-        id:
-          description: Message ID
-          format: uuid
-          type: string
-      required:
-      - id
-      type: object
-    HandlersListEventTypesResponse:
-      properties:
-        event_types:
-          description: Event types
+        count:
+          description: Count of results for this page
+          format: int32
+          type: integer
+        events:
+          description: Events. Platform deployments have 7 day event retention, while Enterprise and Cloud have unlimited retention.
           items:
-            $ref: '#/components/schemas/TypesEventTypeElement'
+            $ref: '#/components/schemas/Handler_typesEventV0'
           type: array
+        total:
+          description: Total number of results available
+          format: int32
+          type: integer
+      required:
+      - count
+      - events
+      - total
+      type: object
+    TypesEventTypeElement:
+      properties:
+        name:
+          type: string
+        type:
+          type: string
       type: object
     Handler_typesEventData:
       description: Event data
@@ -154,96 +163,6 @@ components:
           $ref: '#/components/schemas/TypesEventMessageGroup'
         request:
           $ref: '#/components/schemas/TypesAPIRequest'
-      type: object
-    TypesEventMessageGroup:
-      description: Message group data, if originated from an API request taking an action on a message group
-      properties:
-        id:
-          description: Message Group ID
-          format: uuid
-          type: string
-      required:
-      - id
-      type: object
-    Handler_typesEventV0:
-      properties:
-        additional_data:
-          description: Additional event data
-          items:
-            format: int32
-            type: integer
-          type: array
-        created_at:
-          description: Event creation time
-          format: date-time
-          type: string
-        created_by:
-          $ref: '#/components/schemas/Handler_typesUser'
-        data:
-          $ref: '#/components/schemas/Handler_typesEventData'
-        id:
-          description: Event ID
-          format: uuid
-          type: string
-        type:
-          description: Event type
-          type: string
-      required:
-      - created_at
-      - data
-      - id
-      - type
-      type: object
-    TypesEventTypeElement:
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-      type: object
-    TypesAPIRequest:
-      description: API request data, if originated from an API request
-      properties:
-        api_key_name:
-          description: Name of API key if an API key was used
-          type:
-          - string
-          - 'null'
-        authentication_method:
-          description: Description of how request was authenticated
-          type:
-          - string
-          - 'null'
-        body:
-          description: Request body
-          type: string
-        id:
-          description: API request ID
-          format: uuid
-          type: string
-        ip:
-          description: IP address of requester, if available
-          type:
-          - string
-          - 'null'
-        method:
-          description: HTTP method
-          type: string
-        path:
-          description: URL path
-          type: string
-        query:
-          additionalProperties:
-            type: string
-          description: Query parameters
-          type: object
-        user_agent:
-          description: User agent of requester, if available
-          type: string
-      required:
-      - id
-      - method
-      - path
       type: object
     Handler_typesUser:
       description: User that created the event. Nil if system originated
@@ -314,26 +233,6 @@ components:
       - last_name
       - updated_at
       type: object
-    HandlersListEventsInAuditLogResponse:
-      properties:
-        count:
-          description: Count of results for this page
-          format: int32
-          type: integer
-        events:
-          description: Events. Platform deployments have 7 day event retention, while Enterprise and Cloud have unlimited retention.
-          items:
-            $ref: '#/components/schemas/Handler_typesEventV0'
-          type: array
-        total:
-          description: Total number of results available
-          format: int32
-          type: integer
-      required:
-      - count
-      - events
-      - total
-      type: object
     HandlersGetAuditLogEventResponse:
       properties:
         additional_data:
@@ -362,6 +261,107 @@ components:
       - data
       - id
       - type
+      type: object
+    TypesEventMessageGroup:
+      description: Message group data, if originated from an API request taking an action on a message group
+      properties:
+        id:
+          description: Message Group ID
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    TypesEventMessage:
+      description: API request data, if originated from an API request
+      properties:
+        id:
+          description: Message ID
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    Handler_typesEventV0:
+      properties:
+        additional_data:
+          description: Additional event data
+          items:
+            format: int32
+            type: integer
+          type: array
+        created_at:
+          description: Event creation time
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/Handler_typesUser'
+        data:
+          $ref: '#/components/schemas/Handler_typesEventData'
+        id:
+          description: Event ID
+          format: uuid
+          type: string
+        type:
+          description: Event type
+          type: string
+      required:
+      - created_at
+      - data
+      - id
+      - type
+      type: object
+    HandlersListEventTypesResponse:
+      properties:
+        event_types:
+          description: Event types
+          items:
+            $ref: '#/components/schemas/TypesEventTypeElement'
+          type: array
+      type: object
+    TypesAPIRequest:
+      description: API request data, if originated from an API request
+      properties:
+        api_key_name:
+          description: Name of API key if an API key was used
+          type:
+          - string
+          - 'null'
+        authentication_method:
+          description: Description of how request was authenticated
+          type:
+          - string
+          - 'null'
+        body:
+          description: Request body
+          type: string
+        id:
+          description: API request ID
+          format: uuid
+          type: string
+        ip:
+          description: IP address of requester, if available
+          type:
+          - string
+          - 'null'
+        method:
+          description: HTTP method
+          type: string
+        path:
+          description: URL path
+          type: string
+        query:
+          additionalProperties:
+            type: string
+          description: Query parameters
+          type: object
+        user_agent:
+          description: User agent of requester, if available
+          type: string
+      required:
+      - id
+      - method
+      - path
       type: object
   securitySchemes:
     bearerAuth:

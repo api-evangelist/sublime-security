@@ -192,6 +192,95 @@ paths:
       - Organizations
 components:
   schemas:
+    PatchChildOrganizationLicensingInput:
+      properties:
+        licenses:
+          description: Desired license to apply. Exactly one license per request is supported today; the array shape is reserved for future multi-SKU support.
+          items:
+            $ref: '#/components/schemas/Handler_typesLicenseInput'
+          maxItems: 1
+          minItems: 1
+          type: array
+      required:
+      - licenses
+      type: object
+    CreateChildOrganizationInput:
+      properties:
+        can_add_children:
+          description: Whether the child organization can have its own child organizations
+          type:
+          - boolean
+          - 'null'
+        can_manage_child_licenses:
+          description: Whether the child organization can manage its descendants' licenses
+          type:
+          - boolean
+          - 'null'
+        licenses:
+          description: Licenses to provision on the new organization. Omit for an unlicensed (free) org.
+          items:
+            $ref: '#/components/schemas/Handler_typesLicenseInput'
+          type: array
+        name:
+          description: Name of the child organization
+          type: string
+      required:
+      - name
+      type: object
+    Handler_typesPatchChildOrganizationLicensingResponse:
+      properties:
+        licenses:
+          description: Licenses present on the organization after the requested transition. A license whose transition failed is omitted; see warnings for details.
+          items:
+            $ref: '#/components/schemas/TypesLicense'
+          type: array
+        warnings:
+          description: Non-fatal issues encountered while applying the transition. A non-empty warnings array alongside a partial licenses array indicates partial success.
+          items:
+            type: string
+          type: array
+      type: object
+    Handler_typesBulkPatchChildOrganizationLicensingResponse:
+      properties:
+        results:
+          description: One entry per requested organization, in the same order as the request's items array. Inspect each entry's error field to detect partial failure.
+          items:
+            $ref: '#/components/schemas/Handler_typesBulkLicensingResult'
+          type: array
+      type: object
+    PatchChildOrganizationInput:
+      properties:
+        can_add_children:
+          description: Set whether this organization may create its own child organizations. Granting requires the target to be below the maximum hierarchy depth.
+          example: true
+          type:
+          - boolean
+          - 'null'
+        can_manage_child_licenses:
+          description: Set whether this organization may manage licenses on its descendants. Granting requires child-organization license management to be enabled for the root organization and the target's immediate parent to already hold this permission; revoking is always allowed.
+          example: false
+          type:
+          - boolean
+          - 'null'
+        name:
+          description: New display name for the organization. Must be non-empty after trimming whitespace.
+          example: Acme Corp (renamed)
+          type:
+          - string
+          - 'null'
+      type: object
+    BulkPatchChildOrganizationLicensingInput:
+      properties:
+        items:
+          description: Per-organization transitions to apply. Capped at 200 entries per call. The same org_id may not appear more than once. The caller must be able to manage licenses on every listed organization, or the entire request is rejected before any transition is attempted.
+          items:
+            $ref: '#/components/schemas/Handler_typesBulkLicensingItem'
+          maxItems: 200
+          minItems: 1
+          type: array
+      required:
+      - items
+      type: object
     Handler_typesLicenseInput:
       properties:
         sku:
@@ -213,6 +302,76 @@ components:
       required:
       - sku
       - status
+      type: object
+    Handler_typesBulkLicensingResult:
+      properties:
+        error:
+          description: Human-readable failure reason; empty on success, populated when the transition failed for this organization. Safe to surface to end users.
+          example: enterprise subscriptions cannot be transitioned to a trial
+          type: string
+        licenses:
+          description: Licenses present on the organization after the transition. Populated on success.
+          items:
+            $ref: '#/components/schemas/TypesLicense'
+          type: array
+        org_id:
+          description: ID of the organization this result applies to.
+          example: 019263d1-7c1a-7c8e-9c66-f1c2a9b1f4e2
+          format: uuid
+          type: string
+        warnings:
+          description: Non-fatal issues encountered while applying the transition for this organization.
+          items:
+            type: string
+          type: array
+      type: object
+    Handler_typesCreateChildOrganizationResponse:
+      properties:
+        id:
+          description: ID of the newly created organization
+          format: uuid
+          type: string
+        licenses:
+          description: Licenses successfully provisioned on the new organization
+          items:
+            $ref: '#/components/schemas/TypesLicense'
+          type: array
+        warnings:
+          description: Non-fatal issues encountered while applying optional settings
+          items:
+            type: string
+          type: array
+      type: object
+    Handler_typesListChildOrganizationsResponse:
+      properties:
+        children:
+          description: The matching child organizations, ordered by name.
+          items:
+            $ref: '#/components/schemas/TypesOrganization'
+          type: array
+        total:
+          description: Total number of matching child organizations, ignoring offset/limit.
+          example: 3
+          format: int32
+          type: integer
+      type: object
+    Handler_typesBulkLicensingItem:
+      properties:
+        licenses:
+          description: License transition to apply to this organization. Exactly one license per entry is supported today; the array shape is reserved for future multi-SKU support.
+          items:
+            $ref: '#/components/schemas/Handler_typesLicenseInput'
+          maxItems: 1
+          minItems: 1
+          type: array
+        org_id:
+          description: ID of the child organization this entry targets. Must be a descendant of the calling organization.
+          example: 019263d1-7c1a-7c8e-9c66-f1c2a9b1f4e2
+          format: uuid
+          type: string
+      required:
+      - licenses
+      - org_id
       type: object
     TypesOrganization:
       description: The root org
@@ -301,165 +460,6 @@ components:
           type:
           - string
           - 'null'
-      type: object
-    Handler_typesCreateChildOrganizationResponse:
-      properties:
-        id:
-          description: ID of the newly created organization
-          format: uuid
-          type: string
-        licenses:
-          description: Licenses successfully provisioned on the new organization
-          items:
-            $ref: '#/components/schemas/TypesLicense'
-          type: array
-        warnings:
-          description: Non-fatal issues encountered while applying optional settings
-          items:
-            type: string
-          type: array
-      type: object
-    Handler_typesPatchChildOrganizationLicensingResponse:
-      properties:
-        licenses:
-          description: Licenses present on the organization after the requested transition. A license whose transition failed is omitted; see warnings for details.
-          items:
-            $ref: '#/components/schemas/TypesLicense'
-          type: array
-        warnings:
-          description: Non-fatal issues encountered while applying the transition. A non-empty warnings array alongside a partial licenses array indicates partial success.
-          items:
-            type: string
-          type: array
-      type: object
-    Handler_typesListChildOrganizationsResponse:
-      properties:
-        children:
-          description: The matching child organizations, ordered by name.
-          items:
-            $ref: '#/components/schemas/TypesOrganization'
-          type: array
-        total:
-          description: Total number of matching child organizations, ignoring offset/limit.
-          example: 3
-          format: int32
-          type: integer
-      type: object
-    CreateChildOrganizationInput:
-      properties:
-        can_add_children:
-          description: Whether the child organization can have its own child organizations
-          type:
-          - boolean
-          - 'null'
-        can_manage_child_licenses:
-          description: Whether the child organization can manage its descendants' licenses
-          type:
-          - boolean
-          - 'null'
-        licenses:
-          description: Licenses to provision on the new organization. Omit for an unlicensed (free) org.
-          items:
-            $ref: '#/components/schemas/Handler_typesLicenseInput'
-          type: array
-        name:
-          description: Name of the child organization
-          type: string
-      required:
-      - name
-      type: object
-    Handler_typesBulkLicensingResult:
-      properties:
-        error:
-          description: Human-readable failure reason; empty on success, populated when the transition failed for this organization. Safe to surface to end users.
-          example: enterprise subscriptions cannot be transitioned to a trial
-          type: string
-        licenses:
-          description: Licenses present on the organization after the transition. Populated on success.
-          items:
-            $ref: '#/components/schemas/TypesLicense'
-          type: array
-        org_id:
-          description: ID of the organization this result applies to.
-          example: 019263d1-7c1a-7c8e-9c66-f1c2a9b1f4e2
-          format: uuid
-          type: string
-        warnings:
-          description: Non-fatal issues encountered while applying the transition for this organization.
-          items:
-            type: string
-          type: array
-      type: object
-    PatchChildOrganizationInput:
-      properties:
-        can_add_children:
-          description: Set whether this organization may create its own child organizations. Granting requires the target to be below the maximum hierarchy depth.
-          example: true
-          type:
-          - boolean
-          - 'null'
-        can_manage_child_licenses:
-          description: Set whether this organization may manage licenses on its descendants. Granting requires child-organization license management to be enabled for the root organization and the target's immediate parent to already hold this permission; revoking is always allowed.
-          example: false
-          type:
-          - boolean
-          - 'null'
-        name:
-          description: New display name for the organization. Must be non-empty after trimming whitespace.
-          example: Acme Corp (renamed)
-          type:
-          - string
-          - 'null'
-      type: object
-    PatchChildOrganizationLicensingInput:
-      properties:
-        licenses:
-          description: Desired license to apply. Exactly one license per request is supported today; the array shape is reserved for future multi-SKU support.
-          items:
-            $ref: '#/components/schemas/Handler_typesLicenseInput'
-          maxItems: 1
-          minItems: 1
-          type: array
-      required:
-      - licenses
-      type: object
-    Handler_typesBulkLicensingItem:
-      properties:
-        licenses:
-          description: License transition to apply to this organization. Exactly one license per entry is supported today; the array shape is reserved for future multi-SKU support.
-          items:
-            $ref: '#/components/schemas/Handler_typesLicenseInput'
-          maxItems: 1
-          minItems: 1
-          type: array
-        org_id:
-          description: ID of the child organization this entry targets. Must be a descendant of the calling organization.
-          example: 019263d1-7c1a-7c8e-9c66-f1c2a9b1f4e2
-          format: uuid
-          type: string
-      required:
-      - licenses
-      - org_id
-      type: object
-    Handler_typesBulkPatchChildOrganizationLicensingResponse:
-      properties:
-        results:
-          description: One entry per requested organization, in the same order as the request's items array. Inspect each entry's error field to detect partial failure.
-          items:
-            $ref: '#/components/schemas/Handler_typesBulkLicensingResult'
-          type: array
-      type: object
-    BulkPatchChildOrganizationLicensingInput:
-      properties:
-        items:
-          description: Per-organization transitions to apply. Capped at 200 entries per call. The same org_id may not appear more than once. The caller must be able to manage licenses on every listed organization, or the entire request is rejected before any transition is attempted.
-          items:
-            $ref: '#/components/schemas/Handler_typesBulkLicensingItem'
-          maxItems: 200
-          minItems: 1
-          type: array
-      required:
-      - items
       type: object
   securitySchemes:
     bearerAuth:
