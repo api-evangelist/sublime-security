@@ -133,27 +133,6 @@ paths:
       - Email Bombs
 components:
   schemas:
-    HandlersV0CreateEmailBombResponse:
-      properties:
-        created_bomb_id:
-          description: ID of the newly created bomb. Omitted when the time range merged into existing bombs.
-          format: uuid
-          type:
-          - string
-          - 'null'
-        overlapping_bomb_ids:
-          description: IDs of all bombs overlapping the requested time range
-          format: uuid
-          items:
-            type: string
-          type: array
-        updated_bomb_ids:
-          description: IDs of existing bombs expanded to cover the requested time range
-          format: uuid
-          items:
-            type: string
-          type: array
-      type: object
     HandlersV0GetEmailBombResponse:
       properties:
         active:
@@ -201,6 +180,72 @@ components:
           description: Time when the email bomb was last updated
           format: date-time
           type: string
+      type: object
+    HandlersV0CreateEmailBombResponse:
+      properties:
+        created_bomb_id:
+          description: ID of the newly created bomb. Omitted when the time range merged into existing bombs.
+          format: uuid
+          type:
+          - string
+          - 'null'
+        overlapping_bomb_ids:
+          description: IDs of all bombs overlapping the requested time range
+          format: uuid
+          items:
+            type: string
+          type: array
+        updated_bomb_ids:
+          description: IDs of existing bombs expanded to cover the requested time range
+          format: uuid
+          items:
+            type: string
+          type: array
+      type: object
+    Handler_typesMailbox:
+      description: Mailbox that the email bomb was found in
+      properties:
+        email:
+          description: Mailbox email address
+          type: string
+        external_id:
+          description: ID of the mailbox in the source system (e.g., Office 365 or Google Workspace)
+          type:
+          - string
+          - 'null'
+        id:
+          description: Mailbox ID
+          format: uuid
+          type: string
+      required:
+      - email
+      - id
+      type: object
+    DismissEmailBombInput:
+      properties:
+        review_comment:
+          description: Comment describing reason for dismissing the email bomb
+          type:
+          - string
+          - 'null'
+      type: object
+    CreateEmailBombInput:
+      properties:
+        end_time:
+          description: End of the email bomb time range (must not be in the future)
+          format: date-time
+          type: string
+        mailbox_id:
+          description: ID of the mailbox to declare the email bomb for
+          type: string
+        start_time:
+          description: Start of the email bomb time range
+          format: date-time
+          type: string
+      required:
+      - end_time
+      - mailbox_id
+      - start_time
       type: object
     HandlersV0ListEmailBombsResponse:
       properties:
@@ -268,51 +313,6 @@ components:
           description: Time when the email bomb was last updated
           format: date-time
           type: string
-      type: object
-    Handler_typesMailbox:
-      description: Mailbox that the email bomb was found in
-      properties:
-        email:
-          description: Mailbox email address
-          type: string
-        external_id:
-          description: ID of the mailbox in the source system (e.g., Office 365 or Google Workspace)
-          type:
-          - string
-          - 'null'
-        id:
-          description: Mailbox ID
-          format: uuid
-          type: string
-      required:
-      - email
-      - id
-      type: object
-    CreateEmailBombInput:
-      properties:
-        end_time:
-          description: End of the email bomb time range (must not be in the future)
-          format: date-time
-          type: string
-        mailbox_id:
-          description: ID of the mailbox to declare the email bomb for
-          type: string
-        start_time:
-          description: Start of the email bomb time range
-          format: date-time
-          type: string
-      required:
-      - end_time
-      - mailbox_id
-      - start_time
-      type: object
-    DismissEmailBombInput:
-      properties:
-        review_comment:
-          description: Comment describing reason for dismissing the email bomb
-          type:
-          - string
-          - 'null'
       type: object
   securitySchemes:
     bearerAuth:

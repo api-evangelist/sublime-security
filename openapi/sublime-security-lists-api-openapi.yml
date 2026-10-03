@@ -273,6 +273,13 @@ paths:
       - Lists
 components:
   schemas:
+    AddListEntryInput:
+      properties:
+        string:
+          description: String list entry
+          maxLength: 2000
+          type: string
+      type: object
     Handler_typesGetListResponse:
       properties:
         lists:
@@ -280,14 +287,6 @@ components:
           items:
             $ref: '#/components/schemas/Handler_typesList'
           type: array
-      type: object
-    PatchListInput:
-      properties:
-        description:
-          description: Description of list
-          type: string
-      required:
-      - description
       type: object
     SetListEntriesInput:
       properties:
@@ -330,25 +329,6 @@ components:
       - id
       - name
       type: object
-    CreateListInput:
-      properties:
-        description:
-          description: Description of list
-          type: string
-        name:
-          description: Unique name used to reference the list in MQL
-          type: string
-      required:
-      - description
-      - name
-      type: object
-    AddListEntryInput:
-      properties:
-        string:
-          description: String list entry
-          maxLength: 2000
-          type: string
-      type: object
     Handler_typesListEntries:
       properties:
         entries:
@@ -361,6 +341,26 @@ components:
           items:
             type: string
           type: array
+      type: object
+    PatchListInput:
+      properties:
+        description:
+          description: Description of list
+          type: string
+      required:
+      - description
+      type: object
+    CreateListInput:
+      properties:
+        description:
+          description: Description of list
+          type: string
+        name:
+          description: Unique name used to reference the list in MQL
+          type: string
+      required:
+      - description
+      - name
       type: object
   securitySchemes:
     bearerAuth:

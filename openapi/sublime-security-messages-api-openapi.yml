@@ -539,80 +539,285 @@ paths:
       - Messages
 components:
   schemas:
-    Mdm_serviceReceived:
-      description: Details of the Received field
+    HandlersGetMessageCanonicalGroupTasksResponse:
       properties:
-        additional:
-          $ref: '#/components/schemas/Mdm_serviceReceivedAdditional'
-        id:
-          $ref: '#/components/schemas/Mdm_serviceReceivedID'
-        link:
-          $ref: '#/components/schemas/Mdm_serviceReceivedVia'
-        mailbox:
-          $ref: '#/components/schemas/Mdm_serviceReceivedFor'
-        protocol:
-          $ref: '#/components/schemas/Mdm_serviceReceivedWith'
-        server:
-          $ref: '#/components/schemas/Mdm_serviceReceivedBy'
+        actions:
+          description: Tasks associated with the message group
+          items:
+            $ref: '#/components/schemas/Actions_typesActionEventCounts'
+          type: array
+      type: object
+    Handler_typesQuerySimpleMeta:
+      description: Metadata about the query evaluated against the message
+      properties:
+        name:
+          description: Query name
+          type:
+          - string
+          - 'null'
+        severity:
+          description: Severity associated with the query
+          type:
+          - string
+          - 'null'
         source:
-          $ref: '#/components/schemas/Mdm_serviceReceivedFrom'
-        time:
-          description: Time parsed from the Received header
+          description: Query source
+          type:
+          - string
+          - 'null'
+      type: object
+    Mdm_serviceIPTranslation:
+      properties:
+        original:
+          description: The IP in its original format if it is an IPv4-mapped-IPv6 source address
+          type:
+          - string
+          - 'null'
+        v4_to_v6:
+          description: Whether 'Original' is IPv4-mapped-IPv6
+          type: boolean
+      type: object
+    Mdm_serviceCompAuth:
+      description: Composite Authentication result, used by Microsoft O365
+      properties:
+        reason:
+          description: Reason for the verdict
+          type: string
+        verdict:
+          description: Verdict of the compauth
+          type: string
+      required:
+      - reason
+      - verdict
+      type: object
+    Handler_typesRuleSimple:
+      properties:
+        active:
+          description: Whether the rule is active
+          type: boolean
+        feed_id:
+          description: Feed ID associated with the rule
+          type:
+          - string
+          - 'null'
+        name:
+          description: Rule name
+          type:
+          - string
+          - 'null'
+        severity:
+          description: Severity associated with the rule
+          type:
+          - string
+          - 'null'
+        source:
+          description: The MQL source to run against the message
+          type: string
+      required:
+      - source
+      type: object
+    Mdm_serviceBodyHTML:
+      description: The body part containing content-type text/html
+      properties:
+        charset:
+          description: charset of the text/[subtype]
+          type: string
+        content_transfer_encoding:
+          description: Content-Transfer-Encoding of the text/[subtype]
+          type: string
+        display_text:
+          description: Visible text of the HTML document, with invisible characters removed and non-ASCII characters converted to ASCII spaces.
+          type:
+          - string
+          - 'null'
+        inner_text:
+          description: Inner text of the HTML document that doesn't include HTML tags.
+          type:
+          - string
+          - 'null'
+        links:
+          description: All links found in the HTML part of the body of the message
+          items:
+            $ref: '#/components/schemas/Mdm_serviceLink'
+          type: array
+        raw:
+          description: Decoded raw content of a body text type (text/[subtype] section)
+          type:
+          - string
+          - 'null'
+      type: object
+    Mdm_serviceMailbox:
+      description: Organizer mailbox with email and display name
+      properties:
+        display_name:
+          description: Display name
+          type: string
+        email:
+          $ref: '#/components/schemas/Mdm_serviceEmailAddress'
+      required:
+      - email
+      type: object
+    Mdm_serviceMetadata:
+      description: Metadata
+      properties:
+        canonical_id:
+          description: A deterministic ID, generated from metadata such as Attachments, Body, Subject, Sender and is used to group similar messages/campaigns together
+          type: string
+        created_at:
+          description: Creation time of the data model
+          format: date-time
+          type: string
+        effective_at:
+          description: Effective time of the data model, used for evaluation against lists and historical functions such as sender profiles or whois.
           format: date-time
           type:
           - string
           - 'null'
-        zone_offset:
-          description: Timezone offset parsed from the Received header
-          type:
-          - string
-          - 'null'
-      type: object
-    Mdm_serviceIP:
-      description: X-Originating-IP header, which identifies the originating IP address of the sender client
-      properties:
-        ip:
-          description: The IP in canonical form
+        id:
+          description: Message ID
+          format: uuid
           type: string
-        translation:
-          $ref: '#/components/schemas/Mdm_serviceIPTranslation'
-        version:
-          description: The version of IP (i.e., 4 or 6), null for backward compatibility.
-          format: int32
-          type:
-          - integer
-          - 'null'
       required:
-      - ip
+      - canonical_id
+      - created_at
       type: object
-    HandlersAsaReportResponseV0:
+    Mdm_serviceHop:
       properties:
-        attack_type:
-          description: Present if verdict is 'malicious'
+        authentication_results:
+          $ref: '#/components/schemas/Mdm_serviceAuthResults'
+        fields:
+          description: List of all raw header fields contained within this hop
           items:
-            $ref: '#/components/schemas/HandlersAsaTitleDescriptionPair'
+            $ref: '#/components/schemas/Mdm_serviceHopField'
           type: array
-        full_explanation:
-          description: Comprehensive explanation of the findings, including verdict, attack type, attack technique, and complete reasoning.
+        index:
+          description: Index indicates the order in which a hop occurred from sender to recipient
+          format: int32
+          type: integer
+        received:
+          $ref: '#/components/schemas/Mdm_serviceReceived'
+        received_spf:
+          $ref: '#/components/schemas/Mdm_serviceSPF'
+        signature:
+          $ref: '#/components/schemas/Mdm_serviceSignature'
+      required:
+      - fields
+      - index
+      type: object
+    Mdm_serviceHopField:
+      properties:
+        name:
+          description: The name of the field
           type: string
-        summary:
-          description: Executive summary of the findings, including verdict, attack type, attack technique, and high-level reasoning.
+        position:
+          description: This field's position along the entire list of header fields
+          format: int32
+          type: integer
+        value:
+          description: The value contained within the field
           type: string
-        tactics_and_techniques:
-          description: Array of techniques used in the attack. Present if verdict is 'malicious'
+      required:
+      - name
+      - position
+      type: object
+    Handler_typesMessageImageLink:
+      properties:
+        expires_in:
+          description: Approximate duration of link in seconds
+          format: int32
+          type: integer
+        url:
+          description: Temporary link to image
+          type: string
+      required:
+      - expires_in
+      - url
+      type: object
+    AttackScoreForRawMessageInput:
+      properties:
+        raw_message:
+          description: The full base64 encoded raw eml message
+          format: byte
+          type: string
+      required:
+      - raw_message
+      type: object
+    Mdm_serviceRewriteDetails:
+      description: Information about an original URL that was unfurled from rewrite detection
+      properties:
+        encoders:
+          description: List of detected URL rewrite encoders while unraveling the URL
           items:
-            $ref: '#/components/schemas/HandlersAsaTitleDescriptionPair'
+            enum:
+            - adobe
+            - appspot
+            - aws_ses
+            - azurecomm
+            - azure_safelink
+            - barracuda
+            - bing_open_redirect
+            - branch_io
+            - checkpoint
+            - cisco
+            - cloudflare
+            - convertkit
+            - deref_mail
+            - doubleclick
+            - edgepilot
+            - esvalabs
+            - exactag
+            - exclaimer
+            - facebook
+            - fireeye
+            - fortimail
+            - generic_desturl
+            - generic_logout_redirect
+            - go_acoustic
+            - google_amp
+            - google_amp_project
+            - google_adservices
+            - google_meet_redirect
+            - google_notifications
+            - google_open_redirect
+            - google_tag_manager
+            - google_travel_redirect
+            - google_translate_open_redirect
+            - google_user_content
+            - href_li
+            - indeed_open_redirect
+            - inky
+            - instagram
+            - mailgun
+            - mailjet
+            - mandrill
+            - messagegears
+            - microsoft
+            - microsoft_dynamics
+            - microsoft_oauth_redirect
+            - monday_tracker
+            - postmark
+            - ppcprotect
+            - proofpoint
+            - pylonlinks
+            - securence
+            - sophos
+            - sqclick
+            - squarespace
+            - sublime
+            - titanhq
+            - topsec
+            - trend_micro
+            - vtiger
+            - wix
+            - yahoo
+            - youtube_set_sid
+            type: string
           type: array
-        verdict:
-          description: ASA verdict
-          enum:
-          - malicious
-          - spam
-          - graymail
-          - benign
-          - likely_benign
-          - unknown
+        original:
+          description: Original URL without any unraveling URL rewrites
           type: string
+      required:
+      - original
       type: object
     Mdm_serviceDomain:
       description: Domain parsed from X-Authenticated-Domain or X-Authenticated-Sender headers, which represents the domain used for sender authentication, typically the domain of the sending organization. This field provides additional context for analyzing the legitimacy of the sender
@@ -642,6 +847,37 @@ components:
           type: boolean
       required:
       - domain
+      type: object
+    Handler_typesSender:
+      description: Details of the message sender
+      properties:
+        display_name:
+          description: Display name
+          type: string
+        email:
+          description: Email address
+          type: string
+      required:
+      - email
+      type: object
+    Mdm_serviceRecipients:
+      description: Recipient objects
+      properties:
+        bcc:
+          description: List of 'bcc' Mailbox objects
+          items:
+            $ref: '#/components/schemas/Mdm_serviceMailbox'
+          type: array
+        cc:
+          description: List of 'cc' Mailbox objects
+          items:
+            $ref: '#/components/schemas/Mdm_serviceMailbox'
+          type: array
+        to:
+          description: List of 'to' Mailbox objects
+          items:
+            $ref: '#/components/schemas/Mdm_serviceMailbox'
+          type: array
       type: object
     Mdm_serviceURL:
       description: URL details when QR code type is url
@@ -689,51 +925,397 @@ components:
       required:
       - url
       type: object
-    Mdm_serviceThread:
-      description: The current text thread of the message
+    Mdm_serviceReceivedID:
+      description: The 'id' section of the Received header
       properties:
-        banners:
-          description: All warning banners found in the body of the message.
-          items:
-            $ref: '#/components/schemas/Mdm_serviceBanner'
-          type: array
-        links:
-          description: All links found in the given thread, unique by the target and display text/url.
-          items:
-            $ref: '#/components/schemas/Mdm_serviceLink'
-          type: array
-        preamble:
-          description: The preamble text from the thread, typically the headers of a reply or forward. Things like From, Sent, Subject, saved as one big multiline string. This doesn't include banners.
-          type: string
-        text:
-          description: The text content from the latest reply/forward in a message thread. This typically excludes content from forwarded messages and warning banners.
+        raw:
+          description: The raw string of 'id' section
           type: string
       type: object
-    Mdm_servicePlain:
-      description: The body part containing content-type text/plain
+    Mdm_serviceMessageType:
+      description: Override on message types, defined from the perspective of your organization
       properties:
-        charset:
-          description: charset of the text/[subtype]
+        inbound:
+          description: Message was sent from someone outside your organization, to *at least one* recipient inside your organization
+          type: boolean
+        internal:
+          description: Message was sent from someone inside your organization, to *at least one* recipient inside your organization. Messages *must be authenticated* by either SPF or DKIM to be treated as internal.
+          type: boolean
+        outbound:
+          description: Message was sent from someone inside your organization, to *at least one* recipient outside your organization
+          type: boolean
+      type: object
+    HandlersMessage:
+      properties:
+        canonical_group_id:
+          description: Identifier shared by messages with the same canonical_id that arrive within the same period without a 60-minute gap
           type: string
-        content_transfer_encoding:
-          description: Content-Transfer-Encoding of the text/[subtype]
+        canonical_id:
+          description: The sha1 hash of the message body text and sender
           type: string
-        links:
-          description: All links found in the plain part of the body of the message
-          items:
-            $ref: '#/components/schemas/Mdm_serviceLink'
-          type: array
-        raw:
-          description: Decoded raw content of a body text type (text/[subtype] section)
+        created_at:
+          description: Datetime the message was created
+          type: string
+        data_model:
+          $ref: '#/components/schemas/Mdm_serviceMessageDataModel'
+        delivered_at:
+          description: The time, if any, at which the message was delivered
+          format: date-time
           type:
           - string
           - 'null'
+        effective_at:
+          description: The effective time of the message
+          format: date-time
+          type:
+          - string
+          - 'null'
+        id:
+          description: Message ID
+          format: uuid
+          type: string
+        mailbox_id:
+          description: ID of the mailbox for the message
+          format: uuid
+          type:
+          - string
+          - 'null'
+        matched_global_exclusion:
+          description: Whether or not the message matched a global exclusion rule
+          type:
+          - boolean
+          - 'null'
+        preview:
+          $ref: '#/components/schemas/TypesPreview'
+        raw_message_id:
+          description: ID of the raw message that generated this message
+          format: uuid
+          type: string
+        received_inline:
+          description: Whether or not the message was received via inline processing
+          type: boolean
+        reports_as_phish:
+          description: ID of the message group this message reports as phish
+          type:
+          - string
+          - 'null'
+        reviewed_at:
+          description: Datetime the message was reviewed
+          type:
+          - string
+          - 'null'
+        status:
+          description: The status of the message
+          type:
+          - string
+          - 'null'
+        status_changed_at:
+          description: The time when the status last changed
+          format: date-time
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/TypesMessageType'
+      required:
+      - canonical_group_id
+      - canonical_id
+      - created_at
+      - data_model
+      - id
+      - preview
+      - raw_message_id
       type: object
-    Mdm_serviceReceivedFrom:
-      description: The 'from' section of the Received header, relating to a server in a prior hop
+    CreateMessageInput:
+      properties:
+        canonical_id:
+          description: The canonical ID of the message, if known
+          type:
+          - string
+          - 'null'
+        external_created_at:
+          description: Timestamp the message created at according to the external source
+          type:
+          - string
+          - 'null'
+        external_message_id:
+          description: ID of the message according to the external source
+          type:
+          - string
+          - 'null'
+        external_thread_id:
+          description: ID of the thread the message belongs to according to the external source
+          type:
+          - string
+          - 'null'
+        folder:
+          description: The mailbox folder the message is in
+          type:
+          - string
+          - 'null'
+        labels:
+          description: Labels applied to the message by the mailbox
+          items:
+            type: string
+          type: array
+        mailbox_email_address:
+          description: The email address of the mailbox containing this message
+          format: email
+          type:
+          - string
+          - 'null'
+        message_type:
+          $ref: '#/components/schemas/Mdm_serviceMessageType'
+        raw_message:
+          description: The full base64 encoded raw eml message
+          format: byte
+          type: string
+        route_type:
+          description: The directional route type of the message
+          type:
+          - string
+          - 'null'
+      required:
+      - raw_message
+      type: object
+    Mdm_serviceAuthResults:
+      description: Results of authentication. Supported fields include 'Authentication-Results', 'X-Original-Authentication-Results', 'X-MS-Exchange-Authentication-Results', 'X-Agari-Authentication-Results', 'Authentication-Results-Original', and 'ARC-Authentication-Results'. Specification details can be found at https://tools.ietf.org/html/rfc8601
+      properties:
+        compauth:
+          $ref: '#/components/schemas/Mdm_serviceCompAuth'
+        dkim:
+          description: Verdict of the Domain Keys Identified Mail check
+          enum:
+          - none
+          - pass
+          - fail
+          - policy
+          - neutral
+          - temperror
+          - permerror
+          type: string
+        dkim_details:
+          description: List of details of the Domain Keys Identified Mail checks
+          items:
+            $ref: '#/components/schemas/Mdm_serviceSignature'
+          type: array
+        dmarc:
+          description: Verdict of the Domain-based Message Authentication, Reporting & Conformance check
+          enum:
+          - none
+          - pass
+          - fail
+          - bestguesspass
+          type: string
+        dmarc_details:
+          $ref: '#/components/schemas/Mdm_serviceDMARC'
+        instance:
+          description: Instance number of this auth result (if ARC)
+          type: string
+        server:
+          $ref: '#/components/schemas/Mdm_serviceDomain'
+        spf:
+          description: Verdict of the Sender Policy Framework
+          enum:
+          - none
+          - pass
+          - fail
+          - softfail
+          - policy
+          - neutral
+          - temperror
+          - permerror
+          type: string
+        spf_details:
+          $ref: '#/components/schemas/Mdm_serviceSPF'
+        type:
+          description: The type of authentication result, derived from the field name
+          type: string
+      type: object
+    Handler_typesAnalyzeResponseQuery:
+      properties:
+        error:
+          description: Error message, if success == false
+          type:
+          - string
+          - 'null'
+        execution_time:
+          description: Execution time in seconds
+          format: double
+          type:
+          - number
+          - 'null'
+        external_errors:
+          description: External errors that occurred during evaluation
+          items:
+            type: string
+          type: array
+        query:
+          $ref: '#/components/schemas/Handler_typesQuerySimpleMeta'
+        result:
+          description: Result of the query evaluation
+        success:
+          description: Whether execution was successful or errored
+          type: boolean
+      required:
+      - execution_time
+      - success
+      type: object
+    TypesMessageType:
+      description: The types of the message
+      properties:
+        inbound:
+          description: Message was sent from someone outside your organization, to *at least one* recipient inside your organization
+          type: boolean
+        internal:
+          description: Message was sent between two or more participants inside your organization
+          type: boolean
+        outbound:
+          description: Message was sent from someone inside your organization, to *at least one* recipient outside your organization
+          type: boolean
+      type: object
+    Mdm_serviceLink:
+      properties:
+        display_text:
+          description: The text of a hyperlink, if it's not a URL
+          type: string
+        display_url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+        href_url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+        mismatched:
+          description: Whether the display URL and href URL root domains are mismatched (i.e. .href_url.domain.root_domain != .display_url.domain.root_domain, where both are not null and valid domains)
+          type:
+          - boolean
+          - 'null'
+        parser:
+          description: The parser that was used to derived the link
+          enum:
+          - plain
+          - hyperlink
+          type: string
+        visible:
+          description: Whether the link is visible to a human when previewing an email or page
+          type:
+          - boolean
+          - 'null'
+      type: object
+    Mdm_serviceExternal:
+      description: Cloud API provider or other external source metadata
+      properties:
+        created_at:
+          description: The created time of the message as provided by the cloud API (G Suite or Office 365) or other external source. This is typically the time the external source received the message
+          format: date-time
+          type:
+          - string
+          - 'null'
+        message_id:
+          description: The message ID as provided by the cloud API (G Suite or Office 365) or other external source
+          type: string
+        route_type:
+          description: whether the message was sent or received
+          enum:
+          - sent
+          - received
+          type: string
+        spam:
+          description: The upstream mail gateway determined the message to be spam. For cloud API providers, this will be the same as spam_folder. For other implementation methods like transport rules, this will be determined by message header values (e.g. X-SPAM) if supported
+          type:
+          - boolean
+          - 'null'
+        spam_folder:
+          description: The message arrived in the user's spam folder. This only applies to cloud APIs (G Suite or Office 365)
+          type:
+          - boolean
+          - 'null'
+        thread_id:
+          description: The thread/conversation's unique ID as provided by the cloud API (G Suite or Office 365)
+          type: string
+      type: object
+    Mdm_serviceEmailAddress:
+      description: Email address object
+      properties:
+        domain:
+          $ref: '#/components/schemas/Mdm_serviceDomain'
+        email:
+          description: Full email address
+          format: email
+          type: string
+        local_part:
+          description: Local-part, i.e. before the @
+          type: string
+      type: object
+    Mdm_serviceAuthSummary:
+      description: Summary of authentication results for the message
+      properties:
+        dmarc:
+          $ref: '#/components/schemas/Mdm_serviceDMARCSummary'
+        spf:
+          $ref: '#/components/schemas/Mdm_serviceSPFSummary'
+      type: object
+    Mdm_serviceReceivedVia:
+      description: The 'via' section of the Received header, denoting transport
       properties:
         raw:
-          description: The raw string of 'from' section
+          description: The raw string of 'via' section
+          type: string
+      type: object
+    Handler_typesQuerySimple:
+      properties:
+        name:
+          description: Query name
+          type:
+          - string
+          - 'null'
+        severity:
+          description: Severity associated with the query
+          type:
+          - string
+          - 'null'
+        source:
+          description: The MQL source to run against the message
+          type:
+          - string
+          - 'null'
+      required:
+      - source
+      type: object
+    Actions_typesActionEventCounts:
+      properties:
+        action_type:
+          description: The type of the action that was applied
+          type: string
+        attempts:
+          description: The number of attempts made to apply the action
+          format: int32
+          type: integer
+        change:
+          description: The type of change that was made (either applied or reverted)
+          type: string
+        created_at:
+          description: The time the action event was created
+          format: date-time
+          type: string
+        id:
+          description: The ID of the action event
+          type: string
+        total:
+          description: The total number of messages that the action was applied to
+          format: int32
+          type: integer
+      type: object
+    Handler_typesAttachmentImageContent:
+      properties:
+        data:
+          description: Base64 encoded PNGs of the raw attachment. Multiple if it is a document with pages.
+          items:
+            items:
+              format: int32
+              type: integer
+            type: array
+          type: array
+        hash:
+          description: The MD5 hash of the full attachment
           type: string
       type: object
     Mdm_serviceAttachment:
@@ -856,6 +1438,470 @@ components:
           - integer
           - 'null'
       type: object
+    Mdm_serviceSignature:
+      description: Details of a message signature. Supported fields include 'DKIM-Signature', 'DomainKey-Signature', 'X-Google-DKIM-Signature' and 'ARC-Message-Signature'
+      properties:
+        algorithm:
+          description: Signing algorithm
+          type: string
+        body_hash:
+          description: Body Hash
+          type: string
+        domain:
+          description: Domain identified in the DKIM signature if any. This is the domain that's queried for the public key.
+          type: string
+        headers:
+          description: Header fields signed by the algorithm
+          type: string
+        instance:
+          description: Instance number of this signature (if ARC)
+          type: string
+        selector:
+          description: Selector
+          type: string
+        signature:
+          description: Signature of headers and body
+          type: string
+        type:
+          description: The type of signature, derived from the field name
+          type: string
+        version:
+          description: Version
+          type: string
+      type: object
+    Handler_typesRuleSimplePublicID:
+      description: Metadata for the rule compared against the message
+      properties:
+        id:
+          description: Rule ID
+          type:
+          - string
+          - 'null'
+        name:
+          description: Rule name
+          type:
+          - string
+          - 'null'
+        severity:
+          description: Severity associated with the rule
+          type:
+          - string
+          - 'null'
+        source:
+          description: The MQL source for the rule
+          type: string
+      required:
+      - source
+      type: object
+    AnalyzeMessageByIDInput:
+      properties:
+        queries:
+          description: Queries to analyze
+          items:
+            $ref: '#/components/schemas/Handler_typesQuerySimple'
+          type: array
+        rules:
+          description: Rules to analyze
+          items:
+            $ref: '#/components/schemas/Handler_typesRuleSimple'
+          type: array
+        run_active_detection_rules:
+          default: false
+          description: Whether to analyze the message with all active detection rules in your organization
+          type: boolean
+        run_all_detection_rules:
+          default: false
+          description: Whether to analyze with all detection rules from all Feeds, including uninstalled + inactive Feed rules, as well as any active detection rules you’ve created that are not part of a Feed.
+          type: boolean
+        run_all_insights:
+          default: false
+          description: Whether to analyze with all insights
+          type: boolean
+      type: object
+    Mdm_serviceBanner:
+      properties:
+        links:
+          description: All links found in the banner, unique by the target and display text/url.
+          items:
+            $ref: '#/components/schemas/Mdm_serviceLink'
+          type: array
+        text:
+          description: The text content from the warning banner.
+          type: string
+      type: object
+    Mdm_serviceReceivedAdditional:
+      description: The remaining additional clauses of the Received header
+      properties:
+        raw:
+          description: The raw string for remaining additional clauses, such as transport information
+          type: string
+      type: object
+    Mdm_serviceSenderMailbox:
+      description: Sender object
+      properties:
+        decoders:
+          description: Decoders used to parse the email sender info, if any
+          items:
+            enum:
+            - google_groups
+            type: string
+          type: array
+        display_name:
+          description: Display name
+          type: string
+        email:
+          $ref: '#/components/schemas/Mdm_serviceEmailAddress'
+      required:
+      - email
+      type: object
+    HandlersAsaTitleDescriptionPair:
+      properties:
+        description:
+          type: string
+        title:
+          type: string
+      type: object
+    Mdm_serviceSPF:
+      description: Details of the Sender Policy Framework check. Supported fields include 'Received-SPF' and 'X-Received-SPF'
+      properties:
+        client_ip:
+          $ref: '#/components/schemas/Mdm_serviceIP'
+        description:
+          description: Verbose description of the SPF verdict
+          type:
+          - string
+          - 'null'
+        designator:
+          description: Email or domain of the designating body
+          type:
+          - string
+          - 'null'
+        helo:
+          $ref: '#/components/schemas/Mdm_serviceDomain'
+        server:
+          $ref: '#/components/schemas/Mdm_serviceDomain'
+        verdict:
+          description: Verdict of the SPF
+          type:
+          - string
+          - 'null'
+      type: object
+    Mdm_serviceReceivedWith:
+      description: The 'with' section of the Received header, denoting the protocol used
+      properties:
+        raw:
+          description: The raw string of 'with' section
+          type: string
+      type: object
+    Mdm_serviceDMARC:
+      description: Details of the Domain-based Message Authentication, Reporting & Conformance check
+      properties:
+        action:
+          description: Indicates the action taken by the spam filter based on the results of the DMARC check. For more information see https://docs.microsoft.com/en-us/microsoft-365/security/office-365-security/anti-spam-message-headers?view=o365-worldwide#authentication-results-message-header-fields
+          type:
+          - string
+          - 'null'
+        disposition:
+          description: Gmail-applied policy
+          type:
+          - string
+          - 'null'
+        from:
+          $ref: '#/components/schemas/Mdm_serviceDomain'
+        policy:
+          description: Policy for the organizational domain
+          type:
+          - string
+          - 'null'
+        sub_policy:
+          description: Policy for the subdomain of the organizational domain
+          type:
+          - string
+          - 'null'
+        verdict:
+          description: Describes the results of the DMARC check for the message
+          type:
+          - string
+          - 'null'
+        version:
+          description: DMARC version
+          type:
+          - string
+          - 'null'
+      type: object
+    Mdm_serviceReceivedFor:
+      description: The 'for' section of the Received header, denoting the destination mailbox
+      properties:
+        raw:
+          description: The raw string of 'for' section
+          type: string
+      type: object
+    Handler_typesAnalyzeRawMessageResponse:
+      properties:
+        query_results:
+          description: Query result details
+          items:
+            $ref: '#/components/schemas/Handler_typesAnalyzeResponseQuery'
+          type: array
+        rule_results:
+          description: Analyze result details
+          items:
+            $ref: '#/components/schemas/Handler_typesAnalyzeResponseRule'
+          type: array
+      type: object
+    Mdm_servicePlain:
+      description: The body part containing content-type text/plain
+      properties:
+        charset:
+          description: charset of the text/[subtype]
+          type: string
+        content_transfer_encoding:
+          description: Content-Transfer-Encoding of the text/[subtype]
+          type: string
+        links:
+          description: All links found in the plain part of the body of the message
+          items:
+            $ref: '#/components/schemas/Mdm_serviceLink'
+          type: array
+        raw:
+          description: Decoded raw content of a body text type (text/[subtype] section)
+          type:
+          - string
+          - 'null'
+      type: object
+    Handler_typesMailbox:
+      description: Mailbox that the email bomb was found in
+      properties:
+        email:
+          description: Mailbox email address
+          type: string
+        external_id:
+          description: ID of the mailbox in the source system (e.g., Office 365 or Google Workspace)
+          type:
+          - string
+          - 'null'
+        id:
+          description: Mailbox ID
+          format: uuid
+          type: string
+      required:
+      - email
+      - id
+      type: object
+    Mdm_serviceReceivedBy:
+      description: The 'by' section of the Received header, denoting the current server
+      properties:
+        raw:
+          description: The raw string of 'by' section
+          type: string
+      type: object
+    Mdm_serviceThread:
+      description: The current text thread of the message
+      properties:
+        banners:
+          description: All warning banners found in the body of the message.
+          items:
+            $ref: '#/components/schemas/Mdm_serviceBanner'
+          type: array
+        links:
+          description: All links found in the given thread, unique by the target and display text/url.
+          items:
+            $ref: '#/components/schemas/Mdm_serviceLink'
+          type: array
+        preamble:
+          description: The preamble text from the thread, typically the headers of a reply or forward. Things like From, Sent, Subject, saved as one big multiline string. This doesn't include banners.
+          type: string
+        text:
+          description: The text content from the latest reply/forward in a message thread. This typically excludes content from forwarded messages and warning banners.
+          type: string
+      type: object
+    AnalyzeMessageInput:
+      properties:
+        queries:
+          description: Queries to analyze
+          items:
+            $ref: '#/components/schemas/Handler_typesQuerySimple'
+          type: array
+        raw_message:
+          description: The full base64 encoded raw eml message
+          format: byte
+          type: string
+        rules:
+          description: Rules to analyze
+          items:
+            $ref: '#/components/schemas/Handler_typesRuleSimple'
+          type: array
+        run_active_detection_rules:
+          default: false
+          description: Whether to analyze the message with all active detection rules in your organization
+          type: boolean
+        run_all_detection_rules:
+          default: false
+          description: Whether to analyze with all detection rules from all Feeds, including uninstalled + inactive Feed rules, as well as any active detection rules you’ve created that are not part of a Feed.
+          type: boolean
+        run_all_insights:
+          default: false
+          description: Whether to analyze with all insights
+          type: boolean
+      required:
+      - raw_message
+      type: object
+    HandlersAsaReportResponseV0:
+      properties:
+        attack_type:
+          description: Present if verdict is 'malicious'
+          items:
+            $ref: '#/components/schemas/HandlersAsaTitleDescriptionPair'
+          type: array
+        full_explanation:
+          description: Comprehensive explanation of the findings, including verdict, attack type, attack technique, and complete reasoning.
+          type: string
+        summary:
+          description: Executive summary of the findings, including verdict, attack type, attack technique, and high-level reasoning.
+          type: string
+        tactics_and_techniques:
+          description: Array of techniques used in the attack. Present if verdict is 'malicious'
+          items:
+            $ref: '#/components/schemas/HandlersAsaTitleDescriptionPair'
+          type: array
+        verdict:
+          description: ASA verdict
+          enum:
+          - malicious
+          - spam
+          - graymail
+          - benign
+          - likely_benign
+          - unknown
+          type: string
+      type: object
+    HandlersAsaVerdictResponseV0:
+      properties:
+        verdict:
+          description: ASA verdict
+          enum:
+          - malicious
+          - spam
+          - graymail
+          - likely_benign
+          - benign
+          - unknown
+          type: string
+      type: object
+    Handler_typesAnalyzeResponseRule:
+      properties:
+        error:
+          description: Error message, if success == false
+          type:
+          - string
+          - 'null'
+        execution_time:
+          description: Execution time in seconds
+          format: double
+          type:
+          - number
+          - 'null'
+        external_errors:
+          description: External errors that occurred during evaluation
+          items:
+            type: string
+          type: array
+        matched:
+          description: Whether the rule matched the provided message
+          type:
+          - boolean
+          - 'null'
+        rule:
+          $ref: '#/components/schemas/Handler_typesRuleSimplePublicID'
+        success:
+          description: Whether execution was successful or errored
+          type: boolean
+      required:
+      - execution_time
+      - matched
+      - success
+      type: object
+    GetMessageAttachmentImageRawInput:
+      properties:
+        file_type:
+          description: The file type of the attachment
+          type: string
+        raw:
+          description: The full base64 encoded raw attachment to render
+          format: byte
+          type: string
+      required:
+      - raw
+      type: object
+    Mdm_serviceReceived:
+      description: Details of the Received field
+      properties:
+        additional:
+          $ref: '#/components/schemas/Mdm_serviceReceivedAdditional'
+        id:
+          $ref: '#/components/schemas/Mdm_serviceReceivedID'
+        link:
+          $ref: '#/components/schemas/Mdm_serviceReceivedVia'
+        mailbox:
+          $ref: '#/components/schemas/Mdm_serviceReceivedFor'
+        protocol:
+          $ref: '#/components/schemas/Mdm_serviceReceivedWith'
+        server:
+          $ref: '#/components/schemas/Mdm_serviceReceivedBy'
+        source:
+          $ref: '#/components/schemas/Mdm_serviceReceivedFrom'
+        time:
+          description: Time parsed from the Received header
+          format: date-time
+          type:
+          - string
+          - 'null'
+        zone_offset:
+          description: Timezone offset parsed from the Received header
+          type:
+          - string
+          - 'null'
+      type: object
+    Mdm_serviceMessageDataModel:
+      description: Full data model of the message
+      properties:
+        _errors:
+          description: Non-fatal errors while parsing MDM
+          items:
+            additionalProperties:
+              type: string
+            type: object
+          type: array
+        _meta:
+          $ref: '#/components/schemas/Mdm_serviceMetadata'
+        attachments:
+          description: Attachments
+          items:
+            $ref: '#/components/schemas/Mdm_serviceAttachment'
+          type: array
+        body:
+          $ref: '#/components/schemas/Mdm_serviceBody'
+        external:
+          $ref: '#/components/schemas/Mdm_serviceExternal'
+        headers:
+          $ref: '#/components/schemas/Mdm_serviceHeaders'
+        mailbox:
+          $ref: '#/components/schemas/Mdm_serviceMailboxExtended'
+        recipients:
+          $ref: '#/components/schemas/Mdm_serviceRecipients'
+        sender:
+          $ref: '#/components/schemas/Mdm_serviceSenderMailbox'
+        subject:
+          $ref: '#/components/schemas/Mdm_serviceSubject'
+        type:
+          $ref: '#/components/schemas/Mdm_serviceMessageType'
+      required:
+      - _meta
+      - headers
+      - recipients
+      - sender
+      - type
+      type: object
     Mdm_servicePreviousThread:
       properties:
         banners:
@@ -891,139 +1937,6 @@ components:
           description: The text content from the latest reply/forward in a message thread. This typically excludes content from forwarded messages and warning banners.
           type: string
       type: object
-    Mdm_serviceBody:
-      description: Body of the email
-      properties:
-        current_thread:
-          $ref: '#/components/schemas/Mdm_serviceThread'
-        html:
-          $ref: '#/components/schemas/Mdm_serviceBodyHTML'
-        ips:
-          description: IP Addresses located in the body
-          items:
-            $ref: '#/components/schemas/Mdm_serviceIP'
-          type: array
-        links:
-          description: All links found in the body of the message, unique by the target and display text/url.
-          items:
-            $ref: '#/components/schemas/Mdm_serviceLink'
-          type: array
-        plain:
-          $ref: '#/components/schemas/Mdm_servicePlain'
-        previous_threads:
-          description: The previous texts threads of the message'
-          items:
-            $ref: '#/components/schemas/Mdm_servicePreviousThread'
-          type: array
-      type: object
-    Mdm_serviceRecipients:
-      description: Recipient objects
-      properties:
-        bcc:
-          description: List of 'bcc' Mailbox objects
-          items:
-            $ref: '#/components/schemas/Mdm_serviceMailbox'
-          type: array
-        cc:
-          description: List of 'cc' Mailbox objects
-          items:
-            $ref: '#/components/schemas/Mdm_serviceMailbox'
-          type: array
-        to:
-          description: List of 'to' Mailbox objects
-          items:
-            $ref: '#/components/schemas/Mdm_serviceMailbox'
-          type: array
-      type: object
-    Mdm_serviceBodyHTML:
-      description: The body part containing content-type text/html
-      properties:
-        charset:
-          description: charset of the text/[subtype]
-          type: string
-        content_transfer_encoding:
-          description: Content-Transfer-Encoding of the text/[subtype]
-          type: string
-        display_text:
-          description: Visible text of the HTML document, with invisible characters removed and non-ASCII characters converted to ASCII spaces.
-          type:
-          - string
-          - 'null'
-        inner_text:
-          description: Inner text of the HTML document that doesn't include HTML tags.
-          type:
-          - string
-          - 'null'
-        links:
-          description: All links found in the HTML part of the body of the message
-          items:
-            $ref: '#/components/schemas/Mdm_serviceLink'
-          type: array
-        raw:
-          description: Decoded raw content of a body text type (text/[subtype] section)
-          type:
-          - string
-          - 'null'
-      type: object
-    Mdm_serviceSPF:
-      description: Details of the Sender Policy Framework check. Supported fields include 'Received-SPF' and 'X-Received-SPF'
-      properties:
-        client_ip:
-          $ref: '#/components/schemas/Mdm_serviceIP'
-        description:
-          description: Verbose description of the SPF verdict
-          type:
-          - string
-          - 'null'
-        designator:
-          description: Email or domain of the designating body
-          type:
-          - string
-          - 'null'
-        helo:
-          $ref: '#/components/schemas/Mdm_serviceDomain'
-        server:
-          $ref: '#/components/schemas/Mdm_serviceDomain'
-        verdict:
-          description: Verdict of the SPF
-          type:
-          - string
-          - 'null'
-      type: object
-    Handler_typesAttachmentImageContent:
-      properties:
-        data:
-          description: Base64 encoded PNGs of the raw attachment. Multiple if it is a document with pages.
-          items:
-            items:
-              format: int32
-              type: integer
-            type: array
-          type: array
-        hash:
-          description: The MD5 hash of the full attachment
-          type: string
-      type: object
-    TypesMessageType:
-      description: The types of the message
-      properties:
-        inbound:
-          description: Message was sent from someone outside your organization, to *at least one* recipient inside your organization
-          type: boolean
-        internal:
-          description: Message was sent between two or more participants inside your organization
-          type: boolean
-        outbound:
-          description: Message was sent from someone inside your organization, to *at least one* recipient outside your organization
-          type: boolean
-      type: object
-    Mdm_serviceReceivedID:
-      description: The 'id' section of the Received header
-      properties:
-        raw:
-          description: The raw string of 'id' section
-          type: string
-      type: object
     Handler_typesRecipient:
       properties:
         email:
@@ -1032,59 +1945,42 @@ components:
       required:
       - email
       type: object
-    Mdm_serviceAuthResults:
-      description: Results of authentication. Supported fields include 'Authentication-Results', 'X-Original-Authentication-Results', 'X-MS-Exchange-Authentication-Results', 'X-Agari-Authentication-Results', 'Authentication-Results-Original', and 'ARC-Authentication-Results'. Specification details can be found at https://tools.ietf.org/html/rfc8601
+    Mdm_serviceSPFSummary:
+      description: Summary of the SPF check
       properties:
-        compauth:
-          $ref: '#/components/schemas/Mdm_serviceCompAuth'
-        dkim:
-          description: Verdict of the Domain Keys Identified Mail check
-          enum:
-          - none
-          - pass
-          - fail
-          - policy
-          - neutral
-          - temperror
-          - permerror
-          type: string
-        dkim_details:
-          description: List of details of the Domain Keys Identified Mail checks
-          items:
-            $ref: '#/components/schemas/Mdm_serviceSignature'
-          type: array
-        dmarc:
-          description: Verdict of the Domain-based Message Authentication, Reporting & Conformance check
-          enum:
-          - none
-          - pass
-          - fail
-          - bestguesspass
-          type: string
-        dmarc_details:
-          $ref: '#/components/schemas/Mdm_serviceDMARC'
-        instance:
-          description: Instance number of this auth result (if ARC)
-          type: string
-        server:
-          $ref: '#/components/schemas/Mdm_serviceDomain'
-        spf:
-          description: Verdict of the Sender Policy Framework
-          enum:
-          - none
-          - pass
-          - fail
-          - softfail
-          - policy
-          - neutral
-          - temperror
-          - permerror
-          type: string
-        spf_details:
+        details:
           $ref: '#/components/schemas/Mdm_serviceSPF'
-        type:
-          description: The type of authentication result, derived from the field name
+        error:
+          description: Whether the SPF check errored
+          type:
+          - boolean
+          - 'null'
+        pass:
+          description: Whether the SPF check passed
+          type:
+          - boolean
+          - 'null'
+        received_hop:
+          description: The lowest hop at which the SPF check was made
+          format: int32
+          type: integer
+      type: object
+    Mdm_serviceIP:
+      description: X-Originating-IP header, which identifies the originating IP address of the sender client
+      properties:
+        ip:
+          description: The IP in canonical form
           type: string
+        translation:
+          $ref: '#/components/schemas/Mdm_serviceIPTranslation'
+        version:
+          description: The version of IP (i.e., 4 or 6), null for backward compatibility.
+          format: int32
+          type:
+          - integer
+          - 'null'
+      required:
+      - ip
       type: object
     TypesPreview:
       description: Preview of key details from the message header
@@ -1114,117 +2010,107 @@ components:
       - sender_email_address
       - subject
       type: object
-    HandlersAsaTitleDescriptionPair:
+    Mdm_serviceBody:
+      description: Body of the email
       properties:
-        description:
-          type: string
-        title:
-          type: string
+        current_thread:
+          $ref: '#/components/schemas/Mdm_serviceThread'
+        html:
+          $ref: '#/components/schemas/Mdm_serviceBodyHTML'
+        ips:
+          description: IP Addresses located in the body
+          items:
+            $ref: '#/components/schemas/Mdm_serviceIP'
+          type: array
+        links:
+          description: All links found in the body of the message, unique by the target and display text/url.
+          items:
+            $ref: '#/components/schemas/Mdm_serviceLink'
+          type: array
+        plain:
+          $ref: '#/components/schemas/Mdm_servicePlain'
+        previous_threads:
+          description: The previous texts threads of the message'
+          items:
+            $ref: '#/components/schemas/Mdm_servicePreviousThread'
+          type: array
       type: object
-    Mdm_serviceLink:
+    Mdm_serviceMailboxExtended:
+      description: The mailbox where the message was found
       properties:
-        display_text:
-          description: The text of a hyperlink, if it's not a URL
+        display_name:
+          description: Display name
           type: string
-        display_url:
-          $ref: '#/components/schemas/Mdm_serviceURL'
-        href_url:
-          $ref: '#/components/schemas/Mdm_serviceURL'
-        mismatched:
-          description: Whether the display URL and href URL root domains are mismatched (i.e. .href_url.domain.root_domain != .display_url.domain.root_domain, where both are not null and valid domains)
-          type:
-          - boolean
-          - 'null'
-        parser:
-          description: The parser that was used to derived the link
-          enum:
-          - plain
-          - hyperlink
-          type: string
-        visible:
-          description: Whether the link is visible to a human when previewing an email or page
-          type:
-          - boolean
-          - 'null'
-      type: object
-    Mdm_serviceEmailAddress:
-      description: Email address object
-      properties:
-        domain:
-          $ref: '#/components/schemas/Mdm_serviceDomain'
         email:
-          description: Full email address
-          format: email
+          $ref: '#/components/schemas/Mdm_serviceEmailAddress'
+        first_name:
+          description: First name (given name) of the mailbox owner
           type: string
-        local_part:
-          description: Local-part, i.e. before the @
-          type: string
-      type: object
-    Mdm_serviceReceivedVia:
-      description: The 'via' section of the Received header, denoting transport
-      properties:
-        raw:
-          description: The raw string of 'via' section
-          type: string
-      type: object
-    Handler_typesRuleSimplePublicID:
-      description: Metadata for the rule compared against the message
-      properties:
-        id:
-          description: Rule ID
-          type:
-          - string
-          - 'null'
-        name:
-          description: Rule name
-          type:
-          - string
-          - 'null'
-        severity:
-          description: Severity associated with the rule
-          type:
-          - string
-          - 'null'
-        source:
-          description: The MQL source for the rule
+        last_name:
+          description: Last name (surname) of the mailbox owner
           type: string
       required:
-      - source
+      - email
       type: object
-    Mdm_serviceMessageType:
-      description: Override on message types, defined from the perspective of your organization
+    Handler_typesMessageImage:
       properties:
-        inbound:
-          description: Message was sent from someone outside your organization, to *at least one* recipient inside your organization
-          type: boolean
-        internal:
-          description: Message was sent from someone inside your organization, to *at least one* recipient inside your organization. Messages *must be authenticated* by either SPF or DKIM to be treated as internal.
-          type: boolean
-        outbound:
-          description: Message was sent from someone inside your organization, to *at least one* recipient outside your organization
-          type: boolean
-      type: object
-    HandlersMessage:
-      properties:
-        canonical_group_id:
-          description: Identifier shared by messages with the same canonical_id that arrive within the same period without a 60-minute gap
+        data:
+          description: Base64-encoded image data
+          format: byte
           type: string
+        is_empty_body:
+          description: If the message is missing a body. In this case an empty PNG is returned.
+          type: boolean
+        mime_type:
+          description: MIME type of the image
+          type: string
+      type: object
+    HandlersAttackScoreResponse:
+      properties:
+        graymail_score:
+          description: Score from 0 to 100, with higher scores indicating a higher correlation with messages involved in graymail.
+          format: double
+          type:
+          - number
+          - 'null'
+        score:
+          description: Score from 0 to 100, with higher scores indicating a higher correlation with messages involved in attacks.
+          format: double
+          type:
+          - number
+          - 'null'
+        top_signals:
+          description: Top signals contributing to the score
+          items:
+            $ref: '#/components/schemas/HandlersAttackScoreSignalResult'
+          type: array
+        verdict:
+          description: Verdict of the score, determined by thresholds.
+          type:
+          - string
+          - 'null'
+      type: object
+    Handler_typesMessage:
+      properties:
         canonical_id:
-          description: The sha1 hash of the message body text and sender
+          description: Canonical ID of the message
           type: string
         created_at:
           description: Datetime the message was created
-          type: string
-        data_model:
-          $ref: '#/components/schemas/Mdm_serviceMessageDataModel'
-        delivered_at:
-          description: The time, if any, at which the message was delivered
           format: date-time
+          type: string
+        external_id:
+          description: ID of the message in the source system (e.g., Office 365 or Google Workspace)
           type:
           - string
           - 'null'
-        effective_at:
-          description: The effective time of the message
+        forward_recipients:
+          description: Email addresses this message was forwarded to by the recipient mailbox
+          items:
+            type: string
+          type: array
+        forwarded_at:
+          description: Time this message was forwarded by the recipient mailbox. A null value indicates that it has not yet been forwarded
           format: date-time
           type:
           - string
@@ -1233,95 +2119,49 @@ components:
           description: Message ID
           format: uuid
           type: string
-        mailbox_id:
-          description: ID of the mailbox for the message
-          format: uuid
-          type:
-          - string
-          - 'null'
-        matched_global_exclusion:
-          description: Whether or not the message matched a global exclusion rule
+        landed_in_spam:
+          description: Whether the message landed in the recipient's spam folder
           type:
           - boolean
           - 'null'
-        preview:
-          $ref: '#/components/schemas/TypesPreview'
-        raw_message_id:
-          description: ID of the raw message that generated this message
+        mailbox:
+          $ref: '#/components/schemas/Handler_typesMailbox'
+        message_source_id:
+          description: ID of the message source of the message
           format: uuid
-          type: string
-        received_inline:
-          description: Whether or not the message was received via inline processing
-          type: boolean
-        reports_as_phish:
-          description: ID of the message group this message reports as phish
           type:
           - string
           - 'null'
-        reviewed_at:
-          description: Datetime the message was reviewed
-          type:
-          - string
-          - 'null'
-        status:
-          description: The status of the message
-          type:
-          - string
-          - 'null'
-        status_changed_at:
-          description: The time when the status last changed
+        read_at:
+          description: Time this message was read in the user's mailbox. A null value indicates that it has not yet been marked read
           format: date-time
           type:
           - string
           - 'null'
-        type:
-          $ref: '#/components/schemas/TypesMessageType'
+        recipients:
+          description: Details of the message recipients
+          items:
+            $ref: '#/components/schemas/Handler_typesRecipient'
+          type: array
+        replied_at:
+          description: Time that this message was replied to by the recipient mailbox. A null value indicates that it has not yet been replied to by the recipient
+          format: date-time
+          type:
+          - string
+          - 'null'
+        sender:
+          $ref: '#/components/schemas/Handler_typesSender'
+        subject:
+          description: Subject of the message
+          type: string
       required:
-      - canonical_group_id
       - canonical_id
       - created_at
-      - data_model
       - id
-      - preview
-      - raw_message_id
-      type: object
-    Mdm_serviceThreadRecipients:
-      description: Recipients extracted from thread preamble
-      properties:
-        bcc:
-          description: List of 'bcc' Mailbox objects
-          items:
-            $ref: '#/components/schemas/Mdm_serviceMailbox'
-          type: array
-        cc:
-          description: List of 'cc' Mailbox objects
-          items:
-            $ref: '#/components/schemas/Mdm_serviceMailbox'
-          type: array
-        to:
-          description: List of 'to' Mailbox objects
-          items:
-            $ref: '#/components/schemas/Mdm_serviceMailbox'
-          type: array
-      type: object
-    Handler_typesQuerySimpleMeta:
-      description: Metadata about the query evaluated against the message
-      properties:
-        name:
-          description: Query name
-          type:
-          - string
-          - 'null'
-        severity:
-          description: Severity associated with the query
-          type:
-          - string
-          - 'null'
-        source:
-          description: Query source
-          type:
-          - string
-          - 'null'
+      - message_source_id
+      - recipients
+      - sender
+      - subject
       type: object
     Mdm_serviceHeaders:
       description: The message headers
@@ -1403,211 +2243,6 @@ components:
       required:
       - hops
       type: object
-    AnalyzeMessageInput:
-      properties:
-        queries:
-          description: Queries to analyze
-          items:
-            $ref: '#/components/schemas/Handler_typesQuerySimple'
-          type: array
-        raw_message:
-          description: The full base64 encoded raw eml message
-          format: byte
-          type: string
-        rules:
-          description: Rules to analyze
-          items:
-            $ref: '#/components/schemas/Handler_typesRuleSimple'
-          type: array
-        run_active_detection_rules:
-          default: false
-          description: Whether to analyze the message with all active detection rules in your organization
-          type: boolean
-        run_all_detection_rules:
-          default: false
-          description: Whether to analyze with all detection rules from all Feeds, including uninstalled + inactive Feed rules, as well as any active detection rules you’ve created that are not part of a Feed.
-          type: boolean
-        run_all_insights:
-          default: false
-          description: Whether to analyze with all insights
-          type: boolean
-      required:
-      - raw_message
-      type: object
-    Mdm_serviceRewriteDetails:
-      description: Information about an original URL that was unfurled from rewrite detection
-      properties:
-        encoders:
-          description: List of detected URL rewrite encoders while unraveling the URL
-          items:
-            enum:
-            - adobe
-            - appspot
-            - aws_ses
-            - azurecomm
-            - azure_safelink
-            - barracuda
-            - bing_open_redirect
-            - branch_io
-            - checkpoint
-            - cisco
-            - cloudflare
-            - convertkit
-            - deref_mail
-            - doubleclick
-            - edgepilot
-            - esvalabs
-            - exactag
-            - exclaimer
-            - facebook
-            - fireeye
-            - fortimail
-            - generic_desturl
-            - generic_logout_redirect
-            - go_acoustic
-            - google_amp
-            - google_amp_project
-            - google_adservices
-            - google_meet_redirect
-            - google_notifications
-            - google_open_redirect
-            - google_tag_manager
-            - google_travel_redirect
-            - google_translate_open_redirect
-            - google_user_content
-            - href_li
-            - indeed_open_redirect
-            - inky
-            - instagram
-            - mailgun
-            - mailjet
-            - mandrill
-            - messagegears
-            - microsoft
-            - microsoft_dynamics
-            - microsoft_oauth_redirect
-            - monday_tracker
-            - postmark
-            - ppcprotect
-            - proofpoint
-            - pylonlinks
-            - securence
-            - sophos
-            - sqclick
-            - squarespace
-            - sublime
-            - titanhq
-            - topsec
-            - trend_micro
-            - vtiger
-            - wix
-            - yahoo
-            - youtube_set_sid
-            type: string
-          type: array
-        original:
-          description: Original URL without any unraveling URL rewrites
-          type: string
-      required:
-      - original
-      type: object
-    Handler_typesMessageImage:
-      properties:
-        data:
-          description: Base64-encoded image data
-          format: byte
-          type: string
-        is_empty_body:
-          description: If the message is missing a body. In this case an empty PNG is returned.
-          type: boolean
-        mime_type:
-          description: MIME type of the image
-          type: string
-      type: object
-    CreateMessageInput:
-      properties:
-        canonical_id:
-          description: The canonical ID of the message, if known
-          type:
-          - string
-          - 'null'
-        external_created_at:
-          description: Timestamp the message created at according to the external source
-          type:
-          - string
-          - 'null'
-        external_message_id:
-          description: ID of the message according to the external source
-          type:
-          - string
-          - 'null'
-        external_thread_id:
-          description: ID of the thread the message belongs to according to the external source
-          type:
-          - string
-          - 'null'
-        folder:
-          description: The mailbox folder the message is in
-          type:
-          - string
-          - 'null'
-        labels:
-          description: Labels applied to the message by the mailbox
-          items:
-            type: string
-          type: array
-        mailbox_email_address:
-          description: The email address of the mailbox containing this message
-          format: email
-          type:
-          - string
-          - 'null'
-        message_type:
-          $ref: '#/components/schemas/Mdm_serviceMessageType'
-        raw_message:
-          description: The full base64 encoded raw eml message
-          format: byte
-          type: string
-        route_type:
-          description: The directional route type of the message
-          type:
-          - string
-          - 'null'
-      required:
-      - raw_message
-      type: object
-    Handler_typesSender:
-      description: Details of the message sender
-      properties:
-        display_name:
-          description: Display name
-          type: string
-        email:
-          description: Email address
-          type: string
-      required:
-      - email
-      type: object
-    Mdm_serviceReceivedWith:
-      description: The 'with' section of the Received header, denoting the protocol used
-      properties:
-        raw:
-          description: The raw string of 'with' section
-          type: string
-      type: object
-    HandlersAsaVerdictResponseV0:
-      properties:
-        verdict:
-          description: ASA verdict
-          enum:
-          - malicious
-          - spam
-          - graymail
-          - likely_benign
-          - benign
-          - unknown
-          type: string
-      type: object
     Mdm_serviceDMARCSummary:
       description: Summary of the DMARC check
       properties:
@@ -1628,360 +2263,46 @@ components:
           format: int32
           type: integer
       type: object
-    Mdm_serviceMailbox:
-      description: Organizer mailbox with email and display name
+    Mdm_serviceThreadRecipients:
+      description: Recipients extracted from thread preamble
       properties:
-        display_name:
-          description: Display name
-          type: string
-        email:
-          $ref: '#/components/schemas/Mdm_serviceEmailAddress'
-      required:
-      - email
-      type: object
-    HandlersAttackScoreSignalResult:
-      properties:
-        category:
-          type: string
-        description:
-          type: string
-        rank:
-          format: int32
-          type: integer
-      type: object
-    Mdm_serviceMailboxExtended:
-      description: The mailbox where the message was found
-      properties:
-        display_name:
-          description: Display name
-          type: string
-        email:
-          $ref: '#/components/schemas/Mdm_serviceEmailAddress'
-        first_name:
-          description: First name (given name) of the mailbox owner
-          type: string
-        last_name:
-          description: Last name (surname) of the mailbox owner
-          type: string
-      required:
-      - email
-      type: object
-    AttackScoreForRawMessageInput:
-      properties:
-        raw_message:
-          description: The full base64 encoded raw eml message
-          format: byte
-          type: string
-      required:
-      - raw_message
-      type: object
-    Mdm_serviceMetadata:
-      description: Metadata
-      properties:
-        canonical_id:
-          description: A deterministic ID, generated from metadata such as Attachments, Body, Subject, Sender and is used to group similar messages/campaigns together
-          type: string
-        created_at:
-          description: Creation time of the data model
-          format: date-time
-          type: string
-        effective_at:
-          description: Effective time of the data model, used for evaluation against lists and historical functions such as sender profiles or whois.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        id:
-          description: Message ID
-          format: uuid
-          type: string
-      required:
-      - canonical_id
-      - created_at
-      type: object
-    Handler_typesRuleSimple:
-      properties:
-        active:
-          description: Whether the rule is active
-          type: boolean
-        feed_id:
-          description: Feed ID associated with the rule
-          type:
-          - string
-          - 'null'
-        name:
-          description: Rule name
-          type:
-          - string
-          - 'null'
-        severity:
-          description: Severity associated with the rule
-          type:
-          - string
-          - 'null'
-        source:
-          description: The MQL source to run against the message
-          type: string
-      required:
-      - source
-      type: object
-    Mdm_serviceAuthSummary:
-      description: Summary of authentication results for the message
-      properties:
-        dmarc:
-          $ref: '#/components/schemas/Mdm_serviceDMARCSummary'
-        spf:
-          $ref: '#/components/schemas/Mdm_serviceSPFSummary'
-      type: object
-    Mdm_serviceMessageDataModel:
-      description: Full data model of the message
-      properties:
-        _errors:
-          description: Non-fatal errors while parsing MDM
+        bcc:
+          description: List of 'bcc' Mailbox objects
           items:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/components/schemas/Mdm_serviceMailbox'
           type: array
-        _meta:
-          $ref: '#/components/schemas/Mdm_serviceMetadata'
-        attachments:
-          description: Attachments
+        cc:
+          description: List of 'cc' Mailbox objects
           items:
-            $ref: '#/components/schemas/Mdm_serviceAttachment'
+            $ref: '#/components/schemas/Mdm_serviceMailbox'
           type: array
-        body:
-          $ref: '#/components/schemas/Mdm_serviceBody'
-        external:
-          $ref: '#/components/schemas/Mdm_serviceExternal'
-        headers:
-          $ref: '#/components/schemas/Mdm_serviceHeaders'
-        mailbox:
-          $ref: '#/components/schemas/Mdm_serviceMailboxExtended'
-        recipients:
-          $ref: '#/components/schemas/Mdm_serviceRecipients'
-        sender:
-          $ref: '#/components/schemas/Mdm_serviceSenderMailbox'
-        subject:
-          $ref: '#/components/schemas/Mdm_serviceSubject'
-        type:
-          $ref: '#/components/schemas/Mdm_serviceMessageType'
-      required:
-      - _meta
-      - headers
-      - recipients
-      - sender
-      - type
-      type: object
-    HandlersAttackScoreResponse:
-      properties:
-        graymail_score:
-          description: Score from 0 to 100, with higher scores indicating a higher correlation with messages involved in graymail.
-          format: double
-          type:
-          - number
-          - 'null'
-        score:
-          description: Score from 0 to 100, with higher scores indicating a higher correlation with messages involved in attacks.
-          format: double
-          type:
-          - number
-          - 'null'
-        top_signals:
-          description: Top signals contributing to the score
+        to:
+          description: List of 'to' Mailbox objects
           items:
-            $ref: '#/components/schemas/HandlersAttackScoreSignalResult'
-          type: array
-        verdict:
-          description: Verdict of the score, determined by thresholds.
-          type:
-          - string
-          - 'null'
-      type: object
-    Mdm_serviceHop:
-      properties:
-        authentication_results:
-          $ref: '#/components/schemas/Mdm_serviceAuthResults'
-        fields:
-          description: List of all raw header fields contained within this hop
-          items:
-            $ref: '#/components/schemas/Mdm_serviceHopField'
-          type: array
-        index:
-          description: Index indicates the order in which a hop occurred from sender to recipient
-          format: int32
-          type: integer
-        received:
-          $ref: '#/components/schemas/Mdm_serviceReceived'
-        received_spf:
-          $ref: '#/components/schemas/Mdm_serviceSPF'
-        signature:
-          $ref: '#/components/schemas/Mdm_serviceSignature'
-      required:
-      - fields
-      - index
-      type: object
-    Handler_typesMailbox:
-      description: Mailbox that the email bomb was found in
-      properties:
-        email:
-          description: Mailbox email address
-          type: string
-        external_id:
-          description: ID of the mailbox in the source system (e.g., Office 365 or Google Workspace)
-          type:
-          - string
-          - 'null'
-        id:
-          description: Mailbox ID
-          format: uuid
-          type: string
-      required:
-      - email
-      - id
-      type: object
-    Mdm_serviceHopField:
-      properties:
-        name:
-          description: The name of the field
-          type: string
-        position:
-          description: This field's position along the entire list of header fields
-          format: int32
-          type: integer
-        value:
-          description: The value contained within the field
-          type: string
-      required:
-      - name
-      - position
-      type: object
-    Handler_typesTaskAccepted:
-      properties:
-        task_id:
-          description: Task ID. Use the /v0/tasks/:id endpoint to check the task status.
-          format: uuid
-          type: string
-      required:
-      - task_id
-      type: object
-    HandlersGetMessageCanonicalGroupTasksResponse:
-      properties:
-        actions:
-          description: Tasks associated with the message group
-          items:
-            $ref: '#/components/schemas/Actions_typesActionEventCounts'
+            $ref: '#/components/schemas/Mdm_serviceMailbox'
           type: array
       type: object
-    SetMessageAccessJustificationInput:
+    ActionMessageInput:
       properties:
-        justification:
-          description: Justification for accessing this message's contents
+        action:
+          description: Action to take on the message group
+          enum:
+          - restore
+          - warning_banner
+          - quarantine
+          - trash
+          - move_to_spam
+          - move_to_graymail
+          - delete_calendar_events
           type: string
-      type: object
-    Handler_typesAnalyzeResponseRule:
-      properties:
-        error:
-          description: Error message, if success == false
-          type:
-          - string
-          - 'null'
-        execution_time:
-          description: Execution time in seconds
-          format: double
-          type:
-          - number
-          - 'null'
-        external_errors:
-          description: External errors that occurred during evaluation
+        custom_action_ids:
+          description: IDs of actions to perform on the message group
           items:
             type: string
           type: array
-        matched:
-          description: Whether the rule matched the provided message
-          type:
-          - boolean
-          - 'null'
-        rule:
-          $ref: '#/components/schemas/Handler_typesRuleSimplePublicID'
-        success:
-          description: Whether execution was successful or errored
+        share_with_sublime:
+          description: Whether to share the message group & review with Sublime
           type: boolean
-      required:
-      - execution_time
-      - matched
-      - success
-      type: object
-    Mdm_serviceReceivedFor:
-      description: The 'for' section of the Received header, denoting the destination mailbox
-      properties:
-        raw:
-          description: The raw string of 'for' section
-          type: string
-      type: object
-    Mdm_serviceReceivedBy:
-      description: The 'by' section of the Received header, denoting the current server
-      properties:
-        raw:
-          description: The raw string of 'by' section
-          type: string
-      type: object
-    AnalyzeMessageByIDInput:
-      properties:
-        queries:
-          description: Queries to analyze
-          items:
-            $ref: '#/components/schemas/Handler_typesQuerySimple'
-          type: array
-        rules:
-          description: Rules to analyze
-          items:
-            $ref: '#/components/schemas/Handler_typesRuleSimple'
-          type: array
-        run_active_detection_rules:
-          default: false
-          description: Whether to analyze the message with all active detection rules in your organization
-          type: boolean
-        run_all_detection_rules:
-          default: false
-          description: Whether to analyze with all detection rules from all Feeds, including uninstalled + inactive Feed rules, as well as any active detection rules you’ve created that are not part of a Feed.
-          type: boolean
-        run_all_insights:
-          default: false
-          description: Whether to analyze with all insights
-          type: boolean
-      type: object
-    Handler_typesAnalyzeRawMessageResponse:
-      properties:
-        query_results:
-          description: Query result details
-          items:
-            $ref: '#/components/schemas/Handler_typesAnalyzeResponseQuery'
-          type: array
-        rule_results:
-          description: Analyze result details
-          items:
-            $ref: '#/components/schemas/Handler_typesAnalyzeResponseRule'
-          type: array
-      type: object
-    Mdm_serviceReceivedAdditional:
-      description: The remaining additional clauses of the Received header
-      properties:
-        raw:
-          description: The raw string for remaining additional clauses, such as transport information
-          type: string
-      type: object
-    GetMessageAttachmentImageRawInput:
-      properties:
-        file_type:
-          description: The file type of the attachment
-          type: string
-        raw:
-          description: The full base64 encoded raw attachment to render
-          format: byte
-          type: string
-      required:
-      - raw
       type: object
     Mdm_serviceSubject:
       description: Subject object
@@ -2008,358 +2329,37 @@ components:
             type: string
           type: array
       type: object
-    Mdm_serviceIPTranslation:
+    Mdm_serviceReceivedFrom:
+      description: The 'from' section of the Received header, relating to a server in a prior hop
       properties:
-        original:
-          description: The IP in its original format if it is an IPv4-mapped-IPv6 source address
-          type:
-          - string
-          - 'null'
-        v4_to_v6:
-          description: Whether 'Original' is IPv4-mapped-IPv6
-          type: boolean
-      type: object
-    Handler_typesAnalyzeResponseQuery:
-      properties:
-        error:
-          description: Error message, if success == false
-          type:
-          - string
-          - 'null'
-        execution_time:
-          description: Execution time in seconds
-          format: double
-          type:
-          - number
-          - 'null'
-        external_errors:
-          description: External errors that occurred during evaluation
-          items:
-            type: string
-          type: array
-        query:
-          $ref: '#/components/schemas/Handler_typesQuerySimpleMeta'
-        result:
-          description: Result of the query evaluation
-        success:
-          description: Whether execution was successful or errored
-          type: boolean
-      required:
-      - execution_time
-      - success
-      type: object
-    Mdm_serviceSignature:
-      description: Details of a message signature. Supported fields include 'DKIM-Signature', 'DomainKey-Signature', 'X-Google-DKIM-Signature' and 'ARC-Message-Signature'
-      properties:
-        algorithm:
-          description: Signing algorithm
-          type: string
-        body_hash:
-          description: Body Hash
-          type: string
-        domain:
-          description: Domain identified in the DKIM signature if any. This is the domain that's queried for the public key.
-          type: string
-        headers:
-          description: Header fields signed by the algorithm
-          type: string
-        instance:
-          description: Instance number of this signature (if ARC)
-          type: string
-        selector:
-          description: Selector
-          type: string
-        signature:
-          description: Signature of headers and body
-          type: string
-        type:
-          description: The type of signature, derived from the field name
-          type: string
-        version:
-          description: Version
+        raw:
+          description: The raw string of 'from' section
           type: string
       type: object
-    Mdm_serviceSenderMailbox:
-      description: Sender object
+    SetMessageAccessJustificationInput:
       properties:
-        decoders:
-          description: Decoders used to parse the email sender info, if any
-          items:
-            enum:
-            - google_groups
-            type: string
-          type: array
-        display_name:
-          description: Display name
-          type: string
-        email:
-          $ref: '#/components/schemas/Mdm_serviceEmailAddress'
-      required:
-      - email
-      type: object
-    ActionMessageInput:
-      properties:
-        action:
-          description: Action to take on the message group
-          enum:
-          - restore
-          - warning_banner
-          - quarantine
-          - trash
-          - move_to_spam
-          - move_to_graymail
-          - delete_calendar_events
-          type: string
-        custom_action_ids:
-          description: IDs of actions to perform on the message group
-          items:
-            type: string
-          type: array
-        share_with_sublime:
-          description: Whether to share the message group & review with Sublime
-          type: boolean
-      type: object
-    Actions_typesActionEventCounts:
-      properties:
-        action_type:
-          description: The type of the action that was applied
-          type: string
-        attempts:
-          description: The number of attempts made to apply the action
-          format: int32
-          type: integer
-        change:
-          description: The type of change that was made (either applied or reverted)
-          type: string
-        created_at:
-          description: The time the action event was created
-          format: date-time
-          type: string
-        id:
-          description: The ID of the action event
-          type: string
-        total:
-          description: The total number of messages that the action was applied to
-          format: int32
-          type: integer
-      type: object
-    Handler_typesMessageImageLink:
-      properties:
-        expires_in:
-          description: Approximate duration of link in seconds
-          format: int32
-          type: integer
-        url:
-          description: Temporary link to image
-          type: string
-      required:
-      - expires_in
-      - url
-      type: object
-    Mdm_serviceExternal:
-      description: Cloud API provider or other external source metadata
-      properties:
-        created_at:
-          description: The created time of the message as provided by the cloud API (G Suite or Office 365) or other external source. This is typically the time the external source received the message
-          format: date-time
-          type:
-          - string
-          - 'null'
-        message_id:
-          description: The message ID as provided by the cloud API (G Suite or Office 365) or other external source
-          type: string
-        route_type:
-          description: whether the message was sent or received
-          enum:
-          - sent
-          - received
-          type: string
-        spam:
-          description: The upstream mail gateway determined the message to be spam. For cloud API providers, this will be the same as spam_folder. For other implementation methods like transport rules, this will be determined by message header values (e.g. X-SPAM) if supported
-          type:
-          - boolean
-          - 'null'
-        spam_folder:
-          description: The message arrived in the user's spam folder. This only applies to cloud APIs (G Suite or Office 365)
-          type:
-          - boolean
-          - 'null'
-        thread_id:
-          description: The thread/conversation's unique ID as provided by the cloud API (G Suite or Office 365)
+        justification:
+          description: Justification for accessing this message's contents
           type: string
       type: object
-    Mdm_serviceCompAuth:
-      description: Composite Authentication result, used by Microsoft O365
+    Handler_typesTaskAccepted:
       properties:
-        reason:
-          description: Reason for the verdict
-          type: string
-        verdict:
-          description: Verdict of the compauth
-          type: string
-      required:
-      - reason
-      - verdict
-      type: object
-    Handler_typesQuerySimple:
-      properties:
-        name:
-          description: Query name
-          type:
-          - string
-          - 'null'
-        severity:
-          description: Severity associated with the query
-          type:
-          - string
-          - 'null'
-        source:
-          description: The MQL source to run against the message
-          type:
-          - string
-          - 'null'
-      required:
-      - source
-      type: object
-    Handler_typesMessage:
-      properties:
-        canonical_id:
-          description: Canonical ID of the message
-          type: string
-        created_at:
-          description: Datetime the message was created
-          format: date-time
-          type: string
-        external_id:
-          description: ID of the message in the source system (e.g., Office 365 or Google Workspace)
-          type:
-          - string
-          - 'null'
-        forward_recipients:
-          description: Email addresses this message was forwarded to by the recipient mailbox
-          items:
-            type: string
-          type: array
-        forwarded_at:
-          description: Time this message was forwarded by the recipient mailbox. A null value indicates that it has not yet been forwarded
-          format: date-time
-          type:
-          - string
-          - 'null'
-        id:
-          description: Message ID
+        task_id:
+          description: Task ID. Use the /v0/tasks/:id endpoint to check the task status.
           format: uuid
           type: string
-        landed_in_spam:
-          description: Whether the message landed in the recipient's spam folder
-          type:
-          - boolean
-          - 'null'
-        mailbox:
-          $ref: '#/components/schemas/Handler_typesMailbox'
-        message_source_id:
-          description: ID of the message source of the message
-          format: uuid
-          type:
-          - string
-          - 'null'
-        read_at:
-          description: Time this message was read in the user's mailbox. A null value indicates that it has not yet been marked read
-          format: date-time
-          type:
-          - string
-          - 'null'
-        recipients:
-          description: Details of the message recipients
-          items:
-            $ref: '#/components/schemas/Handler_typesRecipient'
-          type: array
-        replied_at:
-          description: Time that this message was replied to by the recipient mailbox. A null value indicates that it has not yet been replied to by the recipient
-          format: date-time
-          type:
-          - string
-          - 'null'
-        sender:
-          $ref: '#/components/schemas/Handler_typesSender'
-        subject:
-          description: Subject of the message
-          type: string
       required:
-      - canonical_id
-      - created_at
-      - id
-      - message_source_id
-      - recipients
-      - sender
-      - subject
+      - task_id
       type: object
-    Mdm_serviceBanner:
+    HandlersAttackScoreSignalResult:
       properties:
-        links:
-          description: All links found in the banner, unique by the target and display text/url.
-          items:
-            $ref: '#/components/schemas/Mdm_serviceLink'
-          type: array
-        text:
-          description: The text content from the warning banner.
+        category:
           type: string
-      type: object
-    Mdm_serviceSPFSummary:
-      description: Summary of the SPF check
-      properties:
-        details:
-          $ref: '#/components/schemas/Mdm_serviceSPF'
-        error:
-          description: Whether the SPF check errored
-          type:
-          - boolean
-          - 'null'
-        pass:
-          description: Whether the SPF check passed
-          type:
-          - boolean
-          - 'null'
-        received_hop:
-          description: The lowest hop at which the SPF check was made
+        description:
+          type: string
+        rank:
           format: int32
           type: integer
-      type: object
-    Mdm_serviceDMARC:
-      description: Details of the Domain-based Message Authentication, Reporting & Conformance check
-      properties:
-        action:
-          description: Indicates the action taken by the spam filter based on the results of the DMARC check. For more information see https://docs.microsoft.com/en-us/microsoft-365/security/office-365-security/anti-spam-message-headers?view=o365-worldwide#authentication-results-message-header-fields
-          type:
-          - string
-          - 'null'
-        disposition:
-          description: Gmail-applied policy
-          type:
-          - string
-          - 'null'
-        from:
-          $ref: '#/components/schemas/Mdm_serviceDomain'
-        policy:
-          description: Policy for the organizational domain
-          type:
-          - string
-          - 'null'
-        sub_policy:
-          description: Policy for the subdomain of the organizational domain
-          type:
-          - string
-          - 'null'
-        verdict:
-          description: Describes the results of the DMARC check for the message
-          type:
-          - string
-          - 'null'
-        version:
-          description: DMARC version
-          type:
-          - string
-          - 'null'
       type: object
   securitySchemes:
     bearerAuth:

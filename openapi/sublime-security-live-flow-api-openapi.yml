@@ -41,6 +41,40 @@ paths:
       - Live flow
 components:
   schemas:
+    TypesSqarAction:
+      properties:
+        active:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+      type: object
+    Handler_typesAnalyzeRawMessageLiveFlowResponse:
+      properties:
+        canonical_id:
+          description: Canonical (message group) ID
+          type: string
+        flagged_rules:
+          description: Flagged rules
+          items:
+            $ref: '#/components/schemas/TypesFlatSqar'
+          type: array
+        message_id:
+          description: Message ID
+          format: uuid
+          type:
+          - string
+          - 'null'
+        raw_message_id:
+          description: Raw message ID
+          format: uuid
+          type:
+          - string
+          - 'null'
+      type: object
     TypesFlatSqar:
       description: Originating rule for this rule exclusion
       properties:
@@ -266,6 +300,15 @@ components:
       - source_md5
       - updated_at
       type: object
+    TypesRuleAuthor:
+      properties:
+        name:
+          description: Name of a rule author
+          type: string
+        twitter:
+          description: Twitter handle for a rule author
+          type: string
+      type: object
     AnalyzeRawMessageLiveFlowInput:
       properties:
         ? ''
@@ -349,49 +392,6 @@ components:
         outbound:
           description: Message was sent from someone inside your organization, to *at least one* recipient outside your organization
           type: boolean
-      type: object
-    Handler_typesAnalyzeRawMessageLiveFlowResponse:
-      properties:
-        canonical_id:
-          description: Canonical (message group) ID
-          type: string
-        flagged_rules:
-          description: Flagged rules
-          items:
-            $ref: '#/components/schemas/TypesFlatSqar'
-          type: array
-        message_id:
-          description: Message ID
-          format: uuid
-          type:
-          - string
-          - 'null'
-        raw_message_id:
-          description: Raw message ID
-          format: uuid
-          type:
-          - string
-          - 'null'
-      type: object
-    TypesRuleAuthor:
-      properties:
-        name:
-          description: Name of a rule author
-          type: string
-        twitter:
-          description: Twitter handle for a rule author
-          type: string
-      type: object
-    TypesSqarAction:
-      properties:
-        active:
-          type: boolean
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
       type: object
   securitySchemes:
     bearerAuth:

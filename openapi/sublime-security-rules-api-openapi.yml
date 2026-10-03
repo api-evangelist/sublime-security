@@ -349,6 +349,91 @@ paths:
       - Rules
 components:
   schemas:
+    TypesSqarAction:
+      properties:
+        active:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+      type: object
+    Handler_typesRule:
+      properties:
+        active:
+          description: Indicates whether or not the rule is active and will flag matching messages
+          type: boolean
+        created_at:
+          description: Rule creation time
+          format: date-time
+          type: string
+        description:
+          description: Description of rule
+          type: string
+        id:
+          description: Rule ID
+          format: uuid
+          type: string
+        name:
+          description: Rule name
+          type: string
+        references:
+          description: URLs of reference resources for this rule
+          items:
+            type: string
+          type: array
+        severity:
+          description: Rule severity
+          enum:
+          - informational
+          - low
+          - medium
+          - high
+          - critical
+          type: string
+        source:
+          description: Rule MQL (Message Query Language) source
+          type: string
+        tags:
+          description: Freeform tags for this rule (for example, "Executive Impersonation")
+          items:
+            type: string
+          type: array
+        updated_at:
+          description: Rule last updated time
+          format: date-time
+          type: string
+      required:
+      - description
+      - name
+      - source
+      type: object
+    Handler_typesListRulesResponse:
+      properties:
+        count:
+          description: Count of results for this page
+          format: int32
+          type: integer
+        rules:
+          description: List of rules
+          items:
+            $ref: '#/components/schemas/Handler_typesRule'
+          type: array
+        total:
+          description: Total number of results available
+          format: int32
+          type: integer
+      type: object
+    Handler_typesListRuleHistoryResponse:
+      properties:
+        history:
+          additionalProperties:
+            $ref: '#/components/schemas/Handler_typesRuleHistoryResponse'
+          description: List of rule history entries
+          type: object
+      type: object
     Handler_typesRuleHistoryStats:
       description: Rule history stats for message groups
       properties:
@@ -390,256 +475,6 @@ components:
           description: Total number of rule history entries
           format: int32
           type: integer
-      type: object
-    ValidateRuleInput:
-      properties:
-        action_ids:
-          description: IDs of actions to run when the rule is triggered
-          items:
-            type: string
-          type: array
-        active:
-          description: Activate the rule immediately
-          type: boolean
-        attack_types:
-          description: Rule attack types
-          items:
-            type: string
-          type: array
-        authors:
-          description: Rule authors. Defaults to the user that made the request
-          items:
-            $ref: '#/components/schemas/TypesRuleAuthor'
-          type: array
-        auto_review_auto_share:
-          description: Whether auto-reviewed messages will be shared
-          type: boolean
-        auto_review_classification:
-          description: The classification auto-reviewed messages will have, when an auto-review action is associated with the rule
-          type:
-          - string
-          - 'null'
-        description:
-          description: Description of rule
-          type: string
-        detection_methods:
-          description: Rule detection technologies
-          items:
-            type: string
-          type: array
-        false_positives:
-          description: Descriptions of known false positives that could occur
-          items:
-            type: string
-          type: array
-        internal_type:
-          description: For core feed only
-          type:
-          - string
-          - 'null'
-        label:
-          description: Rule label
-          type:
-          - string
-          - 'null'
-        maturity:
-          description: Rule maturity
-          type:
-          - string
-          - 'null'
-        name:
-          description: Rule name
-          type: string
-        references:
-          description: URL references
-          items:
-            type: string
-          type: array
-        run_triage_on_excluded_messages:
-          description: For Triage rules only, whether this rule will run even if the message matched a global exclusion.
-          type:
-          - boolean
-          - 'null'
-        severity:
-          description: Rule severity
-          type:
-          - string
-          - 'null'
-        source:
-          description: Source
-          type: string
-        tactics_and_techniques:
-          description: Rule tactics and techniques
-          items:
-            type: string
-          type: array
-        tags:
-          description: Tags
-          items:
-            type: string
-          type: array
-        triage_abuse_reports:
-          description: For Triage rules only, whether this rule will run for reported messages. For triage rules, one triage_ field must be true.
-          type:
-          - boolean
-          - 'null'
-        triage_classification_changes:
-          description: For Triage rules only, whether this rule will run for messages whose classification has just changed. For triage rules, one triage_ field must be true.
-          type:
-          - boolean
-          - 'null'
-        triage_dlp_rule_matched:
-          description: For Triage rules only, whether this rule will run for messages that matched a DLP rule. For triage rules, one triage_ field must be true.
-          type:
-          - boolean
-          - 'null'
-        triage_flagged_messages:
-          description: For Triage rules only, whether this rule will run for messages which flagged. For triage rules, one triage_ field must be true.
-          type:
-          - boolean
-          - 'null'
-        type:
-          description: Type of the rule
-          enum:
-          - detection
-          - dlp
-          - triage
-          type: string
-        user_provided_tags:
-          description: User-provided tags
-          items:
-            type: string
-          type: array
-      required:
-      - name
-      - source
-      type: object
-    TypesAPIRule:
-      description: Rule base
-      properties:
-        action_ids:
-          description: IDs of actions to run when the rule is triggered
-          items:
-            type: string
-          type: array
-        active:
-          description: Indicates whether or not the rule is active and will flag matching messages
-          type: boolean
-        attack_types:
-          description: Rule attack types
-          items:
-            type: string
-          type: array
-        authors:
-          description: Rule authors
-          items:
-            $ref: '#/components/schemas/TypesRuleAuthor'
-          type: array
-        auto_review_auto_share:
-          description: Whether auto-reviewed messages will be shared
-          type: boolean
-        auto_review_classification:
-          description: The classification auto-reviewed messages will have, when an auto-review action is associated with the rule
-          enum:
-          - malicious
-          - benign
-          - spam
-          - graymail
-          - simulation
-          - unwanted
-          - violation
-          - non-violation
-          type: string
-        created_at:
-          description: Rule creation time
-          format: date-time
-          type: string
-        description:
-          description: Description of rule
-          type: string
-        detection_methods:
-          description: Rule detection technologies
-          items:
-            type: string
-          type: array
-        false_positives:
-          description: Descriptions of known false positives that could occur
-          items:
-            type: string
-          type: array
-        id:
-          description: Rule ID
-          format: uuid
-          type: string
-        label:
-          description: Rule label
-          type: string
-        last_activated_at:
-          description: When the rule was last activated
-          format: date-time
-          type: string
-        maturity:
-          description: Rule maturity
-          type: string
-        name:
-          description: Rule name
-          type: string
-        passive:
-          description: Indicates whether or not the rule is in passive mode
-          type: boolean
-        references:
-          description: URLs of reference resources for this rule
-          items:
-            type: string
-          type: array
-        run_triage_on_excluded_messages:
-          description: For Triage rules only, whether this rule will run even if the message matched a global exclusion.
-          type: boolean
-        severity:
-          description: Rule severity
-          enum:
-          - informational
-          - low
-          - medium
-          - high
-          - critical
-          type: string
-        source:
-          description: Rule MQL (Message Query Language) source
-          type: string
-        tactics_and_techniques:
-          description: Rule tactics and techniques
-          items:
-            type: string
-          type: array
-        tags:
-          description: Freeform tags for this rule (for example, "Executive Impersonation")
-          items:
-            type: string
-          type: array
-        triage_abuse_reports:
-          description: For Triage rules only, whether this rule will run for reported messages. For triage rules, one triage_ field must be true.
-          type: boolean
-        triage_classification_changes:
-          description: For Triage rules only, whether this rule will run for messages whose classification has just changed. For triage rules, one triage_ field must be true.
-          type: boolean
-        triage_dlp_rule_matched:
-          description: For Triage rules only, whether this rule will run for messages that matched a DLP rule. For triage rules, one triage_ field must be true.
-          type: boolean
-        triage_flagged_messages:
-          description: For Triage rules only, whether this rule will run for messages which flagged. For triage rules, one triage_ field must be true.
-          type: boolean
-        type:
-          description: Rule type
-          type: string
-        updated_at:
-          description: Rule last updated time
-          format: date-time
-          type: string
-      required:
-      - description
-      - name
-      - source
       type: object
     UpdateRuleInput:
       properties:
@@ -773,11 +608,42 @@ components:
           description: Validation error message if the rule is invalid
           type: string
       type: object
-    Handler_typesRule:
+    TypesAPIRule:
+      description: Rule base
       properties:
+        action_ids:
+          description: IDs of actions to run when the rule is triggered
+          items:
+            type: string
+          type: array
         active:
           description: Indicates whether or not the rule is active and will flag matching messages
           type: boolean
+        attack_types:
+          description: Rule attack types
+          items:
+            type: string
+          type: array
+        authors:
+          description: Rule authors
+          items:
+            $ref: '#/components/schemas/TypesRuleAuthor'
+          type: array
+        auto_review_auto_share:
+          description: Whether auto-reviewed messages will be shared
+          type: boolean
+        auto_review_classification:
+          description: The classification auto-reviewed messages will have, when an auto-review action is associated with the rule
+          enum:
+          - malicious
+          - benign
+          - spam
+          - graymail
+          - simulation
+          - unwanted
+          - violation
+          - non-violation
+          type: string
         created_at:
           description: Rule creation time
           format: date-time
@@ -785,18 +651,44 @@ components:
         description:
           description: Description of rule
           type: string
+        detection_methods:
+          description: Rule detection technologies
+          items:
+            type: string
+          type: array
+        false_positives:
+          description: Descriptions of known false positives that could occur
+          items:
+            type: string
+          type: array
         id:
           description: Rule ID
           format: uuid
           type: string
+        label:
+          description: Rule label
+          type: string
+        last_activated_at:
+          description: When the rule was last activated
+          format: date-time
+          type: string
+        maturity:
+          description: Rule maturity
+          type: string
         name:
           description: Rule name
           type: string
+        passive:
+          description: Indicates whether or not the rule is in passive mode
+          type: boolean
         references:
           description: URLs of reference resources for this rule
           items:
             type: string
           type: array
+        run_triage_on_excluded_messages:
+          description: For Triage rules only, whether this rule will run even if the message matched a global exclusion.
+          type: boolean
         severity:
           description: Rule severity
           enum:
@@ -809,11 +701,31 @@ components:
         source:
           description: Rule MQL (Message Query Language) source
           type: string
+        tactics_and_techniques:
+          description: Rule tactics and techniques
+          items:
+            type: string
+          type: array
         tags:
           description: Freeform tags for this rule (for example, "Executive Impersonation")
           items:
             type: string
           type: array
+        triage_abuse_reports:
+          description: For Triage rules only, whether this rule will run for reported messages. For triage rules, one triage_ field must be true.
+          type: boolean
+        triage_classification_changes:
+          description: For Triage rules only, whether this rule will run for messages whose classification has just changed. For triage rules, one triage_ field must be true.
+          type: boolean
+        triage_dlp_rule_matched:
+          description: For Triage rules only, whether this rule will run for messages that matched a DLP rule. For triage rules, one triage_ field must be true.
+          type: boolean
+        triage_flagged_messages:
+          description: For Triage rules only, whether this rule will run for messages which flagged. For triage rules, one triage_ field must be true.
+          type: boolean
+        type:
+          description: Rule type
+          type: string
         updated_at:
           description: Rule last updated time
           format: date-time
@@ -822,15 +734,6 @@ components:
       - description
       - name
       - source
-      type: object
-    TypesRuleAuthor:
-      properties:
-        name:
-          description: Name of a rule author
-          type: string
-        twitter:
-          description: Twitter handle for a rule author
-          type: string
       type: object
     CreateRuleInput:
       properties:
@@ -955,40 +858,14 @@ components:
       - name
       - source
       type: object
-    TypesSqarAction:
+    TypesRuleAuthor:
       properties:
-        active:
-          type: boolean
-        id:
-          type: string
         name:
+          description: Name of a rule author
           type: string
-        type:
+        twitter:
+          description: Twitter handle for a rule author
           type: string
-      type: object
-    Handler_typesListRulesResponse:
-      properties:
-        count:
-          description: Count of results for this page
-          format: int32
-          type: integer
-        rules:
-          description: List of rules
-          items:
-            $ref: '#/components/schemas/Handler_typesRule'
-          type: array
-        total:
-          description: Total number of results available
-          format: int32
-          type: integer
-      type: object
-    Handler_typesListRuleHistoryResponse:
-      properties:
-        history:
-          additionalProperties:
-            $ref: '#/components/schemas/Handler_typesRuleHistoryResponse'
-          description: List of rule history entries
-          type: object
       type: object
     Handler_typesRuleHistoryResponse:
       properties:
@@ -1001,6 +878,129 @@ components:
           $ref: '#/components/schemas/Handler_typesRuleHistoryStats'
         rule:
           $ref: '#/components/schemas/TypesAPIRule'
+      type: object
+    ValidateRuleInput:
+      properties:
+        action_ids:
+          description: IDs of actions to run when the rule is triggered
+          items:
+            type: string
+          type: array
+        active:
+          description: Activate the rule immediately
+          type: boolean
+        attack_types:
+          description: Rule attack types
+          items:
+            type: string
+          type: array
+        authors:
+          description: Rule authors. Defaults to the user that made the request
+          items:
+            $ref: '#/components/schemas/TypesRuleAuthor'
+          type: array
+        auto_review_auto_share:
+          description: Whether auto-reviewed messages will be shared
+          type: boolean
+        auto_review_classification:
+          description: The classification auto-reviewed messages will have, when an auto-review action is associated with the rule
+          type:
+          - string
+          - 'null'
+        description:
+          description: Description of rule
+          type: string
+        detection_methods:
+          description: Rule detection technologies
+          items:
+            type: string
+          type: array
+        false_positives:
+          description: Descriptions of known false positives that could occur
+          items:
+            type: string
+          type: array
+        internal_type:
+          description: For core feed only
+          type:
+          - string
+          - 'null'
+        label:
+          description: Rule label
+          type:
+          - string
+          - 'null'
+        maturity:
+          description: Rule maturity
+          type:
+          - string
+          - 'null'
+        name:
+          description: Rule name
+          type: string
+        references:
+          description: URL references
+          items:
+            type: string
+          type: array
+        run_triage_on_excluded_messages:
+          description: For Triage rules only, whether this rule will run even if the message matched a global exclusion.
+          type:
+          - boolean
+          - 'null'
+        severity:
+          description: Rule severity
+          type:
+          - string
+          - 'null'
+        source:
+          description: Source
+          type: string
+        tactics_and_techniques:
+          description: Rule tactics and techniques
+          items:
+            type: string
+          type: array
+        tags:
+          description: Tags
+          items:
+            type: string
+          type: array
+        triage_abuse_reports:
+          description: For Triage rules only, whether this rule will run for reported messages. For triage rules, one triage_ field must be true.
+          type:
+          - boolean
+          - 'null'
+        triage_classification_changes:
+          description: For Triage rules only, whether this rule will run for messages whose classification has just changed. For triage rules, one triage_ field must be true.
+          type:
+          - boolean
+          - 'null'
+        triage_dlp_rule_matched:
+          description: For Triage rules only, whether this rule will run for messages that matched a DLP rule. For triage rules, one triage_ field must be true.
+          type:
+          - boolean
+          - 'null'
+        triage_flagged_messages:
+          description: For Triage rules only, whether this rule will run for messages which flagged. For triage rules, one triage_ field must be true.
+          type:
+          - boolean
+          - 'null'
+        type:
+          description: Type of the rule
+          enum:
+          - detection
+          - dlp
+          - triage
+          type: string
+        user_provided_tags:
+          description: User-provided tags
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - source
       type: object
   securitySchemes:
     bearerAuth:
