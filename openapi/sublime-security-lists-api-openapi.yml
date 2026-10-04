@@ -273,31 +273,6 @@ paths:
       - Lists
 components:
   schemas:
-    AddListEntryInput:
-      properties:
-        string:
-          description: String list entry
-          maxLength: 2000
-          type: string
-      type: object
-    Handler_typesGetListResponse:
-      properties:
-        lists:
-          description: List of lists
-          items:
-            $ref: '#/components/schemas/Handler_typesList'
-          type: array
-      type: object
-    SetListEntriesInput:
-      properties:
-        entries:
-          description: List entries
-          items:
-            type: string
-          type: array
-      required:
-      - entries
-      type: object
     Handler_typesList:
       properties:
         created_at:
@@ -342,13 +317,13 @@ components:
             type: string
           type: array
       type: object
-    PatchListInput:
+    Handler_typesGetListResponse:
       properties:
-        description:
-          description: Description of list
-          type: string
-      required:
-      - description
+        lists:
+          description: List of lists
+          items:
+            $ref: '#/components/schemas/Handler_typesList'
+          type: array
       type: object
     CreateListInput:
       properties:
@@ -361,6 +336,31 @@ components:
       required:
       - description
       - name
+      type: object
+    SetListEntriesInput:
+      properties:
+        entries:
+          description: List entries
+          items:
+            type: string
+          type: array
+      required:
+      - entries
+      type: object
+    PatchListInput:
+      properties:
+        description:
+          description: Description of list
+          type: string
+      required:
+      - description
+      type: object
+    AddListEntryInput:
+      properties:
+        string:
+          description: String list entry
+          maxLength: 2000
+          type: string
       type: object
   securitySchemes:
     bearerAuth:

@@ -41,6 +41,28 @@ paths:
       - Live flow
 components:
   schemas:
+    TypesRuleAuthor:
+      properties:
+        name:
+          description: Name of a rule author
+          type: string
+        twitter:
+          description: Twitter handle for a rule author
+          type: string
+      type: object
+    Mdm_serviceMessageType:
+      description: Override on message types, defined from the perspective of your organization
+      properties:
+        inbound:
+          description: Message was sent from someone outside your organization, to *at least one* recipient inside your organization
+          type: boolean
+        internal:
+          description: Message was sent from someone inside your organization, to *at least one* recipient inside your organization. Messages *must be authenticated* by either SPF or DKIM to be treated as internal.
+          type: boolean
+        outbound:
+          description: Message was sent from someone inside your organization, to *at least one* recipient outside your organization
+          type: boolean
+      type: object
     TypesSqarAction:
       properties:
         active:
@@ -51,29 +73,6 @@ components:
           type: string
         type:
           type: string
-      type: object
-    Handler_typesAnalyzeRawMessageLiveFlowResponse:
-      properties:
-        canonical_id:
-          description: Canonical (message group) ID
-          type: string
-        flagged_rules:
-          description: Flagged rules
-          items:
-            $ref: '#/components/schemas/TypesFlatSqar'
-          type: array
-        message_id:
-          description: Message ID
-          format: uuid
-          type:
-          - string
-          - 'null'
-        raw_message_id:
-          description: Raw message ID
-          format: uuid
-          type:
-          - string
-          - 'null'
       type: object
     TypesFlatSqar:
       description: Originating rule for this rule exclusion
@@ -300,14 +299,28 @@ components:
       - source_md5
       - updated_at
       type: object
-    TypesRuleAuthor:
+    Handler_typesAnalyzeRawMessageLiveFlowResponse:
       properties:
-        name:
-          description: Name of a rule author
+        canonical_id:
+          description: Canonical (message group) ID
           type: string
-        twitter:
-          description: Twitter handle for a rule author
-          type: string
+        flagged_rules:
+          description: Flagged rules
+          items:
+            $ref: '#/components/schemas/TypesFlatSqar'
+          type: array
+        message_id:
+          description: Message ID
+          format: uuid
+          type:
+          - string
+          - 'null'
+        raw_message_id:
+          description: Raw message ID
+          format: uuid
+          type:
+          - string
+          - 'null'
       type: object
     AnalyzeRawMessageLiveFlowInput:
       properties:
@@ -379,19 +392,6 @@ components:
       - mailbox_email_address
       - message_source_id
       - raw_message
-      type: object
-    Mdm_serviceMessageType:
-      description: Override on message types, defined from the perspective of your organization
-      properties:
-        inbound:
-          description: Message was sent from someone outside your organization, to *at least one* recipient inside your organization
-          type: boolean
-        internal:
-          description: Message was sent from someone inside your organization, to *at least one* recipient inside your organization. Messages *must be authenticated* by either SPF or DKIM to be treated as internal.
-          type: boolean
-        outbound:
-          description: Message was sent from someone inside your organization, to *at least one* recipient outside your organization
-          type: boolean
       type: object
   securitySchemes:
     bearerAuth:

@@ -147,61 +147,19 @@ components:
           description: The originating user-agent for the click
           type: string
       type: object
-    Handler_typesMessageGroupV0:
+    Handler_typesFlaggedRuleV0:
       properties:
-        classification:
-          description: Classification of the message group
-          type:
-          - string
-          - 'null'
-        flagged_rules:
-          description: Flagged rules from the message
-          items:
-            $ref: '#/components/schemas/Handler_typesFlaggedRuleV0'
-          type: array
         id:
-          description: Canonical ID of the group
+          description: ID of the flagged rule
           type: string
-        message_links_clicked:
-          description: Message link clicked events
-          items:
-            $ref: '#/components/schemas/Handler_typesMessageGroupEventLinksClickedV0'
-          type: array
-        messages:
-          description: Message previews
-          items:
-            $ref: '#/components/schemas/Handler_typesMessagePreviewV0'
-          type: array
-        organization_id:
-          description: ID of the group's organization
+        name:
+          description: Name of the flagged rule
           type: string
-        review_comment:
-          description: Comment describing reason for action
-          type:
-          - string
-          - 'null'
-        review_label:
-          description: Message group label
-          type:
-          - string
-          - 'null'
-        review_status:
-          description: Message group status
-          type:
-          - string
-          - 'null'
-        state:
-          description: Message group state
-          type:
-          - string
-          - 'null'
-        user_reports:
-          description: User reports of the message
+        tags:
+          description: List of tags for the flagged rule
           items:
-            $ref: '#/components/schemas/Handler_typesMessageReportV0'
+            type: string
           type: array
-      required:
-      - id
       type: object
     HandlersGetV0HuntJobResultsResponse:
       properties:
@@ -214,6 +172,14 @@ components:
           description: Total count of message groups returned by the hunt
           format: int32
           type: integer
+      type: object
+    Handler_typesRecipient:
+      properties:
+        email:
+          description: Email address
+          type: string
+      required:
+      - email
       type: object
     Handler_typesMailbox:
       description: Mailbox that the email bomb was found in
@@ -234,10 +200,57 @@ components:
       - email
       - id
       type: object
-    HandlersStartHuntJobResponse:
+    StartHuntJobInput:
       properties:
-        hunt_job_id:
-          description: ID of the started hunt job.
+        name:
+          description: Name of the hunt job.
+          type:
+          - string
+          - 'null'
+        private:
+          description: Restrict hunt job visibility to admins only.
+          type: boolean
+        range_end_time:
+          description: Exclusive end datetime of the hunt job, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z').
+          format: date-time
+          type: string
+        range_start_time:
+          description: Inclusive start datetime of the hunt job, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z').
+          format: date-time
+          type: string
+        source:
+          description: MQL source of the hunt job.
+          type: string
+        triage_email_bomb:
+          description: Pre-filters to only include messages that are contained in an email bomb. Combined with triage_reported, triage_flagged, and triage_dlp_rule_matched with a logical OR.
+          type: boolean
+        triage_flagged:
+          description: Pre-filters to only includes flagged messages. Combined with triage_reported, triage_email_bomb, and triage_dlp_rule_matched with a logical OR.
+          type: boolean
+        triage_reported:
+          description: Pre-filters to only includes user-reported messages. Combined with triage_flagged, triage_email_bomb, and triage_dlp_rule_matched with a logical OR.
+          type: boolean
+      required:
+      - range_end_time
+      - range_start_time
+      - source
+      type: object
+    Handler_typesMessageReportV0:
+      properties:
+        channel:
+          description: Channel used to report the group
+          type: string
+        reported_at:
+          description: Time the group was reported
+          format: date-time
+          type: string
+        reported_by_message_id:
+          description: ID of the reporting message (the user forward)
+          type:
+          - string
+          - 'null'
+        reporter:
+          description: Email address of the user who reported the group
           type: string
       type: object
     Handler_typesMessagePreviewV0:
@@ -294,85 +307,6 @@ components:
       - sender
       - subject
       type: object
-    StartHuntJobInput:
-      properties:
-        name:
-          description: Name of the hunt job.
-          type:
-          - string
-          - 'null'
-        private:
-          description: Restrict hunt job visibility to admins only.
-          type: boolean
-        range_end_time:
-          description: Exclusive end datetime of the hunt job, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z').
-          format: date-time
-          type: string
-        range_start_time:
-          description: Inclusive start datetime of the hunt job, in UTC using the ISO 8601 format (e.g., '2021-03-14T15:09:26Z').
-          format: date-time
-          type: string
-        source:
-          description: MQL source of the hunt job.
-          type: string
-        triage_email_bomb:
-          description: Pre-filters to only include messages that are contained in an email bomb. Combined with triage_reported, triage_flagged, and triage_dlp_rule_matched with a logical OR.
-          type: boolean
-        triage_flagged:
-          description: Pre-filters to only includes flagged messages. Combined with triage_reported, triage_email_bomb, and triage_dlp_rule_matched with a logical OR.
-          type: boolean
-        triage_reported:
-          description: Pre-filters to only includes user-reported messages. Combined with triage_flagged, triage_email_bomb, and triage_dlp_rule_matched with a logical OR.
-          type: boolean
-      required:
-      - range_end_time
-      - range_start_time
-      - source
-      type: object
-    Handler_typesMessageReportV0:
-      properties:
-        channel:
-          description: Channel used to report the group
-          type: string
-        reported_at:
-          description: Time the group was reported
-          format: date-time
-          type: string
-        reported_by_message_id:
-          description: ID of the reporting message (the user forward)
-          type:
-          - string
-          - 'null'
-        reporter:
-          description: Email address of the user who reported the group
-          type: string
-      type: object
-    Handler_typesSender:
-      description: Details of the message sender
-      properties:
-        display_name:
-          description: Display name
-          type: string
-        email:
-          description: Email address
-          type: string
-      required:
-      - email
-      type: object
-    Handler_typesFlaggedRuleV0:
-      properties:
-        id:
-          description: ID of the flagged rule
-          type: string
-        name:
-          description: Name of the flagged rule
-          type: string
-        tags:
-          description: List of tags for the flagged rule
-          items:
-            type: string
-          type: array
-      type: object
     HandlersGetV0HuntJobResponse:
       properties:
         error:
@@ -412,13 +346,79 @@ components:
       - range_end_time
       - range_start_time
       type: object
-    Handler_typesRecipient:
+    Handler_typesSender:
+      description: Details of the message sender
       properties:
+        display_name:
+          description: Display name
+          type: string
         email:
           description: Email address
           type: string
       required:
       - email
+      type: object
+    Handler_typesMessageGroupV0:
+      properties:
+        classification:
+          description: Classification of the message group
+          type:
+          - string
+          - 'null'
+        flagged_rules:
+          description: Flagged rules from the message
+          items:
+            $ref: '#/components/schemas/Handler_typesFlaggedRuleV0'
+          type: array
+        id:
+          description: Canonical ID of the group
+          type: string
+        message_links_clicked:
+          description: Message link clicked events
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageGroupEventLinksClickedV0'
+          type: array
+        messages:
+          description: Message previews
+          items:
+            $ref: '#/components/schemas/Handler_typesMessagePreviewV0'
+          type: array
+        organization_id:
+          description: ID of the group's organization
+          type: string
+        review_comment:
+          description: Comment describing reason for action
+          type:
+          - string
+          - 'null'
+        review_label:
+          description: Message group label
+          type:
+          - string
+          - 'null'
+        review_status:
+          description: Message group status
+          type:
+          - string
+          - 'null'
+        state:
+          description: Message group state
+          type:
+          - string
+          - 'null'
+        user_reports:
+          description: User reports of the message
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageReportV0'
+          type: array
+      required:
+      - id
+      type: object
+    HandlersStartHuntJobResponse:
+      properties:
+        hunt_job_id:
+          description: ID of the started hunt job.
+          type: string
       type: object
   securitySchemes:
     bearerAuth:

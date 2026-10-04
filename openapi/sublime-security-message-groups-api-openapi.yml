@@ -909,7 +909,47 @@ components:
           description: URL that was clicked
           type: string
       type: object
-    TrashMessageCanonicalGroupInput:
+    RestoreMultipleMessageGroupsInput:
+      properties:
+        classification:
+          description: Classification to apply to the messages being reviewed. Optional.
+          enum:
+          - malicious
+          - benign
+          - spam
+          - graymail
+          - simulation
+          - unwanted
+          - violation
+          - non-violation
+          type: string
+        message_group_ids:
+          description: Canonical IDs of the message groups to restore
+          items:
+            type: string
+          minItems: 1
+          type: array
+        report_label:
+          description: Label to apply to messages being reviewed. Optional.
+          enum:
+          - spam
+          - phishing
+          - false_positive
+          - false_negative
+          - phishing_simulation
+          - graymail
+          - violation
+          - non-violation
+          type: string
+        review_comment:
+          description: Comment describing reason for action
+          type:
+          - string
+          - 'null'
+      required:
+      - message_group_ids
+      type: object
+    RestoreMessageCanonicalGroupInput:
       properties:
         classification:
           description: Classification to apply to the messages being reviewed. Optional.
@@ -941,57 +981,142 @@ components:
           - string
           - 'null'
       type: object
-    BoundedValues_string:
-      description: Bounded first attachment names on messages in the group
+    Handler_typesRecipient:
       properties:
-        total:
-          format: int32
-          type: integer
-        values:
-          items:
-            type: string
-          type: array
-      type: object
-    Handler_typesGetTaskResponse:
-      description: Generic information about the scan task execution, such as status or errors.
-      properties:
-        created_at:
-          description: Task creation time
-          format: date-time
-          type: string
-        error:
-          description: Task error
-          type: string
-        id:
-          description: Task ID
-          format: uuid
-          type: string
-        state:
-          description: Task status
-          enum:
-          - pending
-          - started
-          - succeeded
-          - failed
-          - retrying
+        email:
+          description: Email address
           type: string
       required:
-      - id
-      - state
+      - email
       type: object
-    Handler_typesMessageGroupActivityEventMailbox:
-      description: Details about the mailbox associated with the message, except for 'received' events
+    ShareWithSublimePublicInput:
       properties:
-        display_name:
-          description: Display name of the mailbox
+        destination:
+          description: Consent-scoped destination on Themis. Empty for the default shared-samples flow.
+          type: string
+        report_label:
+          description: User reported label that categorizes the report
+          enum:
+          - spam
+          - phishing
+          - false_positive
+          - violation
+          - non-violation
+          type: string
+        review_comment:
+          description: Comment describing reason for the report
+          type: string
+      type: object
+    Handler_typesGetHuntResponse:
+      properties:
+        message_groups:
+          description: Array of messages groups returned by the hunt
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageGroupV0'
+          type: array
+        task_response:
+          $ref: '#/components/schemas/Handler_typesGetTaskResponse'
+      type: object
+    QuarantineMessageCanonicalGroupInput:
+      properties:
+        classification:
+          description: Classification to apply to the messages being reviewed. Optional.
+          enum:
+          - malicious
+          - benign
+          - spam
+          - graymail
+          - simulation
+          - unwanted
+          - violation
+          - non-violation
+          type: string
+        report_label:
+          description: Label to apply to messages being reviewed. Optional.
+          enum:
+          - spam
+          - phishing
+          - false_positive
+          - false_negative
+          - phishing_simulation
+          - graymail
+          - violation
+          - non-violation
+          type: string
+        review_comment:
+          description: Comment describing reason for action
           type:
           - string
           - 'null'
-        email_address:
-          description: Email address of the mailbox
+      type: object
+    QuarantineMultipleMessageGroupsInput:
+      properties:
+        classification:
+          description: Classification to apply to the messages being reviewed. Optional.
+          enum:
+          - malicious
+          - benign
+          - spam
+          - graymail
+          - simulation
+          - unwanted
+          - violation
+          - non-violation
           type: string
-        external_id:
-          description: External ID of the mailbox
+        message_group_ids:
+          description: Canonical IDs of the message groups to quarantine
+          items:
+            type: string
+          minItems: 1
+          type: array
+        report_label:
+          description: Label to apply to messages being reviewed. Optional.
+          enum:
+          - spam
+          - phishing
+          - false_positive
+          - false_negative
+          - phishing_simulation
+          - graymail
+          - violation
+          - non-violation
+          type: string
+        review_comment:
+          description: Comment describing reason for action
+          type:
+          - string
+          - 'null'
+      required:
+      - message_group_ids
+      type: object
+    DismissMessageCanonicalGroupInput:
+      properties:
+        classification:
+          description: Classification to apply to the messages being reviewed. Optional.
+          enum:
+          - malicious
+          - benign
+          - spam
+          - graymail
+          - simulation
+          - unwanted
+          - violation
+          - non-violation
+          type: string
+        report_label:
+          description: Label to apply to messages being reviewed. Optional.
+          enum:
+          - spam
+          - phishing
+          - false_positive
+          - false_negative
+          - phishing_simulation
+          - graymail
+          - violation
+          - non-violation
+          type: string
+        review_comment:
+          description: Comment describing reason for action
           type:
           - string
           - 'null'
@@ -1036,110 +1161,6 @@ components:
       required:
       - message_group_ids
       type: object
-    Handler_typesSender:
-      description: Details of the message sender
-      properties:
-        display_name:
-          description: Display name
-          type: string
-        email:
-          description: Email address
-          type: string
-      required:
-      - email
-      type: object
-    Handler_typesFlaggedRuleV0:
-      properties:
-        id:
-          description: ID of the flagged rule
-          type: string
-        name:
-          description: Name of the flagged rule
-          type: string
-        tags:
-          description: List of tags for the flagged rule
-          items:
-            type: string
-          type: array
-      type: object
-    Handler_typesMessageGroupActivityEvent:
-      properties:
-        client_ip:
-          description: Client IP of the click (click events only)
-          type:
-          - string
-          - 'null'
-        forward_recipients:
-          $ref: '#/components/schemas/BoundedValues_string'
-        mailbox:
-          $ref: '#/components/schemas/Handler_typesMessageGroupActivityEventMailbox'
-        message_id:
-          description: ID of the message, except for 'received' events
-          type:
-          - string
-          - 'null'
-        recipients:
-          $ref: '#/components/schemas/TruncatedBoundedValues_string'
-        timestamp:
-          description: Time of the event
-          format: date-time
-          type: string
-        type:
-          description: Type of activity event
-          type: string
-        url:
-          description: URL that was clicked (click events only)
-          type:
-          - string
-          - 'null'
-        user_agent:
-          description: User agent of the click (click events only)
-          type:
-          - string
-          - 'null'
-      type: object
-    Handler_typesGetHuntResponse:
-      properties:
-        message_groups:
-          description: Array of messages groups returned by the hunt
-          items:
-            $ref: '#/components/schemas/Handler_typesMessageGroupV0'
-          type: array
-        task_response:
-          $ref: '#/components/schemas/Handler_typesGetTaskResponse'
-      type: object
-    RestoreMessageCanonicalGroupInput:
-      properties:
-        classification:
-          description: Classification to apply to the messages being reviewed. Optional.
-          enum:
-          - malicious
-          - benign
-          - spam
-          - graymail
-          - simulation
-          - unwanted
-          - violation
-          - non-violation
-          type: string
-        report_label:
-          description: Label to apply to messages being reviewed. Optional.
-          enum:
-          - spam
-          - phishing
-          - false_positive
-          - false_negative
-          - phishing_simulation
-          - graymail
-          - violation
-          - non-violation
-          type: string
-        review_comment:
-          description: Comment describing reason for action
-          type:
-          - string
-          - 'null'
-      type: object
     HuntMessageGroupsInput:
       properties:
         created_at[gte]:
@@ -1163,83 +1184,8 @@ components:
       required:
       - source
       type: object
-    Handler_typesV0ListMessageGroupsResponse:
-      properties:
-        count:
-          description: Count of messages groups for this page
-          format: int32
-          type: integer
-        message_groups:
-          description: Array of messages groups matching the search
-          items:
-            $ref: '#/components/schemas/Handler_typesMessageGroupV0'
-          type: array
-        stats_limit_exceeded:
-          description: Indicates if 'total' is a lower bound
-          type: boolean
-        total:
-          description: Total number of messages groups matching the search
-          format: int32
-          type: integer
-      required:
-      - count
-      - total
-      type: object
-    GraymailMultipleMessageGroupsInput:
-      properties:
-        classification:
-          description: Classification to apply to the messages being reviewed. Optional.
-          enum:
-          - malicious
-          - benign
-          - spam
-          - graymail
-          - simulation
-          - unwanted
-          - violation
-          - non-violation
-          type: string
-        message_group_ids:
-          description: Canonical IDs of the message groups to move to graymail
-          items:
-            type: string
-          minItems: 1
-          type: array
-        report_label:
-          description: Label to apply to messages being reviewed. Optional.
-          enum:
-          - spam
-          - phishing
-          - false_positive
-          - false_negative
-          - phishing_simulation
-          - graymail
-          - violation
-          - non-violation
-          type: string
-        review_comment:
-          description: Comment describing reason for action
-          type:
-          - string
-          - 'null'
-      required:
-      - message_group_ids
-      type: object
-    HandlersReviewMessagesResponse:
-      properties:
-        actions:
-          description: List of actions that were applied
-          items:
-            type: string
-          type: array
-        task_id:
-          description: Tracking ID of the parent task
-          type:
-          - string
-          - 'null'
-      type: object
-    TruncatedBoundedValues_handler_types.MessageGroupActivityEvent:
-      description: Link clicks observed on messages in the group, newest first; for full history use GET /v1/messages/groups/{id}/activity?type=click
+    TruncatedBoundedValues_string:
+      description: The first recipient email addresses of the message involved in the event (received events only), may truncate with as few as 1 recipient
       properties:
         total:
           format: int32
@@ -1248,179 +1194,49 @@ components:
           type: boolean
         values:
           items:
-            $ref: '#/components/schemas/Handler_typesMessageGroupActivityEvent'
+            type: string
           type: array
       type: object
-    Handler_typesMessageGroupEventLinkClick:
+    Handler_typesFlaggedRuleV0:
       properties:
-        clicked_at:
-          description: The time that the link was clicked
+        id:
+          description: ID of the flagged rule
+          type: string
+        name:
+          description: Name of the flagged rule
+          type: string
+        tags:
+          description: List of tags for the flagged rule
+          items:
+            type: string
+          type: array
+      type: object
+    Handler_typesGetTaskResponse:
+      description: Generic information about the scan task execution, such as status or errors.
+      properties:
+        created_at:
+          description: Task creation time
           format: date-time
           type: string
-        client_ip:
-          description: The originating client IP for the click
+        error:
+          description: Task error
           type: string
-        mailbox_display_name:
-          description: Display name of mailbox that performed the action
-          type:
-          - string
-          - 'null'
-        mailbox_email_address:
-          description: Mailbox email address that performed the action
-          type:
-          - string
-          - 'null'
-        mailbox_external_id:
-          description: External ID of the mailbox that performed the action
-          type:
-          - string
-          - 'null'
-        message_id:
-          description: ID of the Sublime message for which the action occurred
-          type: string
-        user_agent:
-          description: The originating user-agent for the click
-          type: string
-      type: object
-    QuarantineMultipleMessageGroupsInput:
-      properties:
-        classification:
-          description: Classification to apply to the messages being reviewed. Optional.
-          enum:
-          - malicious
-          - benign
-          - spam
-          - graymail
-          - simulation
-          - unwanted
-          - violation
-          - non-violation
-          type: string
-        message_group_ids:
-          description: Canonical IDs of the message groups to quarantine
-          items:
-            type: string
-          minItems: 1
-          type: array
-        report_label:
-          description: Label to apply to messages being reviewed. Optional.
-          enum:
-          - spam
-          - phishing
-          - false_positive
-          - false_negative
-          - phishing_simulation
-          - graymail
-          - violation
-          - non-violation
-          type: string
-        review_comment:
-          description: Comment describing reason for action
-          type:
-          - string
-          - 'null'
-      required:
-      - message_group_ids
-      type: object
-    ReviewMessageGroupsInput:
-      properties:
-        action:
-          description: Action to take on the message group
-          enum:
-          - restore
-          - warning_banner
-          - quarantine
-          - trash
-          - move_to_spam
-          - move_to_graymail
-          - delete_calendar_events
-          type: string
-        classification:
-          description: Classification of the message group
-          enum:
-          - malicious
-          - benign
-          - spam
-          - graymail
-          - simulation
-          - unwanted
-          - violation
-          - non-violation
-          - skip
-          type: string
-        custom_action_ids:
-          description: IDs of actions to perform on the message group
-          items:
-            type: string
-          type: array
-        message_group_ids:
-          description: Canonical IDs of the message groups to review
-          items:
-            type: string
-          minItems: 1
-          type: array
-        review_comment:
-          description: Comment describing reason for action
-          type:
-          - string
-          - 'null'
-        share_with_sublime:
-          description: Whether to share the message group & review with Sublime
-          type: boolean
-      required:
-      - classification
-      - message_group_ids
-      type: object
-    QuarantineMessageCanonicalGroupInput:
-      properties:
-        classification:
-          description: Classification to apply to the messages being reviewed. Optional.
-          enum:
-          - malicious
-          - benign
-          - spam
-          - graymail
-          - simulation
-          - unwanted
-          - violation
-          - non-violation
-          type: string
-        report_label:
-          description: Label to apply to messages being reviewed. Optional.
-          enum:
-          - spam
-          - phishing
-          - false_positive
-          - false_negative
-          - phishing_simulation
-          - graymail
-          - violation
-          - non-violation
-          type: string
-        review_comment:
-          description: Comment describing reason for action
-          type:
-          - string
-          - 'null'
-      type: object
-    Handler_typesMailbox:
-      description: Mailbox that the email bomb was found in
-      properties:
-        email:
-          description: Mailbox email address
-          type: string
-        external_id:
-          description: ID of the mailbox in the source system (e.g., Office 365 or Google Workspace)
-          type:
-          - string
-          - 'null'
         id:
-          description: Mailbox ID
+          description: Task ID
           format: uuid
           type: string
+        state:
+          description: Task status
+          enum:
+          - pending
+          - started
+          - succeeded
+          - failed
+          - retrying
+          type: string
       required:
-      - email
       - id
+      - state
       type: object
     Handler_typesMessagePreviewV0:
       properties:
@@ -1476,57 +1292,38 @@ components:
       - sender
       - subject
       type: object
-    Handler_typesMessageGroupSIEMSummaryResponse:
-      properties:
-        cursor:
-          description: Opaque cursor for the next page; pass it back as the cursor query param. Null when no more pages are available.
-          type:
-          - string
-          - 'null'
-        message_groups:
-          description: List of flagged message groups for SIEM ingestion
-          items:
-            $ref: '#/components/schemas/Handler_typesMessageGroupSIEMSummaryItem'
-          type: array
-      type: object
-    Handler_typesRecipient:
-      properties:
-        email:
-          description: Email address
-          type: string
-      required:
-      - email
-      type: object
-    TruncatedBoundedValues_string:
-      description: The first recipient email addresses of the message involved in the event (received events only), may truncate with as few as 1 recipient
+    BoundedValues_string:
+      description: Bounded first attachment names on messages in the group
       properties:
         total:
           format: int32
           type: integer
-        truncated:
-          type: boolean
         values:
           items:
             type: string
           type: array
       type: object
-    ShareWithSublimePublicInput:
+    Handler_typesV0ListMessageGroupsResponse:
       properties:
-        destination:
-          description: Consent-scoped destination on Themis. Empty for the default shared-samples flow.
-          type: string
-        report_label:
-          description: User reported label that categorizes the report
-          enum:
-          - spam
-          - phishing
-          - false_positive
-          - violation
-          - non-violation
-          type: string
-        review_comment:
-          description: Comment describing reason for the report
-          type: string
+        count:
+          description: Count of messages groups for this page
+          format: int32
+          type: integer
+        message_groups:
+          description: Array of messages groups matching the search
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageGroupV0'
+          type: array
+        stats_limit_exceeded:
+          description: Indicates if 'total' is a lower bound
+          type: boolean
+        total:
+          description: Total number of messages groups matching the search
+          format: int32
+          type: integer
+      required:
+      - count
+      - total
       type: object
     Handler_typesMessageGroupV0:
       properties:
@@ -1584,6 +1381,254 @@ components:
       required:
       - id
       type: object
+    DismissMultipleMessageGroupsInput:
+      properties:
+        classification:
+          description: Classification to apply to the messages being reviewed. Optional.
+          enum:
+          - malicious
+          - benign
+          - spam
+          - graymail
+          - simulation
+          - unwanted
+          - violation
+          - non-violation
+          type: string
+        message_group_ids:
+          description: Canonical IDs of the message groups to dismiss
+          items:
+            type: string
+          minItems: 1
+          type: array
+        report_label:
+          description: Label to apply to messages being reviewed. Optional.
+          enum:
+          - spam
+          - phishing
+          - false_positive
+          - false_negative
+          - phishing_simulation
+          - graymail
+          - violation
+          - non-violation
+          type: string
+        review_comment:
+          description: Comment describing reason for action
+          type:
+          - string
+          - 'null'
+      required:
+      - message_group_ids
+      type: object
+    Handler_typesTaskAccepted:
+      properties:
+        task_id:
+          description: Task ID. Use the /v0/tasks/:id endpoint to check the task status.
+          format: uuid
+          type: string
+      required:
+      - task_id
+      type: object
+    Handler_typesMessageGroupActivityEventMailbox:
+      description: Details about the mailbox associated with the message, except for 'received' events
+      properties:
+        display_name:
+          description: Display name of the mailbox
+          type:
+          - string
+          - 'null'
+        email_address:
+          description: Email address of the mailbox
+          type: string
+        external_id:
+          description: External ID of the mailbox
+          type:
+          - string
+          - 'null'
+      type: object
+    Handler_typesMessageGroupEventLinkClick:
+      properties:
+        clicked_at:
+          description: The time that the link was clicked
+          format: date-time
+          type: string
+        client_ip:
+          description: The originating client IP for the click
+          type: string
+        mailbox_display_name:
+          description: Display name of mailbox that performed the action
+          type:
+          - string
+          - 'null'
+        mailbox_email_address:
+          description: Mailbox email address that performed the action
+          type:
+          - string
+          - 'null'
+        mailbox_external_id:
+          description: External ID of the mailbox that performed the action
+          type:
+          - string
+          - 'null'
+        message_id:
+          description: ID of the Sublime message for which the action occurred
+          type: string
+        user_agent:
+          description: The originating user-agent for the click
+          type: string
+      type: object
+    GraymailMultipleMessageGroupsInput:
+      properties:
+        classification:
+          description: Classification to apply to the messages being reviewed. Optional.
+          enum:
+          - malicious
+          - benign
+          - spam
+          - graymail
+          - simulation
+          - unwanted
+          - violation
+          - non-violation
+          type: string
+        message_group_ids:
+          description: Canonical IDs of the message groups to move to graymail
+          items:
+            type: string
+          minItems: 1
+          type: array
+        report_label:
+          description: Label to apply to messages being reviewed. Optional.
+          enum:
+          - spam
+          - phishing
+          - false_positive
+          - false_negative
+          - phishing_simulation
+          - graymail
+          - violation
+          - non-violation
+          type: string
+        review_comment:
+          description: Comment describing reason for action
+          type:
+          - string
+          - 'null'
+      required:
+      - message_group_ids
+      type: object
+    Handler_typesMessageGroupActivityEvent:
+      properties:
+        client_ip:
+          description: Client IP of the click (click events only)
+          type:
+          - string
+          - 'null'
+        forward_recipients:
+          $ref: '#/components/schemas/BoundedValues_string'
+        mailbox:
+          $ref: '#/components/schemas/Handler_typesMessageGroupActivityEventMailbox'
+        message_id:
+          description: ID of the message, except for 'received' events
+          type:
+          - string
+          - 'null'
+        recipients:
+          $ref: '#/components/schemas/TruncatedBoundedValues_string'
+        timestamp:
+          description: Time of the event
+          format: date-time
+          type: string
+        type:
+          description: Type of activity event
+          type: string
+        url:
+          description: URL that was clicked (click events only)
+          type:
+          - string
+          - 'null'
+        user_agent:
+          description: User agent of the click (click events only)
+          type:
+          - string
+          - 'null'
+      type: object
+    Handler_typesMessageGroupSIEMSummaryResponse:
+      properties:
+        cursor:
+          description: Opaque cursor for the next page; pass it back as the cursor query param. Null when no more pages are available.
+          type:
+          - string
+          - 'null'
+        message_groups:
+          description: List of flagged message groups for SIEM ingestion
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageGroupSIEMSummaryItem'
+          type: array
+      type: object
+    TruncatedBoundedValues_handler_types.MessageGroupActivityEvent:
+      description: Link clicks observed on messages in the group, newest first; for full history use GET /v1/messages/groups/{id}/activity?type=click
+      properties:
+        total:
+          format: int32
+          type: integer
+        truncated:
+          type: boolean
+        values:
+          items:
+            $ref: '#/components/schemas/Handler_typesMessageGroupActivityEvent'
+          type: array
+      type: object
+    Handler_typesMailbox:
+      description: Mailbox that the email bomb was found in
+      properties:
+        email:
+          description: Mailbox email address
+          type: string
+        external_id:
+          description: ID of the mailbox in the source system (e.g., Office 365 or Google Workspace)
+          type:
+          - string
+          - 'null'
+        id:
+          description: Mailbox ID
+          format: uuid
+          type: string
+      required:
+      - email
+      - id
+      type: object
+    Handler_typesMessageReportV0:
+      properties:
+        channel:
+          description: Channel used to report the group
+          type: string
+        reported_at:
+          description: Time the group was reported
+          format: date-time
+          type: string
+        reported_by_message_id:
+          description: ID of the reporting message (the user forward)
+          type:
+          - string
+          - 'null'
+        reporter:
+          description: Email address of the user who reported the group
+          type: string
+      type: object
+    Handler_typesSender:
+      description: Details of the message sender
+      properties:
+        display_name:
+          description: Display name
+          type: string
+        email:
+          description: Email address
+          type: string
+      required:
+      - email
+      type: object
     Handler_typesMessageGroupSIEMSummaryItem:
       properties:
         attachment_hashes:
@@ -1625,7 +1670,7 @@ components:
         subjects:
           $ref: '#/components/schemas/BoundedValues_string'
       type: object
-    DismissMessageCanonicalGroupInput:
+    TrashMessageCanonicalGroupInput:
       properties:
         classification:
           description: Classification to apply to the messages being reviewed. Optional.
@@ -1657,112 +1702,67 @@ components:
           - string
           - 'null'
       type: object
-    Handler_typesMessageReportV0:
+    HandlersReviewMessagesResponse:
       properties:
-        channel:
-          description: Channel used to report the group
-          type: string
-        reported_at:
-          description: Time the group was reported
-          format: date-time
-          type: string
-        reported_by_message_id:
-          description: ID of the reporting message (the user forward)
-          type:
-          - string
-          - 'null'
-        reporter:
-          description: Email address of the user who reported the group
-          type: string
-      type: object
-    DismissMultipleMessageGroupsInput:
-      properties:
-        classification:
-          description: Classification to apply to the messages being reviewed. Optional.
-          enum:
-          - malicious
-          - benign
-          - spam
-          - graymail
-          - simulation
-          - unwanted
-          - violation
-          - non-violation
-          type: string
-        message_group_ids:
-          description: Canonical IDs of the message groups to dismiss
+        actions:
+          description: List of actions that were applied
           items:
             type: string
-          minItems: 1
           type: array
-        report_label:
-          description: Label to apply to messages being reviewed. Optional.
-          enum:
-          - spam
-          - phishing
-          - false_positive
-          - false_negative
-          - phishing_simulation
-          - graymail
-          - violation
-          - non-violation
-          type: string
-        review_comment:
-          description: Comment describing reason for action
-          type:
-          - string
-          - 'null'
-      required:
-      - message_group_ids
-      type: object
-    RestoreMultipleMessageGroupsInput:
-      properties:
-        classification:
-          description: Classification to apply to the messages being reviewed. Optional.
-          enum:
-          - malicious
-          - benign
-          - spam
-          - graymail
-          - simulation
-          - unwanted
-          - violation
-          - non-violation
-          type: string
-        message_group_ids:
-          description: Canonical IDs of the message groups to restore
-          items:
-            type: string
-          minItems: 1
-          type: array
-        report_label:
-          description: Label to apply to messages being reviewed. Optional.
-          enum:
-          - spam
-          - phishing
-          - false_positive
-          - false_negative
-          - phishing_simulation
-          - graymail
-          - violation
-          - non-violation
-          type: string
-        review_comment:
-          description: Comment describing reason for action
-          type:
-          - string
-          - 'null'
-      required:
-      - message_group_ids
-      type: object
-    Handler_typesTaskAccepted:
-      properties:
         task_id:
-          description: Task ID. Use the /v0/tasks/:id endpoint to check the task status.
-          format: uuid
+          description: Tracking ID of the parent task
+          type:
+          - string
+          - 'null'
+      type: object
+    ReviewMessageGroupsInput:
+      properties:
+        action:
+          description: Action to take on the message group
+          enum:
+          - restore
+          - warning_banner
+          - quarantine
+          - trash
+          - move_to_spam
+          - move_to_graymail
+          - delete_calendar_events
           type: string
+        classification:
+          description: Classification of the message group
+          enum:
+          - malicious
+          - benign
+          - spam
+          - graymail
+          - simulation
+          - unwanted
+          - violation
+          - non-violation
+          - skip
+          type: string
+        custom_action_ids:
+          description: IDs of actions to perform on the message group
+          items:
+            type: string
+          type: array
+        message_group_ids:
+          description: Canonical IDs of the message groups to review
+          items:
+            type: string
+          minItems: 1
+          type: array
+        review_comment:
+          description: Comment describing reason for action
+          type:
+          - string
+          - 'null'
+        share_with_sublime:
+          description: Whether to share the message group & review with Sublime
+          type: boolean
       required:
-      - task_id
+      - classification
+      - message_group_ids
       type: object
   securitySchemes:
     bearerAuth:

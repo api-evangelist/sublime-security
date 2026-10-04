@@ -192,18 +192,26 @@ paths:
       - Organizations
 components:
   schemas:
-    Handler_typesPatchChildOrganizationLicensingResponse:
+    PatchChildOrganizationInput:
       properties:
-        licenses:
-          description: Licenses present on the organization after the requested transition. A license whose transition failed is omitted; see warnings for details.
-          items:
-            $ref: '#/components/schemas/TypesLicense'
-          type: array
-        warnings:
-          description: Non-fatal issues encountered while applying the transition. A non-empty warnings array alongside a partial licenses array indicates partial success.
-          items:
-            type: string
-          type: array
+        can_add_children:
+          description: Set whether this organization may create its own child organizations. Granting requires the target to be below the maximum hierarchy depth.
+          example: true
+          type:
+          - boolean
+          - 'null'
+        can_manage_child_licenses:
+          description: Set whether this organization may manage licenses on its descendants. Granting requires child-organization license management to be enabled for the root organization and the target's immediate parent to already hold this permission; revoking is always allowed.
+          example: false
+          type:
+          - boolean
+          - 'null'
+        name:
+          description: New display name for the organization. Must be non-empty after trimming whitespace.
+          example: Acme Corp (renamed)
+          type:
+          - string
+          - 'null'
       type: object
     Handler_typesBulkLicensingItem:
       properties:
@@ -222,48 +230,6 @@ components:
       required:
       - licenses
       - org_id
-      type: object
-    BulkPatchChildOrganizationLicensingInput:
-      properties:
-        items:
-          description: Per-organization transitions to apply. Capped at 200 entries per call. The same org_id may not appear more than once. The caller must be able to manage licenses on every listed organization, or the entire request is rejected before any transition is attempted.
-          items:
-            $ref: '#/components/schemas/Handler_typesBulkLicensingItem'
-          maxItems: 200
-          minItems: 1
-          type: array
-      required:
-      - items
-      type: object
-    Handler_typesBulkPatchChildOrganizationLicensingResponse:
-      properties:
-        results:
-          description: One entry per requested organization, in the same order as the request's items array. Inspect each entry's error field to detect partial failure.
-          items:
-            $ref: '#/components/schemas/Handler_typesBulkLicensingResult'
-          type: array
-      type: object
-    Handler_typesLicenseInput:
-      properties:
-        sku:
-          description: Identifies the product to license. "sublime_email_security" is the only SKU available today.
-          enum:
-          - sublime_email_security
-          type: string
-        status:
-          description: 'Desired billing state for the license. Valid values: "trialing", "active", "canceled". Use "canceled" to downgrade an existing license back to free.'
-          type: string
-        trial_days:
-          description: Length of the trial in days (only used when status is trialing.) If not set, the default trial length will be used.
-          format: int32
-          maximum: 90
-          minimum: 1
-          type:
-          - integer
-          - 'null'
-      required:
-      - sku
-      - status
       type: object
     CreateChildOrganizationInput:
       properties:
@@ -288,66 +254,6 @@ components:
       required:
       - name
       type: object
-    PatchChildOrganizationInput:
-      properties:
-        can_add_children:
-          description: Set whether this organization may create its own child organizations. Granting requires the target to be below the maximum hierarchy depth.
-          example: true
-          type:
-          - boolean
-          - 'null'
-        can_manage_child_licenses:
-          description: Set whether this organization may manage licenses on its descendants. Granting requires child-organization license management to be enabled for the root organization and the target's immediate parent to already hold this permission; revoking is always allowed.
-          example: false
-          type:
-          - boolean
-          - 'null'
-        name:
-          description: New display name for the organization. Must be non-empty after trimming whitespace.
-          example: Acme Corp (renamed)
-          type:
-          - string
-          - 'null'
-      type: object
-    TypesLicense:
-      properties:
-        sku:
-          description: Identifies the licensed product. "sublime_email_security" is the only SKU available today.
-          enum:
-          - sublime_email_security
-          type: string
-        status:
-          description: 'Current billing status of this license. This reflects the underlying billing state and may differ from a requested transition target. Common values: "trialing" (within a time-limited trial — see trial_expires_at for the end date), "active" (a paid, current subscription), and "no_subscription" (free tier — no active subscription). Stripe-derived states such as "past_due", "canceled", "unpaid", "incomplete", and "incomplete_expired" may also appear.'
-          enum:
-          - trialing
-          - active
-          - no_subscription
-          - past_due
-          - canceled
-          - unpaid
-          - incomplete
-          - incomplete_expired
-          type: string
-        trial_expires_at:
-          description: When the trial period ends. Present only while status is "trialing"; omitted otherwise.
-          format: date-time
-          type:
-          - string
-          - 'null'
-      type: object
-    Handler_typesListChildOrganizationsResponse:
-      properties:
-        children:
-          description: The matching child organizations, ordered by name.
-          items:
-            $ref: '#/components/schemas/TypesOrganization'
-          type: array
-        total:
-          description: Total number of matching child organizations, ignoring offset/limit.
-          example: 3
-          format: int32
-          type: integer
-      type: object
     Handler_typesCreateChildOrganizationResponse:
       properties:
         id:
@@ -361,6 +267,19 @@ components:
           type: array
         warnings:
           description: Non-fatal issues encountered while applying optional settings
+          items:
+            type: string
+          type: array
+      type: object
+    Handler_typesPatchChildOrganizationLicensingResponse:
+      properties:
+        licenses:
+          description: Licenses present on the organization after the requested transition. A license whose transition failed is omitted; see warnings for details.
+          items:
+            $ref: '#/components/schemas/TypesLicense'
+          type: array
+        warnings:
+          description: Non-fatal issues encountered while applying the transition. A non-empty warnings array alongside a partial licenses array indicates partial success.
           items:
             type: string
           type: array
@@ -449,6 +368,36 @@ components:
             type: string
           type: array
       type: object
+    Handler_typesLicenseInput:
+      properties:
+        sku:
+          description: Identifies the product to license. "sublime_email_security" is the only SKU available today.
+          enum:
+          - sublime_email_security
+          type: string
+        status:
+          description: 'Desired billing state for the license. Valid values: "trialing", "active", "canceled". Use "canceled" to downgrade an existing license back to free.'
+          type: string
+        trial_days:
+          description: Length of the trial in days (only used when status is trialing.) If not set, the default trial length will be used.
+          format: int32
+          maximum: 90
+          minimum: 1
+          type:
+          - integer
+          - 'null'
+      required:
+      - sku
+      - status
+      type: object
+    Handler_typesBulkPatchChildOrganizationLicensingResponse:
+      properties:
+        results:
+          description: One entry per requested organization, in the same order as the request's items array. Inspect each entry's error field to detect partial failure.
+          items:
+            $ref: '#/components/schemas/Handler_typesBulkLicensingResult'
+          type: array
+      type: object
     PatchChildOrganizationLicensingInput:
       properties:
         licenses:
@@ -460,6 +409,57 @@ components:
           type: array
       required:
       - licenses
+      type: object
+    BulkPatchChildOrganizationLicensingInput:
+      properties:
+        items:
+          description: Per-organization transitions to apply. Capped at 200 entries per call. The same org_id may not appear more than once. The caller must be able to manage licenses on every listed organization, or the entire request is rejected before any transition is attempted.
+          items:
+            $ref: '#/components/schemas/Handler_typesBulkLicensingItem'
+          maxItems: 200
+          minItems: 1
+          type: array
+      required:
+      - items
+      type: object
+    TypesLicense:
+      properties:
+        sku:
+          description: Identifies the licensed product. "sublime_email_security" is the only SKU available today.
+          enum:
+          - sublime_email_security
+          type: string
+        status:
+          description: 'Current billing status of this license. This reflects the underlying billing state and may differ from a requested transition target. Common values: "trialing" (within a time-limited trial — see trial_expires_at for the end date), "active" (a paid, current subscription), and "no_subscription" (free tier — no active subscription). Stripe-derived states such as "past_due", "canceled", "unpaid", "incomplete", and "incomplete_expired" may also appear.'
+          enum:
+          - trialing
+          - active
+          - no_subscription
+          - past_due
+          - canceled
+          - unpaid
+          - incomplete
+          - incomplete_expired
+          type: string
+        trial_expires_at:
+          description: When the trial period ends. Present only while status is "trialing"; omitted otherwise.
+          format: date-time
+          type:
+          - string
+          - 'null'
+      type: object
+    Handler_typesListChildOrganizationsResponse:
+      properties:
+        children:
+          description: The matching child organizations, ordered by name.
+          items:
+            $ref: '#/components/schemas/TypesOrganization'
+          type: array
+        total:
+          description: Total number of matching child organizations, ignoring offset/limit.
+          example: 3
+          format: int32
+          type: integer
       type: object
   securitySchemes:
     bearerAuth:

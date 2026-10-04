@@ -41,6 +41,135 @@ paths:
       - Enrichment
 components:
   schemas:
+    Mdm_serviceDomain:
+      description: Domain parsed from X-Authenticated-Domain or X-Authenticated-Sender headers, which represents the domain used for sender authentication, typically the domain of the sending organization. This field provides additional context for analyzing the legitimacy of the sender
+      properties:
+        domain:
+          description: The fully qualified domain name (FQDN). This may not *always* be routable, e.g. when an email address contains a domain that is just a TLD with no SLD, e.g. foo@WIN-bar
+          format: hostname
+          type: string
+        punycode:
+          description: Interpreted punycode if the domain starts with xn--. For example, if 'domain' is 'xn--ublimesecurity-4xc.com' then 'punycode' is śublimesecurity.com
+          type: string
+        root_domain:
+          description: The root domain, including the TLD
+          format: hostname
+          type: string
+        sld:
+          description: Second-level domain, e.g. 'windows' for the domain 'windows.net'
+          type: string
+        subdomain:
+          description: Subdomain, e.g. 'drive' for the domain 'drive.google.com'
+          type: string
+        tld:
+          description: The domain's top-level domain. E.g. the TLD of google.com is 'com'
+          type: string
+        valid:
+          description: Whether the domain is valid
+          type: boolean
+      required:
+      - domain
+      type: object
+    Enrichment_typesCredPhish:
+      description: CredPhish analysis of the screenshot taken for the final URL
+      properties:
+        brand:
+          $ref: '#/components/schemas/Enrichment_typesBrandInfo'
+        confidence:
+          description: Level in a credential phish assessment, only set if .disposition is phishing
+          enum:
+          - low
+          - medium
+          - high
+          type: string
+        contains_captcha:
+          description: Final page contains a captcha test
+          type:
+          - boolean
+          - 'null'
+        contains_login:
+          description: Final page resembles a login screen
+          type:
+          - boolean
+          - 'null'
+        disposition:
+          description: Verdict of the link, determined by various stages of analysis
+          enum:
+          - benign
+          - phishing
+          - unknown
+          type: string
+      type: object
+    Mdm_serviceURL:
+      description: URL details when QR code type is url
+      properties:
+        domain:
+          $ref: '#/components/schemas/Mdm_serviceDomain'
+        fragment:
+          description: 'Fragment identifier; the text following the # in the URL (also called the anchor tag)'
+          type: string
+        ip:
+          $ref: '#/components/schemas/Mdm_serviceIP'
+        password:
+          description: The password specified before the domain name
+          type: string
+        path:
+          description: Everything after the TLD and before the query parameters
+          type: string
+        port:
+          description: The port used for the URL. If no explicit port is set, the port will be inferred from the protocol
+          format: int32
+          type:
+          - integer
+          - 'null'
+        query_params:
+          description: The full query parameters of the URL
+          type: string
+        query_params_decoded:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: The decoded query parameters of the URL
+          type: object
+        rewrite:
+          $ref: '#/components/schemas/Mdm_serviceRewriteDetails'
+        scheme:
+          description: Protocol for the URL request, e.g. http
+          type: string
+        url:
+          description: Full URL
+          type: string
+        username:
+          description: The username specified before the domain name of the URL
+          type: string
+      required:
+      - url
+      type: object
+    Link_analysis_typesFinalDOM:
+      description: Full DOM of the analyzed URL
+      properties:
+        display_text:
+          description: Visible text of the HTML document, with invisible characters removed and non-ASCII characters converted to ASCII spaces.
+          type:
+          - string
+          - 'null'
+        inner_text:
+          description: Inner text of the HTML document that doesn't include HTML tags.
+          type:
+          - string
+          - 'null'
+        links:
+          description: Links found within the DOM
+          items:
+            $ref: '#/components/schemas/Mdm_serviceLink'
+          type: array
+        raw:
+          description: Decoded raw content of a body text type (text/[subtype] section)
+          type:
+          - string
+          - 'null'
+      type: object
     Mdm_serviceIPTranslation:
       properties:
         original:
@@ -252,6 +381,185 @@ components:
           - Zscaler
           type: string
       type: object
+    Enrichment_typesLinkAnalysisRunDiagnostics:
+      description: INTERNAL
+      properties:
+        created_at:
+          description: When the diagnostic object was created
+          format: date-time
+          type: string
+        submit_verdict:
+          description: Reason the URL was [not] submitted to Link Analysis
+          type: string
+        submit_verdict_url:
+          description: The URL upon which the submit verdict was based
+          type: string
+      type: object
+    FfiJSON:
+      description: Response from the URL decoded as a JSON object for application/json content types
+      type: object
+    Link_analysis_typesAdditionalResponse:
+      properties:
+        content_type:
+          description: Content type of the response
+          type: string
+        file:
+          $ref: '#/components/schemas/Link_analysis_typesDownloadedFile'
+        json:
+          $ref: '#/components/schemas/FfiJSON'
+        status_code:
+          description: HTTP status code for the response
+          format: int32
+          type: integer
+        url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+      type: object
+    Handler_typesLinkAnalysisResponse:
+      properties:
+        additional_responses:
+          description: Additional HTTP responses for the page, which could be additional resources, XHR requests, etc.
+          items:
+            $ref: '#/components/schemas/Link_analysis_typesAdditionalResponse'
+          type: array
+        analyzed:
+          description: Whether the target page was successfully analyzed for credential phishing attempts
+          type: boolean
+        content_type:
+          description: Content type of the page
+          type: string
+        credphish:
+          $ref: '#/components/schemas/Enrichment_typesCredPhish'
+        diagnostics:
+          $ref: '#/components/schemas/Enrichment_typesLinkAnalysisRunDiagnostics'
+        effective_url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+        files_downloaded:
+          description: All downloads from the page. These must download without interaction and within a few seconds
+          items:
+            $ref: '#/components/schemas/Link_analysis_typesDownloadedFile'
+          type: array
+        final_dom:
+          $ref: '#/components/schemas/Link_analysis_typesFinalDOM'
+        original_url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+        page_status_code:
+          description: HTTP status code of the page
+          format: int32
+          type:
+          - integer
+          - 'null'
+        redirect_history:
+          description: Each URL which the link analysis service was redirected through
+          items:
+            $ref: '#/components/schemas/Mdm_serviceURL'
+          type: array
+        retrieved:
+          description: Whether the page was successfully retrieved
+          type: boolean
+        retrieved_at:
+          description: Time the page was retrieved
+          format: date-time
+          type:
+          - string
+          - 'null'
+        screenshot:
+          $ref: '#/components/schemas/Mdm_serviceFile'
+        status_code:
+          description: HTTP status code for the requested page
+          format: int32
+          type: integer
+        submitted:
+          description: Whether the page was submitted to be retrieved for analysis
+          type: boolean
+        unique_urls_accessed:
+          description: All unique URLs accessed during the analysis
+          items:
+            $ref: '#/components/schemas/Mdm_serviceURL'
+          type: array
+        would_analyze:
+          description: Whether the link would have been analyzed if run in a rule
+          type: boolean
+        would_submit:
+          description: Whether the link would have been submitted if run in a rule
+          type: boolean
+      type: object
+    Mdm_serviceRewriteDetails:
+      description: Information about an original URL that was unfurled from rewrite detection
+      properties:
+        encoders:
+          description: List of detected URL rewrite encoders while unraveling the URL
+          items:
+            enum:
+            - adobe
+            - appspot
+            - aws_ses
+            - azurecomm
+            - azure_safelink
+            - barracuda
+            - bing_open_redirect
+            - branch_io
+            - checkpoint
+            - cisco
+            - cloudflare
+            - convertkit
+            - deref_mail
+            - doubleclick
+            - edgepilot
+            - esvalabs
+            - exactag
+            - exclaimer
+            - facebook
+            - fireeye
+            - fortimail
+            - generic_desturl
+            - generic_logout_redirect
+            - go_acoustic
+            - google_amp
+            - google_amp_project
+            - google_adservices
+            - google_meet_redirect
+            - google_notifications
+            - google_open_redirect
+            - google_tag_manager
+            - google_travel_redirect
+            - google_translate_open_redirect
+            - google_user_content
+            - href_li
+            - indeed_open_redirect
+            - inky
+            - instagram
+            - mailgun
+            - mailjet
+            - mandrill
+            - messagegears
+            - microsoft
+            - microsoft_dynamics
+            - microsoft_oauth_redirect
+            - monday_tracker
+            - postmark
+            - ppcprotect
+            - proofpoint
+            - pylonlinks
+            - securence
+            - sophos
+            - sqclick
+            - squarespace
+            - sublime
+            - titanhq
+            - topsec
+            - trend_micro
+            - vtiger
+            - wix
+            - yahoo
+            - youtube_set_sid
+            type: string
+          type: array
+        original:
+          description: Original URL without any unraveling URL rewrites
+          type: string
+      required:
+      - original
+      type: object
     Mdm_serviceFile:
       description: File containing screenshot of final_url
       properties:
@@ -355,35 +663,22 @@ components:
           - integer
           - 'null'
       type: object
-    Enrichment_typesCredPhish:
-      description: CredPhish analysis of the screenshot taken for the final URL
+    Mdm_serviceIP:
+      description: X-Originating-IP header, which identifies the originating IP address of the sender client
       properties:
-        brand:
-          $ref: '#/components/schemas/Enrichment_typesBrandInfo'
-        confidence:
-          description: Level in a credential phish assessment, only set if .disposition is phishing
-          enum:
-          - low
-          - medium
-          - high
+        ip:
+          description: The IP in canonical form
           type: string
-        contains_captcha:
-          description: Final page contains a captcha test
+        translation:
+          $ref: '#/components/schemas/Mdm_serviceIPTranslation'
+        version:
+          description: The version of IP (i.e., 4 or 6), null for backward compatibility.
+          format: int32
           type:
-          - boolean
+          - integer
           - 'null'
-        contains_login:
-          description: Final page resembles a login screen
-          type:
-          - boolean
-          - 'null'
-        disposition:
-          description: Verdict of the link, determined by various stages of analysis
-          enum:
-          - benign
-          - phishing
-          - unknown
-          type: string
+      required:
+      - ip
       type: object
     LinkAnalysisEvaluateInput:
       properties:
@@ -395,83 +690,6 @@ components:
           type: string
       required:
       - url
-      type: object
-    Mdm_serviceRewriteDetails:
-      description: Information about an original URL that was unfurled from rewrite detection
-      properties:
-        encoders:
-          description: List of detected URL rewrite encoders while unraveling the URL
-          items:
-            enum:
-            - adobe
-            - appspot
-            - aws_ses
-            - azurecomm
-            - azure_safelink
-            - barracuda
-            - bing_open_redirect
-            - branch_io
-            - checkpoint
-            - cisco
-            - cloudflare
-            - convertkit
-            - deref_mail
-            - doubleclick
-            - edgepilot
-            - esvalabs
-            - exactag
-            - exclaimer
-            - facebook
-            - fireeye
-            - fortimail
-            - generic_desturl
-            - generic_logout_redirect
-            - go_acoustic
-            - google_amp
-            - google_amp_project
-            - google_adservices
-            - google_meet_redirect
-            - google_notifications
-            - google_open_redirect
-            - google_tag_manager
-            - google_travel_redirect
-            - google_translate_open_redirect
-            - google_user_content
-            - href_li
-            - indeed_open_redirect
-            - inky
-            - instagram
-            - mailgun
-            - mailjet
-            - mandrill
-            - messagegears
-            - microsoft
-            - microsoft_dynamics
-            - microsoft_oauth_redirect
-            - monday_tracker
-            - postmark
-            - ppcprotect
-            - proofpoint
-            - pylonlinks
-            - securence
-            - sophos
-            - sqclick
-            - squarespace
-            - sublime
-            - titanhq
-            - topsec
-            - trend_micro
-            - vtiger
-            - wix
-            - yahoo
-            - youtube_set_sid
-            type: string
-          type: array
-        original:
-          description: Original URL without any unraveling URL rewrites
-          type: string
-      required:
-      - original
       type: object
     Link_analysis_typesDownloadedFile:
       description: Raw HTTP response payload as a file
@@ -584,224 +802,6 @@ components:
           type:
           - integer
           - 'null'
-      type: object
-    Handler_typesLinkAnalysisResponse:
-      properties:
-        additional_responses:
-          description: Additional HTTP responses for the page, which could be additional resources, XHR requests, etc.
-          items:
-            $ref: '#/components/schemas/Link_analysis_typesAdditionalResponse'
-          type: array
-        analyzed:
-          description: Whether the target page was successfully analyzed for credential phishing attempts
-          type: boolean
-        content_type:
-          description: Content type of the page
-          type: string
-        credphish:
-          $ref: '#/components/schemas/Enrichment_typesCredPhish'
-        diagnostics:
-          $ref: '#/components/schemas/Enrichment_typesLinkAnalysisRunDiagnostics'
-        effective_url:
-          $ref: '#/components/schemas/Mdm_serviceURL'
-        files_downloaded:
-          description: All downloads from the page. These must download without interaction and within a few seconds
-          items:
-            $ref: '#/components/schemas/Link_analysis_typesDownloadedFile'
-          type: array
-        final_dom:
-          $ref: '#/components/schemas/Link_analysis_typesFinalDOM'
-        original_url:
-          $ref: '#/components/schemas/Mdm_serviceURL'
-        page_status_code:
-          description: HTTP status code of the page
-          format: int32
-          type:
-          - integer
-          - 'null'
-        redirect_history:
-          description: Each URL which the link analysis service was redirected through
-          items:
-            $ref: '#/components/schemas/Mdm_serviceURL'
-          type: array
-        retrieved:
-          description: Whether the page was successfully retrieved
-          type: boolean
-        retrieved_at:
-          description: Time the page was retrieved
-          format: date-time
-          type:
-          - string
-          - 'null'
-        screenshot:
-          $ref: '#/components/schemas/Mdm_serviceFile'
-        status_code:
-          description: HTTP status code for the requested page
-          format: int32
-          type: integer
-        submitted:
-          description: Whether the page was submitted to be retrieved for analysis
-          type: boolean
-        unique_urls_accessed:
-          description: All unique URLs accessed during the analysis
-          items:
-            $ref: '#/components/schemas/Mdm_serviceURL'
-          type: array
-        would_analyze:
-          description: Whether the link would have been analyzed if run in a rule
-          type: boolean
-        would_submit:
-          description: Whether the link would have been submitted if run in a rule
-          type: boolean
-      type: object
-    Mdm_serviceDomain:
-      description: Domain parsed from X-Authenticated-Domain or X-Authenticated-Sender headers, which represents the domain used for sender authentication, typically the domain of the sending organization. This field provides additional context for analyzing the legitimacy of the sender
-      properties:
-        domain:
-          description: The fully qualified domain name (FQDN). This may not *always* be routable, e.g. when an email address contains a domain that is just a TLD with no SLD, e.g. foo@WIN-bar
-          format: hostname
-          type: string
-        punycode:
-          description: Interpreted punycode if the domain starts with xn--. For example, if 'domain' is 'xn--ublimesecurity-4xc.com' then 'punycode' is śublimesecurity.com
-          type: string
-        root_domain:
-          description: The root domain, including the TLD
-          format: hostname
-          type: string
-        sld:
-          description: Second-level domain, e.g. 'windows' for the domain 'windows.net'
-          type: string
-        subdomain:
-          description: Subdomain, e.g. 'drive' for the domain 'drive.google.com'
-          type: string
-        tld:
-          description: The domain's top-level domain. E.g. the TLD of google.com is 'com'
-          type: string
-        valid:
-          description: Whether the domain is valid
-          type: boolean
-      required:
-      - domain
-      type: object
-    Mdm_serviceURL:
-      description: URL details when QR code type is url
-      properties:
-        domain:
-          $ref: '#/components/schemas/Mdm_serviceDomain'
-        fragment:
-          description: 'Fragment identifier; the text following the # in the URL (also called the anchor tag)'
-          type: string
-        ip:
-          $ref: '#/components/schemas/Mdm_serviceIP'
-        password:
-          description: The password specified before the domain name
-          type: string
-        path:
-          description: Everything after the TLD and before the query parameters
-          type: string
-        port:
-          description: The port used for the URL. If no explicit port is set, the port will be inferred from the protocol
-          format: int32
-          type:
-          - integer
-          - 'null'
-        query_params:
-          description: The full query parameters of the URL
-          type: string
-        query_params_decoded:
-          additionalProperties:
-            items:
-              type: string
-            type: array
-          description: The decoded query parameters of the URL
-          type: object
-        rewrite:
-          $ref: '#/components/schemas/Mdm_serviceRewriteDetails'
-        scheme:
-          description: Protocol for the URL request, e.g. http
-          type: string
-        url:
-          description: Full URL
-          type: string
-        username:
-          description: The username specified before the domain name of the URL
-          type: string
-      required:
-      - url
-      type: object
-    Enrichment_typesLinkAnalysisRunDiagnostics:
-      description: INTERNAL
-      properties:
-        created_at:
-          description: When the diagnostic object was created
-          format: date-time
-          type: string
-        submit_verdict:
-          description: Reason the URL was [not] submitted to Link Analysis
-          type: string
-        submit_verdict_url:
-          description: The URL upon which the submit verdict was based
-          type: string
-      type: object
-    Link_analysis_typesFinalDOM:
-      description: Full DOM of the analyzed URL
-      properties:
-        display_text:
-          description: Visible text of the HTML document, with invisible characters removed and non-ASCII characters converted to ASCII spaces.
-          type:
-          - string
-          - 'null'
-        inner_text:
-          description: Inner text of the HTML document that doesn't include HTML tags.
-          type:
-          - string
-          - 'null'
-        links:
-          description: Links found within the DOM
-          items:
-            $ref: '#/components/schemas/Mdm_serviceLink'
-          type: array
-        raw:
-          description: Decoded raw content of a body text type (text/[subtype] section)
-          type:
-          - string
-          - 'null'
-      type: object
-    Link_analysis_typesAdditionalResponse:
-      properties:
-        content_type:
-          description: Content type of the response
-          type: string
-        file:
-          $ref: '#/components/schemas/Link_analysis_typesDownloadedFile'
-        json:
-          $ref: '#/components/schemas/FfiJSON'
-        status_code:
-          description: HTTP status code for the response
-          format: int32
-          type: integer
-        url:
-          $ref: '#/components/schemas/Mdm_serviceURL'
-      type: object
-    FfiJSON:
-      description: Response from the URL decoded as a JSON object for application/json content types
-      type: object
-    Mdm_serviceIP:
-      description: X-Originating-IP header, which identifies the originating IP address of the sender client
-      properties:
-        ip:
-          description: The IP in canonical form
-          type: string
-        translation:
-          $ref: '#/components/schemas/Mdm_serviceIPTranslation'
-        version:
-          description: The version of IP (i.e., 4 or 6), null for backward compatibility.
-          format: int32
-          type:
-          - integer
-          - 'null'
-      required:
-      - ip
       type: object
     Mdm_serviceLink:
       properties:
