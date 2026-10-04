@@ -1,0 +1,125 @@
+slug: sublime-security
+provider: Sublime Security
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 11
+edges:
+- tag: Message Groups
+  spec_file: sublime-security-message-groups-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.92
+  evidence: POST /v0/message-groups/quarantine "Quarantine multiple message groups"; GET /v0/message-groups/siem-summary
+    "Get SIEM-oriented summary of flagged message groups"
+  reason: Quarantine, restore, review and SIEM summaries of flagged malicious email groups are unambiguously
+    threat detection and response operations.
+- tag: Messages
+  spec_file: sublime-security-messages-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.88
+  evidence: POST /v0/messages/attack_score "Evaluate attack score for a raw message"; GET /v0/messages/{id}/asa_verdict
+    "Retrieve ASA verdict for a message"
+  reason: Message analysis, attack scoring, verdicts and remediation actions on individual emails constitute
+    email threat detection and response.
+- tag: Hunt Jobs
+  spec_file: sublime-security-hunt-jobs-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: POST /v0/hunt-jobs "Start hunt job"; GET /v0/hunt-jobs/{id}/results with Handler_typesFlaggedRuleV0
+  reason: Retroactive threat hunting across historical messages with flagged-rule results is core threat
+    detection and response.
+- tag: Email Bombs
+  spec_file: sublime-security-email-bombs-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.82
+  evidence: GET /v0/messages/bombs listEmailBombs "List email bombs"; POST /v0/messages/bombs/{id}/dismiss
+    "Dismiss email bomb"
+  reason: Detection and triage/dismissal of email-bomb attacks against mailboxes — an email-threat detection
+    and response surface, not a business-domain object.
+- tag: Rules
+  spec_file: sublime-security-rules-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.82
+  evidence: 'POST /v0/rules "Create rule", POST /v0/rules/{id}/activate "Activate rule"; vendor: "Teams
+    write detection-as-code in Sublime''s Message Query Language (MQL)"'
+  reason: Lifecycle management of detection-as-code rules (create, validate, activate, version history)
+    that drive email attack detection.
+- tag: Live flow
+  spec_file: sublime-security-live-flow-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.8
+  evidence: POST /v0/live-flow/raw-messages/analyze "Process raw message"; schemas TypesSqarAction, TypesRuleAuthor
+  reason: Inline analysis of raw email messages against detection rules producing actions — real-time
+    email threat detection.
+- tag: BinExplode
+  spec_file: sublime-security-binexplode-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.78
+  evidence: POST /v0/binexplode/scan  postScan  Upload a binary to be binexploded; schemas StrelkaYARAMatch,
+    StrelkaEncryptedZip, StrelkaMachO
+  reason: Submits binaries/attachments for deep file analysis with YARA matching and archive/executable
+    decomposition as part of an email attack detection platform — malicious-content detection, i.e. Threat
+    Detection & Response. Could arguably be read as file-analysis tooling, so slightly below 0.8.
+- tag: Enrichment
+  spec_file: sublime-security-enrichment-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.78
+  evidence: POST /v0/enrichment/link_analysis/evaluate "Analyze a provided link using ml.link_analysis
+    functionality"; schema Enrichment_typesCredPhish
+  reason: Malicious-link analysis with credential-phishing verdicts is threat detection enrichment within
+    the security platform.
+- tag: Roles
+  spec_file: sublime-security-roles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.76
+  evidence: PUT /v0/roles/assign "Assign role to user"
+  reason: Assignment of roles to platform users is access management, though the surface is a single operation.
+- tag: Organizations
+  spec_file: sublime-security-organizations-api-openapi.yml
+  capability_id: BC-4230.10
+  capability_id_l1: BC-4230
+  capability_name: Tenant Provisioning & Lifecycle
+  confidence: 0.74
+  evidence: POST /v0/organizations/mine/child-organizations "Create child organization"; PATCH .../{id}/licensing
+    "Update child organization licensing"
+  reason: Multi-Tenancy API creating and maintaining child organizations (tenants) and their licensing
+    — tenant provisioning and lifecycle in a multi-tenant SaaS; licensing updates add some ambiguity with
+    entitlement management.
+- tag: SCIM
+  spec_file: sublime-security-scim-api-openapi.yml
+  capability_id: BC-4230.50
+  capability_id_l1: BC-4230
+  capability_name: Tenant Identity Federation
+  confidence: 0.7
+  evidence: GET /v0/scim/Users listSCIMUsers 'List SCIM users', POST createSCIMUser, DELETE deleteSCIMUser,
+    plus 'Get SCIM service provider configuration'
+  reason: The operations implement the SCIM 2.0 provisioning surface (Users, Schemas, ResourceTypes, ServiceProviderConfig)
+    that lets a customer tenant's identity provider create, update and deprovision user accounts in the
+    vendor's SaaS platform — precisely BC-4230.50 'lifecycle of tenant user accounts via single sign-on
+    and SCIM'. Some ambiguity remains versus generic enterprise IAM, hence moderate confidence.

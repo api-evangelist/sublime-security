@@ -237,6 +237,9 @@ x-enrichment:
   artifacts_added: 22
   pass: local-v1
 common:
+- type: CapabilityMap
+  url: capabilities/sublime-security-capability-edges.yml
+  name: Sublime Security Business Capability Map
 - type: Website
   url: https://sublime.security/
 - type: DeveloperPortal
