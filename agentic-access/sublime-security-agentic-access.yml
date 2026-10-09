@@ -1,22 +1,45 @@
-generated: '2026-07-21'
+generated: '2026-09-23'
 method: generated
-source: openapi/sublime-security-multitenancy-openapi.json, openapi/sublime-security-platform-openapi.json
+source: openapi/sublime-security-binexplode-api-openapi.yml, openapi/sublime-security-email-bombs-api-openapi.yml,
+  openapi/sublime-security-enrichment-api-openapi.yml, openapi/sublime-security-events-in-the-audit-log-api-openapi.yml,
+  openapi/sublime-security-hunt-jobs-api-openapi.yml, openapi/sublime-security-lists-api-openapi.yml,
+  openapi/sublime-security-live-flow-api-openapi.yml, openapi/sublime-security-mailboxes-api-openapi.yml,
+  openapi/sublime-security-message-groups-api-openapi.yml, openapi/sublime-security-messages-api-openapi.yml,
+  openapi/sublime-security-organizations-api-openapi.yml, openapi/sublime-security-roles-api-openapi.yml,
+  openapi/sublime-security-rules-api-openapi.yml, openapi/sublime-security-scim-api-openapi.yml,
+  openapi/sublime-security-tasks-api-openapi.yml, openapi/sublime-security-user-reports-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 91
   by_action_class:
-    connected: 43
-    acting: 48
+    acting: 47
+    connected: 44
   by_consequence:
-    read: 43
-    write: 48
+    write: 47
+    read: 44
   human_in_the_loop_required: 0
 operations:
-- path: /v0/organizations/mine/child-organizations
+- path: /v0/binexplode/scan
+  method: post
+  operationId: postScan
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v0/binexplode/scan/{id}
   method: get
-  operationId: listChildOrganizations
+  operationId: getScan
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -24,9 +47,19 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v0/organizations/mine/child-organizations
+- path: /v0/messages/bombs
+  method: get
+  operationId: listEmailBombs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v0/messages/bombs
   method: post
-  operationId: createChildOrganization
+  operationId: createEmailBomb
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -40,9 +73,19 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v0/organizations/mine/child-organizations/bulk-licensing
+- path: /v0/messages/bombs/{id}
+  method: get
+  operationId: getEmailBomb
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v0/messages/bombs/{id}/dismiss
   method: post
-  operationId: bulkPatchChildOrganizationLicensing
+  operationId: dismissEmailBomb
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -56,25 +99,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v0/organizations/mine/child-organizations/{id}
-  method: patch
-  operationId: patchChildOrganization
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v0/organizations/mine/child-organizations/{id}/licensing
-  method: patch
-  operationId: patchChildOrganizationLicensing
+- path: /v0/enrichment/link_analysis/evaluate
+  method: post
+  operationId: linkAnalysisEvaluate
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -118,48 +145,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v0/binexplode/scan
-  method: post
-  operationId: postScan
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v0/binexplode/scan/{id}
-  method: get
-  operationId: getScan
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v0/enrichment/link_analysis/evaluate
-  method: post
-  operationId: linkAnalysisEvaluate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v0/hunt-jobs
   method: post
   operationId: startHuntJob
@@ -620,73 +605,15 @@ operations:
   method: post
   operationId: getMessageAttachmentImageRaw
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v0/messages/attack_score
   method: post
   operationId: attackScoreForRawMessage
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v0/messages/bombs
-  method: get
-  operationId: listEmailBombs
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v0/messages/bombs
-  method: post
-  operationId: createEmailBomb
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v0/messages/bombs/{id}
-  method: get
-  operationId: getEmailBomb
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v0/messages/bombs/{id}/dismiss
-  method: post
-  operationId: dismissEmailBomb
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -883,6 +810,80 @@ operations:
 - path: /v0/messages/{id}/trash
   method: post
   operationId: trashMessage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v0/organizations/mine/child-organizations
+  method: get
+  operationId: listChildOrganizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v0/organizations/mine/child-organizations
+  method: post
+  operationId: createChildOrganization
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v0/organizations/mine/child-organizations/bulk-licensing
+  method: post
+  operationId: bulkPatchChildOrganizationLicensing
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v0/organizations/mine/child-organizations/{id}
+  method: patch
+  operationId: patchChildOrganization
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v0/organizations/mine/child-organizations/{id}/licensing
+  method: patch
+  operationId: patchChildOrganizationLicensing
   x-agentic-access:
     action-class: acting
     consequence: write
