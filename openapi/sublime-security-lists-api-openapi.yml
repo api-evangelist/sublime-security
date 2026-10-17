@@ -304,27 +304,6 @@ components:
       - id
       - name
       type: object
-    Handler_typesListEntries:
-      properties:
-        entries:
-          description: List of string entries
-          items:
-            type: string
-          type: array
-        overrides:
-          description: List of override string entries
-          items:
-            type: string
-          type: array
-      type: object
-    Handler_typesGetListResponse:
-      properties:
-        lists:
-          description: List of lists
-          items:
-            $ref: '#/components/schemas/Handler_typesList'
-          type: array
-      type: object
     CreateListInput:
       properties:
         description:
@@ -337,15 +316,13 @@ components:
       - description
       - name
       type: object
-    SetListEntriesInput:
+    Handler_typesGetListResponse:
       properties:
-        entries:
-          description: List entries
+        lists:
+          description: List of lists
           items:
-            type: string
+            $ref: '#/components/schemas/Handler_typesList'
           type: array
-      required:
-      - entries
       type: object
     PatchListInput:
       properties:
@@ -361,6 +338,29 @@ components:
           description: String list entry
           maxLength: 2000
           type: string
+      type: object
+    Handler_typesListEntries:
+      properties:
+        entries:
+          description: List of string entries
+          items:
+            type: string
+          type: array
+        overrides:
+          description: List of override string entries
+          items:
+            type: string
+          type: array
+      type: object
+    SetListEntriesInput:
+      properties:
+        entries:
+          description: List entries
+          items:
+            type: string
+          type: array
+      required:
+      - entries
       type: object
   securitySchemes:
     bearerAuth:

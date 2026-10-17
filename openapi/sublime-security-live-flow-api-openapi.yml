@@ -50,6 +50,29 @@ components:
           description: Twitter handle for a rule author
           type: string
       type: object
+    Handler_typesAnalyzeRawMessageLiveFlowResponse:
+      properties:
+        canonical_id:
+          description: Canonical (message group) ID
+          type: string
+        flagged_rules:
+          description: Flagged rules
+          items:
+            $ref: '#/components/schemas/TypesFlatSqar'
+          type: array
+        message_id:
+          description: Message ID
+          format: uuid
+          type:
+          - string
+          - 'null'
+        raw_message_id:
+          description: Raw message ID
+          format: uuid
+          type:
+          - string
+          - 'null'
+      type: object
     Mdm_serviceMessageType:
       description: Override on message types, defined from the perspective of your organization
       properties:
@@ -63,16 +86,76 @@ components:
           description: Message was sent from someone inside your organization, to *at least one* recipient outside your organization
           type: boolean
       type: object
-    TypesSqarAction:
+    AnalyzeRawMessageLiveFlowInput:
       properties:
-        active:
+        ? ''
+        : type: boolean
+        analyze_async:
+          description: Run analysis and finish ingestion async. flagged_rules will be empty on response.
           type: boolean
-        id:
+        canonical_id:
+          description: Known Canonical (message group) ID
+          maxLength: 64
+          minLength: 64
+          type:
+          - string
+          - 'null'
+        create_mailbox:
+          description: Create mailbox if it doesn't exist. If true, message_source_id must also be set
+          type: boolean
+        delivery_status:
+          description: Override delivery status. Use 'undelivered' to simulate inline processing (e.g. for testing interdict actions).
+          type:
+          - string
+          - 'null'
+        external_created_at:
+          description: Timestamp the message created at according to the external source
+          format: date-time
+          type:
+          - string
+          - 'null'
+        external_message_id:
+          description: ID of the message according to the external source
+          type:
+          - string
+          - 'null'
+        external_thread_id:
+          description: ID of the thread the message belongs to according to the external source
+          type:
+          - string
+          - 'null'
+        folder:
+          description: The mailbox folder the message is in
+          type:
+          - string
+          - 'null'
+        labels:
+          description: Labels applied to the message by the mailbox
+          items:
+            type: string
+          type: array
+        mailbox_email_address:
+          description: The email address of the mailbox containing this message
+          format: email
           type: string
-        name:
+        message_source_id:
+          description: API Message source ID associated with the mailbox.
+          format: uuid
           type: string
-        type:
+        message_type:
+          $ref: '#/components/schemas/Mdm_serviceMessageType'
+        raw_message:
+          description: The full base64 encoded raw eml message
           type: string
+        route_type:
+          description: The directional route type of the message
+          type:
+          - string
+          - 'null'
+      required:
+      - mailbox_email_address
+      - message_source_id
+      - raw_message
       type: object
     TypesFlatSqar:
       description: Originating rule for this rule exclusion
@@ -299,99 +382,16 @@ components:
       - source_md5
       - updated_at
       type: object
-    Handler_typesAnalyzeRawMessageLiveFlowResponse:
+    TypesSqarAction:
       properties:
-        canonical_id:
-          description: Canonical (message group) ID
-          type: string
-        flagged_rules:
-          description: Flagged rules
-          items:
-            $ref: '#/components/schemas/TypesFlatSqar'
-          type: array
-        message_id:
-          description: Message ID
-          format: uuid
-          type:
-          - string
-          - 'null'
-        raw_message_id:
-          description: Raw message ID
-          format: uuid
-          type:
-          - string
-          - 'null'
-      type: object
-    AnalyzeRawMessageLiveFlowInput:
-      properties:
-        ? ''
-        : type: boolean
-        analyze_async:
-          description: Run analysis and finish ingestion async. flagged_rules will be empty on response.
+        active:
           type: boolean
-        canonical_id:
-          description: Known Canonical (message group) ID
-          maxLength: 64
-          minLength: 64
-          type:
-          - string
-          - 'null'
-        create_mailbox:
-          description: Create mailbox if it doesn't exist. If true, message_source_id must also be set
-          type: boolean
-        delivery_status:
-          description: Override delivery status. Use 'undelivered' to simulate inline processing (e.g. for testing interdict actions).
-          type:
-          - string
-          - 'null'
-        external_created_at:
-          description: Timestamp the message created at according to the external source
-          format: date-time
-          type:
-          - string
-          - 'null'
-        external_message_id:
-          description: ID of the message according to the external source
-          type:
-          - string
-          - 'null'
-        external_thread_id:
-          description: ID of the thread the message belongs to according to the external source
-          type:
-          - string
-          - 'null'
-        folder:
-          description: The mailbox folder the message is in
-          type:
-          - string
-          - 'null'
-        labels:
-          description: Labels applied to the message by the mailbox
-          items:
-            type: string
-          type: array
-        mailbox_email_address:
-          description: The email address of the mailbox containing this message
-          format: email
+        id:
           type: string
-        message_source_id:
-          description: API Message source ID associated with the mailbox.
-          format: uuid
+        name:
           type: string
-        message_type:
-          $ref: '#/components/schemas/Mdm_serviceMessageType'
-        raw_message:
-          description: The full base64 encoded raw eml message
+        type:
           type: string
-        route_type:
-          description: The directional route type of the message
-          type:
-          - string
-          - 'null'
-      required:
-      - mailbox_email_address
-      - message_source_id
-      - raw_message
       type: object
   securitySchemes:
     bearerAuth:

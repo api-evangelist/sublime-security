@@ -112,26 +112,6 @@ paths:
       - Mailboxes
 components:
   schemas:
-    HandlersV0ListMailboxesResponse:
-      properties:
-        active:
-          description: Total number of active matching filters
-          format: int32
-          type: integer
-        count:
-          description: Count of results for this page
-          format: int32
-          type: integer
-        mailboxes:
-          description: List of mailboxes
-          items:
-            $ref: '#/components/schemas/HandlersV0Mailbox'
-          type: array
-        total:
-          description: Total number of results available
-          format: int32
-          type: integer
-      type: object
     HandlersV0Mailbox:
       properties:
         active:
@@ -152,6 +132,26 @@ components:
       required:
       - email_address
       - id
+      type: object
+    HandlersV0ListMailboxesResponse:
+      properties:
+        active:
+          description: Total number of active matching filters
+          format: int32
+          type: integer
+        count:
+          description: Count of results for this page
+          format: int32
+          type: integer
+        mailboxes:
+          description: List of mailboxes
+          items:
+            $ref: '#/components/schemas/HandlersV0Mailbox'
+          type: array
+        total:
+          description: Total number of results available
+          format: int32
+          type: integer
       type: object
   securitySchemes:
     bearerAuth:

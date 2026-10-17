@@ -70,6 +70,378 @@ components:
       required:
       - domain
       type: object
+    Link_analysis_typesDownloadedFile:
+      description: Raw HTTP response payload as a file
+      properties:
+        file_extension:
+          description: File extension from context such as headers
+          type: string
+        file_name:
+          description: File name
+          type: string
+        file_type:
+          description: File type determined by looking at the magic bytes in the file
+          enum:
+          - 3gp
+          - 7z
+          - Z
+          - aac
+          - aiff
+          - amr
+          - ar
+          - avi
+          - bmp
+          - bz2
+          - cab
+          - cr2
+          - crx
+          - dcm
+          - deb
+          - dex
+          - dey
+          - doc
+          - docx
+          - dwg
+          - elf
+          - eot
+          - epub
+          - exe
+          - flac
+          - flv
+          - gif
+          - gz
+          - heif
+          - html
+          - ico
+          - ics
+          - iso
+          - jp2
+          - jpg
+          - jxr
+          - lz
+          - m4a
+          - m4v
+          - macho
+          - mid
+          - mkv
+          - mov
+          - mp3
+          - mp4
+          - mpg
+          - nes
+          - ogg
+          - otf
+          - pdf
+          - png
+          - ppt
+          - pptx
+          - ps
+          - psd
+          - rar
+          - rpm
+          - rtf
+          - sqlite
+          - svg
+          - swf
+          - tar
+          - tif
+          - ttf
+          - wasm
+          - wav
+          - webm
+          - webp
+          - wmv
+          - woff
+          - woff2
+          - xls
+          - xlsx
+          - xz
+          - zip
+          - zst
+          - unknown
+          type: string
+        md5:
+          description: MD5 hash of the downloaded file
+          type: string
+        raw:
+          description: Base64 encoded source of the file
+          format: base64
+          type:
+          - string
+          - 'null'
+        sha1:
+          description: SHA1 hash of the downloaded file
+          type: string
+        sha256:
+          description: SHA256 hash of the downloaded file
+          type: string
+        size:
+          description: Size of the file in bytes
+          format: int64
+          type:
+          - integer
+          - 'null'
+      type: object
+    Link_analysis_typesFinalDOM:
+      description: Full DOM of the analyzed URL
+      properties:
+        display_text:
+          description: Visible text of the HTML document, with invisible characters removed and non-ASCII characters converted to ASCII spaces.
+          type:
+          - string
+          - 'null'
+        inner_text:
+          description: Inner text of the HTML document that doesn't include HTML tags.
+          type:
+          - string
+          - 'null'
+        links:
+          description: Links found within the DOM
+          items:
+            $ref: '#/components/schemas/Mdm_serviceLink'
+          type: array
+        raw:
+          description: Decoded raw content of a body text type (text/[subtype] section)
+          type:
+          - string
+          - 'null'
+      type: object
+    Link_analysis_typesAdditionalResponse:
+      properties:
+        content_type:
+          description: Content type of the response
+          type: string
+        file:
+          $ref: '#/components/schemas/Link_analysis_typesDownloadedFile'
+        json:
+          $ref: '#/components/schemas/FfiJSON'
+        status_code:
+          description: HTTP status code for the response
+          format: int32
+          type: integer
+        url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+      type: object
+    Handler_typesLinkAnalysisResponse:
+      properties:
+        additional_responses:
+          description: Additional HTTP responses for the page, which could be additional resources, XHR requests, etc.
+          items:
+            $ref: '#/components/schemas/Link_analysis_typesAdditionalResponse'
+          type: array
+        analyzed:
+          description: Whether the target page was successfully analyzed for credential phishing attempts
+          type: boolean
+        content_type:
+          description: Content type of the page
+          type: string
+        credphish:
+          $ref: '#/components/schemas/Enrichment_typesCredPhish'
+        diagnostics:
+          $ref: '#/components/schemas/Enrichment_typesLinkAnalysisRunDiagnostics'
+        effective_url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+        files_downloaded:
+          description: All downloads from the page. These must download without interaction and within a few seconds
+          items:
+            $ref: '#/components/schemas/Link_analysis_typesDownloadedFile'
+          type: array
+        final_dom:
+          $ref: '#/components/schemas/Link_analysis_typesFinalDOM'
+        original_url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+        page_status_code:
+          description: HTTP status code of the page
+          format: int32
+          type:
+          - integer
+          - 'null'
+        redirect_history:
+          description: Each URL which the link analysis service was redirected through
+          items:
+            $ref: '#/components/schemas/Mdm_serviceURL'
+          type: array
+        retrieved:
+          description: Whether the page was successfully retrieved
+          type: boolean
+        retrieved_at:
+          description: Time the page was retrieved
+          format: date-time
+          type:
+          - string
+          - 'null'
+        screenshot:
+          $ref: '#/components/schemas/Mdm_serviceFile'
+        status_code:
+          description: HTTP status code for the requested page
+          format: int32
+          type: integer
+        submitted:
+          description: Whether the page was submitted to be retrieved for analysis
+          type: boolean
+        unique_urls_accessed:
+          description: All unique URLs accessed during the analysis
+          items:
+            $ref: '#/components/schemas/Mdm_serviceURL'
+          type: array
+        would_analyze:
+          description: Whether the link would have been analyzed if run in a rule
+          type: boolean
+        would_submit:
+          description: Whether the link would have been submitted if run in a rule
+          type: boolean
+      type: object
+    Mdm_serviceIPTranslation:
+      properties:
+        original:
+          description: The IP in its original format if it is an IPv4-mapped-IPv6 source address
+          type:
+          - string
+          - 'null'
+        v4_to_v6:
+          description: Whether 'Original' is IPv4-mapped-IPv6
+          type: boolean
+      type: object
+    Mdm_serviceLink:
+      properties:
+        display_text:
+          description: The text of a hyperlink, if it's not a URL
+          type: string
+        display_url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+        href_url:
+          $ref: '#/components/schemas/Mdm_serviceURL'
+        mismatched:
+          description: Whether the display URL and href URL root domains are mismatched (i.e. .href_url.domain.root_domain != .display_url.domain.root_domain, where both are not null and valid domains)
+          type:
+          - boolean
+          - 'null'
+        parser:
+          description: The parser that was used to derived the link
+          enum:
+          - plain
+          - hyperlink
+          type: string
+        visible:
+          description: Whether the link is visible to a human when previewing an email or page
+          type:
+          - boolean
+          - 'null'
+      type: object
+    LinkAnalysisEvaluateInput:
+      properties:
+        no_logo_detect:
+          description: Whether to skip logo detection
+          type: boolean
+        url:
+          description: URL to analyze
+          type: string
+      required:
+      - url
+      type: object
+    Mdm_serviceFile:
+      description: File containing screenshot of final_url
+      properties:
+        file_extension:
+          description: File extension from context such as headers
+          type: string
+        file_name:
+          description: File name
+          type: string
+        file_type:
+          description: File type determined by looking at the magic bytes in the file
+          enum:
+          - 3gp
+          - 7z
+          - Z
+          - aac
+          - aiff
+          - amr
+          - ar
+          - avi
+          - bmp
+          - bz2
+          - cab
+          - cr2
+          - crx
+          - dcm
+          - deb
+          - dex
+          - dey
+          - doc
+          - docx
+          - dwg
+          - elf
+          - eot
+          - epub
+          - exe
+          - flac
+          - flv
+          - gif
+          - gz
+          - heif
+          - html
+          - ico
+          - ics
+          - iso
+          - jp2
+          - jpg
+          - jxr
+          - lz
+          - m4a
+          - m4v
+          - macho
+          - mid
+          - mkv
+          - mov
+          - mp3
+          - mp4
+          - mpg
+          - nes
+          - ogg
+          - otf
+          - pdf
+          - png
+          - ppt
+          - pptx
+          - ps
+          - psd
+          - rar
+          - rpm
+          - rtf
+          - sqlite
+          - svg
+          - swf
+          - tar
+          - tif
+          - ttf
+          - wasm
+          - wav
+          - webm
+          - webp
+          - wmv
+          - woff
+          - woff2
+          - xls
+          - xlsx
+          - xz
+          - zip
+          - zst
+          - unknown
+          type: string
+        raw:
+          description: Base64 encoded source of the file
+          format: base64
+          type:
+          - string
+          - 'null'
+        size:
+          description: Size of the file in bytes
+          format: int64
+          type:
+          - integer
+          - 'null'
+      type: object
     Enrichment_typesCredPhish:
       description: CredPhish analysis of the screenshot taken for the final URL
       properties:
@@ -100,86 +472,19 @@ components:
           - unknown
           type: string
       type: object
-    Mdm_serviceURL:
-      description: URL details when QR code type is url
+    Enrichment_typesLinkAnalysisRunDiagnostics:
+      description: INTERNAL
       properties:
-        domain:
-          $ref: '#/components/schemas/Mdm_serviceDomain'
-        fragment:
-          description: 'Fragment identifier; the text following the # in the URL (also called the anchor tag)'
+        created_at:
+          description: When the diagnostic object was created
+          format: date-time
           type: string
-        ip:
-          $ref: '#/components/schemas/Mdm_serviceIP'
-        password:
-          description: The password specified before the domain name
+        submit_verdict:
+          description: Reason the URL was [not] submitted to Link Analysis
           type: string
-        path:
-          description: Everything after the TLD and before the query parameters
+        submit_verdict_url:
+          description: The URL upon which the submit verdict was based
           type: string
-        port:
-          description: The port used for the URL. If no explicit port is set, the port will be inferred from the protocol
-          format: int32
-          type:
-          - integer
-          - 'null'
-        query_params:
-          description: The full query parameters of the URL
-          type: string
-        query_params_decoded:
-          additionalProperties:
-            items:
-              type: string
-            type: array
-          description: The decoded query parameters of the URL
-          type: object
-        rewrite:
-          $ref: '#/components/schemas/Mdm_serviceRewriteDetails'
-        scheme:
-          description: Protocol for the URL request, e.g. http
-          type: string
-        url:
-          description: Full URL
-          type: string
-        username:
-          description: The username specified before the domain name of the URL
-          type: string
-      required:
-      - url
-      type: object
-    Link_analysis_typesFinalDOM:
-      description: Full DOM of the analyzed URL
-      properties:
-        display_text:
-          description: Visible text of the HTML document, with invisible characters removed and non-ASCII characters converted to ASCII spaces.
-          type:
-          - string
-          - 'null'
-        inner_text:
-          description: Inner text of the HTML document that doesn't include HTML tags.
-          type:
-          - string
-          - 'null'
-        links:
-          description: Links found within the DOM
-          items:
-            $ref: '#/components/schemas/Mdm_serviceLink'
-          type: array
-        raw:
-          description: Decoded raw content of a body text type (text/[subtype] section)
-          type:
-          - string
-          - 'null'
-      type: object
-    Mdm_serviceIPTranslation:
-      properties:
-        original:
-          description: The IP in its original format if it is an IPv4-mapped-IPv6 source address
-          type:
-          - string
-          - 'null'
-        v4_to_v6:
-          description: Whether 'Original' is IPv4-mapped-IPv6
-          type: boolean
       type: object
     Enrichment_typesBrandInfo:
       description: Information about the recognized brand on the target page
@@ -381,107 +686,25 @@ components:
           - Zscaler
           type: string
       type: object
-    Enrichment_typesLinkAnalysisRunDiagnostics:
-      description: INTERNAL
-      properties:
-        created_at:
-          description: When the diagnostic object was created
-          format: date-time
-          type: string
-        submit_verdict:
-          description: Reason the URL was [not] submitted to Link Analysis
-          type: string
-        submit_verdict_url:
-          description: The URL upon which the submit verdict was based
-          type: string
-      type: object
     FfiJSON:
       description: Response from the URL decoded as a JSON object for application/json content types
       type: object
-    Link_analysis_typesAdditionalResponse:
+    Mdm_serviceIP:
+      description: X-Originating-IP header, which identifies the originating IP address of the sender client
       properties:
-        content_type:
-          description: Content type of the response
+        ip:
+          description: The IP in canonical form
           type: string
-        file:
-          $ref: '#/components/schemas/Link_analysis_typesDownloadedFile'
-        json:
-          $ref: '#/components/schemas/FfiJSON'
-        status_code:
-          description: HTTP status code for the response
-          format: int32
-          type: integer
-        url:
-          $ref: '#/components/schemas/Mdm_serviceURL'
-      type: object
-    Handler_typesLinkAnalysisResponse:
-      properties:
-        additional_responses:
-          description: Additional HTTP responses for the page, which could be additional resources, XHR requests, etc.
-          items:
-            $ref: '#/components/schemas/Link_analysis_typesAdditionalResponse'
-          type: array
-        analyzed:
-          description: Whether the target page was successfully analyzed for credential phishing attempts
-          type: boolean
-        content_type:
-          description: Content type of the page
-          type: string
-        credphish:
-          $ref: '#/components/schemas/Enrichment_typesCredPhish'
-        diagnostics:
-          $ref: '#/components/schemas/Enrichment_typesLinkAnalysisRunDiagnostics'
-        effective_url:
-          $ref: '#/components/schemas/Mdm_serviceURL'
-        files_downloaded:
-          description: All downloads from the page. These must download without interaction and within a few seconds
-          items:
-            $ref: '#/components/schemas/Link_analysis_typesDownloadedFile'
-          type: array
-        final_dom:
-          $ref: '#/components/schemas/Link_analysis_typesFinalDOM'
-        original_url:
-          $ref: '#/components/schemas/Mdm_serviceURL'
-        page_status_code:
-          description: HTTP status code of the page
+        translation:
+          $ref: '#/components/schemas/Mdm_serviceIPTranslation'
+        version:
+          description: The version of IP (i.e., 4 or 6), null for backward compatibility.
           format: int32
           type:
           - integer
           - 'null'
-        redirect_history:
-          description: Each URL which the link analysis service was redirected through
-          items:
-            $ref: '#/components/schemas/Mdm_serviceURL'
-          type: array
-        retrieved:
-          description: Whether the page was successfully retrieved
-          type: boolean
-        retrieved_at:
-          description: Time the page was retrieved
-          format: date-time
-          type:
-          - string
-          - 'null'
-        screenshot:
-          $ref: '#/components/schemas/Mdm_serviceFile'
-        status_code:
-          description: HTTP status code for the requested page
-          format: int32
-          type: integer
-        submitted:
-          description: Whether the page was submitted to be retrieved for analysis
-          type: boolean
-        unique_urls_accessed:
-          description: All unique URLs accessed during the analysis
-          items:
-            $ref: '#/components/schemas/Mdm_serviceURL'
-          type: array
-        would_analyze:
-          description: Whether the link would have been analyzed if run in a rule
-          type: boolean
-        would_submit:
-          description: Whether the link would have been submitted if run in a rule
-          type: boolean
+      required:
+      - ip
       type: object
     Mdm_serviceRewriteDetails:
       description: Information about an original URL that was unfurled from rewrite detection
@@ -560,274 +783,51 @@ components:
       required:
       - original
       type: object
-    Mdm_serviceFile:
-      description: File containing screenshot of final_url
+    Mdm_serviceURL:
+      description: URL details when QR code type is url
       properties:
-        file_extension:
-          description: File extension from context such as headers
+        domain:
+          $ref: '#/components/schemas/Mdm_serviceDomain'
+        fragment:
+          description: 'Fragment identifier; the text following the # in the URL (also called the anchor tag)'
           type: string
-        file_name:
-          description: File name
-          type: string
-        file_type:
-          description: File type determined by looking at the magic bytes in the file
-          enum:
-          - 3gp
-          - 7z
-          - Z
-          - aac
-          - aiff
-          - amr
-          - ar
-          - avi
-          - bmp
-          - bz2
-          - cab
-          - cr2
-          - crx
-          - dcm
-          - deb
-          - dex
-          - dey
-          - doc
-          - docx
-          - dwg
-          - elf
-          - eot
-          - epub
-          - exe
-          - flac
-          - flv
-          - gif
-          - gz
-          - heif
-          - html
-          - ico
-          - ics
-          - iso
-          - jp2
-          - jpg
-          - jxr
-          - lz
-          - m4a
-          - m4v
-          - macho
-          - mid
-          - mkv
-          - mov
-          - mp3
-          - mp4
-          - mpg
-          - nes
-          - ogg
-          - otf
-          - pdf
-          - png
-          - ppt
-          - pptx
-          - ps
-          - psd
-          - rar
-          - rpm
-          - rtf
-          - sqlite
-          - svg
-          - swf
-          - tar
-          - tif
-          - ttf
-          - wasm
-          - wav
-          - webm
-          - webp
-          - wmv
-          - woff
-          - woff2
-          - xls
-          - xlsx
-          - xz
-          - zip
-          - zst
-          - unknown
-          type: string
-        raw:
-          description: Base64 encoded source of the file
-          format: base64
-          type:
-          - string
-          - 'null'
-        size:
-          description: Size of the file in bytes
-          format: int64
-          type:
-          - integer
-          - 'null'
-      type: object
-    Mdm_serviceIP:
-      description: X-Originating-IP header, which identifies the originating IP address of the sender client
-      properties:
         ip:
-          description: The IP in canonical form
+          $ref: '#/components/schemas/Mdm_serviceIP'
+        password:
+          description: The password specified before the domain name
           type: string
-        translation:
-          $ref: '#/components/schemas/Mdm_serviceIPTranslation'
-        version:
-          description: The version of IP (i.e., 4 or 6), null for backward compatibility.
+        path:
+          description: Everything after the TLD and before the query parameters
+          type: string
+        port:
+          description: The port used for the URL. If no explicit port is set, the port will be inferred from the protocol
           format: int32
           type:
           - integer
           - 'null'
-      required:
-      - ip
-      type: object
-    LinkAnalysisEvaluateInput:
-      properties:
-        no_logo_detect:
-          description: Whether to skip logo detection
-          type: boolean
+        query_params:
+          description: The full query parameters of the URL
+          type: string
+        query_params_decoded:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: The decoded query parameters of the URL
+          type: object
+        rewrite:
+          $ref: '#/components/schemas/Mdm_serviceRewriteDetails'
+        scheme:
+          description: Protocol for the URL request, e.g. http
+          type: string
         url:
-          description: URL to analyze
+          description: Full URL
+          type: string
+        username:
+          description: The username specified before the domain name of the URL
           type: string
       required:
       - url
-      type: object
-    Link_analysis_typesDownloadedFile:
-      description: Raw HTTP response payload as a file
-      properties:
-        file_extension:
-          description: File extension from context such as headers
-          type: string
-        file_name:
-          description: File name
-          type: string
-        file_type:
-          description: File type determined by looking at the magic bytes in the file
-          enum:
-          - 3gp
-          - 7z
-          - Z
-          - aac
-          - aiff
-          - amr
-          - ar
-          - avi
-          - bmp
-          - bz2
-          - cab
-          - cr2
-          - crx
-          - dcm
-          - deb
-          - dex
-          - dey
-          - doc
-          - docx
-          - dwg
-          - elf
-          - eot
-          - epub
-          - exe
-          - flac
-          - flv
-          - gif
-          - gz
-          - heif
-          - html
-          - ico
-          - ics
-          - iso
-          - jp2
-          - jpg
-          - jxr
-          - lz
-          - m4a
-          - m4v
-          - macho
-          - mid
-          - mkv
-          - mov
-          - mp3
-          - mp4
-          - mpg
-          - nes
-          - ogg
-          - otf
-          - pdf
-          - png
-          - ppt
-          - pptx
-          - ps
-          - psd
-          - rar
-          - rpm
-          - rtf
-          - sqlite
-          - svg
-          - swf
-          - tar
-          - tif
-          - ttf
-          - wasm
-          - wav
-          - webm
-          - webp
-          - wmv
-          - woff
-          - woff2
-          - xls
-          - xlsx
-          - xz
-          - zip
-          - zst
-          - unknown
-          type: string
-        md5:
-          description: MD5 hash of the downloaded file
-          type: string
-        raw:
-          description: Base64 encoded source of the file
-          format: base64
-          type:
-          - string
-          - 'null'
-        sha1:
-          description: SHA1 hash of the downloaded file
-          type: string
-        sha256:
-          description: SHA256 hash of the downloaded file
-          type: string
-        size:
-          description: Size of the file in bytes
-          format: int64
-          type:
-          - integer
-          - 'null'
-      type: object
-    Mdm_serviceLink:
-      properties:
-        display_text:
-          description: The text of a hyperlink, if it's not a URL
-          type: string
-        display_url:
-          $ref: '#/components/schemas/Mdm_serviceURL'
-        href_url:
-          $ref: '#/components/schemas/Mdm_serviceURL'
-        mismatched:
-          description: Whether the display URL and href URL root domains are mismatched (i.e. .href_url.domain.root_domain != .display_url.domain.root_domain, where both are not null and valid domains)
-          type:
-          - boolean
-          - 'null'
-        parser:
-          description: The parser that was used to derived the link
-          enum:
-          - plain
-          - hyperlink
-          type: string
-        visible:
-          description: Whether the link is visible to a human when previewing an email or page
-          type:
-          - boolean
-          - 'null'
       type: object
   securitySchemes:
     bearerAuth:
