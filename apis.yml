@@ -83,6 +83,8 @@ apis:
   humanURL: https://docs.sublime.security/reference/introduction
   baseURL: https://platform.sublime.security
   tags:
+  - Data Enrichment
+  tags_raw:
   - Enrichment
   properties:
   - type: OpenAPI
