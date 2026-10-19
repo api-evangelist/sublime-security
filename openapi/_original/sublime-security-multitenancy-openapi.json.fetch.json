@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.sublime.security/openapi/multi_tenancy_openapi_spec.json",
+ "requested_url": "https://docs.sublime.security/openapi/multi_tenancy_openapi_spec.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 72421,
+ "sha256": "28da41b55c3ff7410e16eb733d7da19738b5223cf44ad9704b1bf1c8bcf43804",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
