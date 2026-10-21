@@ -2,6 +2,7 @@ generated: '2026-10-13'
 method: searched
 checked:
 - https://azuremarketplace.microsoft.com/
+- docker-hub/integrations/docker-hub-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: Microsoft Azure Marketplace
@@ -19,3 +20,26 @@ edges:
   seller_name: Sublime Security
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: Docker Hub (docker-verified-publisher)
+  partner: docker-hub
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: docker-verified-publisher
+  evidence: https://hub.docker.com/u/sublimesec
+  mirror_of: docker-hub/integrations/docker-hub-integration-edges.yml
+  apps:
+  - sublimesec/bora-lite
+  - sublimesec/mantis
+  - sublimesec/nugget
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: Docker Verified Publisher
+  badges:
+  - Docker Verified Publisher
+source:
+- docker-hub/integrations/docker-hub-integration-edges.yml

@@ -15,3 +15,16 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: sublime-security-docker-hub-docker-verified-publisher
+  label: Docker Hub (docker-verified-publisher)
+  partner: docker-hub
+  partner_name: Docker Hub (docker-verified-publisher)
+  category: Docker Verified Publisher
+  type: marketplace
+  marketplace: docker-verified-publisher
+  channel: partner-built
+  evidence: https://hub.docker.com/u/sublimesec
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
