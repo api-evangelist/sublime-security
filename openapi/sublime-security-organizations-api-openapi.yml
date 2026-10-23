@@ -467,3 +467,9 @@ components:
       type: http
 x-readme:
   explorer-enabled: false
+x-provenance:
+  method: harvested
+  publisher: Sublime Security
+  source: https://docs.sublime.security/openapi/multi_tenancy_openapi_spec.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
